@@ -13,32 +13,44 @@ namespace mysym
   //   return false;
   // }
 
-  void merge_same_operator(symbol_ptr_t s)
+  void merge_same_basic_operator(symbol_t& s)
   {
     //
     // 1.是单个符号并且不是基础运算符（常量，变量，函数）
     // 2.单目运算符
     // 直接返回，不进行处理
     //
-    if (((is_single(s)) && (!is_operator(s->opt))) || (is_unary_operation(s)))
+    if (((is_single(s)) && (!is_basic(s.opt))) || (is_unary_operation(s)))
       return;
-    
-    symbol_link_t new_links;
-    opt_t opt = s->opt;
-    symbol_ptr_t p = nullptr;
-    for (symbol_link_iter_t it = s->next.begin(); it < s->next.end(); it++)
+
+    symbol_items_t new_items;
+    opt_t opt = s.opt;
+    for (auto it = s.items.begin(); it != s.items.end(); it++)
     {
-      merge_same_operator(*it);
-      if ((*it)->opt == opt)
+      merge_same_basic_operator(*it);
+      if ((*it).opt == opt)
       {
-        new_links.insert(new_links.end(), (*it)->next.begin(), (*it)->next.end());
+        new_items.insert(new_items.end(), (*it).items.begin(), (*it).items.end());
       }
       else
       {
-        new_links.push_back(*it);
+        new_items.push_back(*it);
       }
     }
-    s->next = new_links;
+    s.items = new_items;
+    return;
+  }
+
+  void merge(symbol_t& s)
+  {
+    // 如果是单项式则直接返回
+    if (is_monomial(s))
+      return;
+
+    //
+    // 合并相同的基础运算符
+    //
+    merge_same_basic_operator(s);
     return;
   }
 } // namespace mysym

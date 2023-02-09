@@ -2,49 +2,60 @@
 
 namespace mysym
 {
-  static std::string __print_unary_operation(symbol_ptr_t s)
+  static std::string __print_unary_operation(const symbol_t &s)
   {
     if (!is_unary_operation(s))
       return "";
 
-    std::string str = ret_name(s->opt);
-    str += print_string(s->next[0]);
+    std::string str = opt_name(s.opt);
+    str += print_string(s.items[0]);
     return str;
   }
 
-  static std::string __print_multiple_operation(symbol_ptr_t s)
+  static std::string __print_multiple_operation(const symbol_t &s)
   {
     if (is_unary_operation(s))
       return "";
 
+    symbol_t p;
     std::string str = "";
-    symbol_ptr_t p = nullptr;
-    size_t l = link_size(s);
+    size_t l = symbol_size(s);
     for (size_t i = 0; i < l; i++)
     {
-      p = s->next[i];
-      if ((is_single(p)) || is_elm_func(p->opt))
+      p = s.items[i];
+
+      if ((is_single(p)) || is_func(p.opt))
       {
         str += print_string(p);
       }
       else
       {
-        str += '(';
-        str += print_string(p);
-        str += ')';
+        //
+        // 判断优先级
+        //
+        if (cmp_operator_priority(s.opt, p.opt) > 0)
+        {
+          str += '(';
+          str += print_string(p);
+          str += ')';
+        }
+        else
+        {
+          str += print_string(p);
+        }
       }
 
       // 链接符号
       if (i != l - 1)
-        str += ret_name(s->opt);
+        str += opt_name(s.opt);
     }
     return str;
   }
 
-  std::string print_string(symbol_ptr_t s)
+  std::string print_string(const symbol_t &s)
   {
     std::string str = "";
-    if (is_operator(s->opt))
+    if (is_basic(s.opt))
     {
       //
       // 判断是单目运算还是多目运算
@@ -60,37 +71,40 @@ namespace mysym
     }
     else
     {
-      if (is_func(s->opt))
+      if (is_func(s.opt))
       {
-        str = s->name;
+        str = s.literal;
         str += "(";
-        if (is_elm_func(s->opt))
+
+        for (auto it = s.items.begin(); it != s.items.end(); it++)
         {
-          if (link_size(s) != 2)
-          {
-            mysym_invalid_range_in_params_exception("number of params = %d", link_size(s));
-          }
-          str += s->next[0]->name;
+          str += print_string(*it);
           str += ",";
-          str += s->next[1]->name;
         }
-        else
-        {
-          size_t l = link_size(s);
-          for (size_t i = 0; i < l; i++)
-          {
-            str += s->next[0]->name;
-            if (i != l - 1)
-              str += ",";
-          }
-        }
+
+        str.pop_back(); // 删除最后一个","号
         str += ")";
       }
       else
       {
-        str = s->name;
+        str = s.literal;
       }
     }
     return str;
+  }
+
+  std::string print_string(const list_t &l)
+  {
+    if (size(l) == 0)
+      return "{}";
+
+    std::string str = "{";
+    for (auto it = l.begin(); it != l.end(); it++)
+    {
+      str += print_string(*it);
+      str += ",";
+    }
+    str.pop_back(); // 删除最后一个","号
+    return str + "}";
   }
 } // namespace mysym

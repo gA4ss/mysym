@@ -2,5 +2,4 @@
 
 namespace mysym
 {
-  
 } // namespace mysym

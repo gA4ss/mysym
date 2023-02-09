@@ -44,7 +44,6 @@ endif()
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/mysym" TYPE FILE FILES
     "/mnt/e/workspace/mysym/./src/mysym.h"
-    "/mnt/e/workspace/mysym/./src/__create.h"
     "/mnt/e/workspace/mysym/./src/symopt.h"
     "/mnt/e/workspace/mysym/./src/compile.h"
     "/mnt/e/workspace/mysym/./src/exception.h"

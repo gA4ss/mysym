@@ -13,19 +13,8 @@ namespace mysym
     opt = kOptNone;
   }
 
-  void __symbol_t::link(std::shared_ptr<__symbol_t> s)
+  void append(symbol_t& y, const symbol_t &x)
   {
-    next.push_back(s);
-  }
-
-  bool __symbol_t::earse(std::shared_ptr<__symbol_t> s)
-  {
-    symbol_link_iter_t it = std::find(next.begin(), next.end(), s);
-    if (it != next.end())
-    {
-      next.erase(it);
-      return true;
-    }
-    return false;
+    y.items.push_back(x);
   }
 } // namespace mysym

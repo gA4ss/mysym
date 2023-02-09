@@ -40,11 +40,30 @@ link_directories(/usr/local/lib)
 #
 set(MYSYM_HEADERS
   ${SRC_DIRECTORY}/mysym.h
-  ${SRC_DIRECTORY}/__create.h
   ${SRC_DIRECTORY}/symopt.h
   ${SRC_DIRECTORY}/compile.h
   ${SRC_DIRECTORY}/exception.h
   ${SRC_DIRECTORY}/debug.h
+)
+
+#
+# Mysym operator sources
+#
+set(MYSYM_OPERATOR_SRC
+  ${SRC_DIRECTORY}/operator/abs.cc
+  ${SRC_DIRECTORY}/operator/minus.cc
+  ${SRC_DIRECTORY}/operator/add.cc
+  ${SRC_DIRECTORY}/operator/sub.cc
+  ${SRC_DIRECTORY}/operator/mul.cc
+  ${SRC_DIRECTORY}/operator/div.cc
+  ${SRC_DIRECTORY}/operator/mod.cc
+  ${SRC_DIRECTORY}/operator/sqrt.cc
+  ${SRC_DIRECTORY}/operator/pow.cc
+  ${SRC_DIRECTORY}/operator/log.cc
+  ${SRC_DIRECTORY}/operator/fact.cc
+  ${SRC_DIRECTORY}/operator/trigo.cc
+  ${SRC_DIRECTORY}/operator/hyper.cc
+  ${SRC_DIRECTORY}/operator/frac.cc
 )
 
 #
@@ -53,29 +72,36 @@ set(MYSYM_HEADERS
 add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/mysym.cc
   ${SRC_DIRECTORY}/create.cc
+  ${SRC_DIRECTORY}/copy.cc
+  ${SRC_DIRECTORY}/coefficient.cc
   ${SRC_DIRECTORY}/print.cc
   ${SRC_DIRECTORY}/make.cc
   ${SRC_DIRECTORY}/merge.cc
+  ${SRC_DIRECTORY}/operand.cc
+  ${SRC_DIRECTORY}/simplify.cc
+  ${SRC_DIRECTORY}/map.cc
+  ${SRC_DIRECTORY}/sort.cc
   ${SRC_DIRECTORY}/find.cc
   ${SRC_DIRECTORY}/match.cc
+  ${SRC_DIRECTORY}/substitute.cc
   ${SRC_DIRECTORY}/expansion.cc
   ${SRC_DIRECTORY}/symopt.cc
-  ${SRC_DIRECTORY}/add.cc
-  ${SRC_DIRECTORY}/sub.cc
-  ${SRC_DIRECTORY}/mul.cc
-  ${SRC_DIRECTORY}/div.cc
-  ${SRC_DIRECTORY}/mod.cc
-  ${SRC_DIRECTORY}/sqrt.cc
-  ${SRC_DIRECTORY}/exp.cc
-  ${SRC_DIRECTORY}/log.cc
+  ${SRC_DIRECTORY}/factor.cc
   ${SRC_DIRECTORY}/fraction.cc
-  ${SRC_DIRECTORY}/trigo.cc
-  ${SRC_DIRECTORY}/hyper.cc
+  ${SRC_DIRECTORY}/limit.cc
+  ${SRC_DIRECTORY}/integral.cc
   ${SRC_DIRECTORY}/func.cc
   ${SRC_DIRECTORY}/constant.cc
   ${SRC_DIRECTORY}/library.cc
+  ${SRC_DIRECTORY}/list.cc
+  ${SRC_DIRECTORY}/solve.cc
+  ${SRC_DIRECTORY}/rational.cc
+  ${SRC_DIRECTORY}/variables.cc
+  ${SRC_DIRECTORY}/monomial.cc
+  ${MYSYM_OPERATOR_SRC}
 )
-target_link_libraries(${PROJECT_NAME} my)
+# target_link_libraries(${PROJECT_NAME} mynum mympf mympz my)
+target_link_libraries(${PROJECT_NAME} mympf mympz my)
 
 #
 # Test Build
@@ -94,6 +120,8 @@ add_subdirectory(test)
 enable_testing()
 add_test(NAME test_basic COMMAND test_basic)
 set_tests_properties(test_basic PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_map COMMAND test_map)
+set_tests_properties(test_map PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 # add_test(NAME test_addsub COMMAND test_addsub)
 # set_tests_properties(test_addsub PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 # add_test(NAME test_mul COMMAND test_mul)
