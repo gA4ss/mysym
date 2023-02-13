@@ -40,14 +40,14 @@ namespace mysym
     {
       if (opt == kOptInteger)
       {
-        if (__check_integer_format(literal))
+        if (!__check_integer_format(literal))
         {
           mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt, literal.c_str());
         }
       }
       else if (opt == kOptReal)
       {
-        if (__check_real_format(literal))
+        if (!__check_real_format(literal))
         {
           mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt, literal.c_str());
         }

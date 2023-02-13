@@ -84,6 +84,9 @@ namespace mysym
   symbol_t make(opt_t opt, std::string s, bool as = false);
   symbol_t make(opt_t opt, std::string s1, std::string s2, bool as = false);
 
+  symbol_t make(opt_t opt, std::string s1, const symbol_t &s2, bool as = false);
+  symbol_t make(opt_t opt, const symbol_t &s1, std::string s2, bool as = false);
+
 #define create_opt(opt) create(opt)
 #define create_sym(literal) create(kOptSymbol, (literal))
 #define create_int(literal) create(kOptInteger, (literal))

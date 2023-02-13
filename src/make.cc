@@ -33,4 +33,17 @@ namespace mysym
     symbol_t v2 = create_sym(s2);
     return make(opt, v1, v2, as);
   }
+
+  symbol_t make(opt_t opt, std::string s1, const symbol_t &s2, bool as)
+  {
+    symbol_t v1 = create_sym(s1);
+    return make(opt, v1, s2, as);
+  }
+
+  symbol_t make(opt_t opt, const symbol_t &s1, std::string s2, bool as)
+  {
+    symbol_t v2 = create_sym(s2);
+    return make(opt, s1, v2, as);
+  }
+
 } // namespace mysym

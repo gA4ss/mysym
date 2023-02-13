@@ -440,6 +440,16 @@ build test/install: phony test/CMakeFiles/install.util
 # Utility command for list_install_components
 
 build test/list_install_components: phony
+
+#############################################
+# Utility command for rebuild_cache
+
+build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -H/mnt/e/workspace/mysym -B/mnt/e/workspace/mysym/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+build test/rebuild_cache: phony test/CMakeFiles/rebuild_cache.util
 # =============================================================================
 # Object build statements for EXECUTABLE target test_map
 
@@ -504,16 +514,38 @@ build test/test_basic: CXX_EXECUTABLE_LINKER__test_basic test/CMakeFiles/test_ba
   PRE_LINK = :
   TARGET_FILE = test/test_basic
   TARGET_PDB = test_basic.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_monomial
+
 
 #############################################
-# Utility command for rebuild_cache
+# Order-only phony target for test_monomial
 
-build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -H/mnt/e/workspace/mysym -B/mnt/e/workspace/mysym/build
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-build test/rebuild_cache: phony test/CMakeFiles/rebuild_cache.util
+build cmake_object_order_depends_target_test_monomial: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_monomial.dir/test_monomial.cc.o: CXX_COMPILER__test_monomial ../test/test_monomial.cc || cmake_object_order_depends_target_test_monomial
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_monomial.dir/test_monomial.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_monomial.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_monomial.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_monomial
+
+
+#############################################
+# Link the executable test/test_monomial
+
+build test/test_monomial: CXX_EXECUTABLE_LINKER__test_monomial test/CMakeFiles/test_monomial.dir/test_monomial.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_monomial.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_monomial
+  TARGET_PDB = test_monomial.dbg
 
 #############################################
 # Utility command for install/local
@@ -581,6 +613,7 @@ build test/edit_cache: phony test/CMakeFiles/edit_cache.util
 build mysym: phony libmysym.a
 build test_basic: phony test/test_basic
 build test_map: phony test/test_map
+build test_monomial: phony test/test_monomial
 build test_simplify: phony test/test_simplify
 # =============================================================================
 # Folder targets.
@@ -591,7 +624,7 @@ build test_simplify: phony test/test_simplify
 #############################################
 # Folder: /mnt/e/workspace/mysym/build/test
 
-build  test/all: phony test_map test_basic test_simplify
+build  test/all: phony test_map test_basic test_monomial test_simplify
 # =============================================================================
 # Built-in targets
 
@@ -599,7 +632,7 @@ build  test/all: phony test_map test_basic test_simplify
 #############################################
 # The main all target.
 
-build all: phony libmysym.a test/test_map test/test_basic test/test_simplify
+build all: phony libmysym.a test/test_map test/test_basic test/test_monomial test/test_simplify
 
 #############################################
 # Make the all target the default.
