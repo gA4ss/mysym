@@ -70,3 +70,11 @@
 188	1600	1676301004	CMakeFiles/mysym.dir/src/substitute.cc.o	659501a8a290a25b
 189	1350	1676301004	CMakeFiles/mysym.dir/src/expansion.cc.o	e171680162eb011a
 1218	1491	1668920416	CMakeFiles/mysym.dir/src/union.cc.o	6d25abc2fa638f8f
+214	1011	1676649474	CMakeFiles/mysym.dir/src/fraction.cc.o	a04fc7e3bca8d68a
+217	1413	1676649474	test/CMakeFiles/test_fraction.dir/test_fraction.cc.o	282557250b3809ba
+1019	3471	1676649476	libmysym.a	71c674de681bdce3
+3472	4797	1676649478	test/test_fraction	de45f0a8cb67151b
+197	1352	1676649616	test/CMakeFiles/test_fraction.dir/test_fraction.cc.o	282557250b3809ba
+1357	2372	1676649617	test/test_fraction	de45f0a8cb67151b
+192	1240	1676649690	test/CMakeFiles/test_fraction.dir/test_fraction.cc.o	282557250b3809ba
+1245	2476	1676649692	test/test_fraction	de45f0a8cb67151b

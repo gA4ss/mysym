@@ -271,6 +271,12 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_fraction.dir/test_fraction.cc.o -c /mnt/e/workspace/mysym/test/test_fraction.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_fraction.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_simplify.dir/test_simplify.cc.o -c /mnt/e/workspace/mysym/test/test_simplify.cc",
   "file": "/mnt/e/workspace/mysym/test/test_simplify.cc"
 }

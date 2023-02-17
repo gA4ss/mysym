@@ -39,6 +39,8 @@ add_executable(test_simplify ${SRC_DIRECTORY}/test_simplify.cc)
 target_link_libraries(test_simplify mysym gtest pthread)
 add_executable(test_monomial ${SRC_DIRECTORY}/test_monomial.cc)
 target_link_libraries(test_monomial mysym gtest pthread)
+add_executable(test_fraction ${SRC_DIRECTORY}/test_fraction.cc)
+target_link_libraries(test_fraction mysym gtest pthread)
 
 # add_executable(test_addsub ${SRC_DIRECTORY}/test_addsub.cc)
 # target_link_libraries(test_addsub mympf gtest pthread)

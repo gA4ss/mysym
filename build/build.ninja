@@ -450,6 +450,15 @@ build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build test/rebuild_cache: phony test/CMakeFiles/rebuild_cache.util
+
+#############################################
+# Utility command for edit_cache
+
+build test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build test/edit_cache: phony test/CMakeFiles/edit_cache.util
 # =============================================================================
 # Object build statements for EXECUTABLE target test_map
 
@@ -546,6 +555,38 @@ build test/test_monomial: CXX_EXECUTABLE_LINKER__test_monomial test/CMakeFiles/t
   PRE_LINK = :
   TARGET_FILE = test/test_monomial
   TARGET_PDB = test_monomial.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_fraction
+
+
+#############################################
+# Order-only phony target for test_fraction
+
+build cmake_object_order_depends_target_test_fraction: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_fraction.dir/test_fraction.cc.o: CXX_COMPILER__test_fraction ../test/test_fraction.cc || cmake_object_order_depends_target_test_fraction
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_fraction.dir/test_fraction.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_fraction.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_fraction.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_fraction
+
+
+#############################################
+# Link the executable test/test_fraction
+
+build test/test_fraction: CXX_EXECUTABLE_LINKER__test_fraction test/CMakeFiles/test_fraction.dir/test_fraction.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_fraction.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_fraction
+  TARGET_PDB = test_fraction.dbg
 
 #############################################
 # Utility command for install/local
@@ -598,20 +639,12 @@ build test/CMakeFiles/test.util: CUSTOM_COMMAND
   pool = console
   restat = 1
 build test/test: phony test/CMakeFiles/test.util
-
-#############################################
-# Utility command for edit_cache
-
-build test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build test/edit_cache: phony test/CMakeFiles/edit_cache.util
 # =============================================================================
 # Target aliases.
 
 build mysym: phony libmysym.a
 build test_basic: phony test/test_basic
+build test_fraction: phony test/test_fraction
 build test_map: phony test/test_map
 build test_monomial: phony test/test_monomial
 build test_simplify: phony test/test_simplify
@@ -624,7 +657,7 @@ build test_simplify: phony test/test_simplify
 #############################################
 # Folder: /mnt/e/workspace/mysym/build/test
 
-build  test/all: phony test_map test_basic test_monomial test_simplify
+build  test/all: phony test_map test_basic test_monomial test_fraction test_simplify
 # =============================================================================
 # Built-in targets
 
@@ -632,7 +665,7 @@ build  test/all: phony test_map test_basic test_monomial test_simplify
 #############################################
 # The main all target.
 
-build all: phony libmysym.a test/test_map test/test_basic test/test_monomial test/test_simplify
+build all: phony libmysym.a test/test_map test/test_basic test/test_monomial test/test_fraction test/test_simplify
 
 #############################################
 # Make the all target the default.
