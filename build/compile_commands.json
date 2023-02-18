@@ -37,6 +37,12 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/tree.cc.o -c /mnt/e/workspace/mysym/src/tree.cc",
+  "file": "/mnt/e/workspace/mysym/src/tree.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/merge.cc.o -c /mnt/e/workspace/mysym/src/merge.cc",
   "file": "/mnt/e/workspace/mysym/src/merge.cc"
 },
@@ -169,6 +175,18 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/polynomial.cc.o -c /mnt/e/workspace/mysym/src/polynomial.cc",
+  "file": "/mnt/e/workspace/mysym/src/polynomial.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/degree.cc.o -c /mnt/e/workspace/mysym/src/degree.cc",
+  "file": "/mnt/e/workspace/mysym/src/degree.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/abs.cc.o -c /mnt/e/workspace/mysym/src/operator/abs.cc",
   "file": "/mnt/e/workspace/mysym/src/operator/abs.cc"
 },
@@ -253,6 +271,18 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_expression.dir/test_expression.cc.o -c /mnt/e/workspace/mysym/test/test_expression.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_expression.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o -c /mnt/e/workspace/mysym/test/test_polynomial.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_polynomial.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_map.dir/test_map.cc.o -c /mnt/e/workspace/mysym/test/test_map.cc",
   "file": "/mnt/e/workspace/mysym/test/test_map.cc"
 },
@@ -271,13 +301,13 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_fraction.dir/test_fraction.cc.o -c /mnt/e/workspace/mysym/test/test_fraction.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_fraction.cc"
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_simplify.dir/test_simplify.cc.o -c /mnt/e/workspace/mysym/test/test_simplify.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_simplify.cc"
 },
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_simplify.dir/test_simplify.cc.o -c /mnt/e/workspace/mysym/test/test_simplify.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_simplify.cc"
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_fraction.dir/test_fraction.cc.o -c /mnt/e/workspace/mysym/test/test_fraction.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_fraction.cc"
 }
 ]

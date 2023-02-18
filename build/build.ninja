@@ -114,6 +114,13 @@ build CMakeFiles/mysym.dir/src/make.cc.o: CXX_COMPILER__mysym ../src/make.cc || 
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/tree.cc.o: CXX_COMPILER__mysym ../src/tree.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/tree.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
 build CMakeFiles/mysym.dir/src/merge.cc.o: CXX_COMPILER__mysym ../src/merge.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/merge.cc.o.d
@@ -268,6 +275,20 @@ build CMakeFiles/mysym.dir/src/monomial.cc.o: CXX_COMPILER__mysym ../src/monomia
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/polynomial.cc.o: CXX_COMPILER__mysym ../src/polynomial.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/polynomial.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/degree.cc.o: CXX_COMPILER__mysym ../src/degree.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/degree.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
 build CMakeFiles/mysym.dir/src/operator/abs.cc.o: CXX_COMPILER__mysym ../src/operator/abs.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/operator/abs.cc.o.d
@@ -374,7 +395,7 @@ build CMakeFiles/mysym.dir/src/operator/frac.cc.o: CXX_COMPILER__mysym ../src/op
 #############################################
 # Link the static library libmysym.a
 
-build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/print.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/func.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/variables.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o
+build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/print.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/tree.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/func.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/variables.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/polynomial.cc.o CMakeFiles/mysym.dir/src/degree.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o
   LANGUAGE_COMPILE_FLAGS = -Wall -g
   OBJECT_DIR = CMakeFiles/mysym.dir
   POST_BUILD = :
@@ -437,11 +458,6 @@ build test/CMakeFiles/install.util: CUSTOM_COMMAND test/all
 build test/install: phony test/CMakeFiles/install.util
 
 #############################################
-# Utility command for list_install_components
-
-build test/list_install_components: phony
-
-#############################################
 # Utility command for rebuild_cache
 
 build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
@@ -459,6 +475,75 @@ build test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
   DESC = No interactive CMake dialog available...
   restat = 1
 build test/edit_cache: phony test/CMakeFiles/edit_cache.util
+# =============================================================================
+# Object build statements for EXECUTABLE target test_expression
+
+
+#############################################
+# Order-only phony target for test_expression
+
+build cmake_object_order_depends_target_test_expression: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_expression.dir/test_expression.cc.o: CXX_COMPILER__test_expression ../test/test_expression.cc || cmake_object_order_depends_target_test_expression
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_expression.dir/test_expression.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_expression.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_expression.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_expression
+
+
+#############################################
+# Link the executable test/test_expression
+
+build test/test_expression: CXX_EXECUTABLE_LINKER__test_expression test/CMakeFiles/test_expression.dir/test_expression.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_expression.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_expression
+  TARGET_PDB = test_expression.dbg
+
+#############################################
+# Utility command for list_install_components
+
+build test/list_install_components: phony
+# =============================================================================
+# Object build statements for EXECUTABLE target test_polynomial
+
+
+#############################################
+# Order-only phony target for test_polynomial
+
+build cmake_object_order_depends_target_test_polynomial: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o: CXX_COMPILER__test_polynomial ../test/test_polynomial.cc || cmake_object_order_depends_target_test_polynomial
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_polynomial.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_polynomial.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_polynomial
+
+
+#############################################
+# Link the executable test/test_polynomial
+
+build test/test_polynomial: CXX_EXECUTABLE_LINKER__test_polynomial test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_polynomial.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_polynomial
+  TARGET_PDB = test_polynomial.dbg
 # =============================================================================
 # Object build statements for EXECUTABLE target test_map
 
@@ -555,38 +640,6 @@ build test/test_monomial: CXX_EXECUTABLE_LINKER__test_monomial test/CMakeFiles/t
   PRE_LINK = :
   TARGET_FILE = test/test_monomial
   TARGET_PDB = test_monomial.dbg
-# =============================================================================
-# Object build statements for EXECUTABLE target test_fraction
-
-
-#############################################
-# Order-only phony target for test_fraction
-
-build cmake_object_order_depends_target_test_fraction: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_fraction.dir/test_fraction.cc.o: CXX_COMPILER__test_fraction ../test/test_fraction.cc || cmake_object_order_depends_target_test_fraction
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_fraction.dir/test_fraction.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_fraction.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_fraction.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_fraction
-
-
-#############################################
-# Link the executable test/test_fraction
-
-build test/test_fraction: CXX_EXECUTABLE_LINKER__test_fraction test/CMakeFiles/test_fraction.dir/test_fraction.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_fraction.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_fraction
-  TARGET_PDB = test_fraction.dbg
 
 #############################################
 # Utility command for install/local
@@ -597,6 +650,16 @@ build test/CMakeFiles/install/local.util: CUSTOM_COMMAND test/all
   pool = console
   restat = 1
 build test/install/local: phony test/CMakeFiles/install/local.util
+
+#############################################
+# Utility command for test
+
+build test/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build test/test: phony test/CMakeFiles/test.util
 # =============================================================================
 # Object build statements for EXECUTABLE target test_simplify
 
@@ -629,24 +692,48 @@ build test/test_simplify: CXX_EXECUTABLE_LINKER__test_simplify test/CMakeFiles/t
   PRE_LINK = :
   TARGET_FILE = test/test_simplify
   TARGET_PDB = test_simplify.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_fraction
+
 
 #############################################
-# Utility command for test
+# Order-only phony target for test_fraction
 
-build test/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
-  pool = console
-  restat = 1
-build test/test: phony test/CMakeFiles/test.util
+build cmake_object_order_depends_target_test_fraction: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_fraction.dir/test_fraction.cc.o: CXX_COMPILER__test_fraction ../test/test_fraction.cc || cmake_object_order_depends_target_test_fraction
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_fraction.dir/test_fraction.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_fraction.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_fraction.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_fraction
+
+
+#############################################
+# Link the executable test/test_fraction
+
+build test/test_fraction: CXX_EXECUTABLE_LINKER__test_fraction test/CMakeFiles/test_fraction.dir/test_fraction.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_fraction.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_fraction
+  TARGET_PDB = test_fraction.dbg
 # =============================================================================
 # Target aliases.
 
 build mysym: phony libmysym.a
 build test_basic: phony test/test_basic
+build test_expression: phony test/test_expression
 build test_fraction: phony test/test_fraction
 build test_map: phony test/test_map
 build test_monomial: phony test/test_monomial
+build test_polynomial: phony test/test_polynomial
 build test_simplify: phony test/test_simplify
 # =============================================================================
 # Folder targets.
@@ -657,7 +744,7 @@ build test_simplify: phony test/test_simplify
 #############################################
 # Folder: /mnt/e/workspace/mysym/build/test
 
-build  test/all: phony test_map test_basic test_monomial test_fraction test_simplify
+build  test/all: phony test_expression test_polynomial test_map test_basic test_monomial test_simplify test_fraction
 # =============================================================================
 # Built-in targets
 
@@ -665,7 +752,7 @@ build  test/all: phony test_map test_basic test_monomial test_fraction test_simp
 #############################################
 # The main all target.
 
-build all: phony libmysym.a test/test_map test/test_basic test/test_monomial test/test_fraction test/test_simplify
+build all: phony libmysym.a test/test_expression test/test_polynomial test/test_map test/test_basic test/test_monomial test/test_simplify test/test_fraction
 
 #############################################
 # Make the all target the default.

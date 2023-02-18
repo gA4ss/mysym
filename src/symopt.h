@@ -72,7 +72,7 @@ namespace mysym
   } opt_t;
 #define kOptMax kOptSymbol
 
-#define is_opt_none(o) (o == kOptNone)
+#define is_none(o) (o == kOptNone)
 #define is_opt(o) ((o > kOptNone) && (o < kOptSymbol))
 #define is_basic(o) ((o >= kOptAdd) && (o <= kOptMod))
 #define is_sym(o) (o >= kOptSymbol)

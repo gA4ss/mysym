@@ -41,6 +41,14 @@ namespace mysym
     }
   }
 
+  void insert(list_t& dl, const list_t &sl, bool found)
+  {
+    for (auto it = dl.begin(); it != dl.end(); it++)
+    {
+      
+    }
+  }
+
   void clear(list_t& l)
   {
     l.clear();

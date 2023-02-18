@@ -43,10 +43,6 @@ namespace mysym
 
   void merge(symbol_t& s)
   {
-    // 如果是单项式则直接返回
-    if (is_monomial(s))
-      return;
-
     //
     // 合并相同的基础运算符
     //

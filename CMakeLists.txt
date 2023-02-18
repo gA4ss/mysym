@@ -76,6 +76,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/coefficient.cc
   ${SRC_DIRECTORY}/print.cc
   ${SRC_DIRECTORY}/make.cc
+  ${SRC_DIRECTORY}/tree.cc
   ${SRC_DIRECTORY}/merge.cc
   ${SRC_DIRECTORY}/operand.cc
   ${SRC_DIRECTORY}/simplify.cc
@@ -98,6 +99,8 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/rational.cc
   ${SRC_DIRECTORY}/variables.cc
   ${SRC_DIRECTORY}/monomial.cc
+  ${SRC_DIRECTORY}/polynomial.cc
+  ${SRC_DIRECTORY}/degree.cc
   ${MYSYM_OPERATOR_SRC}
 )
 # target_link_libraries(${PROJECT_NAME} mynum mympf mympz my)

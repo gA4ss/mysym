@@ -45,6 +45,14 @@ namespace mysym
   typedef std::map<opt_t, std::string> operator_names_t;
 
   //
+  // 使用符号严格限定的几个类型
+  //
+  typedef symbol_t var_t;
+  typedef symbol_t num_t;
+  typedef symbol_t int_t;
+  typedef symbol_t flt_t;
+
+  //
   // 列表
   //
   typedef symbol_items_t list_t;
@@ -52,7 +60,8 @@ namespace mysym
   size_t size(const list_t &l);
   bool find(const list_t &l, const symbol_t &s);
   bool abstract_find(const list_t &l, const symbol_t &s);
-  void insert(list_t &l, const symbol_t &s, bool found=false);
+  void insert(list_t &l, const symbol_t &s, bool found = false);
+  void insert(list_t& dl, const list_t &sl, bool found = false);
   void clear(list_t &l);
 
   //
@@ -78,19 +87,21 @@ namespace mysym
   void init();
   symbol_t create(opt_t opt, std::string literal = "");
 
-  symbol_t make(opt_t opt, const symbol_t &s, bool as = false);
-  symbol_t make(opt_t opt, const symbol_t &s1, const symbol_t &s2, bool as = false);
+  symbol_t make(opt_t opt, const symbol_t &s, bool nas = false);
+  symbol_t make(opt_t opt, const symbol_t &s1, const symbol_t &s2, bool nas = false);
 
-  symbol_t make(opt_t opt, std::string s, bool as = false);
-  symbol_t make(opt_t opt, std::string s1, std::string s2, bool as = false);
+  symbol_t make(opt_t opt, std::string s, bool nas = false);
+  symbol_t make(opt_t opt, std::string s1, std::string s2, bool nas = false);
 
-  symbol_t make(opt_t opt, std::string s1, const symbol_t &s2, bool as = false);
-  symbol_t make(opt_t opt, const symbol_t &s1, std::string s2, bool as = false);
+  symbol_t make(opt_t opt, std::string s1, const symbol_t &s2, bool nas = false);
+  symbol_t make(opt_t opt, const symbol_t &s1, std::string s2, bool nas = false);
 
 #define create_opt(opt) create(opt)
+#define create_none() create(kOptNone)
 #define create_sym(literal) create(kOptSymbol, (literal))
 #define create_int(literal) create(kOptInteger, (literal))
 #define create_real(literal) create(kOptReal, (literal))
+#define undefined create_none()
 
 #define kind(s) get_opt(s)
 #define number_of_operands(s) symbol_size(s)
@@ -106,11 +117,16 @@ namespace mysym
   void merge(symbol_t &s);
   void automatic_simplify(symbol_t &s);
 
-  bool is_monomial(const symbol_t &s);
+  list_t complete_sub_expressions(const symbol_t &s);
   list_t variables(const symbol_t &s);
   list_t constants(const symbol_t &s);
   list_t integers(const symbol_t &s);
   list_t reals(const symbol_t &s);
+
+#define is_undefined(s) is_none(kind(s))
+  bool is_monomial(const symbol_t &s, const symbol_t &x);
+  bool is_polynomial(const symbol_t &s, const symbol_t &x);
+  int_t degree(const symbol_t &s, const symbol_t &x);
 
   typedef symbol_t (*fptr_map_t)(const symbol_t &);
   symbol_t map(fptr_map_t fmap, const symbol_t &s);
@@ -129,41 +145,45 @@ namespace mysym
   //
   // 运算符号
   //
-#define abs(s) make(kOptAbs, s, true)
-#define minus(s) make(kOptSub, s, true)
-#define add(s1, s2) make(kOptAdd, s1, s2, true)
-#define sub(s1, s2) make(kOptSub, s1, s2, true)
-#define mul(s1, s2) make(kOptMul, s1, s2, true)
-#define div(s1, s2) make(kOptDiv, s1, s2, true)
-#define mod(s1, s2) make(kOptMod, s1, s2, true)
-#define sqrt(s1, s2) make(kOptSqrt, s1, s2, true)
-#define pow(s1, s2) make(kOptPow, s1, s2, true)
-#define log(s1, s2) make(kOptLog, s1, s2, true)
-#define frac(s1, s2) make(kOptFrac, s1, s2, true)
-#define sin(s) make(kOptSin, s, true)
-#define cos(s) make(kOptCos, s, true)
-#define tan(s) make(kOptTan, s, true)
-#define cot(s) make(kOptCot, s, true)
-#define sec(s) make(kOptSec, s, true)
-#define csc(s) make(kOptCsc, s, true)
-#define asin(s) make(kOptArcSin, s, true)
-#define acos(s) make(kOptArcCos, s, true)
-#define atan(s) make(kOptArcTan, s, true)
-#define acot(s) make(kOptArcCot, s, true)
-#define asec(s) make(kOptArcSec, s, true)
-#define acsc(s) make(kOptArcCsc, s, true)
-#define sinh(s) make(kOptSinh, s, true)
-#define cosh(s) make(kOptCosh, s, true)
-#define tanh(s) make(kOptTanh, s, true)
-#define coth(s) make(kOptCoth, s, true)
-#define sech(s) make(kOptSech, s, true)
-#define csch(s) make(kOptCsch, s, true)
-#define asinh(s) make(kOptArcSinh, s, true)
-#define acosh(s) make(kOptArcCosh, s, true)
-#define atanh(s) make(kOptArcTanh, s, true)
-#define acoth(s) make(kOptArcCoth, s, true)
-#define asech(s) make(kOptArcSech, s, true)
-#define acsch(s) make(kOptArcCsch, s, true)
+#define abs(s) make(kOptAbs, s, false)
+#define minus(s) make(kOptSub, s, false)
+#define add(s1, s2) make(kOptAdd, s1, s2, false)
+#define sub(s1, s2) make(kOptSub, s1, s2, false)
+#define mul(s1, s2) make(kOptMul, s1, s2, false)
+#define div(s1, s2) make(kOptDiv, s1, s2, false)
+#define mod(s1, s2) make(kOptMod, s1, s2, false)
+#define sqrt(s1, s2) make(kOptSqrt, s1, s2, false)
+#define pow(s1, s2) make(kOptPow, s1, s2, false)
+#define log(s1, s2) make(kOptLog, s1, s2, false)
+#define frac(s1, s2) make(kOptFrac, s1, s2, false)
+#define sin(s) make(kOptSin, s, false)
+#define cos(s) make(kOptCos, s, false)
+#define tan(s) make(kOptTan, s, false)
+#define cot(s) make(kOptCot, s, false)
+#define sec(s) make(kOptSec, s, false)
+#define csc(s) make(kOptCsc, s, false)
+#define asin(s) make(kOptArcSin, s, false)
+#define acos(s) make(kOptArcCos, s, false)
+#define atan(s) make(kOptArcTan, s, false)
+#define acot(s) make(kOptArcCot, s, false)
+#define asec(s) make(kOptArcSec, s, false)
+#define acsc(s) make(kOptArcCsc, s, false)
+#define sinh(s) make(kOptSinh, s, false)
+#define cosh(s) make(kOptCosh, s, false)
+#define tanh(s) make(kOptTanh, s, false)
+#define coth(s) make(kOptCoth, s, false)
+#define sech(s) make(kOptSech, s, false)
+#define csch(s) make(kOptCsch, s, false)
+#define asinh(s) make(kOptArcSinh, s, false)
+#define acosh(s) make(kOptArcCosh, s, false)
+#define atanh(s) make(kOptArcTanh, s, false)
+#define acoth(s) make(kOptArcCoth, s, false)
+#define asech(s) make(kOptArcSech, s, false)
+#define acsch(s) make(kOptArcCsch, s, false)
+
+  //
+  // 全局变量
+  //
 
 } // namespace mysym
 
