@@ -67,6 +67,13 @@ set(MYSYM_OPERATOR_SRC
 )
 
 #
+# Debug sources
+#
+set(MYSYM_DEBUG_SRC
+  ${SRC_DIRECTORY}/print.cc
+)
+
+#
 # Library Build
 #
 add_library(${PROJECT_NAME} STATIC
@@ -74,7 +81,6 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/create.cc
   ${SRC_DIRECTORY}/copy.cc
   ${SRC_DIRECTORY}/coefficient.cc
-  ${SRC_DIRECTORY}/print.cc
   ${SRC_DIRECTORY}/make.cc
   ${SRC_DIRECTORY}/tree.cc
   ${SRC_DIRECTORY}/merge.cc
@@ -100,8 +106,10 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/variables.cc
   ${SRC_DIRECTORY}/monomial.cc
   ${SRC_DIRECTORY}/polynomial.cc
+  ${SRC_DIRECTORY}/expression.cc
   ${SRC_DIRECTORY}/degree.cc
   ${MYSYM_OPERATOR_SRC}
+  ${MYSYM_DEBUG_SRC}
 )
 # target_link_libraries(${PROJECT_NAME} mynum mympf mympz my)
 target_link_libraries(${PROJECT_NAME} mympf mympz my)

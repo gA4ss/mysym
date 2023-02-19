@@ -43,9 +43,9 @@ namespace mysym
 
   void insert(list_t& dl, const list_t &sl, bool found)
   {
-    for (auto it = dl.begin(); it != dl.end(); it++)
+    for (auto it = sl.begin(); it != sl.end(); it++)
     {
-      
+      insert(dl, *it, found);
     }
   }
 

@@ -10,6 +10,7 @@
 /mnt/e/workspace/mysym/build/test/CMakeFiles/install.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/rebuild_cache.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/edit_cache.dir
+/mnt/e/workspace/mysym/build/test/CMakeFiles/test_list.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_expression.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/list_install_components.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_polynomial.dir

@@ -98,7 +98,7 @@ namespace mysym
 
 #define create_opt(opt) create(opt)
 #define create_none() create(kOptNone)
-#define create_sym(literal) create(kOptSymbol, (literal))
+#define create_sym(literal) create(kOptVariate, (literal))
 #define create_int(literal) create(kOptInteger, (literal))
 #define create_real(literal) create(kOptReal, (literal))
 #define undefined create_none()
@@ -117,7 +117,7 @@ namespace mysym
   void merge(symbol_t &s);
   void automatic_simplify(symbol_t &s);
 
-  list_t complete_sub_expressions(const symbol_t &s);
+  list_t complete_sub_expressions(const symbol_t &s, bool found = false);
   list_t variables(const symbol_t &s);
   list_t constants(const symbol_t &s);
   list_t integers(const symbol_t &s);

@@ -66,21 +66,21 @@ namespace mysym
     // 符号类型
     // 包含了，变量，常量等等都算是符号
     //
-    kOptSymbol,
+    kOptVariate,
     kOptInteger,
     kOptReal
   } opt_t;
-#define kOptMax kOptSymbol
+#define kOptMax kOptVariate
 
 #define is_none(o) (o == kOptNone)
-#define is_opt(o) ((o > kOptNone) && (o < kOptSymbol))
+#define is_opt(o) ((o > kOptNone) && (o < kOptVariate))
 #define is_basic(o) ((o >= kOptAdd) && (o <= kOptMod))
-#define is_sym(o) (o >= kOptSymbol)
-#define is_var(o) (o == kOptSymbol)
+#define is_sym(o) (o >= kOptVariate)
+#define is_var(o) (o == kOptVariate)
 #define is_num(o) ((o == kOptInteger) || (o == kOptReal))
 #define is_int(o) (o == kOptInteger)
 #define is_real(o) (o == kOptReal)
-#define is_func(o) ((o > kOptMod) && (o < kOptSymbol))
+#define is_func(o) ((o > kOptMod) && (o < kOptVariate))
 
   typedef struct __operator_t
   {

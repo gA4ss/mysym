@@ -8,15 +8,14 @@
 using namespace mysym;
 
 TEST(Sym, Expression) {
-  symbol_t s1 = add("x", "y");   // x + y
-  symbol_t s2 = add(create_sym("z"), mul("a", "b")); // z + ab
-  // symbol_ptr_t s3 = add(s1, create_sym("i"));
+  symbol_t s1 = add("x", create_int("1"));
+  symbol_t s2 = mul(create_sym("a"), s1);
+  symbol_t s3 = mul(create_int("3"), cos("y"));
+  symbol_t s4 = add(s2, s3);
+  std::cout << print_string(s4) << std::endl;
 
-  symbol_t r = map(s1, s2);
-  std::cout << print_string(r) << std::endl;
-
-  r = map(s1, s2, kOptSin);
-  std::cout << print_string(r) << std::endl;
+  list_t l = complete_sub_expressions(s4);
+  std::cout << print_string(l) << std::endl;
 }
 
 int main(int argc, char* argv[]) {

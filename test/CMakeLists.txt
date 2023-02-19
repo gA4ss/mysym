@@ -45,6 +45,8 @@ add_executable(test_fraction ${SRC_DIRECTORY}/test_fraction.cc)
 target_link_libraries(test_fraction mysym gtest pthread)
 add_executable(test_expression ${SRC_DIRECTORY}/test_expression.cc)
 target_link_libraries(test_expression mysym gtest pthread)
+add_executable(test_list ${SRC_DIRECTORY}/test_list.cc)
+target_link_libraries(test_list mysym gtest pthread)
 
 # add_executable(test_addsub ${SRC_DIRECTORY}/test_addsub.cc)
 # target_link_libraries(test_addsub mympf gtest pthread)
