@@ -128,6 +128,13 @@ build CMakeFiles/mysym.dir/src/operand.cc.o: CXX_COMPILER__mysym ../src/operand.
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/exponent.cc.o: CXX_COMPILER__mysym ../src/exponent.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/exponent.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
 build CMakeFiles/mysym.dir/src/simplify.cc.o: CXX_COMPILER__mysym ../src/simplify.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/simplify.cc.o.d
@@ -289,6 +296,13 @@ build CMakeFiles/mysym.dir/src/degree.cc.o: CXX_COMPILER__mysym ../src/degree.cc
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/cmp.cc.o: CXX_COMPILER__mysym ../src/cmp.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/cmp.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
 build CMakeFiles/mysym.dir/src/operator/abs.cc.o: CXX_COMPILER__mysym ../src/operator/abs.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/operator/abs.cc.o.d
@@ -402,7 +416,7 @@ build CMakeFiles/mysym.dir/src/print.cc.o: CXX_COMPILER__mysym ../src/print.cc |
 #############################################
 # Link the static library libmysym.a
 
-build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/tree.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/func.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/variables.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/polynomial.cc.o CMakeFiles/mysym.dir/src/expression.cc.o CMakeFiles/mysym.dir/src/degree.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o CMakeFiles/mysym.dir/src/print.cc.o
+build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/tree.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/exponent.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/func.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/variables.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/polynomial.cc.o CMakeFiles/mysym.dir/src/expression.cc.o CMakeFiles/mysym.dir/src/degree.cc.o CMakeFiles/mysym.dir/src/cmp.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o CMakeFiles/mysym.dir/src/print.cc.o
   LANGUAGE_COMPILE_FLAGS = -Wall -g
   OBJECT_DIR = CMakeFiles/mysym.dir
   POST_BUILD = :
@@ -455,232 +469,6 @@ build test/CMakeFiles/install/strip.util: CUSTOM_COMMAND test/all
 build test/install/strip: phony test/CMakeFiles/install/strip.util
 
 #############################################
-# Utility command for install
-
-build test/CMakeFiles/install.util: CUSTOM_COMMAND test/all
-  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -P cmake_install.cmake
-  DESC = Install the project...
-  pool = console
-  restat = 1
-build test/install: phony test/CMakeFiles/install.util
-
-#############################################
-# Utility command for rebuild_cache
-
-build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -H/mnt/e/workspace/mysym -B/mnt/e/workspace/mysym/build
-  DESC = Running CMake to regenerate build system...
-  pool = console
-  restat = 1
-build test/rebuild_cache: phony test/CMakeFiles/rebuild_cache.util
-
-#############################################
-# Utility command for edit_cache
-
-build test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
-  DESC = No interactive CMake dialog available...
-  restat = 1
-build test/edit_cache: phony test/CMakeFiles/edit_cache.util
-# =============================================================================
-# Object build statements for EXECUTABLE target test_list
-
-
-#############################################
-# Order-only phony target for test_list
-
-build cmake_object_order_depends_target_test_list: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_list.dir/test_list.cc.o: CXX_COMPILER__test_list ../test/test_list.cc || cmake_object_order_depends_target_test_list
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_list.dir/test_list.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_list.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_list.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_list
-
-
-#############################################
-# Link the executable test/test_list
-
-build test/test_list: CXX_EXECUTABLE_LINKER__test_list test/CMakeFiles/test_list.dir/test_list.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_list.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_list
-  TARGET_PDB = test_list.dbg
-# =============================================================================
-# Object build statements for EXECUTABLE target test_expression
-
-
-#############################################
-# Order-only phony target for test_expression
-
-build cmake_object_order_depends_target_test_expression: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_expression.dir/test_expression.cc.o: CXX_COMPILER__test_expression ../test/test_expression.cc || cmake_object_order_depends_target_test_expression
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_expression.dir/test_expression.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_expression.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_expression.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_expression
-
-
-#############################################
-# Link the executable test/test_expression
-
-build test/test_expression: CXX_EXECUTABLE_LINKER__test_expression test/CMakeFiles/test_expression.dir/test_expression.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_expression.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_expression
-  TARGET_PDB = test_expression.dbg
-
-#############################################
-# Utility command for list_install_components
-
-build test/list_install_components: phony
-# =============================================================================
-# Object build statements for EXECUTABLE target test_polynomial
-
-
-#############################################
-# Order-only phony target for test_polynomial
-
-build cmake_object_order_depends_target_test_polynomial: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o: CXX_COMPILER__test_polynomial ../test/test_polynomial.cc || cmake_object_order_depends_target_test_polynomial
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_polynomial.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_polynomial.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_polynomial
-
-
-#############################################
-# Link the executable test/test_polynomial
-
-build test/test_polynomial: CXX_EXECUTABLE_LINKER__test_polynomial test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_polynomial.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_polynomial
-  TARGET_PDB = test_polynomial.dbg
-# =============================================================================
-# Object build statements for EXECUTABLE target test_map
-
-
-#############################################
-# Order-only phony target for test_map
-
-build cmake_object_order_depends_target_test_map: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_map.dir/test_map.cc.o: CXX_COMPILER__test_map ../test/test_map.cc || cmake_object_order_depends_target_test_map
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_map.dir/test_map.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_map.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_map.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_map
-
-
-#############################################
-# Link the executable test/test_map
-
-build test/test_map: CXX_EXECUTABLE_LINKER__test_map test/CMakeFiles/test_map.dir/test_map.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_map.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_map
-  TARGET_PDB = test_map.dbg
-# =============================================================================
-# Object build statements for EXECUTABLE target test_basic
-
-
-#############################################
-# Order-only phony target for test_basic
-
-build cmake_object_order_depends_target_test_basic: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_basic.dir/test_basic.cc.o: CXX_COMPILER__test_basic ../test/test_basic.cc || cmake_object_order_depends_target_test_basic
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_basic.dir/test_basic.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_basic.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_basic.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_basic
-
-
-#############################################
-# Link the executable test/test_basic
-
-build test/test_basic: CXX_EXECUTABLE_LINKER__test_basic test/CMakeFiles/test_basic.dir/test_basic.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_basic.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_basic
-  TARGET_PDB = test_basic.dbg
-# =============================================================================
-# Object build statements for EXECUTABLE target test_monomial
-
-
-#############################################
-# Order-only phony target for test_monomial
-
-build cmake_object_order_depends_target_test_monomial: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_monomial.dir/test_monomial.cc.o: CXX_COMPILER__test_monomial ../test/test_monomial.cc || cmake_object_order_depends_target_test_monomial
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_monomial.dir/test_monomial.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_monomial.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_monomial.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_monomial
-
-
-#############################################
-# Link the executable test/test_monomial
-
-build test/test_monomial: CXX_EXECUTABLE_LINKER__test_monomial test/CMakeFiles/test_monomial.dir/test_monomial.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_monomial.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_monomial
-  TARGET_PDB = test_monomial.dbg
-
-#############################################
 # Utility command for install/local
 
 build test/CMakeFiles/install/local.util: CUSTOM_COMMAND test/all
@@ -691,46 +479,14 @@ build test/CMakeFiles/install/local.util: CUSTOM_COMMAND test/all
 build test/install/local: phony test/CMakeFiles/install/local.util
 
 #############################################
-# Utility command for test
+# Utility command for install
 
-build test/CMakeFiles/test.util: CUSTOM_COMMAND
-  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/ctest --force-new-ctest-process
-  DESC = Running tests...
+build test/CMakeFiles/install.util: CUSTOM_COMMAND test/all
+  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -P cmake_install.cmake
+  DESC = Install the project...
   pool = console
   restat = 1
-build test/test: phony test/CMakeFiles/test.util
-# =============================================================================
-# Object build statements for EXECUTABLE target test_simplify
-
-
-#############################################
-# Order-only phony target for test_simplify
-
-build cmake_object_order_depends_target_test_simplify: phony || cmake_object_order_depends_target_mysym
-build test/CMakeFiles/test_simplify.dir/test_simplify.cc.o: CXX_COMPILER__test_simplify ../test/test_simplify.cc || cmake_object_order_depends_target_test_simplify
-  DEFINES = -DDEBUG
-  DEP_FILE = test/CMakeFiles/test_simplify.dir/test_simplify.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include -I../test/../src
-  OBJECT_DIR = test/CMakeFiles/test_simplify.dir
-  OBJECT_FILE_DIR = test/CMakeFiles/test_simplify.dir
-
-# =============================================================================
-# Link build statements for EXECUTABLE target test_simplify
-
-
-#############################################
-# Link the executable test/test_simplify
-
-build test/test_simplify: CXX_EXECUTABLE_LINKER__test_simplify test/CMakeFiles/test_simplify.dir/test_simplify.cc.o | libmysym.a || libmysym.a
-  FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
-  LINK_PATH = -L/usr/local/lib
-  OBJECT_DIR = test/CMakeFiles/test_simplify.dir
-  POST_BUILD = :
-  PRE_LINK = :
-  TARGET_FILE = test/test_simplify
-  TARGET_PDB = test_simplify.dbg
+build test/install: phony test/CMakeFiles/install.util
 # =============================================================================
 # Object build statements for EXECUTABLE target test_fraction
 
@@ -764,10 +520,398 @@ build test/test_fraction: CXX_EXECUTABLE_LINKER__test_fraction test/CMakeFiles/t
   TARGET_FILE = test/test_fraction
   TARGET_PDB = test_fraction.dbg
 # =============================================================================
+# Object build statements for EXECUTABLE target test_simplify
+
+
+#############################################
+# Order-only phony target for test_simplify
+
+build cmake_object_order_depends_target_test_simplify: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_simplify.dir/test_simplify.cc.o: CXX_COMPILER__test_simplify ../test/test_simplify.cc || cmake_object_order_depends_target_test_simplify
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_simplify.dir/test_simplify.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_simplify.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_simplify.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_simplify
+
+
+#############################################
+# Link the executable test/test_simplify
+
+build test/test_simplify: CXX_EXECUTABLE_LINKER__test_simplify test/CMakeFiles/test_simplify.dir/test_simplify.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_simplify.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_simplify
+  TARGET_PDB = test_simplify.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_monomial
+
+
+#############################################
+# Order-only phony target for test_monomial
+
+build cmake_object_order_depends_target_test_monomial: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_monomial.dir/test_monomial.cc.o: CXX_COMPILER__test_monomial ../test/test_monomial.cc || cmake_object_order_depends_target_test_monomial
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_monomial.dir/test_monomial.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_monomial.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_monomial.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_monomial
+
+
+#############################################
+# Link the executable test/test_monomial
+
+build test/test_monomial: CXX_EXECUTABLE_LINKER__test_monomial test/CMakeFiles/test_monomial.dir/test_monomial.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_monomial.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_monomial
+  TARGET_PDB = test_monomial.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_sort
+
+
+#############################################
+# Order-only phony target for test_sort
+
+build cmake_object_order_depends_target_test_sort: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_sort.dir/test_sort.cc.o: CXX_COMPILER__test_sort ../test/test_sort.cc || cmake_object_order_depends_target_test_sort
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_sort.dir/test_sort.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_sort.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_sort.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_sort
+
+
+#############################################
+# Link the executable test/test_sort
+
+build test/test_sort: CXX_EXECUTABLE_LINKER__test_sort test/CMakeFiles/test_sort.dir/test_sort.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_sort.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_sort
+  TARGET_PDB = test_sort.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_map
+
+
+#############################################
+# Order-only phony target for test_map
+
+build cmake_object_order_depends_target_test_map: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_map.dir/test_map.cc.o: CXX_COMPILER__test_map ../test/test_map.cc || cmake_object_order_depends_target_test_map
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_map.dir/test_map.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_map.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_map.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_map
+
+
+#############################################
+# Link the executable test/test_map
+
+build test/test_map: CXX_EXECUTABLE_LINKER__test_map test/CMakeFiles/test_map.dir/test_map.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_map.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_map
+  TARGET_PDB = test_map.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_polynomial
+
+
+#############################################
+# Order-only phony target for test_polynomial
+
+build cmake_object_order_depends_target_test_polynomial: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o: CXX_COMPILER__test_polynomial ../test/test_polynomial.cc || cmake_object_order_depends_target_test_polynomial
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_polynomial.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_polynomial.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_polynomial
+
+
+#############################################
+# Link the executable test/test_polynomial
+
+build test/test_polynomial: CXX_EXECUTABLE_LINKER__test_polynomial test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_polynomial.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_polynomial
+  TARGET_PDB = test_polynomial.dbg
+
+#############################################
+# Utility command for list_install_components
+
+build test/list_install_components: phony
+# =============================================================================
+# Object build statements for EXECUTABLE target test_expression
+
+
+#############################################
+# Order-only phony target for test_expression
+
+build cmake_object_order_depends_target_test_expression: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_expression.dir/test_expression.cc.o: CXX_COMPILER__test_expression ../test/test_expression.cc || cmake_object_order_depends_target_test_expression
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_expression.dir/test_expression.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_expression.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_expression.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_expression
+
+
+#############################################
+# Link the executable test/test_expression
+
+build test/test_expression: CXX_EXECUTABLE_LINKER__test_expression test/CMakeFiles/test_expression.dir/test_expression.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_expression.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_expression
+  TARGET_PDB = test_expression.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_basic
+
+
+#############################################
+# Order-only phony target for test_basic
+
+build cmake_object_order_depends_target_test_basic: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_basic.dir/test_basic.cc.o: CXX_COMPILER__test_basic ../test/test_basic.cc || cmake_object_order_depends_target_test_basic
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_basic.dir/test_basic.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_basic.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_basic.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_basic
+
+
+#############################################
+# Link the executable test/test_basic
+
+build test/test_basic: CXX_EXECUTABLE_LINKER__test_basic test/CMakeFiles/test_basic.dir/test_basic.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_basic.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_basic
+  TARGET_PDB = test_basic.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_list
+
+
+#############################################
+# Order-only phony target for test_list
+
+build cmake_object_order_depends_target_test_list: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_list.dir/test_list.cc.o: CXX_COMPILER__test_list ../test/test_list.cc || cmake_object_order_depends_target_test_list
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_list.dir/test_list.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_list.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_list.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_list
+
+
+#############################################
+# Link the executable test/test_list
+
+build test/test_list: CXX_EXECUTABLE_LINKER__test_list test/CMakeFiles/test_list.dir/test_list.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_list.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_list
+  TARGET_PDB = test_list.dbg
+
+#############################################
+# Utility command for test
+
+build test/CMakeFiles/test.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/ctest --force-new-ctest-process
+  DESC = Running tests...
+  pool = console
+  restat = 1
+build test/test: phony test/CMakeFiles/test.util
+# =============================================================================
+# Object build statements for EXECUTABLE target test_cmp
+
+
+#############################################
+# Order-only phony target for test_cmp
+
+build cmake_object_order_depends_target_test_cmp: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_cmp.dir/test_cmp.cc.o: CXX_COMPILER__test_cmp ../test/test_cmp.cc || cmake_object_order_depends_target_test_cmp
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_cmp.dir/test_cmp.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_cmp.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_cmp.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_cmp
+
+
+#############################################
+# Link the executable test/test_cmp
+
+build test/test_cmp: CXX_EXECUTABLE_LINKER__test_cmp test/CMakeFiles/test_cmp.dir/test_cmp.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_cmp.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_cmp
+  TARGET_PDB = test_cmp.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_term
+
+
+#############################################
+# Order-only phony target for test_term
+
+build cmake_object_order_depends_target_test_term: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_term.dir/test_term.cc.o: CXX_COMPILER__test_term ../test/test_term.cc || cmake_object_order_depends_target_test_term
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_term.dir/test_term.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_term.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_term.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_term
+
+
+#############################################
+# Link the executable test/test_term
+
+build test/test_term: CXX_EXECUTABLE_LINKER__test_term test/CMakeFiles/test_term.dir/test_term.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_term.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_term
+  TARGET_PDB = test_term.dbg
+# =============================================================================
+# Object build statements for EXECUTABLE target test_exponent
+
+
+#############################################
+# Order-only phony target for test_exponent
+
+build cmake_object_order_depends_target_test_exponent: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_exponent.dir/test_exponent.cc.o: CXX_COMPILER__test_exponent ../test/test_exponent.cc || cmake_object_order_depends_target_test_exponent
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_exponent.dir/test_exponent.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_exponent.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_exponent.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_exponent
+
+
+#############################################
+# Link the executable test/test_exponent
+
+build test/test_exponent: CXX_EXECUTABLE_LINKER__test_exponent test/CMakeFiles/test_exponent.dir/test_exponent.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_exponent.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_exponent
+  TARGET_PDB = test_exponent.dbg
+
+#############################################
+# Utility command for edit_cache
+
+build test/CMakeFiles/edit_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -E echo No\ interactive\ CMake\ dialog\ available.
+  DESC = No interactive CMake dialog available...
+  restat = 1
+build test/edit_cache: phony test/CMakeFiles/edit_cache.util
+
+#############################################
+# Utility command for rebuild_cache
+
+build test/CMakeFiles/rebuild_cache.util: CUSTOM_COMMAND
+  COMMAND = cd /mnt/e/workspace/mysym/build/test && /usr/bin/cmake -H/mnt/e/workspace/mysym -B/mnt/e/workspace/mysym/build
+  DESC = Running CMake to regenerate build system...
+  pool = console
+  restat = 1
+build test/rebuild_cache: phony test/CMakeFiles/rebuild_cache.util
+# =============================================================================
 # Target aliases.
 
 build mysym: phony libmysym.a
 build test_basic: phony test/test_basic
+build test_cmp: phony test/test_cmp
+build test_exponent: phony test/test_exponent
 build test_expression: phony test/test_expression
 build test_fraction: phony test/test_fraction
 build test_list: phony test/test_list
@@ -775,6 +919,8 @@ build test_map: phony test/test_map
 build test_monomial: phony test/test_monomial
 build test_polynomial: phony test/test_polynomial
 build test_simplify: phony test/test_simplify
+build test_sort: phony test/test_sort
+build test_term: phony test/test_term
 # =============================================================================
 # Folder targets.
 
@@ -784,7 +930,7 @@ build test_simplify: phony test/test_simplify
 #############################################
 # Folder: /mnt/e/workspace/mysym/build/test
 
-build  test/all: phony test_list test_expression test_polynomial test_map test_basic test_monomial test_simplify test_fraction
+build  test/all: phony test_fraction test_simplify test_monomial test_sort test_map test_polynomial test_expression test_basic test_list test_cmp test_term test_exponent
 # =============================================================================
 # Built-in targets
 
@@ -792,7 +938,7 @@ build  test/all: phony test_list test_expression test_polynomial test_map test_b
 #############################################
 # The main all target.
 
-build all: phony libmysym.a test/test_list test/test_expression test/test_polynomial test/test_map test/test_basic test/test_monomial test/test_simplify test/test_fraction
+build all: phony libmysym.a test/test_fraction test/test_simplify test/test_monomial test/test_sort test/test_map test/test_polynomial test/test_expression test/test_basic test/test_list test/test_cmp test/test_term test/test_exponent
 
 #############################################
 # Make the all target the default.

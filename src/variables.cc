@@ -7,7 +7,7 @@ namespace mysym
     list_t l;
     if (is_single(s))
     {
-      insert(l, s);
+      append(l, s);
     }
     else
     {

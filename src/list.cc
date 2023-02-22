@@ -28,7 +28,7 @@ namespace mysym
     return false;
   }
 
-  void insert(list_t& l, const symbol_t &s, bool found)
+  void append(list_t& l, const symbol_t &s, bool found)
   {
     if (!found)
     {
@@ -41,11 +41,11 @@ namespace mysym
     }
   }
 
-  void insert(list_t& dl, const list_t &sl, bool found)
+  void append(list_t& dl, const list_t &sl, bool found)
   {
     for (auto it = sl.begin(); it != sl.end(); it++)
     {
-      insert(dl, *it, found);
+      append(dl, *it, found);
     }
   }
 

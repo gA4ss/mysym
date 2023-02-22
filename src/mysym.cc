@@ -2,7 +2,6 @@
 
 namespace mysym
 {
-
   void init()
   {
     plibrary() = init_library();

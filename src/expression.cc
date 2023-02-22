@@ -9,17 +9,22 @@ namespace mysym
     // 单一符号直接退出
     if (is_sym(kind(s)))
     {
-      insert(l, s, found);
+      append(l, s, found);
       return l;
     }
 
     // 插入最开始的符号多项式，随后遍历它
-    insert(l, s);
+    append(l, s);
     for (auto it = s.items.begin(); it != s.items.end(); it++)
     {
-      insert(l, complete_sub_expressions(*it, found), found);
+      append(l, complete_sub_expressions(*it, found), found);
     }
 
     return l;
+  }
+
+  bool free_of(const symbol_t &s, const symbol_t &u)
+  {
+    return false;
   }
 } // namespace mysym

@@ -60,8 +60,8 @@ namespace mysym
   size_t size(const list_t &l);
   bool find(const list_t &l, const symbol_t &s);
   bool abstract_find(const list_t &l, const symbol_t &s);
-  void insert(list_t &l, const symbol_t &s, bool found = false);
-  void insert(list_t& dl, const list_t &sl, bool found = false);
+  void append(list_t &l, const symbol_t &s, bool found = false);
+  void append(list_t& dl, const list_t &sl, bool found = false);
   void clear(list_t &l);
 
   //
@@ -98,7 +98,7 @@ namespace mysym
 
 #define create_opt(opt) create(opt)
 #define create_none() create(kOptNone)
-#define create_sym(literal) create(kOptVariate, (literal))
+#define create_var(literal) create(kOptVariate, (literal))
 #define create_int(literal) create(kOptInteger, (literal))
 #define create_real(literal) create(kOptReal, (literal))
 #define undefined create_none()
@@ -106,18 +106,23 @@ namespace mysym
 #define kind(s) get_opt(s)
 #define number_of_operands(s) symbol_size(s)
   symbol_t operand(const symbol_t &s, size_t i);
+  symbol_t base(const symbol_t &s);
+  symbol_t exponent(const symbol_t &s);
+  symbol_t term(const symbol_t &s);
 
   bool match(const symbol_t &s1, const symbol_t &s2);
   bool match_in(const symbol_t &s1, const symbol_t &s2);
   bool abstract_match(const symbol_t &s1, const symbol_t &s2);
   bool abstract_match_in(const symbol_t &s1, const symbol_t &s2);
 
+  int cmp(const symbol_t &s1, const symbol_t &s2);
   int cmp_operator_priority(opt_t o1, opt_t o2);
   void merge_same_basic_operator(symbol_t &s);
   void merge(symbol_t &s);
   void automatic_simplify(symbol_t &s);
 
   list_t complete_sub_expressions(const symbol_t &s, bool found = false);
+  bool free_of(const symbol_t &s, const symbol_t &u);
   list_t variables(const symbol_t &s);
   list_t constants(const symbol_t &s);
   list_t integers(const symbol_t &s);
@@ -145,41 +150,41 @@ namespace mysym
   //
   // 运算符号
   //
-#define abs(s) make(kOptAbs, s, false)
-#define minus(s) make(kOptSub, s, false)
-#define add(s1, s2) make(kOptAdd, s1, s2, false)
-#define sub(s1, s2) make(kOptSub, s1, s2, false)
-#define mul(s1, s2) make(kOptMul, s1, s2, false)
-#define div(s1, s2) make(kOptDiv, s1, s2, false)
-#define mod(s1, s2) make(kOptMod, s1, s2, false)
-#define sqrt(s1, s2) make(kOptSqrt, s1, s2, false)
-#define pow(s1, s2) make(kOptPow, s1, s2, false)
-#define log(s1, s2) make(kOptLog, s1, s2, false)
-#define frac(s1, s2) make(kOptFrac, s1, s2, false)
-#define sin(s) make(kOptSin, s, false)
-#define cos(s) make(kOptCos, s, false)
-#define tan(s) make(kOptTan, s, false)
-#define cot(s) make(kOptCot, s, false)
-#define sec(s) make(kOptSec, s, false)
-#define csc(s) make(kOptCsc, s, false)
-#define asin(s) make(kOptArcSin, s, false)
-#define acos(s) make(kOptArcCos, s, false)
-#define atan(s) make(kOptArcTan, s, false)
-#define acot(s) make(kOptArcCot, s, false)
-#define asec(s) make(kOptArcSec, s, false)
-#define acsc(s) make(kOptArcCsc, s, false)
-#define sinh(s) make(kOptSinh, s, false)
-#define cosh(s) make(kOptCosh, s, false)
-#define tanh(s) make(kOptTanh, s, false)
-#define coth(s) make(kOptCoth, s, false)
-#define sech(s) make(kOptSech, s, false)
-#define csch(s) make(kOptCsch, s, false)
-#define asinh(s) make(kOptArcSinh, s, false)
-#define acosh(s) make(kOptArcCosh, s, false)
-#define atanh(s) make(kOptArcTanh, s, false)
-#define acoth(s) make(kOptArcCoth, s, false)
-#define asech(s) make(kOptArcSech, s, false)
-#define acsch(s) make(kOptArcCsch, s, false)
+#define c_abs(s) make(kOptAbs, s, false)
+#define c_minus(s) make(kOptSub, s, false)
+#define c_add(s1, s2) make(kOptAdd, s1, s2, false)
+#define c_sub(s1, s2) make(kOptSub, s1, s2, false)
+#define c_mul(s1, s2) make(kOptMul, s1, s2, false)
+#define c_div(s1, s2) make(kOptDiv, s1, s2, false)
+#define c_mod(s1, s2) make(kOptMod, s1, s2, false)
+#define c_sqrt(s1, s2) make(kOptSqrt, s1, s2, false)
+#define c_pow(s1, s2) make(kOptPow, s1, s2, false)
+#define c_log(s1, s2) make(kOptLog, s1, s2, false)
+#define c_frac(s1, s2) make(kOptFrac, s1, s2, false)
+#define c_sin(s) make(kOptSin, s, false)
+#define c_cos(s) make(kOptCos, s, false)
+#define c_tan(s) make(kOptTan, s, false)
+#define c_cot(s) make(kOptCot, s, false)
+#define c_sec(s) make(kOptSec, s, false)
+#define c_csc(s) make(kOptCsc, s, false)
+#define c_asin(s) make(kOptArcSin, s, false)
+#define c_acos(s) make(kOptArcCos, s, false)
+#define c_atan(s) make(kOptArcTan, s, false)
+#define c_acot(s) make(kOptArcCot, s, false)
+#define c_asec(s) make(kOptArcSec, s, false)
+#define c_acsc(s) make(kOptArcCsc, s, false)
+#define c_sinh(s) make(kOptSinh, s, false)
+#define c_cosh(s) make(kOptCosh, s, false)
+#define c_tanh(s) make(kOptTanh, s, false)
+#define c_coth(s) make(kOptCoth, s, false)
+#define c_sech(s) make(kOptSech, s, false)
+#define c_c_csch(s) make(kOptCsch, s, false)
+#define c_asinh(s) make(kOptArcSinh, s, false)
+#define c_acosh(s) make(kOptArcCosh, s, false)
+#define c_atanh(s) make(kOptArcTanh, s, false)
+#define c_acoth(s) make(kOptArcCoth, s, false)
+#define c_asech(s) make(kOptArcSech, s, false)
+#define c_acsch(s) make(kOptArcCsch, s, false)
 
   //
   // 全局变量

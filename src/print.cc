@@ -85,6 +85,16 @@ namespace mysym
         str.pop_back(); // 删除最后一个","号
         str += ")";
       }
+      else if (is_none(s.opt))
+      {
+        str = opt_name(s.opt);
+      }
+      else if (is_frac(s.opt))
+      {
+        str = numerator(s).literal;
+        str += "/";
+        str = denominator(s).literal;
+      }
       else
       {
         str = s.literal;

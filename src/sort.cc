@@ -2,15 +2,6 @@
 
 namespace mysym
 {
-  // /* 1.次数越低越在前
-  //  * 2.项数越多越在前
-  //  * 3.
-  //  */
-  // static bool __cmp(symbol_ptr_t s1, symbol_ptr_t s2)
-  // {
-  //   return true;
-  // }
-
   // static bool __reverse_cmp(symbol_ptr_t s1, symbol_ptr_t s2)
   // {
   //   return !__cmp(s1, s2);

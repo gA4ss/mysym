@@ -9,34 +9,42 @@ using namespace mysym;
 
 TEST(Sym, List)
 {
-  symbol_t s1 = add("x", "y"); // x + y
-  EXPECT_FALSE(is_monomial(s1, create_sym("x")));
-  symbol_t s2 = add(create_sym("z"), mul("a", "b")); // z + ab
-  EXPECT_FALSE(is_monomial(s2, create_sym("z")));
-  symbol_t s3 = mul("a", "b");
-  EXPECT_FALSE(is_monomial(s3, create_sym("a")));
-  symbol_t s4 = pow("a", create_int("5"));
-  EXPECT_TRUE(is_monomial(s4, create_sym("a")));
-  symbol_t s5 = pow("a", create_int("5"));
-  symbol_t s6 = pow("a", create_int("3"));
-  symbol_t s7 = mul(s6, s7);
-  EXPECT_TRUE(is_monomial(s7, create_sym("a")));
+  list_t l;
+  symbol_t x = create_var("x");
+  append(l, x);
+  symbol_t y = create_var("y");
+  append(l, y);
+  symbol_t z = create_var("z");
+  append(l, z);
+  EXPECT_EQ(size(l), 3);
+
+  std::cout << print_string(l) << std::endl;
+
+  EXPECT_TRUE(find(l, x));
+  EXPECT_TRUE(find(l, y));
+  EXPECT_TRUE(find(l, z));
+  EXPECT_FALSE(find(l, create_var("u")));
+
+  append(l, x);
+  EXPECT_EQ(size(l), 4);
+
+  std::cout << print_string(l) << std::endl;
 }
 
 TEST(Sym, Set)
 {
-  symbol_t s1 = add("x", "y"); // x + y
-  EXPECT_FALSE(is_monomial(s1, create_sym("x")));
-  symbol_t s2 = add(create_sym("z"), mul("a", "b")); // z + ab
-  EXPECT_FALSE(is_monomial(s2, create_sym("z")));
-  symbol_t s3 = mul("a", "b");
-  EXPECT_FALSE(is_monomial(s3, create_sym("a")));
-  symbol_t s4 = pow("a", create_int("5"));
-  EXPECT_TRUE(is_monomial(s4, create_sym("a")));
-  symbol_t s5 = pow("a", create_int("5"));
-  symbol_t s6 = pow("a", create_int("3"));
-  symbol_t s7 = mul(s6, s7);
-  EXPECT_TRUE(is_monomial(s7, create_sym("a")));
+  list_t l;
+  symbol_t x = create_var("x");
+  append(l, x);
+  symbol_t y = create_var("y");
+  append(l, y);
+  symbol_t z = create_var("z");
+  append(l, z, true);
+  append(l, z, true);
+  append(l, z, true);
+  EXPECT_EQ(size(l), 3);
+
+  std::cout << print_string(l) << std::endl;
 }
 
 int main(int argc, char *argv[])

@@ -28,7 +28,6 @@ namespace mysym
     kOptPow,
     kOptLog,
     kOptFact,
-    kOptFrac,
 
     //
     // 三角函数
@@ -39,6 +38,10 @@ namespace mysym
     kOptCot,
     kOptSec,
     kOptCsc,
+
+    //
+    // 反三角函数
+    //
     kOptArcSin,
     kOptArcCos,
     kOptArcTan,
@@ -55,6 +58,10 @@ namespace mysym
     kOptCoth,
     kOptSech,
     kOptCsch,
+
+    //
+    // 反双曲函数
+    //
     kOptArcSinh,
     kOptArcCosh,
     kOptArcTanh,
@@ -68,19 +75,28 @@ namespace mysym
     //
     kOptVariate,
     kOptInteger,
-    kOptReal
+    kOptReal,
+    kOptFrac,
+    kOptMax
   } opt_t;
-#define kOptMax kOptVariate
+#define kOptNameMax kOptVariate
 
 #define is_none(o) (o == kOptNone)
 #define is_opt(o) ((o > kOptNone) && (o < kOptVariate))
 #define is_basic(o) ((o >= kOptAdd) && (o <= kOptMod))
+#define is_basic_func(o) ((o >= kOptAbs) && (o <= kOptFact))
+#define is_trigo(o) ((o >= kOptSin) && (o <= kOptCsc))
+#define is_inv_trigo(o) ((o >= kOptArcSin) && (o <= kOptArcCsc))
+#define is_hyper(o) ((o >= kOptSinh) && (o <= kOptCsch))
+#define is_inv_hyper(o) ((o >= kOptArcSinh) && (o <= kOptArcCsch))
+#define is_func(o) ((o > kOptMod) && (o < kOptVariate))
 #define is_sym(o) (o >= kOptVariate)
 #define is_var(o) (o == kOptVariate)
 #define is_num(o) ((o == kOptInteger) || (o == kOptReal))
 #define is_int(o) (o == kOptInteger)
 #define is_real(o) (o == kOptReal)
-#define is_func(o) ((o > kOptMod) && (o < kOptVariate))
+#define is_frac(o) (o == kOptFrac)
+#define is_const(o) (o >= kOptInteger)
 
   typedef struct __operator_t
   {
@@ -92,14 +108,15 @@ namespace mysym
 
   typedef enum
   {
+    kAssoNone,
     kAssoLeft,
     kAssoRight
   } asso_t;
 
   extern operator_t __operator[kOptMax];
-#define opt_name(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].name : "")
-#define opt_prio(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].prio : -1)
-#define opt_asso(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].asso : -1)
+#define opt_name(o) (((o >= kOptNone) && (o < kOptNameMax)) ? __operator[o].name : "")
+#define opt_prio(o) (((o >= kOptNone) && (o < kOptNameMax)) ? __operator[o].prio : -1)
+#define opt_asso(o) (((o >= kOptNone) && (o < kOptNameMax)) ? __operator[o].asso : -1)
 
 } // namespace mysym
 

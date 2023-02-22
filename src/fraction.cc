@@ -23,8 +23,8 @@ namespace mysym
     if (kind(s) != kOptFrac)
       return s;
 
-    symbol_t p = frac(create_int("1"), denominator(s));
-    symbol_t u = mul(p, numerator(s));
+    symbol_t p = c_frac(create_int("1"), denominator(s));
+    symbol_t u = c_mul(p, numerator(s));
     return u;
   }
 } // namespace mysym

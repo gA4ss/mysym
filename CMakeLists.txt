@@ -85,6 +85,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/tree.cc
   ${SRC_DIRECTORY}/merge.cc
   ${SRC_DIRECTORY}/operand.cc
+  ${SRC_DIRECTORY}/exponent.cc
   ${SRC_DIRECTORY}/simplify.cc
   ${SRC_DIRECTORY}/map.cc
   ${SRC_DIRECTORY}/sort.cc
@@ -108,6 +109,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/polynomial.cc
   ${SRC_DIRECTORY}/expression.cc
   ${SRC_DIRECTORY}/degree.cc
+  ${SRC_DIRECTORY}/cmp.cc
   ${MYSYM_OPERATOR_SRC}
   ${MYSYM_DEBUG_SRC}
 )

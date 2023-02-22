@@ -23,26 +23,26 @@ namespace mysym
 
   symbol_t make(opt_t opt, std::string s, bool nas)
   {
-    symbol_t v = create_sym(s);
+    symbol_t v = create_var(s);
     return make(opt, v, nas);
   }
 
   symbol_t make(opt_t opt, std::string s1, std::string s2, bool nas)
   {
-    symbol_t v1 = create_sym(s1);
-    symbol_t v2 = create_sym(s2);
+    symbol_t v1 = create_var(s1);
+    symbol_t v2 = create_var(s2);
     return make(opt, v1, v2, nas);
   }
 
   symbol_t make(opt_t opt, std::string s1, const symbol_t &s2, bool nas)
   {
-    symbol_t v1 = create_sym(s1);
+    symbol_t v1 = create_var(s1);
     return make(opt, v1, s2, nas);
   }
 
   symbol_t make(opt_t opt, const symbol_t &s1, std::string s2, bool nas)
   {
-    symbol_t v2 = create_sym(s2);
+    symbol_t v2 = create_var(s2);
     return make(opt, s1, v2, nas);
   }
 

@@ -8,10 +8,10 @@
 using namespace mysym;
 
 TEST(Sym, Expression) {
-  symbol_t s1 = add("x", create_int("1"));
-  symbol_t s2 = mul(create_sym("a"), s1);
-  symbol_t s3 = mul(create_int("3"), cos("y"));
-  symbol_t s4 = add(s2, s3);
+  symbol_t s1 = c_add("x", create_int("1"));
+  symbol_t s2 = c_mul(create_var("a"), s1);
+  symbol_t s3 = c_mul(create_int("3"), c_cos("y"));
+  symbol_t s4 = c_add(s2, s3);
   std::cout << print_string(s4) << std::endl;
 
   list_t l = complete_sub_expressions(s4);
