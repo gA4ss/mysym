@@ -2,17 +2,26 @@
 
 namespace mysym
 {
-  // static bool __reverse_cmp(symbol_ptr_t s1, symbol_ptr_t s2)
-  // {
-  //   return !__cmp(s1, s2);
-  // }
+  static bool __symbol_cmp(const symbol_t &s1, const symbol_t &s2)
+  {
+    int c = cmp(s1, s2);
+    return (c == -1) ? true : false;
+  }
 
-  // symbol_ptr_t sort(symbol_ptr_t s, bool reverse)
-  // {
-  //   if (reverse)
-  //     std::sort(s->next.begin(), s->next.end(), __reverse_cmp);
-  //   else
-  //     std::sort(s->next.begin(), s->next.end(), __cmp);
-  //   return s;
-  // }
+  static bool __symbol_reverse_cmp(const symbol_t &s1, const symbol_t &s2)
+  {
+    return !__symbol_cmp(s1, s2);
+  }
+
+  void sort(symbol_t &s, bool reverse)
+  {
+    if (is_sym(kind(s)))
+      return;
+
+    if (reverse)
+      std::sort(s.items.begin(), s.items.end(), __symbol_reverse_cmp);
+    else
+      std::sort(s.items.begin(), s.items.end(), __symbol_cmp);
+    return;
+  }
 } // namespace mysym

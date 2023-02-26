@@ -9,10 +9,16 @@ using namespace mysym;
 
 TEST(Sym, Sort)
 {
-  std::string x = "zAx114314321ABC";
-  std::string y = "y431432";
-  if (x > y) std::cout << "x > y" << std::endl;
-  else std::cout << "x < y" << std::endl;
+  symbol_t a = c_add("a", "y");
+  symbol_t b = c_add("b", "c");
+  symbol_t c = c_add(create_int("5"), "u");
+  symbol_t d = c_add(c_pow("a", create_int("3")), c_sin("y"));
+  symbol_t group1 = c_add(c_add(a, b), c_add(c, d));
+  std::cout << "group1 = " << print_string(group1) << std::endl;
+  sort(group1);
+  std::cout << "after sort group1 = " << print_string(group1) << std::endl;
+  sort(group1, true);
+  std::cout << "after reverse group1 = " << print_string(group1) << std::endl;
 }
 
 int main(int argc, char *argv[])

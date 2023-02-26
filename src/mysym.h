@@ -61,7 +61,7 @@ namespace mysym
   bool find(const list_t &l, const symbol_t &s);
   bool abstract_find(const list_t &l, const symbol_t &s);
   void append(list_t &l, const symbol_t &s, bool found = false);
-  void append(list_t& dl, const list_t &sl, bool found = false);
+  void append(list_t &dl, const list_t &sl, bool found = false);
   void clear(list_t &l);
 
   //
@@ -108,6 +108,7 @@ namespace mysym
   symbol_t operand(const symbol_t &s, size_t i);
   symbol_t base(const symbol_t &s);
   symbol_t exponent(const symbol_t &s);
+#define antilog(s) exponent(s)
   symbol_t term(const symbol_t &s);
 
   bool match(const symbol_t &s1, const symbol_t &s2);
@@ -116,6 +117,7 @@ namespace mysym
   bool abstract_match_in(const symbol_t &s1, const symbol_t &s2);
 
   int cmp(const symbol_t &s1, const symbol_t &s2);
+  void sort(symbol_t &s, bool reverse = false);
   int cmp_operator_priority(opt_t o1, opt_t o2);
   void merge_same_basic_operator(symbol_t &s);
   void merge(symbol_t &s);
@@ -150,17 +152,13 @@ namespace mysym
   //
   // 运算符号
   //
-#define c_abs(s) make(kOptAbs, s, false)
-#define c_minus(s) make(kOptSub, s, false)
 #define c_add(s1, s2) make(kOptAdd, s1, s2, false)
-#define c_sub(s1, s2) make(kOptSub, s1, s2, false)
 #define c_mul(s1, s2) make(kOptMul, s1, s2, false)
-#define c_div(s1, s2) make(kOptDiv, s1, s2, false)
-#define c_mod(s1, s2) make(kOptMod, s1, s2, false)
-#define c_sqrt(s1, s2) make(kOptSqrt, s1, s2, false)
 #define c_pow(s1, s2) make(kOptPow, s1, s2, false)
 #define c_log(s1, s2) make(kOptLog, s1, s2, false)
-#define c_frac(s1, s2) make(kOptFrac, s1, s2, false)
+#define c_fact(s1, s2) make(kOptFact, s1, s2, false)
+#define c_abs(s) make(kOptAbs, s, false)
+#define c_mod(s1, s2) make(kOptMod, s1, s2, false)
 #define c_sin(s) make(kOptSin, s, false)
 #define c_cos(s) make(kOptCos, s, false)
 #define c_tan(s) make(kOptTan, s, false)
@@ -185,6 +183,15 @@ namespace mysym
 #define c_acoth(s) make(kOptArcCoth, s, false)
 #define c_asech(s) make(kOptArcSech, s, false)
 #define c_acsch(s) make(kOptArcCsch, s, false)
+#define c_frac(s1, s2) make(kOptFrac, s1, s2, false)
+
+  //
+  // 扩展运算符
+  //
+#define c_minus(s) c_mul(create_int("-1"), s)
+#define c_sub(s1, s2) make(kOptAdd, s1, c_mul(create_int("-1"), s2, false), false)
+#define c_div(s1, s2) make(kOptMul, s1, c_pow(s2, create_int("-1"), false), false)
+#define c_sqrt(s) make(kOptPow, s, create_frac("1", "2"), false)
 
   //
   // 全局变量

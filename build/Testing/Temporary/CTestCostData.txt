@@ -1,0 +1,13 @@
+test_basic 2 0.687177
+test_map 2 0.647326
+test_simplify 2 0.614234
+test_monomial 2 0.586648
+test_polynomial 2 0.5552
+test_fraction 2 0.507777
+test_expression 2 0.350702
+test_list 2 0.247766
+test_term 2 0.183698
+test_exponent 2 0.121763
+test_cmp 2 0.0919645
+test_sort 2 0.0913819
+---

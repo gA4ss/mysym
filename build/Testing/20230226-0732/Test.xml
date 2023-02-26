@@ -1,0 +1,323 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Site BuildName="(empty)"
+	BuildStamp="20230226-0732-Experimental"
+	Name="(empty)"
+	Generator="ctest-3.10.2"
+	CompilerName=""
+	CompilerVersion=""
+	OSName="Linux"
+	Hostname="DESKTOP-FC6BDD8"
+	OSRelease="5.15.79.1-microsoft-standard-WSL2"
+	OSVersion="#1 SMP Wed Nov 23 01:01:46 UTC 2022"
+	OSPlatform="x86_64"
+	Is64Bits="1"
+	VendorString="GenuineIntel"
+	VendorID="Intel Corporation"
+	FamilyID="6"
+	ModelID="141"
+	ProcessorCacheSize="24576"
+	NumberOfLogicalCPU="16"
+	NumberOfPhysicalCPU="8"
+	TotalVirtualMemory="8192"
+	TotalPhysicalMemory="31972"
+	LogicalProcessorsPerPhysical="2"
+	ProcessorClockFrequency="2496"
+	>
+	<Testing>
+		<StartDateTime>Feb 26 15:43 CST</StartDateTime>
+		<StartTestTime>1677397409</StartTestTime>
+		<TestList>
+			<Test>./test_map</Test>
+			<Test>./test_basic</Test>
+			<Test>./test_monomial</Test>
+			<Test>./test_simplify</Test>
+			<Test>./test_polynomial</Test>
+			<Test>./test_fraction</Test>
+			<Test>./test_expression</Test>
+			<Test>./test_list</Test>
+			<Test>./test_term</Test>
+			<Test>./test_exponent</Test>
+			<Test>./test_sort</Test>
+			<Test>./test_cmp</Test>
+		</TestList>
+		<Test Status="passed">
+			<Name>test_map</Name>
+			<Path>.</Path>
+			<FullName>./test_map</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_map</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.105052</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_map</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkM0OgjAQhO99ij3yI0QfwIOJxoPxJxBPDYcSqyGBLaFFKU9voQHRROOcvkwn092ly1EJRDVihjdYgOJSwbUSxcCyzhQPCQ1GJbDNRcpy+87xnlUCC44my1VQlx/haWesC0IhOh+gV9IZ4Z6VpPFav/GYl/rakO6IyAydZta6vgVjWdSDp3vPFFodd69CcOZQSPfnJDYDSiiWu+S/DRVnVXARDyR0er9vd4OKYfj+j5n2tIrjzbpb32ZD8gQZNHTJ====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_basic</Name>
+			<Path>.</Path>
+			<FullName>./test_basic</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_basic</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.112384</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_basic</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNU01PwzAMvedXmANS2zRl68SRAwLEAYkhJk7VJqUjLBVtMpp0X7+etEVpAipgKeqzYz8/NXZ2ZW0Jz40QhdjADDRTWsFbLSuYdg6optAsQRmxtoT7Uua07O+Z2BW1FBUTJpdp0my/JXuki2OFMnh+eYTOlm0guakZ1QwFB3wMo1WQxjRERCNSyo1xDqGp6G3+4FVAMIFKhWOEKTKEuMAnTKMcrToqbELkhDV+xwWhOEdBg3dhtI/a1NNYo3S003yrkZCCxUCm/UE4hkkMqUHEoiiGaY8uLDq3iOYqhsseq49aW2fVfVpkfoWNnsUw62qRKoSNruVAoqkbH/gUWw9xNWDqElGXibpU1OWiLhl12QwZd2VxV5d7o7mrjLvSuKeNe+K4p86709zTxz2Bg+e81p/w50yYN7fz8Nug90mgpaZliP63QZrRmrzKvUCZu6Cjiwk1FYnfyOh9ul4s7m7bGf0qTNAn0Kb6lg==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_monomial</Name>
+			<Path>.</Path>
+			<FullName>./test_monomial</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_monomial</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0893061</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_monomial</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNUEEKwjAQvOcVe7SHBn2AB0HxIFZp8RR6iBglkOxKslX8va3BUguKc1p2htnZUfMeNZQNosULzIBNZDgH8u85NpaNFCrvUcPa0VG7xBu82UDoDbZaw3lzHYmHntXDCwXloYAX6m4ht4TkrXYtk7DbjBiYTMHH7Kdv0gATa5eJ//Ky0SE/0R2FGrbxrQUIGuXnnTbyflFVq2X3TNJK8QT+yGbL====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_simplify</Name>
+			<Path>.</Path>
+			<FullName>./test_simplify</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_simplify</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0977771</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_simplify</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkMEKwjAMhu99ihzdYUUfwMNA8SCorHgqO1StUmjT0aXK3t7N4pjCxP8Uko8k/y+XgyooI6LBGyyAdENwDd696yYa0pzJfFAFG+tPyqa5xrsJHp3GjtWUx/oLHu8UrWMSyuMOXqr6Bi8ieafInIVxtTXXtkOS9tspBGZzcE3281JigDwpm7H/HJBWIb/4BzI5zmcqFwgK+eed7vdDIcR61dtLLGdPGeduOw==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_polynomial</Name>
+			<Path>.</Path>
+			<FullName>./test_polynomial</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_polynomial</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0813398</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_polynomial</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNUEEKwjAQvOcVe7SHBn2AB0HxIGhp8RR6iBglkOxKslX6e1uDpSqKc1p2htnZUfMBNZQNosUzzIBNZDgF8s85NpaNFCofUMPa0UG7xBu82kDoDXZaw3lzeROPPavWCwXlfgsP1P1CFuRaJG+167iE3eaDg8kUfMx+eicNMLF2mfgvMxsd8iPdUKhxI9+agKBRvt7pQheLqlot+4eSVoo7GM1omw==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_fraction</Name>
+			<Path>.</Path>
+			<FullName>./test_fraction</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_fraction</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0702739</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_fraction</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNUE0LgkAQvc+vmKNKLhV07BD0cQgqtE6isNYWgs7G7lr57/MjJAWjd5t5b97MvGDeIkQvJ0rohlM0QhuNVyUznNQF6jwxgkHgtghxk8qYpw0v6JEoSZmgUiuMm9974o6pX2QQoHfaYY2warC14meTSIICHIhKvsF+2+PRGmOm7WGDo5SphhdwJ4bIiSw+mtnDdrW69fx1ciNCIw1PbfgvCyO4ci/ySRB8Rz0YMSpOrLuovPyw8P3VsvrzM8jgDR4xgc4=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_expression</Name>
+			<Path>.</Path>
+			<FullName>./test_expression</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_expression</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.058146</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_expression</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNUE0LgkAQve+vmKMfqySeOwRJh6BC6SQettpC0FnZXUuJ/nuaJlYUvcsMbx7zZl48HZBAWCKmeAIPNFcajlLkz16VqeYuiZ0BCSwysWNZN+d4TqXAnGOj5dopizfxeGdU5ySGcLuCB5KWcIOqkFypVCBhllHZnmn71l4oozbJ9Z2hPUEZbQqtqEeHkU/7pr41Lh3Wyw8XMCaQK/PnlZ0GtNAsM8l/32vOpHMQFyTxONtvmYJk6L76NEdvZlEUzNtoOq1L7st2fI4=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_list</Name>
+			<Path>.</Path>
+			<FullName>./test_list</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_list</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.044734</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_list</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNkD8LwjAQxfd8ihsttEHdHQTFQVFpcAodIkYpNIkkqbZKv7vpH2prUXxLSO73Xu6OzlpFEKZSxvICU7DcWANnrQRMqguYNLYcIxq0imCVqCNL6jqXt1grKbh0LLdBev2Ae6EkF4hCeNhCpah8wJvYWPTM/Nx/FM3pZ4Xjau3WHQ5GYxDGG4YQ/s4YOF2xNf7qrYbAKssSD/03tOVMByd1l4h2d/p1l6CZxP2PXL/7OSHLRTlMY8ToBd3qerw=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_term</Name>
+			<Path>.</Path>
+			<FullName>./test_term</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_term</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.03356</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_term</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyLtoWDWIWg0ry8zLx0BUOFktTiEoW0ovxcGLu4NLMkVY8rWhcOYhXcc/KTEnMg8ql5ZZlF+Xm5qXlAtakluqUFaIqRzQyuzOWKVggK9VMAg1iQgF5IahFIFAL8vZFEFTQMFHKLNfGaB1GjUJJfkpijyUWcO0tSE4t0U/LL87iikUMBl+8VihLz9FDtATo3wDE42NUF5AmIWj0uACHVY4M=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_exponent</Name>
+			<Path>.</Path>
+			<FullName>./test_exponent</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_exponent</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.023391</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_exponent</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNUD0PgjAQ3fsrbpSBRt0dNBIHEjUQp4ahxmpI6JW0hx//3gJKQKLxbffuvXt3JxYdMkgqxBwvMAdSjhycrdEwawpwVU6KMxF2yGBTmKMs2r7Ca24NaoVeqyisyg/xYGj60ExActhCg6wm+Eo65dkWu7jHwmQK2gVjS3QvDfrIse3d6ay/dmlFQIZkEbD/jiQlbXgyN2Si/8OvvwMrkQ+D/NL7ZZpG6/qcl5GzJ7YaddE=</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_sort</Name>
+			<Path>.</Path>
+			<FullName>./test_sort</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_sort</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0187519</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_sort</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyNUEEKwjAQvOcVc7SHBn2AgqB4EFQaPIUeIkYpNBtJt2p/b2uwVEFxTsvOMDs7etojR1YTFXTGBGwrxil495qrumArhU575FiV/mDKyFu6FsGTs9RqLaf15UM89FSNExrZfoMn8m4hlQ8s7pihabmI7XrAYTSGq5KfrlED9mzKRPyXlq0J6dHfSOhhF986QDAk3++0cXdzpZaL7pWoleIBYMllHA==</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<Test Status="passed">
+			<Name>test_cmp</Name>
+			<Path>.</Path>
+			<FullName>./test_cmp</FullName>
+			<FullCommandLine>/mnt/e/workspace/mysym/build/test/test_cmp</FullCommandLine>
+			<Results>
+				<NamedMeasurement type="numeric/double" name="Execution Time">
+					<Value>0.0207939</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="numeric/double" name="Processors">
+					<Value>1</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Completion Status">
+					<Value>Completed</Value>
+				</NamedMeasurement>
+				<NamedMeasurement type="text/string" name="Command Line">
+					<Value>/mnt/e/workspace/mysym/build/test/test_cmp</Value>
+				</NamedMeasurement>
+				<Measurement>
+					<Value encoding="base64" compression="gzip">eJyN0s8LgjAUB/D7/op3zIPiyB956BAVHYIKpZNIGK0Q3CY6i/77/BGS8Rp9b3u+z+bYi+dDEghrITJxgwAUq1QF11JyoN0CqjpTzCKxOSSBTS7Pad5/Z+KelVJwJppepsy6+GoebRo9OYkhPO6gS9IWrCUv7NO0qffZb0d1mNjAKwNlDoocHXFR4uqIhxJPR3yU+DoyQ8lMRwKUBDpCbdRQW4sojuiAdA/eN4GSKs0N8t8kKZaW5kU+BIk/B/XngEKZCmt8UPPHh0UUrVftRd7QIi9vNsmi====</Value>
+				</Measurement>
+			</Results>
+		</Test>
+		<EndDateTime>Feb 26 15:43 CST</EndDateTime>
+		<EndTestTime>1677397410</EndTestTime>
+		<ElapsedMinutes>0</ElapsedMinutes>
+	</Testing>
+</Site>

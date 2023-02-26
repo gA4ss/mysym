@@ -13,21 +13,23 @@ namespace mysym
 
     //
     // 基础运算符
+    // 在自动化简之后表达式解构中仅存在加法与乘法
     //
     kOptAdd,
-    kOptSub,
     kOptMul,
-    kOptDiv,
-    kOptMod,
+
+    //
+    // 指数函数
+    //
+    kOptPow,
 
     //
     // 基础函数
     //
-    kOptAbs,
-    kOptSqrt,
-    kOptPow,
     kOptLog,
     kOptFact,
+    kOptAbs,
+    kOptMod,
 
     //
     // 三角函数
@@ -83,13 +85,20 @@ namespace mysym
 
 #define is_none(o) (o == kOptNone)
 #define is_opt(o) ((o > kOptNone) && (o < kOptVariate))
-#define is_basic(o) ((o >= kOptAdd) && (o <= kOptMod))
-#define is_basic_func(o) ((o >= kOptAbs) && (o <= kOptFact))
+#define is_add(o) (o == kOptAdd)
+#define is_mul(o) (o == kOptMul)
+#define is_basic(o) ((o == kOptAdd) || (o == kOptMul))
+#define is_pow(o) (o == kOptPow)
+#define is_log(o) (o == kOptLog)
+#define is_fact(o) (o == kOptFact)
+#define is_abs(o) (o == kOptAbs)
+#define is_mod(o) (o == kOptMod)
+#define is_basic_func(o) ((o >= kOptLog) && (o <= kOptMod))
 #define is_trigo(o) ((o >= kOptSin) && (o <= kOptCsc))
 #define is_inv_trigo(o) ((o >= kOptArcSin) && (o <= kOptArcCsc))
 #define is_hyper(o) ((o >= kOptSinh) && (o <= kOptCsch))
 #define is_inv_hyper(o) ((o >= kOptArcSinh) && (o <= kOptArcCsch))
-#define is_func(o) ((o > kOptMod) && (o < kOptVariate))
+#define is_func(o) ((o >= kOptPow) && (o <= kOptArcCsch))
 #define is_sym(o) (o >= kOptVariate)
 #define is_var(o) (o == kOptVariate)
 #define is_num(o) ((o == kOptInteger) || (o == kOptReal))

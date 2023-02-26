@@ -67,6 +67,13 @@ set(MYSYM_OPERATOR_SRC
 )
 
 #
+# Mysym interpreter sources
+#
+set(MYSYM_INTERPRETER_SRC
+  ${SRC_DIRECTORY}/interpreter/interpreter.cc
+)
+
+#
 # Debug sources
 #
 set(MYSYM_DEBUG_SRC
@@ -85,6 +92,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/tree.cc
   ${SRC_DIRECTORY}/merge.cc
   ${SRC_DIRECTORY}/operand.cc
+  ${SRC_DIRECTORY}/base.cc
   ${SRC_DIRECTORY}/exponent.cc
   ${SRC_DIRECTORY}/simplify.cc
   ${SRC_DIRECTORY}/map.cc
@@ -111,6 +119,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/degree.cc
   ${SRC_DIRECTORY}/cmp.cc
   ${MYSYM_OPERATOR_SRC}
+  ${MYSYM_INTERPRETER_SRC}
   ${MYSYM_DEBUG_SRC}
 )
 # target_link_libraries(${PROJECT_NAME} mynum mympf mympz my)
@@ -135,16 +144,27 @@ add_test(NAME test_basic COMMAND test_basic)
 set_tests_properties(test_basic PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_map COMMAND test_map)
 set_tests_properties(test_map PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-# add_test(NAME test_addsub COMMAND test_addsub)
-# set_tests_properties(test_addsub PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-# add_test(NAME test_mul COMMAND test_mul)
-# set_tests_properties(test_mul PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-# add_test(NAME test_exp COMMAND test_exp)
-# set_tests_properties(test_exp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-# add_test(NAME test_div COMMAND test_div)
-# set_tests_properties(test_div PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-# add_test(NAME test_mod COMMAND test_mod)
-# set_tests_properties(test_mod PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_simplify COMMAND test_simplify)
+set_tests_properties(test_simplify PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_monomial COMMAND test_monomial)
+set_tests_properties(test_monomial PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_polynomial COMMAND test_polynomial)
+set_tests_properties(test_polynomial PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_fraction COMMAND test_fraction)
+set_tests_properties(test_fraction PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_expression COMMAND test_expression)
+set_tests_properties(test_expression PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_list COMMAND test_list)
+set_tests_properties(test_list PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_term COMMAND test_term)
+set_tests_properties(test_term PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_exponent COMMAND test_exponent)
+set_tests_properties(test_exponent PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_cmp COMMAND test_cmp)
+set_tests_properties(test_cmp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_sort COMMAND test_sort)
+set_tests_properties(test_sort PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+
 
 #
 # Auto Test

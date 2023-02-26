@@ -18,23 +18,23 @@ namespace mysym
     //
     // 比较符号与运算符
     //
-    if (!is_sym(o1) && is_sym(o2))
-      return -1;
+    // if (!is_sym(o1) && is_sym(o2))
+    //   return -1;
 
-    if (is_sym(o1) && !is_sym(o2))
-      return 1;
+    // if (is_sym(o1) && !is_sym(o2))
+    //   return 1;
 
-    if (is_sym(o1) && is_sym(o2))
-      return 0;
+    // if (is_sym(o1) && is_sym(o2))
+    //   return 0;
 
     //
     // 运算符间的比较
     //
-    if (__operator[o1].prio == __operator[o2].prio)
-      return 0;
-    else if (__operator[o1].prio < __operator[o2].prio)
+    if (__operator[o1].prio < __operator[o2].prio)
       return -1;
-    else
+    else if (__operator[o1].prio > __operator[o2].prio)
       return 1;
+    else
+      return 0;
   }
 } // namespace mysym
