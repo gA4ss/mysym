@@ -15,13 +15,28 @@ namespace mysym
 
   void sort(symbol_t &s, bool reverse)
   {
-    if (is_sym(kind(s)))
+    if (symbol_size(s) == 0)
       return;
 
-    if (reverse)
-      std::sort(s.items.begin(), s.items.end(), __symbol_reverse_cmp);
-    else
-      std::sort(s.items.begin(), s.items.end(), __symbol_cmp);
+    //
+    // 双参数函数不进行排序，但是参数自身参加排序
+    //
+    if (!is_2ps_func(kind(s)))
+    {
+      if (reverse)
+        std::sort(s.items.begin(), s.items.end(), __symbol_reverse_cmp);
+      else
+        std::sort(s.items.begin(), s.items.end(), __symbol_cmp);
+    }
+
+    //
+    // 对子序列进行排序
+    //
+    for (auto it = s.items.begin(); it != s.items.end(); it++)
+    {
+      sort(*it, reverse);
+    }
+
     return;
   }
 } // namespace mysym

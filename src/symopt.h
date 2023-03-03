@@ -79,11 +79,16 @@ namespace mysym
     kOptInteger,
     kOptReal,
     kOptFrac,
+    kOptConstE,
+    kOptConstPI,
+    kOptInfinity,
+    kOptNegInfinity,
     kOptMax
   } opt_t;
 #define kOptNameMax kOptVariate
 
 #define is_none(o) (o == kOptNone)
+#define is_und(o) is_none(o)
 #define is_opt(o) ((o > kOptNone) && (o < kOptVariate))
 #define is_add(o) (o == kOptAdd)
 #define is_mul(o) (o == kOptMul)
@@ -99,6 +104,7 @@ namespace mysym
 #define is_hyper(o) ((o >= kOptSinh) && (o <= kOptCsch))
 #define is_inv_hyper(o) ((o >= kOptArcSinh) && (o <= kOptArcCsch))
 #define is_func(o) ((o >= kOptPow) && (o <= kOptArcCsch))
+#define is_2ps_func(o) ((o == kOptPow) || (o == kOptLog) || (o == kOptMod))
 #define is_sym(o) (o >= kOptVariate)
 #define is_var(o) (o == kOptVariate)
 #define is_num(o) ((o == kOptInteger) || (o == kOptReal))
@@ -106,6 +112,10 @@ namespace mysym
 #define is_real(o) (o == kOptReal)
 #define is_frac(o) (o == kOptFrac)
 #define is_const(o) (o >= kOptInteger)
+#define is_e(o) (o == kOptConstE)
+#define is_pi(o) (o == kOptConstPI)
+#define is_inf(o) (o == kOptInfinity)
+#define is_neg_inf(o) (o == kOptNegInfinity)
 
   typedef struct __operator_t
   {

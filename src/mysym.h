@@ -103,13 +103,18 @@ namespace mysym
 #define create_real(literal) create(kOptReal, (literal))
 #define undefined create_none()
 
+  void copy(const symbol_t &s, symbol_t &d);
+
 #define kind(s) get_opt(s)
 #define number_of_operands(s) symbol_size(s)
   symbol_t operand(const symbol_t &s, size_t i);
   symbol_t base(const symbol_t &s);
   symbol_t exponent(const symbol_t &s);
+  symbol_t term(const symbol_t &s);
+  symbol_t constant(const symbol_t &s);
 #define antilog(s) exponent(s)
   symbol_t term(const symbol_t &s);
+  symbol_t constant(const symbol_t &s);
 
   bool match(const symbol_t &s1, const symbol_t &s2);
   bool match_in(const symbol_t &s1, const symbol_t &s2);
@@ -119,9 +124,13 @@ namespace mysym
   int cmp(const symbol_t &s1, const symbol_t &s2);
   void sort(symbol_t &s, bool reverse = false);
   int cmp_operator_priority(opt_t o1, opt_t o2);
-  void merge_same_basic_operator(symbol_t &s);
   void merge(symbol_t &s);
-  void automatic_simplify(symbol_t &s);
+  symbol_t simplify_rational_number(const symbol_t &s);
+  symbol_t simplify_pow(const symbol_t &s);
+  symbol_t simplify_product(const symbol_t &s);
+  symbol_t simplify_sum(const symbol_t &s);
+  symbol_t simplify_factorial(const symbol_t &s);
+  void automatic_simplify(symbol_t &s, bool reverse = false);
 
   list_t complete_sub_expressions(const symbol_t &s, bool found = false);
   bool free_of(const symbol_t &s, const symbol_t &u);

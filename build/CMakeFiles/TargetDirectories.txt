@@ -12,6 +12,8 @@
 /mnt/e/workspace/mysym/build/test/CMakeFiles/install.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_fraction.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_simplify.dir
+/mnt/e/workspace/mysym/build/test/CMakeFiles/rebuild_cache.dir
+/mnt/e/workspace/mysym/build/test/CMakeFiles/test_match.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_monomial.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_sort.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_map.dir
@@ -25,4 +27,3 @@
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_term.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_regex.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/edit_cache.dir
-/mnt/e/workspace/mysym/build/test/CMakeFiles/rebuild_cache.dir

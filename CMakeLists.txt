@@ -94,11 +94,13 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/operand.cc
   ${SRC_DIRECTORY}/base.cc
   ${SRC_DIRECTORY}/exponent.cc
+  ${SRC_DIRECTORY}/term.cc
   ${SRC_DIRECTORY}/simplify.cc
   ${SRC_DIRECTORY}/map.cc
   ${SRC_DIRECTORY}/sort.cc
   ${SRC_DIRECTORY}/find.cc
   ${SRC_DIRECTORY}/match.cc
+  ${SRC_DIRECTORY}/pattern.cc
   ${SRC_DIRECTORY}/substitute.cc
   ${SRC_DIRECTORY}/expansion.cc
   ${SRC_DIRECTORY}/symopt.cc
@@ -106,7 +108,6 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/fraction.cc
   ${SRC_DIRECTORY}/limit.cc
   ${SRC_DIRECTORY}/integral.cc
-  ${SRC_DIRECTORY}/func.cc
   ${SRC_DIRECTORY}/constant.cc
   ${SRC_DIRECTORY}/library.cc
   ${SRC_DIRECTORY}/list.cc
@@ -164,7 +165,8 @@ add_test(NAME test_cmp COMMAND test_cmp)
 set_tests_properties(test_cmp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_sort COMMAND test_sort)
 set_tests_properties(test_sort PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-
+add_test(NAME test_match COMMAND test_match)
+set_tests_properties(test_match PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 
 #
 # Auto Test

@@ -55,6 +55,8 @@ add_executable(test_cmp ${SRC_DIRECTORY}/test_cmp.cc)
 target_link_libraries(test_cmp mysym gtest pthread)
 add_executable(test_sort ${SRC_DIRECTORY}/test_sort.cc)
 target_link_libraries(test_sort mysym gtest pthread)
+add_executable(test_match ${SRC_DIRECTORY}/test_match.cc)
+target_link_libraries(test_match mysym gtest pthread)
 
 set(RESEARCH TRUE)
 if(RESEARCH)

@@ -3,26 +3,6 @@
 
 namespace mysym
 {
-  static bool __is_integer(std::string s)
-  {
-    return false;
-  }
-
-  static bool __is_real(std::string s)
-  {
-    return false;
-  }
-
-  static bool __is_number(std::string s)
-  {
-    return __is_integer(s) || __is_real(s);
-  }
-
-  static bool __is_variate(std::string s)
-  {
-    return false;
-  }
-
   symbol_t make(opt_t opt, const symbol_t &s, bool nas)
   {
     symbol_t u = create_opt(opt);

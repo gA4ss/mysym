@@ -43,6 +43,25 @@ namespace mysym
     mympf::float_t f1;
     mympf::float_t f2;
 
+    //
+    // 常数的一些比对
+    //
+    if ((is_e(kind(s1)) && is_e(kind(s2))) || (is_pi(kind(s1)) && is_pi(kind(s2))))
+    {
+      return 0;
+    }
+    else if (is_e(kind(s1)) && is_pi(kind(s2)))
+    {
+      return -1;
+    }
+    else if (is_pi(kind(s1)) && is_e(kind(s2)))
+    {
+      return 1;
+    }
+
+    //
+    // 比较数值
+    //
     if ((kind(s1) == kOptFrac))
     {
       mympf::float_t n = mympf::create(numerator(s1).literal);

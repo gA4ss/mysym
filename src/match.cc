@@ -6,13 +6,25 @@ namespace mysym
 {
   bool match(const symbol_t &s1, const symbol_t &s2)
   {
-    if ((is_var(kind(s1))) && (is_var(kind(s2))))
-      return (s1.literal == s2.literal);
-    return false;
+    return cmp(s1, s2) == 0 ? true : false;
   }
 
   bool match_in(const symbol_t &s1, const symbol_t &s2)
   {
+    if (cmp(s1, s2) == 0)
+      return true;
+  
+    // s1 != s2
+
+    if (is_single(s2))
+      return false;
+
+    for (auto it = s2.items.begin(); it != s2.items.end(); it++)
+    {
+      if (match_in(s1, *it))
+        return true;
+    }
+
     return false;
   }
 

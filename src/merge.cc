@@ -13,7 +13,7 @@ namespace mysym
   //   return false;
   // }
 
-  void merge_same_basic_operator(symbol_t& s)
+  static void __merge_same_basic_operator(symbol_t& s)
   {
     //
     // 1.是单个符号并且不是基础运算符（常量，变量，函数）
@@ -27,7 +27,7 @@ namespace mysym
     opt_t opt = s.opt;
     for (auto it = s.items.begin(); it != s.items.end(); it++)
     {
-      merge_same_basic_operator(*it);
+      __merge_same_basic_operator(*it);
       if ((*it).opt == opt)
       {
         new_items.insert(new_items.end(), (*it).items.begin(), (*it).items.end());
@@ -46,7 +46,7 @@ namespace mysym
     //
     // 合并相同的基础运算符
     //
-    merge_same_basic_operator(s);
+    __merge_same_basic_operator(s);
     return;
   }
 } // namespace mysym
