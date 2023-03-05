@@ -25,6 +25,14 @@ namespace mysym
 
   bool free_of(const symbol_t &s, const symbol_t &u)
   {
-    return false;
+    if (cmp(s, u) == 0)
+      return false;
+    
+    for (auto it = s.items.begin(); it != s.items.end(); it++)
+    {
+      if (!free_of(*it, u))
+        return false;
+    }
+    return true;
   }
 } // namespace mysym

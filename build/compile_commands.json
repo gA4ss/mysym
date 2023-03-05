@@ -337,14 +337,26 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_map.dir/test_map.cc.o -c /mnt/e/workspace/mysym/test/test_map.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_map.cc"
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_degree.dir/test_degree.cc.o -c /mnt/e/workspace/mysym/test/test_degree.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_degree.cc"
 },
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o -c /mnt/e/workspace/mysym/test/test_polynomial.cc",
   "file": "/mnt/e/workspace/mysym/test/test_polynomial.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_map.dir/test_map.cc.o -c /mnt/e/workspace/mysym/test/test_map.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_map.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_coefficient.dir/test_coefficient.cc.o -c /mnt/e/workspace/mysym/test/test_coefficient.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_coefficient.cc"
 },
 
 {
@@ -373,19 +385,13 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_exponent.dir/test_exponent.cc.o -c /mnt/e/workspace/mysym/test/test_exponent.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_exponent.cc"
-},
-
-{
-  "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_term.dir/test_term.cc.o -c /mnt/e/workspace/mysym/test/test_term.cc",
   "file": "/mnt/e/workspace/mysym/test/test_term.cc"
 },
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_regex.dir/test_regex.cc.o -c /mnt/e/workspace/mysym/test/test_regex.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_regex.cc"
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_exponent.dir/test_exponent.cc.o -c /mnt/e/workspace/mysym/test/test_exponent.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_exponent.cc"
 }
 ]

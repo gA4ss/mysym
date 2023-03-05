@@ -141,8 +141,13 @@ namespace mysym
 
 #define is_undefined(s) is_none(kind(s))
   bool is_monomial(const symbol_t &s, const symbol_t &x);
+  bool is_monomial(const symbol_t &s, const list_t &xs);
   bool is_polynomial(const symbol_t &s, const symbol_t &x);
+  bool is_polynomial(const symbol_t &s, const list_t &xs);
   int_t degree(const symbol_t &s, const symbol_t &x);
+  int_t degree(const symbol_t &s, const list_t &xs);
+  int_t coefficient(const symbol_t &s, const symbol_t &x, const int_t &d);
+  int_t leading_coefficient(const symbol_t &s, const symbol_t &x);
 
   typedef symbol_t (*fptr_map_t)(const symbol_t &);
   symbol_t map(fptr_map_t fmap, const symbol_t &s);

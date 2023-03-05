@@ -57,14 +57,10 @@ add_executable(test_sort ${SRC_DIRECTORY}/test_sort.cc)
 target_link_libraries(test_sort mysym gtest pthread)
 add_executable(test_match ${SRC_DIRECTORY}/test_match.cc)
 target_link_libraries(test_match mysym gtest pthread)
-
-set(RESEARCH TRUE)
-if(RESEARCH)
-message(STATUS "compile research codes.")
-add_executable(test_regex ${SRC_DIRECTORY}/test_regex.cc)
-target_link_libraries(test_regex mysym gtest pthread)
-endif(RESEARCH)
-
+add_executable(test_degree ${SRC_DIRECTORY}/test_degree.cc)
+target_link_libraries(test_degree mysym gtest pthread)
+add_executable(test_coefficient ${SRC_DIRECTORY}/test_coefficient.cc)
+target_link_libraries(test_coefficient mysym gtest pthread)
 
 # add_executable(test_addsub ${SRC_DIRECTORY}/test_addsub.cc)
 # target_link_libraries(test_addsub mympf gtest pthread)

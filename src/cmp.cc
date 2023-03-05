@@ -3,9 +3,6 @@
 namespace mysym
 {
   /*************************
-   * 比较顺序：
-   * 1. 函数与符号、函数的比较
-   * 2.
    *
    * 规则集返回值
    * -1 小于
@@ -14,15 +11,30 @@ namespace mysym
    *************************/
   int cmp(const symbol_t &s1, const symbol_t &s2);
 
-  /* 常数与符号以及函数的比较
+  /* none值之间的比较
    */
   static bool __rule_0(const symbol_t &s1, const symbol_t &s2)
+  {
+    return is_none(kind(s1)) || is_none(kind(s2));
+  }
+  static int __cmp_0(const symbol_t &s1, const symbol_t &s2)
+  {
+    if (is_none(kind(s1)) && !is_none(kind(s2)))
+      return -1;
+    else if (!is_none(kind(s1)) && is_none(kind(s2)))
+      return 1;
+    return 0;
+  }
+
+  /* 常数与符号以及函数的比较
+   */
+  static bool __rule_1(const symbol_t &s1, const symbol_t &s2)
   {
     return (
         ((is_const(kind(s1))) && (!is_const(kind(s2)))) ||
         ((!is_const(kind(s1))) && (is_const(kind(s2)))));
   }
-  static int __cmp_0(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_1(const symbol_t &s1, const symbol_t &s2)
   {
     // if ((is_const(kind(s1))) && (!is_const(kind(s2))))
     //   return -1;
@@ -34,11 +46,11 @@ namespace mysym
 
   /* 常数间的比较
    */
-  static bool __rule_1(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_2(const symbol_t &s1, const symbol_t &s2)
   {
     return ((is_const(kind(s1))) && (is_const(kind(s2))));
   }
-  static int __cmp_1(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_2(const symbol_t &s1, const symbol_t &s2)
   {
     mympf::float_t f1;
     mympf::float_t f2;
@@ -89,12 +101,12 @@ namespace mysym
 
   /* 变量与运算符或者函数之间的比较
    */
-  static bool __rule_2(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_3(const symbol_t &s1, const symbol_t &s2)
   {
     return ((is_var(kind(s1))) && (!is_var(kind(s2)))) ||
            ((!is_var(kind(s1))) && (is_var(kind(s2))));
   }
-  static int __cmp_2(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_3(const symbol_t &s1, const symbol_t &s2)
   {
     // if ((is_var(kind(s1))) && (is_func(kind(s2))))
     //   return -1;
@@ -106,11 +118,11 @@ namespace mysym
 
   /* 两个变量间的比较
    */
-  static bool __rule_3(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_4(const symbol_t &s1, const symbol_t &s2)
   {
     return ((is_var(kind(s1))) && (is_var(kind(s2))));
   }
-  static int __cmp_3(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_4(const symbol_t &s1, const symbol_t &s2)
   {
     return (
         (s1.literal < s2.literal) ? -1 : (s1.literal > s2.literal) ? 1
@@ -119,11 +131,11 @@ namespace mysym
 
   /* 两个指数函数做比较
    */
-  static bool __rule_4(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_5(const symbol_t &s1, const symbol_t &s2)
   {
     return ((is_pow(kind(s1))) && (is_pow(kind(s2))));
   }
-  static int __cmp_4(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_5(const symbol_t &s1, const symbol_t &s2)
   {
     int c = cmp(base(s1), base(s2));
     if (c == 0)
@@ -135,11 +147,11 @@ namespace mysym
 
   /* 两个对数函数做比较
    */
-  static bool __rule_5(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_6(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_log(kind(s1))) && (is_log(kind(s2)));
   }
-  static int __cmp_5(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_6(const symbol_t &s1, const symbol_t &s2)
   {
     int c = cmp(base(s1), base(s2));
     if (c == 0)
@@ -151,11 +163,11 @@ namespace mysym
 
   /* 两个模函数做比较
    */
-  static bool __rule_6(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_7(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_mod(kind(s1))) && (is_mod(kind(s2)));
   }
-  static int __cmp_6(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_7(const symbol_t &s1, const symbol_t &s2)
   {
     int c = cmp(s1.items[0], s2.items[0]);
     if (c == 0)
@@ -167,11 +179,11 @@ namespace mysym
 
   /* 两个函数做比较
    */
-  static bool __rule_7(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_8(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_func(kind(s1))) && (is_func(kind(s2)));
   }
-  static int __cmp_7(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_8(const symbol_t &s1, const symbol_t &s2)
   {
     if (kind(s1) != kind(s2))
     {
@@ -183,24 +195,24 @@ namespace mysym
 
   /* 和与积作比较，和大于积
    */
-  static bool __rule_8(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_9(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_add(kind(s1)) && is_mul(kind(s2))) ||
            (is_mul(kind(s1)) && is_add(kind(s2)));
   }
-  static int __cmp_8(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_9(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_add(kind(s1))) ? 1 : -1;
   }
 
   /* 相同基础运算符作比较
    */
-  static bool __rule_9(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_10(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_add(kind(s1)) && (is_add(kind(s2)))) ||
            (is_mul(kind(s1)) && (is_mul(kind(s2))));
   }
-  static int __cmp_9(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_10(const symbol_t &s1, const symbol_t &s2)
   {
     if (symbol_size(s1) < symbol_size(s2))
     {
@@ -223,24 +235,24 @@ namespace mysym
 
   /* 和运算符与函数间的比较
    */
-  static bool __rule_10(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_11(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_add(kind(s1)) && is_func(kind(s2))) ||
            (is_func(kind(s1)) && is_add(kind(s2)));
   }
-  static int __cmp_10(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_11(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_add(kind(s1))) ? 1 : -1;
   }
 
   /* 积运算符与函数间的比较
    */
-  static bool __rule_11(const symbol_t &s1, const symbol_t &s2)
+  static bool __rule_12(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_mul(kind(s1)) && is_func(kind(s2))) ||
            (is_func(kind(s1)) && is_mul(kind(s2)));
   }
-  static int __cmp_11(const symbol_t &s1, const symbol_t &s2)
+  static int __cmp_12(const symbol_t &s1, const symbol_t &s2)
   {
     return (is_mul(kind(s1))) ? -1 : 1;
   }
@@ -261,7 +273,8 @@ namespace mysym
       {__rule_8, __cmp_8},
       {__rule_9, __cmp_9},
       {__rule_10, __cmp_10},
-      {__rule_11, __cmp_11}};
+      {__rule_11, __cmp_11},
+      {__rule_12, __cmp_12}};
 
   int cmp(const symbol_t &s1, const symbol_t &s2)
   {

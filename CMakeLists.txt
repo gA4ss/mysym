@@ -167,6 +167,10 @@ add_test(NAME test_sort COMMAND test_sort)
 set_tests_properties(test_sort PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_match COMMAND test_match)
 set_tests_properties(test_match PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_degree COMMAND test_degree)
+set_tests_properties(test_degree PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_coefficient COMMAND test_coefficient)
+set_tests_properties(test_coefficient PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 
 #
 # Auto Test

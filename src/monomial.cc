@@ -4,19 +4,31 @@ namespace mysym
 {
   bool is_monomial(const symbol_t &s, const symbol_t &x)
   {
-    // s是一个常数。
-    if (is_num(kind(s)))
+    //
+    // 检查参数
+    //
+    if (!is_var(kind(x)))
+    {
+      mysym_invalid_param_type_exception("it's must be variate type, it's %d.", kind(x));
+    }
+
+    // s是一个常数。x^0
+    if (is_const(kind(s)))
       return true;
 
     // s是一个变量并且等于x
     if (is_var(kind(s)))
-      return match(s, x);
+      return (cmp(s, x) == 0);
 
+    //
+    // 这里保留之前的一段代码，之前的代码允许在分数
+    // 形式中出现符号，后修订为分数不能存在符号，所
+    // 有带分数的符号必须转换成幂的形式。
     // s是一个分数，但是分子是单项式，分母是常数。
-    if (kind(s) == kOptFrac)
-    {
-      return ((is_num(kind(denominator(s)))) && is_monomial(numerator(s), x)) ? true : false;
-    }
+    // if (kind(s) == kOptFrac)
+    // {
+    //   return ((is_num(kind(denominator(s)))) && is_monomial(numerator(s), x)) ? true : false;
+    // }
 
     // s是变量x的某次幂，其中指数是整数。
     // 这里指数只规定是整数
@@ -24,21 +36,23 @@ namespace mysym
     {
       if ((is_int(kind(s.items[1]))) && (is_var(kind(s.items[0]))))
       {
-        return match(s.items[0], x);
+        return (cmp(s.items[0], x) == 0);
       }
     }
 
+    //
     // s是一个积，是满足以上条件项的乘积。
-    if (kind(s) == kOptMul)
+    // 这里蕴含了，只能是一个常量与一个符号的变量相乘。
+    if ((kind(s) == kOptMul) && (symbol_size(s) == 2))
     {
-      for (auto it = s.items.begin(); it != s.items.end(); it++)
-      {
-        if (!is_monomial(*it, x))
-          return false;
-      }
-      return true;
+      return is_monomial(operand(s, 0), x) && is_monomial(operand(s, 1), x);
     }
 
+    return false;
+  }
+
+  bool is_monomial(const symbol_t &s, const list_t &xs)
+  {
     return false;
   }
 } // namespace mysym

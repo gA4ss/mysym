@@ -12,10 +12,10 @@ namespace mysym
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
-#define mysym_symbol_name_already_exist_exception(name)                    \
-  {                                                                        \
-    throw my::MyException("<mysym> symbol name already exist",             \
-                          __FILE__, __LINE__, __FUNCTION__, "%s", (name)); \
+#define mysym_invalid_param_type_exception(format, ...)                           \
+  {                                                                               \
+    throw my::MyException("<mysym> invalid param type",                           \
+                          __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
 #define mysym_opt_not_operator_exception(format, ...)                             \

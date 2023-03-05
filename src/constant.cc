@@ -8,7 +8,7 @@ namespace mysym
       return create_int("1");
 
     if (is_const(kind(s)))
-      return undefined;
+      return s;
 
     //
     // 到这里只剩乘法操作

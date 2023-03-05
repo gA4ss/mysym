@@ -4,6 +4,14 @@ namespace mysym
 {
   bool is_polynomial(const symbol_t &s, const symbol_t &x)
   {
+    //
+    // 检查参数
+    //
+    if (!is_var(kind(x)))
+    {
+      mysym_invalid_param_type_exception("it's must be variate type, it's %d.", kind(x));
+    }
+
     if (is_monomial(s, x))
       return true;
 
@@ -17,6 +25,11 @@ namespace mysym
       return true;
     }
 
+    return false;
+  }
+
+  bool is_polynomial(const symbol_t &s, const list_t &xs)
+  {
     return false;
   }
 } // namespace mysym
