@@ -42,6 +42,29 @@ namespace mysym
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
+  //////////////////////////////
+  //  定义了一些常用参数检查宏   //
+  //////////////////////////////
+
+#define check_param_type(s, ty)                                                                                                         \
+  {                                                                                                                                     \
+    if (kind(s) != (ty))                                                                                                                \
+    {                                                                                                                                   \
+      mysym_invalid_param_type_exception("\'%s\' must be \'%s\' type, it's %s.", (s).literal.c_str(), opt_name(ty), opt_name(kind(s))); \
+    }                                                                                                                                   \
+  }
+
+#define check_list_all_variate_type(ps)                                                                                            \
+  {                                                                                                                                \
+    for (auto it = (ps).begin(); it != (ps).end(); it++)                                                                           \
+    {                                                                                                                              \
+      if (!is_var(kind(*it)))                                                                                                      \
+      {                                                                                                                            \
+        mysym_invalid_param_type_exception("\'%s\' must be variate type, it's \'%s\'.", it->literal.c_str(), opt_name(kind(*it))); \
+      }                                                                                                                            \
+    }                                                                                                                              \
+  }
+
 } // namespace mysym
 
 #endif // MYSYM_EXCEPTION_H_

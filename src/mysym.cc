@@ -2,11 +2,6 @@
 
 namespace mysym
 {
-  void init()
-  {
-    plibrary() = init_library();
-  }
-
   __symbol_t::__symbol_t()
   {
     opt = kOptNone;

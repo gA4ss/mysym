@@ -77,12 +77,12 @@ namespace mysym
     //
     kOptVariate,
     kOptInteger,
-    kOptReal,
+    kOptFloat,
     kOptFrac,
     kOptConstE,
     kOptConstPI,
-    kOptInfinity,
-    kOptNegInfinity,
+    kOptConstInf,
+    kOptConstNegInf,
     kOptMax
   } opt_t;
 #define kOptNameMax kOptVariate
@@ -107,15 +107,17 @@ namespace mysym
 #define is_2ps_func(o) ((o == kOptPow) || (o == kOptLog) || (o == kOptMod))
 #define is_sym(o) (o >= kOptVariate)
 #define is_var(o) (o == kOptVariate)
-#define is_num(o) ((o == kOptInteger) || (o == kOptReal))
-#define is_int(o) (o == kOptInteger)
-#define is_real(o) (o == kOptReal)
-#define is_frac(o) (o == kOptFrac)
 #define is_const(o) (o >= kOptInteger)
+#define is_int(o) (o == kOptInteger)
+#define is_flt(o) (o == kOptFloat)
+#define is_num(o) (is_int(o) || is_flt(o))
+#define is_nature(o) ((o == kOptConstE) || (o == kOptConstPI) || (o == kOptConstInf) || \
+                      (o == kOptConstNegInf))
+#define is_frac(o) (o == kOptFrac)
 #define is_e(o) (o == kOptConstE)
 #define is_pi(o) (o == kOptConstPI)
-#define is_inf(o) (o == kOptInfinity)
-#define is_neg_inf(o) (o == kOptNegInfinity)
+#define is_inf(o) (o == kOptConstInf)
+#define is_neg_inf(o) (o == kOptConstNegInf)
 
   typedef struct __operator_t
   {
@@ -133,9 +135,10 @@ namespace mysym
   } asso_t;
 
   extern operator_t __operator[kOptMax];
-#define opt_name(o) (((o >= kOptNone) && (o < kOptNameMax)) ? __operator[o].name : "")
-#define opt_prio(o) (((o >= kOptNone) && (o < kOptNameMax)) ? __operator[o].prio : -1)
-#define opt_asso(o) (((o >= kOptNone) && (o < kOptNameMax)) ? __operator[o].asso : -1)
+// kOptNameMax
+#define opt_name(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].name : "")
+#define opt_prio(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].prio : -1)
+#define opt_asso(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].asso : -1)
 
 } // namespace mysym
 

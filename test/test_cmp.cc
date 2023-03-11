@@ -13,7 +13,7 @@ TEST(Sym, Cmp0_3)
   // 常数与变量比较
   //
   symbol_t x = create_var("x");
-  symbol_t c1 = create_real("1.5");
+  symbol_t c1 = create_flt("1.5");
   EXPECT_EQ(cmp(x, c1), 1);
 
   symbol_t fr = c_frac(c1, create_int("5"));
@@ -22,8 +22,8 @@ TEST(Sym, Cmp0_3)
   //
   // 常数与常数间比较
   //
-  symbol_t c2 = create_real("3.14");
-  symbol_t c3 = create_real("2.78");
+  symbol_t c2 = create_flt("3.14");
+  symbol_t c3 = create_flt("2.78");
   EXPECT_EQ(cmp(c3, c2), -1);
   EXPECT_EQ(cmp(c2, c3), 1);
   EXPECT_EQ(cmp(c2, c2), 0);

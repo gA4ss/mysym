@@ -64,6 +64,7 @@ set(MYSYM_OPERATOR_SRC
   ${SRC_DIRECTORY}/operator/trigo.cc
   ${SRC_DIRECTORY}/operator/hyper.cc
   ${SRC_DIRECTORY}/operator/frac.cc
+  ${SRC_DIRECTORY}/operator/frame.cc
 )
 
 #
@@ -119,6 +120,8 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/expression.cc
   ${SRC_DIRECTORY}/degree.cc
   ${SRC_DIRECTORY}/cmp.cc
+  ${SRC_DIRECTORY}/global.cc
+  ${SRC_DIRECTORY}/init.cc
   ${MYSYM_OPERATOR_SRC}
   ${MYSYM_INTERPRETER_SRC}
   ${MYSYM_DEBUG_SRC}

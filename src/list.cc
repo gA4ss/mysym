@@ -12,17 +12,17 @@ namespace mysym
   {
     for (auto it = l.begin(); it != l.end(); it++)
     {
-      if (match(s, *it))
+      if (cmp(s, *it) == 0)
         return true;
     }
     return false;
   }
 
-  bool abstract_find(const list_t& l, const symbol_t &s)
+  bool match(const list_t& l, const symbol_t &s)
   {
     for (auto it = l.begin(); it != l.end(); it++)
     {
-      if (abstract_match(s, *it))
+      if (match(s, *it))
         return true;
     }
     return false;

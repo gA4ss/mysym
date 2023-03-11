@@ -30,6 +30,11 @@ namespace mysym
 
   bool is_polynomial(const symbol_t &s, const list_t &xs)
   {
+    for (auto it = xs.begin(); it != xs.end(); it++)
+    {
+      if (is_polynomial(s, *it) == true)
+        return true;
+    }
     return false;
   }
 } // namespace mysym

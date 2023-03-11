@@ -37,4 +37,23 @@ namespace mysym
     else
       return 0;
   }
+
+  bool is_integer(const num_t &x)
+  {
+    if (kind(x) != kOptFloat)
+      return false;
+    
+    return my::is_integer(x.literal);
+  }
+
+  bool is_real(const num_t &x)
+  {
+    if (is_nature(kind(x)))
+      return true;
+
+    if (kind(x) != kOptFloat)
+      return false;
+    
+    return my::is_real(x.literal);
+  }
 } // namespace mysym

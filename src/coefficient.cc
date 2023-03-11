@@ -7,14 +7,8 @@ namespace mysym
     //
     // 检查参数
     //
-    if (!is_var(kind(x)))
-    {
-      mysym_invalid_param_type_exception("it's must be variate type, it's %d.", kind(x));
-    }
-    if (!is_int(kind(d)))
-    {
-      mysym_invalid_param_type_exception("it's must be integer type, it's %d.", kind(x));
-    }
+    check_param_type(x, kOptVariate);
+    check_param_type(d, kOptInteger);
 
     //
     // 检查s是否是关于x的单项式

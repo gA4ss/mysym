@@ -59,7 +59,7 @@ namespace mysym
 
   size_t size(const list_t &l);
   bool find(const list_t &l, const symbol_t &s);
-  bool abstract_find(const list_t &l, const symbol_t &s);
+  bool match(const list_t &l, const symbol_t &s);
   void append(list_t &l, const symbol_t &s, bool found = false);
   void append(list_t &dl, const list_t &sl, bool found = false);
   void clear(list_t &l);
@@ -84,8 +84,10 @@ namespace mysym
 #define is_single(s) (!symbol_size(s))
 #define is_unary_operation(s) (is_opt(s.opt) && (symbol_size(s) == 1))
 
+  void init_global();
   void init();
   symbol_t create(opt_t opt, std::string literal = "");
+  symbol_t create_symbol(std::string literal);
 
   symbol_t make(opt_t opt, const symbol_t &s, bool nas = false);
   symbol_t make(opt_t opt, const symbol_t &s1, const symbol_t &s2, bool nas = false);
@@ -98,9 +100,10 @@ namespace mysym
 
 #define create_opt(opt) create(opt)
 #define create_none() create(kOptNone)
-#define create_var(literal) create(kOptVariate, (literal))
-#define create_int(literal) create(kOptInteger, (literal))
-#define create_real(literal) create(kOptReal, (literal))
+#define create_var(literal) create(kOptVariate, literal)
+#define create_int(literal) create(kOptInteger, literal)
+#define create_flt(literal) create(kOptFloat, literal)
+#define create_sym(literal) create_symbol(literal)
 #define undefined create_none()
 
   void copy(const symbol_t &s, symbol_t &d);
@@ -118,8 +121,6 @@ namespace mysym
 
   bool match(const symbol_t &s1, const symbol_t &s2);
   bool match_in(const symbol_t &s1, const symbol_t &s2);
-  bool abstract_match(const symbol_t &s1, const symbol_t &s2);
-  bool abstract_match_in(const symbol_t &s1, const symbol_t &s2);
 
   int cmp(const symbol_t &s1, const symbol_t &s2);
   void sort(symbol_t &s, bool reverse = false);
@@ -134,6 +135,7 @@ namespace mysym
 
   list_t complete_sub_expressions(const symbol_t &s, bool found = false);
   bool free_of(const symbol_t &s, const symbol_t &u);
+  bool free_of(const symbol_t &s, const list_t &xs);
   list_t variables(const symbol_t &s);
   list_t constants(const symbol_t &s);
   list_t integers(const symbol_t &s);
@@ -152,6 +154,9 @@ namespace mysym
   typedef symbol_t (*fptr_map_t)(const symbol_t &);
   symbol_t map(fptr_map_t fmap, const symbol_t &s);
   symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o = kOptNone);
+
+  typedef symbol_t (*fptr_operator_frame_t)(const symbol_t &, const symbol_t &);
+  symbol_t operator_frame(const symbol_t &x, const symbol_t &y, fptr_operator_frame_t fopt);
 
   std::string print_string(const symbol_t &s);
   std::string print_string(const list_t &l);
@@ -203,13 +208,27 @@ namespace mysym
   // 扩展运算符
   //
 #define c_minus(s) c_mul(create_int("-1"), s)
-#define c_sub(s1, s2) make(kOptAdd, s1, c_mul(create_int("-1"), s2, false), false)
-#define c_div(s1, s2) make(kOptMul, s1, c_pow(s2, create_int("-1"), false), false)
+#define c_sub(s1, s2) make(kOptAdd, s1, c_mul(create_int("-1"), s2), false)
+#define c_div(s1, s2) make(kOptMul, s1, c_pow(s2, create_int("-1")), false)
 #define c_sqrt(s) make(kOptPow, s, create_frac("1", "2"), false)
+
+
+  //
+  // 符号运算符
+  //
+  symbol_t add(const symbol_t &x, const symbol_t &y);
 
   //
   // 全局变量
   //
+  extern int_t gConstZero;
+  extern int_t gConstOne;
+  extern int_t gConstNegOne;
+  extern flt_t gConstE;
+  extern flt_t gConstPI;
+  extern flt_t gConstInf;
+  extern flt_t gConstNegInf;
+  extern symbol_t gConstUDF;
 
 } // namespace mysym
 

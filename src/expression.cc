@@ -35,4 +35,14 @@ namespace mysym
     }
     return true;
   }
+
+  bool free_of(const symbol_t &s, const list_t &xs)
+  {
+    for (auto it = xs.begin(); it != xs.end(); it++)
+    {
+      if (!free_of(s, *it))
+        return false;
+    }
+    return true;
+  }
 } // namespace mysym

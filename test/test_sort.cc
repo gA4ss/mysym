@@ -23,14 +23,14 @@ TEST(Sym, Sort)
   symbol_t x = create_var("x");
   a = c_pow("x", "2");
   b = c_mul(x, create_int("2"));
-  c = create_int("1");
+  // c = create_int("1");
   symbol_t y1 = c_add(a, b);
-  symbol_t y = c_add(y1, c);
+  symbol_t y = c_add(y1, "1");
   std::cout << "y = " << print_string(y) << std::endl;
   sort(y);
   std::cout << "after sort y = " << print_string(y) << std::endl;
 
-  symbol_t pp = c_pow(create_var("x"), c_add(create_var("y"), create_var("1")));
+  symbol_t pp = c_pow("x", c_add("y", "1"));
   std::cout << "pp = " << print_string(pp) << std::endl;
   sort(pp);
   std::cout << "after sort pp = " << print_string(pp) << std::endl;

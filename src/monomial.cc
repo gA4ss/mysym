@@ -53,6 +53,46 @@ namespace mysym
 
   bool is_monomial(const symbol_t &s, const list_t &xs)
   {
+    check_list_all_variate_type(xs);
+
+    if (is_const(kind(s)))
+      return true;
+
+    if (is_var(kind(s)))
+    {
+      return find(xs, s);
+    }
+
+    if (is_pow(kind(s)))
+    {
+      if (is_int(kind(exponent(s))))
+      {
+        return find(xs, base(s));
+      }
+      return false;
+    }
+
+    if (is_mul(kind(s)))
+    {
+      for (auto is = s.items.begin(); is != s.items.end(); is++)
+      {
+        if (is_const(kind(*is)))
+          continue;
+
+        if (is_var(kind(*is)))
+        {
+          return find(xs, *is);
+        }
+        else if (is_pow(kind((*is))))
+        {
+          if (is_int(kind(exponent(*is))))
+          {
+            return find(xs, base(*is));
+          }
+        }
+      }
+    }
+
     return false;
   }
 } // namespace mysym

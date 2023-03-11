@@ -32,9 +32,9 @@ define_opt(kOptArcSech, "asech", 5, kAssoRight),
 define_opt(kOptArcCsch, "acsch", 5, kAssoRight),
 define_opt(kOptVariate, "variate", 6, kAssoNone),
 define_opt(kOptInteger, "integer", 6, kAssoNone),
-define_opt(kOptReal, "float", 6, kAssoNone),
+define_opt(kOptFloat, "float", 6, kAssoNone),
 define_opt(kOptFrac, "fraction", 6, kAssoNone),
 define_opt(kOptConstE, "e", 6, kAssoNone),
 define_opt(kOptConstPI, "pi", 6, kAssoNone),
-define_opt(kOptInfinity, "inf", 6, kAssoNone),
-define_opt(kOptNegInfinity, "-inf", 6, kAssoNone)
+define_opt(kOptConstInf, "inf", 6, kAssoNone),
+define_opt(kOptConstNegInf, "-inf", 6, kAssoNone)

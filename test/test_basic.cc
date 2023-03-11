@@ -10,10 +10,10 @@ using namespace mysym;
 TEST(Sym, Create)
 {
   symbol_t s1 = create_var("x");
-  symbol_t s2 = create_var("y");
+  symbol_t s2 = create_sym("y");
   symbol_t s3 = create_var("z");
-  symbol_t s4 = create_var("a");
-  symbol_t s5 = create_var("2");
+  symbol_t s4 = create_sym("a");
+  symbol_t s5 = create_sym("2");
 
   symbol_t r = c_mul(c_add(s1, s2), c_pow(s5, s4));
   std::string s = print_string(r);
