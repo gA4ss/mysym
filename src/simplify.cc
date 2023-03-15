@@ -24,6 +24,31 @@
 namespace mysym
 {
 
+  static symbol_t __simplify_rational_number(const symbol_t &s)
+  {
+    return s;
+  }
+
+  static symbol_t __simplify_sum(const symbol_t &s)
+  {
+    return s;
+  }
+
+  static symbol_t __simplify_factorial(const symbol_t &s)
+  {
+    return s;
+  }
+
+  static symbol_t __simplify_product(const symbol_t &s)
+  {
+    return s;
+  }
+
+  static symbol_t __simplify_pow(const symbol_t &s)
+  {
+    return s;
+  }
+
   static symbol_t __simplify_function(const symbol_t &s)
   {
     return s;
@@ -40,7 +65,7 @@ namespace mysym
       //
       // 如果是有理数则进行有理数化简
       //
-      return simplify_rational_number(s);
+      return __simplify_rational_number(s);
     }
     else
     {
@@ -49,13 +74,13 @@ namespace mysym
       //
       symbol_t u = map(__automatic_simplify, s);
       if (is_pow(kind(u)))
-        return simplify_pow(u);
+        return __simplify_pow(u);
       else if (is_mul(kind(u)))
-        return simplify_product(u);
+        return __simplify_product(u);
       else if (is_add(kind(u)))
-        return simplify_sum(u);
+        return __simplify_sum(u);
       else if (is_fact(kind(u)))
-        return simplify_factorial(u);
+        return __simplify_factorial(u);
       else
         return __simplify_function(u);
     }

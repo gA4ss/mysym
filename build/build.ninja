@@ -212,6 +212,20 @@ build CMakeFiles/mysym.dir/src/symopt.cc.o: CXX_COMPILER__mysym ../src/symopt.cc
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/rule.cc.o: CXX_COMPILER__mysym ../src/rule.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/rule.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/optset.cc.o: CXX_COMPILER__mysym ../src/optset.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/optset.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
 build CMakeFiles/mysym.dir/src/factor.cc.o: CXX_COMPILER__mysym ../src/factor.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/factor.cc.o.d
@@ -429,13 +443,6 @@ build CMakeFiles/mysym.dir/src/operator/frac.cc.o: CXX_COMPILER__mysym ../src/op
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src/operator
-build CMakeFiles/mysym.dir/src/operator/frame.cc.o: CXX_COMPILER__mysym ../src/operator/frame.cc || cmake_object_order_depends_target_mysym
-  DEFINES = -DDEBUG
-  DEP_FILE = CMakeFiles/mysym.dir/src/operator/frame.cc.o.d
-  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
-  INCLUDES = -I../. -I/usr/local/include
-  OBJECT_DIR = CMakeFiles/mysym.dir
-  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src/operator
 build CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o: CXX_COMPILER__mysym ../src/interpreter/interpreter.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o.d
@@ -458,7 +465,7 @@ build CMakeFiles/mysym.dir/src/print.cc.o: CXX_COMPILER__mysym ../src/print.cc |
 #############################################
 # Link the static library libmysym.a
 
-build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/tree.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/base.cc.o CMakeFiles/mysym.dir/src/exponent.cc.o CMakeFiles/mysym.dir/src/term.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/pattern.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/variables.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/polynomial.cc.o CMakeFiles/mysym.dir/src/expression.cc.o CMakeFiles/mysym.dir/src/degree.cc.o CMakeFiles/mysym.dir/src/cmp.cc.o CMakeFiles/mysym.dir/src/global.cc.o CMakeFiles/mysym.dir/src/init.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o CMakeFiles/mysym.dir/src/operator/frame.cc.o CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o CMakeFiles/mysym.dir/src/print.cc.o
+build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/tree.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/base.cc.o CMakeFiles/mysym.dir/src/exponent.cc.o CMakeFiles/mysym.dir/src/term.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/pattern.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/rule.cc.o CMakeFiles/mysym.dir/src/optset.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/variables.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/polynomial.cc.o CMakeFiles/mysym.dir/src/expression.cc.o CMakeFiles/mysym.dir/src/degree.cc.o CMakeFiles/mysym.dir/src/cmp.cc.o CMakeFiles/mysym.dir/src/global.cc.o CMakeFiles/mysym.dir/src/init.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o CMakeFiles/mysym.dir/src/print.cc.o
   LANGUAGE_COMPILE_FLAGS = -Wall -g
   OBJECT_DIR = CMakeFiles/mysym.dir
   POST_BUILD = :

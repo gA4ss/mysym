@@ -64,7 +64,6 @@ set(MYSYM_OPERATOR_SRC
   ${SRC_DIRECTORY}/operator/trigo.cc
   ${SRC_DIRECTORY}/operator/hyper.cc
   ${SRC_DIRECTORY}/operator/frac.cc
-  ${SRC_DIRECTORY}/operator/frame.cc
 )
 
 #
@@ -105,6 +104,8 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/substitute.cc
   ${SRC_DIRECTORY}/expansion.cc
   ${SRC_DIRECTORY}/symopt.cc
+  ${SRC_DIRECTORY}/rule.cc
+  ${SRC_DIRECTORY}/optset.cc
   ${SRC_DIRECTORY}/factor.cc
   ${SRC_DIRECTORY}/fraction.cc
   ${SRC_DIRECTORY}/limit.cc

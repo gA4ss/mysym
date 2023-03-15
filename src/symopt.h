@@ -140,6 +140,26 @@ namespace mysym
 #define opt_prio(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].prio : -1)
 #define opt_asso(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].asso : -1)
 
+  typedef struct __symopt_t
+  {
+    operator_t opt;
+  } symopt_t;
+
+  typedef struct __optset_t
+  {
+    std::string name;
+    std::map<std::string, symopt_t> items;
+  } optset_t;
+
+  typedef std::vector<std::string> optnames_t;
+
+  optset_t create(std::string setname, std::string optnames);
+  optset_t create(std::string setname, optnames_t optnames);
+  optset_t create_from_set(std::string setname, std::vector<std::string> setnames);
+  bool in_set(std::string setname, std::string optname);
+  optnames_t in_set(std::string setname, optnames_t optnames);
+  std::string symopts();
+
 } // namespace mysym
 
 #endif // MYSYM_SYMOPT_H_

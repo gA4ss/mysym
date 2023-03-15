@@ -126,11 +126,6 @@ namespace mysym
   void sort(symbol_t &s, bool reverse = false);
   int cmp_operator_priority(opt_t o1, opt_t o2);
   void merge(symbol_t &s);
-  symbol_t simplify_rational_number(const symbol_t &s);
-  symbol_t simplify_pow(const symbol_t &s);
-  symbol_t simplify_product(const symbol_t &s);
-  symbol_t simplify_sum(const symbol_t &s);
-  symbol_t simplify_factorial(const symbol_t &s);
   void automatic_simplify(symbol_t &s, bool reverse = false);
 
   list_t complete_sub_expressions(const symbol_t &s, bool found = false);
@@ -167,6 +162,39 @@ namespace mysym
   symbol_t numerator(const symbol_t &s);
   symbol_t denominator(const symbol_t &s);
   symbol_t frac_to_product(const symbol_t &s);
+
+  //
+  // 规则表
+  //
+
+  // 条件-执行表
+  typedef bool (*fptr_condition_s_t)(const symbol_t &);
+  typedef bool (*fptr_condition_d_t)(const symbol_t &, const symbol_t &);
+  typedef symbol_t (*fptr_execute_s_t)(const symbol_t &);
+  typedef symbol_t (*fptr_execute_d_t)(const symbol_t &, const symbol_t &);
+  typedef std::vector<std::pair<fptr_condition_s_t, fptr_execute_s_t>> rule_table_s_t;
+  typedef std::vector<std::pair<fptr_condition_d_t, fptr_execute_d_t>> rule_table_d_t;
+
+  // 条件执行项目
+  typedef std::map<opt_t, rule_table_s_t> rule_object_s_t;
+  typedef std::map<opt_t, rule_table_d_t> rule_object_d_t;
+
+  typedef struct __rule_library_t
+  {
+    rule_object_s_t rs;
+    rule_object_d_t rd;
+  } rule_library_t;
+
+  void register_rule(opt_t opt, fptr_condition_s_t fcondition, fptr_execute_s_t fexecute);
+  void register_rule(opt_t opt, fptr_condition_d_t fcondition, fptr_execute_d_t fexecute);
+  bool find_rule_table_s(opt_t opt, rule_table_s_t &tab);
+  bool find_rule_table_d(opt_t opt, rule_table_d_t &tab);
+  bool is_empty(const rule_table_s_t &tab);
+  bool is_empty(const rule_table_d_t &tab);
+  symbol_t apply_rule_table(const rule_table_s_t &r, const symbol_t &x);
+  symbol_t apply_rule_table(const rule_table_d_t &r, const symbol_t &x, const symbol_t &y);
+  symbol_t apply_rule(const symbol_t &x);
+  void init_rule();
 
   //
   // 运算符号
@@ -211,7 +239,6 @@ namespace mysym
 #define c_sub(s1, s2) make(kOptAdd, s1, c_mul(create_int("-1"), s2), false)
 #define c_div(s1, s2) make(kOptMul, s1, c_pow(s2, create_int("-1")), false)
 #define c_sqrt(s) make(kOptPow, s, create_frac("1", "2"), false)
-
 
   //
   // 符号运算符

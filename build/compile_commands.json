@@ -121,6 +121,18 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/rule.cc.o -c /mnt/e/workspace/mysym/src/rule.cc",
+  "file": "/mnt/e/workspace/mysym/src/rule.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/optset.cc.o -c /mnt/e/workspace/mysym/src/optset.cc",
+  "file": "/mnt/e/workspace/mysym/src/optset.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/factor.cc.o -c /mnt/e/workspace/mysym/src/factor.cc",
   "file": "/mnt/e/workspace/mysym/src/factor.cc"
 },
@@ -303,12 +315,6 @@
   "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/frac.cc.o -c /mnt/e/workspace/mysym/src/operator/frac.cc",
   "file": "/mnt/e/workspace/mysym/src/operator/frac.cc"
-},
-
-{
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/frame.cc.o -c /mnt/e/workspace/mysym/src/operator/frame.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/frame.cc"
 },
 
 {
