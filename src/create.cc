@@ -31,16 +31,9 @@ namespace mysym
           mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt, literal.c_str());
         }
       }
-      else if (opt == kOptInteger)
+      else if (opt == kOptNumber)
       {
-        if (!__check_integer_format(literal))
-        {
-          mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt, literal.c_str());
-        }
-      }
-      else if (opt == kOptFloat)
-      {
-        if (!__check_float_format(literal))
+        if (!__check_number_format(literal))
         {
           mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt, literal.c_str());
         }
@@ -96,14 +89,9 @@ namespace mysym
       mysym_invalid_symbol_format_exception("invalid symbol literal format = %s", literal.c_str());
     }
 
-    if (st == kStrTypeInt)
+    if (st == kStrTypeNum)
     {
-      s.opt = kOptInteger;
-      s.literal = literal;
-    }
-    else if (st == kStrTypeReal)
-    {
-      s.opt = kOptFloat;
+      s.opt = kOptNumber;
       s.literal = literal;
     }
     else if (st == kStrTypeVar)

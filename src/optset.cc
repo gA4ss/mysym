@@ -7,19 +7,25 @@ namespace mysym
   //
   static std::map<std::string, optset_t> __optsets;
 
-  optset_t create(std::string setname, std::string optnames)
+  optset_t create_set(std::string setname, std::string optnames)
   {
     optset_t os;
     return os;
   }
 
-  optset_t create(std::string setname, optnames_t optnames)
+  optset_t create_set(std::string setname, optnames_t optnames)
   {
     optset_t os;
     return os;
   }
 
-  optset_t create_from_set(std::string setname, std::vector<std::string> setnames)
+  optset_t create_set_include_sets(std::string setname, std::string setnames)
+  {
+    optset_t os;
+    return os;
+  }
+
+  optset_t create_set_exclude_sets(std::string setname, std::string setnames)
   {
     optset_t os;
     return os;
@@ -40,4 +46,14 @@ namespace mysym
   {
     return "";
   }
+
+#define define_opt_set(sn, ons) create_set(sn, ons)
+#define define_opt_set_include_sets(sn, oss) create_set_include_sets(sn, oss)
+#define define_opt_set_exclude_sets(sn, oss) create_set_exclude_sets(sn, oss)
+
+  void init_symset()
+  {
+#include "optset.def"
+  }
+
 } // namespace mysym

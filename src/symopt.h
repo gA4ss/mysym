@@ -4,146 +4,78 @@
 namespace mysym
 {
 
-  typedef enum
-  {
-    //
-    // 表明操作为空
-    //
-    kOptNone,
+#define kOptNone "none"
 
-    //
-    // 基础运算符
-    // 在自动化简之后表达式解构中仅存在加法与乘法
-    //
-    kOptAdd,
-    kOptMul,
+#define kOptAdd "+"
+#define kOptMul "*"
 
-    //
-    // 指数函数
-    //
-    kOptPow,
+#define kOptEqu "="
+#define kOptNotEqu "!="
+#define kOptLT "<"
+#define kOptLE "<="
+#define kOptGT ">"
+#define kOptGE ">="
 
-    //
-    // 基础函数
-    //
-    kOptLog,
-    kOptFact,
-    kOptAbs,
-    kOptMod,
+#define kOptPow "^"
+#define kOptLog "log"
+#define kOptFact "!"
+#define kOptAbs "abs"
+#define kOptMod "mod"
 
-    //
-    // 三角函数
-    //
-    kOptSin,
-    kOptCos,
-    kOptTan,
-    kOptCot,
-    kOptSec,
-    kOptCsc,
+#define kOptSin "sin"
+#define kOptCos "cos"
+#define kOptTan "tan"
+#define kOptCot "cot"
+#define kOptSec "sec"
+#define kOptCsc "csc"
 
-    //
-    // 反三角函数
-    //
-    kOptArcSin,
-    kOptArcCos,
-    kOptArcTan,
-    kOptArcCot,
-    kOptArcSec,
-    kOptArcCsc,
+#define kOptArcSin "arcsin"
+#define kOptArcCos "arccos"
+#define kOptArcTan "arctan"
+#define kOptArcCot "arccot"
+#define kOptArcSec "arcsec"
+#define kOptArcCsc "arccsc"
 
-    //
-    // 双曲函数
-    //
-    kOptSinh,
-    kOptCosh,
-    kOptTanh,
-    kOptCoth,
-    kOptSech,
-    kOptCsch,
+#define kOptSinh "sinh"
+#define kOptCosh "cosh"
+#define kOptTanh "tanh"
+#define kOptCoth "coth"
+#define kOptSech "sech"
+#define kOptCsch "csch"
 
-    //
-    // 反双曲函数
-    //
-    kOptArcSinh,
-    kOptArcCosh,
-    kOptArcTanh,
-    kOptArcCoth,
-    kOptArcSech,
-    kOptArcCsch,
+#define kOptArcSinh "arcsinh"
+#define kOptArcCosh "arccosh"
+#define kOptArcTanh "arctanh"
+#define kOptArcCoth "arccoth"
+#define kOptArcSech "arcsech"
+#define kOptArcCsch "arccsch"
 
-    //
-    // 符号类型
-    // 包含了，变量，常量等等都算是符号
-    //
-    kOptVariate,
-    kOptInteger,
-    kOptFloat,
-    kOptFrac,
-    kOptConstE,
-    kOptConstPI,
-    kOptConstInf,
-    kOptConstNegInf,
-    kOptMax
-  } opt_t;
-#define kOptNameMax kOptVariate
+#define kOptVariate "$"
+#define kOptNumber "%"
+#define kOptFrac "/"
+#define kOptConstE "e"
+#define kOptConstPI "pi"
+#define kOptConstInf "inf"
+#define kOptConstNegInf "-inf"
 
-#define is_none(o) (o == kOptNone)
-#define is_und(o) is_none(o)
-#define is_opt(o) ((o > kOptNone) && (o < kOptVariate))
-#define is_add(o) (o == kOptAdd)
-#define is_mul(o) (o == kOptMul)
-#define is_basic(o) ((o == kOptAdd) || (o == kOptMul))
-#define is_pow(o) (o == kOptPow)
-#define is_log(o) (o == kOptLog)
-#define is_fact(o) (o == kOptFact)
-#define is_abs(o) (o == kOptAbs)
-#define is_mod(o) (o == kOptMod)
-#define is_basic_func(o) ((o >= kOptLog) && (o <= kOptMod))
-#define is_trigo(o) ((o >= kOptSin) && (o <= kOptCsc))
-#define is_inv_trigo(o) ((o >= kOptArcSin) && (o <= kOptArcCsc))
-#define is_hyper(o) ((o >= kOptSinh) && (o <= kOptCsch))
-#define is_inv_hyper(o) ((o >= kOptArcSinh) && (o <= kOptArcCsch))
-#define is_func(o) ((o >= kOptPow) && (o <= kOptArcCsch))
-#define is_2ps_func(o) ((o == kOptPow) || (o == kOptLog) || (o == kOptMod))
-#define is_sym(o) (o >= kOptVariate)
-#define is_var(o) (o == kOptVariate)
-#define is_const(o) (o >= kOptInteger)
-#define is_int(o) (o == kOptInteger)
-#define is_flt(o) (o == kOptFloat)
-#define is_num(o) (is_int(o) || is_flt(o))
-#define is_nature(o) ((o == kOptConstE) || (o == kOptConstPI) || (o == kOptConstInf) || \
-                      (o == kOptConstNegInf))
-#define is_frac(o) (o == kOptFrac)
-#define is_e(o) (o == kOptConstE)
-#define is_pi(o) (o == kOptConstPI)
-#define is_inf(o) (o == kOptConstInf)
-#define is_neg_inf(o) (o == kOptConstNegInf)
+// #define kOptInteger "integer"
+// #define kOptFloat "float"
 
-  typedef struct __operator_t
-  {
-    opt_t opt;
-    std::string name;
-    int prio;
-    int asso;
-  } operator_t;
-
-  typedef enum
-  {
-    kAssoNone,
-    kAssoLeft,
-    kAssoRight
-  } asso_t;
-
-  extern operator_t __operator[kOptMax];
-// kOptNameMax
-#define opt_name(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].name : "")
-#define opt_prio(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].prio : -1)
-#define opt_asso(o) (((o >= kOptNone) && (o < kOptMax)) ? __operator[o].asso : -1)
+  typedef std::string opt_t;
 
   typedef struct __symopt_t
   {
-    operator_t opt;
+    opt_t opt;
+    int prio;
+    bool sorted;
   } symopt_t;
+
+#define is_symopt(o1, o2) ((o1) == (o2))
+
+  std::string opt_name(opt_t o);
+  int opt_prio(opt_t o);
+  bool opt_sorted(opt_t o);
+  int cmp_operator_priority(opt_t o1, opt_t o2);
 
   typedef struct __optset_t
   {
@@ -153,12 +85,47 @@ namespace mysym
 
   typedef std::vector<std::string> optnames_t;
 
-  optset_t create(std::string setname, std::string optnames);
-  optset_t create(std::string setname, optnames_t optnames);
-  optset_t create_from_set(std::string setname, std::vector<std::string> setnames);
+  optset_t create_set(std::string setname, std::string optnames);
+  optset_t create_set(std::string setname, optnames_t optnames);
+  optset_t create_set_include_sets(std::string setname, std::string setnames);
+  optset_t create_set_exclude_sets(std::string setname, std::string setnames);
   bool in_set(std::string setname, std::string optname);
   optnames_t in_set(std::string setname, optnames_t optnames);
   std::string symopts();
+  void init_symopt();
+  void init_symset();
+
+#define is_none(o) (o == kOptNone)
+#define is_und(o) is_none(o)
+#define is_add(o) (o == kOptAdd)
+#define is_mul(o) (o == kOptMul)
+#define is_pow(o) (o == kOptPow)
+#define is_log(o) (o == kOptLog)
+#define is_fact(o) (o == kOptFact)
+#define is_abs(o) (o == kOptAbs)
+#define is_mod(o) (o == kOptMod)
+#define is_var(o) (o == kOptVariate)
+#define is_num(o) (o == kOptNumber)
+#define is_int(o) is_num(o)
+#define is_flt(o) is_num(o)
+#define is_frac(o) (o == kOptFrac)
+#define is_e(o) (o == kOptConstE)
+#define is_pi(o) (o == kOptConstPI)
+#define is_inf(o) (o == kOptConstInf)
+#define is_neg_inf(o) (o == kOptConstNegInf)
+
+#define is_opt(o) (in_set("opt", o))
+#define is_basic(o) (in_set("basic", o))
+#define is_sym(o) (in_set("sym", o))
+#define is_const(o) (in_set("const", o))
+#define is_nature(o) (in_set("nature", o))
+#define is_basic_func(o) (in_set("basicf", o))
+#define is_trigo(o) (in_set("trigo", o))
+#define is_inv_trigo(o) (in_set("itrigo", o))
+#define is_hyper(o) (in_set("hyper", o))
+#define is_inv_hyper(o) (in_set("ihyper", o))
+#define is_func(o) (in_set("func", o))
+#define is_2ps_func(o) (in_set("func2p", o))
 
 } // namespace mysym
 

@@ -8,7 +8,7 @@ namespace mysym
     // 检查参数
     //
     check_param_type(x, kOptVariate);
-    check_param_type(d, kOptInteger);
+    check_param_type(d, kOptNumber);
 
     //
     // 检查s是否是关于x的单项式

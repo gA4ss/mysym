@@ -101,8 +101,8 @@ namespace mysym
 #define create_opt(opt) create(opt)
 #define create_none() create(kOptNone)
 #define create_var(literal) create(kOptVariate, literal)
-#define create_int(literal) create(kOptInteger, literal)
-#define create_flt(literal) create(kOptFloat, literal)
+#define create_int(literal) create(kOptNumber, literal)
+#define create_flt(literal) create(kOptNumber, literal)
 #define create_sym(literal) create_symbol(literal)
 #define undefined create_none()
 
@@ -124,7 +124,6 @@ namespace mysym
 
   int cmp(const symbol_t &s1, const symbol_t &s2);
   void sort(symbol_t &s, bool reverse = false);
-  int cmp_operator_priority(opt_t o1, opt_t o2);
   void merge(symbol_t &s);
   void automatic_simplify(symbol_t &s, bool reverse = false);
 
@@ -150,8 +149,8 @@ namespace mysym
   symbol_t map(fptr_map_t fmap, const symbol_t &s);
   symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o = kOptNone);
 
-  typedef symbol_t (*fptr_operator_frame_t)(const symbol_t &, const symbol_t &);
-  symbol_t operator_frame(const symbol_t &x, const symbol_t &y, fptr_operator_frame_t fopt);
+  // typedef symbol_t (*fptr_operator_frame_t)(const symbol_t &, const symbol_t &);
+  // symbol_t operator_frame(const symbol_t &x, const symbol_t &y, fptr_operator_frame_t fopt);
 
   std::string print_string(const symbol_t &s);
   std::string print_string(const list_t &l);

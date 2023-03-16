@@ -1,17 +1,18 @@
-test_basic 7 1.22933
+test_basic 8 1.72059
 test_map 8 1.03154
-test_simplify 8 0.978651
-test_monomial 6 1.44326
-test_polynomial 8 0.91837
-test_fraction 8 0.848807
-test_expression 8 0.731609
-test_list 8 0.61384
-test_term 8 0.428316
-test_exponent 8 0.301847
-test_cmp 8 0.225963
-test_sort 5 0.160006
-test_match 6 0.185479
-test_degree 2 0.193662
+test_simplify 9 1.41363
+test_monomial 7 1.98447
+test_polynomial 9 1.29952
+test_fraction 9 1.18814
+test_expression 9 1.03999
+test_list 9 0.879081
+test_term 9 0.650282
+test_exponent 9 0.500354
+test_cmp 9 0.389331
+test_sort 6 0.244635
+test_match 7 0.279502
+test_degree 3 0.529128
 test_coefficient 1 0.0243521
 ---
 test_coefficient
+test_map
