@@ -2,24 +2,6 @@
 
 namespace mysym
 {
-  //   symbol_t num_add_num(const symbol_t &x, const symbol_t &y)
-  //   {
-  //     symbol_t z;
-  //     return z;
-  //   }
-
-  //   symbol_t frac_add_frac(const symbol_t &x, const symbol_t &y)
-  //   {
-  //     symbol_t z;
-  //     return z;
-  //   }
-
-  //   symbol_t num_add_frac(const symbol_t &x, const symbol_t &y)
-  //   {
-  //     symbol_t z;
-  //     return z;
-  //   }
-
   //   symbol_t nature_add_nature(const symbol_t &x, const symbol_t &y)
   //   {
   //     symbol_t z;
@@ -160,7 +142,7 @@ namespace mysym
 
   bool __c_add_num_num(const symbol_t &x, const symbol_t &y)
   {
-    return false;
+    return is_num(kind(x)) && is_num(kind(y));
   }
   symbol_t __e_add_num_num(const symbol_t &x, const symbol_t &y)
   {
@@ -169,7 +151,8 @@ namespace mysym
 
   bool __c_add_num_frac(const symbol_t &x, const symbol_t &y)
   {
-    return false;
+    return ((is_num(kind(x)) && is_frac(kind(y))) ||
+            (is_num(kind(y)) && is_frac(kind(x))));
   }
   symbol_t __e_add_num_frac(const symbol_t &x, const symbol_t &y)
   {
@@ -302,11 +285,11 @@ namespace mysym
     return undefined;
   }
 
-  bool __c_add(const symbol_t &x)
+  bool __c_add_entry(const symbol_t &x)
   {
     return false;
   }
-  symbol_t __e_add(const symbol_t &x)
+  symbol_t __e_add_entry(const symbol_t &x)
   {
     return undefined;
   }

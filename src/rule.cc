@@ -95,8 +95,37 @@ namespace mysym
   }
 
 #include "__rule.h"
+
+  static void __register_add_rule()
+  {
+    register_rule(kOptAdd, __c_add_num_num, __e_add_num_num);
+    register_rule(kOptAdd, __c_add_num_frac, __e_add_num_frac);
+    register_rule(kOptAdd, __c_add_num_nature, __e_add_num_nature);
+    register_rule(kOptAdd, __c_add_num_var, __e_add_num_var);
+    register_rule(kOptAdd, __c_add_num_func, __e_add_num_func);
+
+    register_rule(kOptAdd, __c_add_frac_frac, __e_add_frac_frac);
+    register_rule(kOptAdd, __c_add_frac_nature, __e_add_frac_nature);
+
+
+    register_rule(kOptAdd, __c_add_frac_var, __e_add_frac_var);
+    register_rule(kOptAdd, __c_add_frac_func, __e_add_frac_func);
+
+    register_rule(kOptAdd, __c_add_nature_nature, __e_add_nature_nature);
+    register_rule(kOptAdd, __c_add_nature_var, __e_add_nature_var);
+
+    register_rule(kOptAdd, __c_add_nature_func, __e_add_nature_func);
+    register_rule(kOptAdd, __c_add_var_var, __e_add_var_var);
+
+    register_rule(kOptAdd, __c_add_var_func, __e_add_var_func);
+    register_rule(kOptAdd, __c_add_func_func, __e_add_func_func);
+
+    register_rule(kOptAdd, __c_add, __e_add);
+    register_rule(kOptAdd, __c_add_entry, __e_add_entry);
+  }
+
   void init_rule()
   {
-    // register_rule();
+    __register_add_rule();
   }
 } // namespace mysym
