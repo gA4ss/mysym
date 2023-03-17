@@ -175,6 +175,8 @@ add_test(NAME test_degree COMMAND test_degree)
 set_tests_properties(test_degree PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_coefficient COMMAND test_coefficient)
 set_tests_properties(test_coefficient PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_symopt COMMAND test_symopt)
+set_tests_properties(test_symopt PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 
 #
 # Auto Test

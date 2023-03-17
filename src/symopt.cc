@@ -11,6 +11,14 @@ namespace mysym
 #include "symopt.def"
   }
 
+  bool find_symopt(std::string name, symopt_t &out)
+  {
+    if (__symopts.find(name) == __symopts.end())
+      return false;
+    out = __symopts[name];
+    return true;
+  }
+
   std::string opt_name(opt_t o)
   {
     if (__symopts.find(o) == __symopts.end())
@@ -40,5 +48,19 @@ namespace mysym
       return 1;
     else
       return 0;
+  }
+
+  std::string symopts()
+  {
+    std::string res;
+    for (auto it : __symopts)
+    {
+      res += it.first;
+      res += ",";
+    }
+    // 弹出最后一个","
+    if (!res.empty())
+      res.pop_back();
+    return res;
   }
 } // namespace mysym

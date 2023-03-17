@@ -417,5 +417,11 @@
   "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_exponent.dir/test_exponent.cc.o -c /mnt/e/workspace/mysym/test/test_exponent.cc",
   "file": "/mnt/e/workspace/mysym/test/test_exponent.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_symopt.dir/test_symopt.cc.o -c /mnt/e/workspace/mysym/test/test_symopt.cc",
+  "file": "/mnt/e/workspace/mysym/test/test_symopt.cc"
 }
 ]

@@ -1051,6 +1051,38 @@ build test/test_exponent: CXX_EXECUTABLE_LINKER__test_exponent test/CMakeFiles/t
   TARGET_FILE = test/test_exponent
   TARGET_PDB = test_exponent.dbg
 # =============================================================================
+# Object build statements for EXECUTABLE target test_symopt
+
+
+#############################################
+# Order-only phony target for test_symopt
+
+build cmake_object_order_depends_target_test_symopt: phony || cmake_object_order_depends_target_mysym
+build test/CMakeFiles/test_symopt.dir/test_symopt.cc.o: CXX_COMPILER__test_symopt ../test/test_symopt.cc || cmake_object_order_depends_target_test_symopt
+  DEFINES = -DDEBUG
+  DEP_FILE = test/CMakeFiles/test_symopt.dir/test_symopt.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include -I../test/../src
+  OBJECT_DIR = test/CMakeFiles/test_symopt.dir
+  OBJECT_FILE_DIR = test/CMakeFiles/test_symopt.dir
+
+# =============================================================================
+# Link build statements for EXECUTABLE target test_symopt
+
+
+#############################################
+# Link the executable test/test_symopt
+
+build test/test_symopt: CXX_EXECUTABLE_LINKER__test_symopt test/CMakeFiles/test_symopt.dir/test_symopt.cc.o | libmysym.a || libmysym.a
+  FLAGS = -Wall -g
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_PATH = -L/usr/local/lib
+  OBJECT_DIR = test/CMakeFiles/test_symopt.dir
+  POST_BUILD = :
+  PRE_LINK = :
+  TARGET_FILE = test/test_symopt
+  TARGET_PDB = test_symopt.dbg
+# =============================================================================
 # Target aliases.
 
 build mysym: phony libmysym.a
@@ -1068,6 +1100,7 @@ build test_monomial: phony test/test_monomial
 build test_polynomial: phony test/test_polynomial
 build test_simplify: phony test/test_simplify
 build test_sort: phony test/test_sort
+build test_symopt: phony test/test_symopt
 build test_term: phony test/test_term
 # =============================================================================
 # Folder targets.
@@ -1078,7 +1111,7 @@ build test_term: phony test/test_term
 #############################################
 # Folder: /mnt/e/workspace/mysym/build/test
 
-build  test/all: phony test_fraction test_simplify test_match test_monomial test_sort test_degree test_polynomial test_map test_coefficient test_expression test_basic test_list test_cmp test_term test_exponent
+build  test/all: phony test_fraction test_simplify test_match test_monomial test_sort test_degree test_polynomial test_map test_coefficient test_expression test_basic test_list test_cmp test_term test_exponent test_symopt
 # =============================================================================
 # Built-in targets
 
@@ -1086,7 +1119,7 @@ build  test/all: phony test_fraction test_simplify test_match test_monomial test
 #############################################
 # The main all target.
 
-build all: phony libmysym.a test/test_fraction test/test_simplify test/test_match test/test_monomial test/test_sort test/test_degree test/test_polynomial test/test_map test/test_coefficient test/test_expression test/test_basic test/test_list test/test_cmp test/test_term test/test_exponent
+build all: phony libmysym.a test/test_fraction test/test_simplify test/test_match test/test_monomial test/test_sort test/test_degree test/test_polynomial test/test_map test/test_coefficient test/test_expression test/test_basic test/test_list test/test_cmp test/test_term test/test_exponent test/test_symopt
 
 #############################################
 # Make the all target the default.

@@ -28,3 +28,4 @@
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_cmp.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_term.dir
 /mnt/e/workspace/mysym/build/test/CMakeFiles/test_exponent.dir
+/mnt/e/workspace/mysym/build/test/CMakeFiles/test_symopt.dir

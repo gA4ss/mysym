@@ -61,6 +61,8 @@ add_executable(test_degree ${SRC_DIRECTORY}/test_degree.cc)
 target_link_libraries(test_degree mysym gtest pthread)
 add_executable(test_coefficient ${SRC_DIRECTORY}/test_coefficient.cc)
 target_link_libraries(test_coefficient mysym gtest pthread)
+add_executable(test_symopt ${SRC_DIRECTORY}/test_symopt.cc)
+target_link_libraries(test_symopt mysym gtest pthread)
 
 # add_executable(test_addsub ${SRC_DIRECTORY}/test_addsub.cc)
 # target_link_libraries(test_addsub mympf gtest pthread)
