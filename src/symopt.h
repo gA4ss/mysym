@@ -3,6 +3,38 @@
 
 namespace mysym
 {
+  typedef std::string opt_t;
+
+  typedef struct __symopt_t
+  {
+    opt_t opt;
+    int prio;
+    bool sorted;
+  } symopt_t;
+
+  bool find_symopt(std::string name, symopt_t &out);
+  std::string opt_name(opt_t o);
+  int opt_prio(opt_t o);
+  bool opt_sorted(opt_t o);
+  int cmp_operator_priority(opt_t o1, opt_t o2);
+  std::string symopts();
+
+  typedef struct __optset_t
+  {
+    std::string name;
+    std::map<std::string, symopt_t> items;
+  } optset_t;
+
+  bool find_optset(std::string name, optset_t &out);
+  optset_t create_set(std::string setname, std::string optnames);
+  optset_t create_set(std::string setname, std::vector<std::string> optnames);
+  optset_t create_set_include_sets(std::string setname, std::string setnames);
+  optset_t create_set_exclude_sets(std::string setname, std::string setnames);
+  bool in_set(std::string setname, std::string optname);
+  std::vector<std::string> in_set(std::string setname, std::vector<std::string> optnames);
+  std::string optsets();
+  void init_symopt();
+  void init_symset();
 
 #define kOptNone "none"
 
@@ -57,44 +89,6 @@ namespace mysym
 #define kOptConstPI "pi"
 #define kOptConstInf "inf"
 #define kOptConstNegInf "-inf"
-
-  // #define kOptInteger "integer"
-  // #define kOptFloat "float"
-
-  typedef std::string opt_t;
-
-  typedef struct __symopt_t
-  {
-    opt_t opt;
-    int prio;
-    bool sorted;
-  } symopt_t;
-
-#define is_symopt(o1, o2) ((o1) == (o2))
-
-  bool find_symopt(std::string name, symopt_t &out);
-  std::string opt_name(opt_t o);
-  int opt_prio(opt_t o);
-  bool opt_sorted(opt_t o);
-  int cmp_operator_priority(opt_t o1, opt_t o2);
-  std::string symopts();
-
-  typedef struct __optset_t
-  {
-    std::string name;
-    std::map<std::string, symopt_t> items;
-  } optset_t;
-
-  bool find_optset(std::string name, optset_t &out);
-  optset_t create_set(std::string setname, std::string optnames);
-  optset_t create_set(std::string setname, std::vector<std::string> optnames);
-  optset_t create_set_include_sets(std::string setname, std::string setnames);
-  optset_t create_set_exclude_sets(std::string setname, std::string setnames);
-  bool in_set(std::string setname, std::string optname);
-  std::vector<std::string> in_set(std::string setname, std::vector<std::string> optnames);
-  std::string optsets();
-  void init_symopt();
-  void init_symset();
 
 #define is_none(o) (o == kOptNone)
 #define is_und(o) is_none(o)
