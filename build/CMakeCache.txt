@@ -181,7 +181,7 @@ CMAKE_VERBOSE_MAKEFILE:BOOL=FALSE
 mysym_BINARY_DIR:STATIC=/mnt/e/workspace/mysym/build
 
 //Dependencies for the target
-mysym_LIB_DEPENDS:STATIC=general;mympf;general;mympz;general;my;
+mysym_LIB_DEPENDS:STATIC=general;mynum;general;mympf;general;mympz;general;my;
 
 //Value Computed by CMake
 mysym_SOURCE_DIR:STATIC=/mnt/e/workspace/mysym

@@ -18,7 +18,7 @@ namespace mysym
 
     // s是一个变量并且等于x
     if (is_var(kind(s)))
-      return (cmp(s, x) == 0);
+      return (compare(s, x) == 0);
 
     //
     // 这里保留之前的一段代码，之前的代码允许在分数
@@ -36,7 +36,7 @@ namespace mysym
     {
       if ((is_int(kind(s.items[1]))) && (is_var(kind(s.items[0]))))
       {
-        return (cmp(s.items[0], x) == 0);
+        return (compare(s.items[0], x) == 0);
       }
     }
 

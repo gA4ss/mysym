@@ -4,7 +4,7 @@ namespace mysym
 {
   symbol_t term(const symbol_t &s)
   {
-    if (is_sym(kind(s)) || (is_add(kind(s))) || is_func(kind(s)))
+    if (is_sym(kind(s)) || (is_add(kind(s))))
       return s;
 
     if (is_const(kind(s)))

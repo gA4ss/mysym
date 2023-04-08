@@ -16,7 +16,7 @@ namespace mysym
     if (is_monomial(s, x))
     {
       int_t k = degree(s, x);
-      if (cmp(k, d) == 0)
+      if (compare(k, d) == 0)
         return constant(s);
       else
         return undefined;
@@ -28,7 +28,7 @@ namespace mysym
     if (is_add(kind(s)))
     {
       int_t k = create_none();
-      bool diz = cmp(d, create_int("0")) == 0 ? true : false;
+      bool diz = compare(d, create_int("0")) == 0 ? true : false;
       for (auto it = s.items.begin(); it != s.items.end(); it++)
       {
         //
@@ -48,7 +48,7 @@ namespace mysym
             continue;
 
           k = degree(*it, x);
-          if (cmp(k, d) == 0)
+          if (compare(k, d) == 0)
             return constant(*it);
         }
       }

@@ -2,7 +2,7 @@ define_opt_set("all", symopts());
 define_opt_set("basic", kOptAdd "," kOptMul);
 define_opt_set("nature", kOptConstE "," kOptConstPI "," kOptConstInf "," kOptConstNegInf);
 define_opt_set("const", kOptNumber "," kOptFrac "," kOptConstE "," kOptConstPI "," kOptConstInf "," kOptConstNegInf);
-define_opt_set("sym", kOptVariate "," kOptNumber "," kOptFrac "," kOptConstE "," kOptConstPI "," kOptConstInf "," kOptConstNegInf);
+define_opt_set("atom", kOptVariate "," kOptNumber "," kOptFrac "," kOptConstE "," kOptConstPI "," kOptConstInf "," kOptConstNegInf);
 define_opt_set("basicf", kOptPow "," kOptLog "," kOptFact "," kOptAbs "," kOptMod);
 define_opt_set("order", kOptEqu "," kOptNotEqu "," kOptLT "," kOptLE "," kOptGT "," kOptGE);
 define_opt_set("trigo", kOptSin "," kOptCos "," kOptTan "," kOptCot "," kOptSec "," kOptCsc);

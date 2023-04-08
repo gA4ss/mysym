@@ -4,7 +4,7 @@ namespace mysym
 {
   static bool __symbol_cmp(const symbol_t &s1, const symbol_t &s2)
   {
-    int c = cmp(s1, s2);
+    int c = compare(s1, s2);
     return (c == -1) ? true : false;
   }
 
@@ -19,15 +19,15 @@ namespace mysym
       return;
 
     //
-    // 双参数函数不进行排序，但是参数自身参加排序
+    // 符合交换律的才可以进行排序
     //
-    if (!is_2ps_func(kind(s)))
-    {
-      if (reverse)
-        std::sort(s.items.begin(), s.items.end(), __symbol_reverse_cmp);
-      else
-        std::sort(s.items.begin(), s.items.end(), __symbol_cmp);
-    }
+    if (!opt_commutative_law(kind(s)))
+      return;
+
+    if (reverse)
+      std::sort(s.items.begin(), s.items.end(), __symbol_reverse_cmp);
+    else
+      std::sort(s.items.begin(), s.items.end(), __symbol_cmp);
 
     //
     // 对子序列进行排序

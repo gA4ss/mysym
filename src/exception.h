@@ -42,6 +42,8 @@ namespace mysym
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
+#define mysym_assert(exp, format, ...) my_assert(exp, format, __VA_ARGS__)
+
   //////////////////////////////
   //  定义了一些常用参数检查宏   //
   //////////////////////////////

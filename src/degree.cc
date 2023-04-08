@@ -72,7 +72,7 @@ namespace mysym
           continue;
         else
         {
-          if (cmp(d, k) < 0)
+          if (compare(d, k) < 0)
             d = k;
         }
       }
@@ -99,7 +99,7 @@ namespace mysym
           continue;
         else
         {
-          if (cmp(d, k) < 0)
+          if (compare(d, k) < 0)
             d = k;
         }
       }

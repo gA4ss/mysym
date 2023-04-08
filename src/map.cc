@@ -4,7 +4,7 @@ namespace mysym
 {
   symbol_t map(fptr_map_t fmap, const symbol_t &s)
   {
-    if (is_sym(kind(s)))
+    if (is_atom(kind(s)))
       return fmap(s);
 
     symbol_t u = create(s.opt);
@@ -17,14 +17,16 @@ namespace mysym
 
   symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o)
   {
-    if (is_sym(kind(u)))
-      return s;
+    opt_t opt = (o == kOptNone ? kOptMul : o);
+    if (is_atom(kind(u)))
+    {
+      return make(opt, u, s);
+    }
 
     symbol_t v = create(u.opt);
-    opt_t opt = (o == kOptNone ? kOptMul : o);
     for (auto it1 = u.items.begin(); it1 != u.items.end(); it1++)
     {
-      if (is_sym(kind(s)))
+      if (is_atom(kind(s)))
       {
         append(v, make(opt, *it1, s));
       }

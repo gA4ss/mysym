@@ -8,7 +8,7 @@ namespace mysym
     {
       return undefined;
     }
-    else if (is_sym(kind(s)))
+    else if (is_atom(kind(s)))
     {
       return s;
     }

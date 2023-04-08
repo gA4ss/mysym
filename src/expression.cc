@@ -7,7 +7,7 @@ namespace mysym
     list_t l;
 
     // 单一符号直接退出
-    if (is_sym(kind(s)))
+    if (is_atom(kind(s)))
     {
       append(l, s, found);
       return l;
@@ -25,7 +25,7 @@ namespace mysym
 
   bool free_of(const symbol_t &s, const symbol_t &u)
   {
-    if (cmp(s, u) == 0)
+    if (compare(s, u) == 0)
       return false;
     
     for (auto it = s.items.begin(); it != s.items.end(); it++)

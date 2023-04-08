@@ -56,7 +56,9 @@ namespace mysym
     return tab.empty();
   }
 
-  symbol_t apply_rule_table(const rule_table_s_t &r, const symbol_t &x)
+  //////////////////////////////////////////////////////////////////////////////////////////
+
+  symbol_t execute_rule_table(const rule_table_s_t &r, const symbol_t &x)
   {
     for (auto it = r.begin(); it != r.end(); it++)
     {
@@ -66,7 +68,15 @@ namespace mysym
     return undefined;
   }
 
-  symbol_t apply_rule_table(const rule_table_d_t &r, const symbol_t &x, const symbol_t &y)
+  symbol_t execute_rule_table(opt_t opt, const symbol_t &x)
+  {
+    rule_table_s_t tab;
+    if (!find_rule_table_s(opt, tab))
+      return undefined;
+    return execute_rule_table(tab, x);
+  }
+
+  symbol_t execute_rule_table(const rule_table_d_t &r, const symbol_t &x, const symbol_t &y)
   {
     for (auto it = r.begin(); it != r.end(); it++)
     {
@@ -76,56 +86,43 @@ namespace mysym
     return undefined;
   }
 
-  // static symbol_t __execute_opt_rule(opt_t o, const symbol_t &x, const symbol_t &y)
-  // {
-  //   if (r.rd.find(o) == r.rd.end())
-  //     return undefined;
-
-  //   symbol_t _x = execute_opt_rule(o, x);
-  //   symbol_t _y = execute_opt_rule(o, y);
-  //   return apply_rule_table(o, _x, _y);
-  // }
-
-  symbol_t apply_rule(const symbol_t &x)
+  symbol_t execute_rule_table(opt_t opt, const symbol_t &x, const symbol_t &y)
   {
-    opt_t o = x.opt;
-    if (__rule_library.rs.find(o) == __rule_library.rs.end())
+    rule_table_d_t tab;
+    if (!find_rule_table_d(opt, tab))
       return undefined;
-    return apply_rule_table(__rule_library.rs[o], x);
+    return execute_rule_table(tab, x, y);
   }
 
-#include "__rule.h"
-
-  static void __register_add_rule()
+  void apply_rule(symbol_t &x)
   {
-    register_rule(kOptAdd, __c_add_num_num, __e_add_num_num);
-    register_rule(kOptAdd, __c_add_num_frac, __e_add_num_frac);
-    register_rule(kOptAdd, __c_add_num_nature, __e_add_num_nature);
-    register_rule(kOptAdd, __c_add_num_var, __e_add_num_var);
-    register_rule(kOptAdd, __c_add_num_func, __e_add_num_func);
+    x = execute_rule_table(x.opt, x);
+  }
 
-    register_rule(kOptAdd, __c_add_frac_frac, __e_add_frac_frac);
-    register_rule(kOptAdd, __c_add_frac_nature, __e_add_frac_nature);
+  static bool __c_atom_entry(const symbol_t &x)
+  {
+    return is_atom(kind(x));
+  }
+  static symbol_t __e_atom_entry(const symbol_t &x)
+  {
+    return x;
+  }
 
-
-    register_rule(kOptAdd, __c_add_frac_var, __e_add_frac_var);
-    register_rule(kOptAdd, __c_add_frac_func, __e_add_frac_func);
-
-    register_rule(kOptAdd, __c_add_nature_nature, __e_add_nature_nature);
-    register_rule(kOptAdd, __c_add_nature_var, __e_add_nature_var);
-
-    register_rule(kOptAdd, __c_add_nature_func, __e_add_nature_func);
-    register_rule(kOptAdd, __c_add_var_var, __e_add_var_var);
-
-    register_rule(kOptAdd, __c_add_var_func, __e_add_var_func);
-    register_rule(kOptAdd, __c_add_func_func, __e_add_func_func);
-
-    register_rule(kOptAdd, __c_add, __e_add);
-    register_rule(kOptAdd, __c_add_entry, __e_add_entry);
+  void register_atom_rule()
+  {
+    register_rule(kOptVariate, __c_atom_entry, __e_atom_entry);
+    register_rule(kOptNumber, __c_atom_entry, __e_atom_entry);
+    register_rule(kOptFrac, __c_atom_entry, __e_atom_entry);
+    register_rule(kOptConstE, __c_atom_entry, __e_atom_entry);
+    register_rule(kOptConstPI, __c_atom_entry, __e_atom_entry);
+    register_rule(kOptConstInf, __c_atom_entry, __e_atom_entry);
+    register_rule(kOptConstNegInf, __c_atom_entry, __e_atom_entry);
   }
 
   void init_rule()
   {
-    __register_add_rule();
+    register_atom_rule();
+    register_add_rule();
+    register_cmp_rule();
   }
 } // namespace mysym

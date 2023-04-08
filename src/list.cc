@@ -12,7 +12,7 @@ namespace mysym
   {
     for (auto it = l.begin(); it != l.end(); it++)
     {
-      if (cmp(s, *it) == 0)
+      if (compare(s, *it) == 0)
         return true;
     }
     return false;

@@ -121,6 +121,12 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/basic_rule.cc.o -c /mnt/e/workspace/mysym/src/basic_rule.cc",
+  "file": "/mnt/e/workspace/mysym/src/basic_rule.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/rule.cc.o -c /mnt/e/workspace/mysym/src/rule.cc",
   "file": "/mnt/e/workspace/mysym/src/rule.cc"
 },
@@ -187,8 +193,8 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/variables.cc.o -c /mnt/e/workspace/mysym/src/variables.cc",
-  "file": "/mnt/e/workspace/mysym/src/variables.cc"
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/units.cc.o -c /mnt/e/workspace/mysym/src/units.cc",
+  "file": "/mnt/e/workspace/mysym/src/units.cc"
 },
 
 {
@@ -217,8 +223,8 @@
 
 {
   "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/cmp.cc.o -c /mnt/e/workspace/mysym/src/cmp.cc",
-  "file": "/mnt/e/workspace/mysym/src/cmp.cc"
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/compare.cc.o -c /mnt/e/workspace/mysym/src/compare.cc",
+  "file": "/mnt/e/workspace/mysym/src/compare.cc"
 },
 
 {
@@ -231,6 +237,12 @@
   "directory": "/mnt/e/workspace/mysym/build",
   "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/init.cc.o -c /mnt/e/workspace/mysym/src/init.cc",
   "file": "/mnt/e/workspace/mysym/src/init.cc"
+},
+
+{
+  "directory": "/mnt/e/workspace/mysym/build",
+  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/cmp.cc.o -c /mnt/e/workspace/mysym/src/operator/cmp.cc",
+  "file": "/mnt/e/workspace/mysym/src/operator/cmp.cc"
 },
 
 {

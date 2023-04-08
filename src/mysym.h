@@ -14,7 +14,7 @@
 
 #include <mympz/mympz.h>
 #include <mympf/mympf.h>
-// #include <mynum/mynum.h>
+#include <mynum/mynum.h>
 
 #include <mysym/symopt.h>
 #include <mysym/compile.h>
@@ -91,6 +91,8 @@ namespace mysym
 
   symbol_t make(opt_t opt, const symbol_t &s, bool nas = false);
   symbol_t make(opt_t opt, const symbol_t &s1, const symbol_t &s2, bool nas = false);
+#define just_make1(opt, s1) make(opt, s1, true)
+#define just_make2(opt, s1, s2) make(opt, s1, s2, true)
 
   symbol_t make(opt_t opt, std::string s, bool nas = false);
   symbol_t make(opt_t opt, std::string s1, std::string s2, bool nas = false);
@@ -122,10 +124,10 @@ namespace mysym
   bool match(const symbol_t &s1, const symbol_t &s2);
   bool match_in(const symbol_t &s1, const symbol_t &s2);
 
-  int cmp(const symbol_t &s1, const symbol_t &s2);
+  int compare(const symbol_t &s1, const symbol_t &s2);
   void sort(symbol_t &s, bool reverse = false);
   void merge(symbol_t &s);
-  void automatic_simplify(symbol_t &s, bool reverse = false);
+  void automatic_simplify(symbol_t &s);
 
   list_t complete_sub_expressions(const symbol_t &s, bool found = false);
   bool free_of(const symbol_t &s, const symbol_t &u);
@@ -160,12 +162,14 @@ namespace mysym
   //
   symbol_t numerator(const symbol_t &s);
   symbol_t denominator(const symbol_t &s);
-  symbol_t frac_to_product(const symbol_t &s);
+  symbol_t frac_to_prod(const symbol_t &s);
+  symbol_t frac_to_num(const symbol_t &s);
+  symbol_t num_to_frac(const symbol_t &s);
+  mynum::fraction_t frac_to_mynum_fraction(const symbol_t &s);
 
   //
   // 规则表
   //
-
   // 条件-执行表
   typedef bool (*fptr_condition_s_t)(const symbol_t &);
   typedef bool (*fptr_condition_d_t)(const symbol_t &, const symbol_t &);
@@ -184,22 +188,42 @@ namespace mysym
     rule_object_d_t rd;
   } rule_library_t;
 
+  void register_add_rule();
+  void register_cmp_rule();
+
   void register_rule(opt_t opt, fptr_condition_s_t fcondition, fptr_execute_s_t fexecute);
   void register_rule(opt_t opt, fptr_condition_d_t fcondition, fptr_execute_d_t fexecute);
   bool find_rule_table_s(opt_t opt, rule_table_s_t &tab);
   bool find_rule_table_d(opt_t opt, rule_table_d_t &tab);
   bool is_empty(const rule_table_s_t &tab);
   bool is_empty(const rule_table_d_t &tab);
-  symbol_t apply_rule_table(const rule_table_s_t &r, const symbol_t &x);
-  symbol_t apply_rule_table(const rule_table_d_t &r, const symbol_t &x, const symbol_t &y);
-  symbol_t apply_rule(const symbol_t &x);
+  symbol_t execute_rule_table(const rule_table_s_t &r, const symbol_t &x);
+  symbol_t execute_rule_table(const rule_table_d_t &r, const symbol_t &x, const symbol_t &y);
+  symbol_t execute_rule_table(opt_t opt, const symbol_t &x);
+  symbol_t execute_rule_table(opt_t opt, const symbol_t &x, const symbol_t &y);
+  void apply_rule(symbol_t &x);
   void init_rule();
+
+  //
+  // 基础运算律
+  //
+  void apply_associative_law(symbol_t &x);
+  void apply_commutative_law(symbol_t &x);
+  void apply_distributive_law(symbol_t &x);
+  void combine_like_terms(symbol_t &x);
 
   //
   // 运算符号
   //
 #define c_add(s1, s2) make(kOptAdd, s1, s2, false)
 #define c_mul(s1, s2) make(kOptMul, s1, s2, false)
+#define c_equ(s1, s2) make(kOptEqu, s1, s2, false)
+#define c_neq(s1, s2) make(kOptNotEqu, s1, s2, false)
+#define c_lt(s1, s2) make(kOptLT, s1, s2, false)
+#define c_le(s1, s2) make(kOptLE, s1, s2, false)
+#define c_gt(s1, s2) make(kOptGT, s1, s2, false)
+#define c_ge(s1, s2) make(kOptGE, s1, s2, false)
+#define c_cmp(s1, s2) make(kOptCmp, s1, s2, false)
 #define c_pow(s1, s2) make(kOptPow, s1, s2, false)
 #define c_log(s1, s2) make(kOptLog, s1, s2, false)
 #define c_fact(s1, s2) make(kOptFact, s1, s2, false)
@@ -243,6 +267,14 @@ namespace mysym
   // 符号运算符
   //
   symbol_t add(const symbol_t &x, const symbol_t &y);
+  // symbol_t mul(const symbol_t &x, const symbol_t &y);
+  symbol_t equ(const symbol_t &x, const symbol_t &y);
+  symbol_t neq(const symbol_t &x, const symbol_t &y);
+  symbol_t lt(const symbol_t &x, const symbol_t &y);
+  symbol_t le(const symbol_t &x, const symbol_t &y);
+  symbol_t gt(const symbol_t &x, const symbol_t &y);
+  symbol_t ge(const symbol_t &x, const symbol_t &y);
+  symbol_t cmp(const symbol_t &x, const symbol_t &y);
 
   //
   // 全局变量

@@ -35,4 +35,22 @@ namespace mysym
     list_t l;
     return l;
   }
+
+  list_t fractions(const symbol_t &s)
+  {
+    list_t l;
+    return l;
+  }
+
+  list_t natures(const symbol_t &s)
+  {
+    list_t l;
+    return l;
+  }
+
+  list_t functions(const symbol_t &s)
+  {
+    list_t l;
+    return l;
+  }
 } // namespace mysym

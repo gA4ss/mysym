@@ -2,35 +2,31 @@
 
 namespace mysym
 {
-  // static bool __erase_from_symbol_ptr(symbol_link_t links, symbol_ptr_t s)
-  // {
-  //   auto it = std::find(links.begin(), links.end(), s);
-  //   if (it != links.end())
-  //   {
-  //     links.erase(it);
-  //     return true;
-  //   }
-  //   return false;
-  // }
-
-  static void __merge_same_basic_operator(symbol_t& s)
+  void merge(symbol_t &s)
   {
-    //
-    // 1.是单个符号并且不是基础运算符（常量，变量，函数）
-    // 2.单目运算符
-    // 直接返回，不进行处理
-    //
-    if (((is_single(s)) && (!is_basic(s.opt))) || (is_unary_operation(s)))
-      return;
-
     symbol_items_t new_items;
     opt_t opt = s.opt;
     for (auto it = s.items.begin(); it != s.items.end(); it++)
     {
-      __merge_same_basic_operator(*it);
+      //
+      // 这里允许对子项进行合并，为了
+      // f((x+(y+z)), 1)，这种情况。
+      //
+      merge(*it);
+
+      // 判断当前运算符是否一致
       if ((*it).opt == opt)
       {
-        new_items.insert(new_items.end(), (*it).items.begin(), (*it).items.end());
+        //
+        // 判断当运算是否符合结合律
+        // 如果不符合则直接压入子项
+        // 目，为了最后直接替换的代
+        // 码统一掉。
+        //
+        if (opt_associative_law(kind(s)))
+          new_items.insert(new_items.end(), (*it).items.begin(), (*it).items.end());
+        else
+          new_items.push_back(*it);
       }
       else
       {
@@ -38,15 +34,6 @@ namespace mysym
       }
     }
     s.items = new_items;
-    return;
-  }
-
-  void merge(symbol_t& s)
-  {
-    //
-    // 合并相同的基础运算符
-    //
-    __merge_same_basic_operator(s);
     return;
   }
 } // namespace mysym

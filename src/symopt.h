@@ -4,19 +4,32 @@
 namespace mysym
 {
   typedef std::string opt_t;
+  typedef struct __symopt_attribute_t
+  {
+    bool continuous; // 是否是连续的
+  } symopt_attr_t;
 
   typedef struct __symopt_t
   {
     opt_t opt;
-    int prio;
-    bool sorted;
+    int priority;                     // 优先级
+    bool associative_law;             // 结合律
+    bool commutative_law;             // 交换律
+    std::vector<opt_t> distributives; // 分配针对操作
+    std::string unit1;                // 单位
+    symopt_attr_t attr;               // 属性
   } symopt_t;
+#define distributive_law(s) (s.distributives.size() != 0)
 
   bool find_symopt(std::string name, symopt_t &out);
   std::string opt_name(opt_t o);
-  int opt_prio(opt_t o);
-  bool opt_sorted(opt_t o);
+  int opt_priority(opt_t o);
+  bool opt_associative_law(opt_t o);
+  bool opt_commutative_law(opt_t o);
+  bool opt_distributive_law(opt_t o);
+  bool opt_continuous(opt_t o);
   int cmp_operator_priority(opt_t o1, opt_t o2);
+  bool can_distributive(opt_t os, opt_t od);
   std::string symopts();
 
   typedef struct __optset_t
@@ -48,6 +61,7 @@ namespace mysym
 #define kOptGT ">"
 #define kOptGE ">="
 
+#define kOptCmp "cmp"
 #define kOptPow "^"
 #define kOptLog "log"
 #define kOptFact "!"
@@ -111,7 +125,8 @@ namespace mysym
 
 #define is_opt(o) (in_set("opt", o))
 #define is_basic(o) (in_set("basic", o))
-#define is_sym(o) (in_set("sym", o))
+#define is_atom(o) (in_set("atom", o))
+#define is_sym(o) (in_set("atom", o) || in_set("func", o))
 #define is_const(o) (in_set("const", o))
 #define is_nature(o) (in_set("nature", o))
 #define is_basic_func(o) (in_set("basicf", o))

@@ -212,6 +212,13 @@ build CMakeFiles/mysym.dir/src/symopt.cc.o: CXX_COMPILER__mysym ../src/symopt.cc
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/basic_rule.cc.o: CXX_COMPILER__mysym ../src/basic_rule.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/basic_rule.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
 build CMakeFiles/mysym.dir/src/rule.cc.o: CXX_COMPILER__mysym ../src/rule.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/rule.cc.o.d
@@ -289,9 +296,9 @@ build CMakeFiles/mysym.dir/src/rational.cc.o: CXX_COMPILER__mysym ../src/rationa
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
-build CMakeFiles/mysym.dir/src/variables.cc.o: CXX_COMPILER__mysym ../src/variables.cc || cmake_object_order_depends_target_mysym
+build CMakeFiles/mysym.dir/src/units.cc.o: CXX_COMPILER__mysym ../src/units.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
-  DEP_FILE = CMakeFiles/mysym.dir/src/variables.cc.o.d
+  DEP_FILE = CMakeFiles/mysym.dir/src/units.cc.o.d
   FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
@@ -324,9 +331,9 @@ build CMakeFiles/mysym.dir/src/degree.cc.o: CXX_COMPILER__mysym ../src/degree.cc
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
-build CMakeFiles/mysym.dir/src/cmp.cc.o: CXX_COMPILER__mysym ../src/cmp.cc || cmake_object_order_depends_target_mysym
+build CMakeFiles/mysym.dir/src/compare.cc.o: CXX_COMPILER__mysym ../src/compare.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
-  DEP_FILE = CMakeFiles/mysym.dir/src/cmp.cc.o.d
+  DEP_FILE = CMakeFiles/mysym.dir/src/compare.cc.o.d
   FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
@@ -345,6 +352,13 @@ build CMakeFiles/mysym.dir/src/init.cc.o: CXX_COMPILER__mysym ../src/init.cc || 
   INCLUDES = -I../. -I/usr/local/include
   OBJECT_DIR = CMakeFiles/mysym.dir
   OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src
+build CMakeFiles/mysym.dir/src/operator/cmp.cc.o: CXX_COMPILER__mysym ../src/operator/cmp.cc || cmake_object_order_depends_target_mysym
+  DEFINES = -DDEBUG
+  DEP_FILE = CMakeFiles/mysym.dir/src/operator/cmp.cc.o.d
+  FLAGS = -Wall -g   -std=c++11 -g -O0 -Wunused-variable
+  INCLUDES = -I../. -I/usr/local/include
+  OBJECT_DIR = CMakeFiles/mysym.dir
+  OBJECT_FILE_DIR = CMakeFiles/mysym.dir/src/operator
 build CMakeFiles/mysym.dir/src/operator/abs.cc.o: CXX_COMPILER__mysym ../src/operator/abs.cc || cmake_object_order_depends_target_mysym
   DEFINES = -DDEBUG
   DEP_FILE = CMakeFiles/mysym.dir/src/operator/abs.cc.o.d
@@ -465,7 +479,7 @@ build CMakeFiles/mysym.dir/src/print.cc.o: CXX_COMPILER__mysym ../src/print.cc |
 #############################################
 # Link the static library libmysym.a
 
-build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/tree.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/base.cc.o CMakeFiles/mysym.dir/src/exponent.cc.o CMakeFiles/mysym.dir/src/term.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/pattern.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/rule.cc.o CMakeFiles/mysym.dir/src/optset.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/variables.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/polynomial.cc.o CMakeFiles/mysym.dir/src/expression.cc.o CMakeFiles/mysym.dir/src/degree.cc.o CMakeFiles/mysym.dir/src/cmp.cc.o CMakeFiles/mysym.dir/src/global.cc.o CMakeFiles/mysym.dir/src/init.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o CMakeFiles/mysym.dir/src/print.cc.o
+build libmysym.a: CXX_STATIC_LIBRARY_LINKER__mysym CMakeFiles/mysym.dir/src/mysym.cc.o CMakeFiles/mysym.dir/src/create.cc.o CMakeFiles/mysym.dir/src/copy.cc.o CMakeFiles/mysym.dir/src/coefficient.cc.o CMakeFiles/mysym.dir/src/make.cc.o CMakeFiles/mysym.dir/src/tree.cc.o CMakeFiles/mysym.dir/src/merge.cc.o CMakeFiles/mysym.dir/src/operand.cc.o CMakeFiles/mysym.dir/src/base.cc.o CMakeFiles/mysym.dir/src/exponent.cc.o CMakeFiles/mysym.dir/src/term.cc.o CMakeFiles/mysym.dir/src/simplify.cc.o CMakeFiles/mysym.dir/src/map.cc.o CMakeFiles/mysym.dir/src/sort.cc.o CMakeFiles/mysym.dir/src/find.cc.o CMakeFiles/mysym.dir/src/match.cc.o CMakeFiles/mysym.dir/src/pattern.cc.o CMakeFiles/mysym.dir/src/substitute.cc.o CMakeFiles/mysym.dir/src/expansion.cc.o CMakeFiles/mysym.dir/src/symopt.cc.o CMakeFiles/mysym.dir/src/basic_rule.cc.o CMakeFiles/mysym.dir/src/rule.cc.o CMakeFiles/mysym.dir/src/optset.cc.o CMakeFiles/mysym.dir/src/factor.cc.o CMakeFiles/mysym.dir/src/fraction.cc.o CMakeFiles/mysym.dir/src/limit.cc.o CMakeFiles/mysym.dir/src/integral.cc.o CMakeFiles/mysym.dir/src/constant.cc.o CMakeFiles/mysym.dir/src/library.cc.o CMakeFiles/mysym.dir/src/list.cc.o CMakeFiles/mysym.dir/src/solve.cc.o CMakeFiles/mysym.dir/src/rational.cc.o CMakeFiles/mysym.dir/src/units.cc.o CMakeFiles/mysym.dir/src/monomial.cc.o CMakeFiles/mysym.dir/src/polynomial.cc.o CMakeFiles/mysym.dir/src/expression.cc.o CMakeFiles/mysym.dir/src/degree.cc.o CMakeFiles/mysym.dir/src/compare.cc.o CMakeFiles/mysym.dir/src/global.cc.o CMakeFiles/mysym.dir/src/init.cc.o CMakeFiles/mysym.dir/src/operator/cmp.cc.o CMakeFiles/mysym.dir/src/operator/abs.cc.o CMakeFiles/mysym.dir/src/operator/minus.cc.o CMakeFiles/mysym.dir/src/operator/add.cc.o CMakeFiles/mysym.dir/src/operator/sub.cc.o CMakeFiles/mysym.dir/src/operator/mul.cc.o CMakeFiles/mysym.dir/src/operator/div.cc.o CMakeFiles/mysym.dir/src/operator/mod.cc.o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o CMakeFiles/mysym.dir/src/operator/pow.cc.o CMakeFiles/mysym.dir/src/operator/log.cc.o CMakeFiles/mysym.dir/src/operator/fact.cc.o CMakeFiles/mysym.dir/src/operator/trigo.cc.o CMakeFiles/mysym.dir/src/operator/hyper.cc.o CMakeFiles/mysym.dir/src/operator/frac.cc.o CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o CMakeFiles/mysym.dir/src/print.cc.o
   LANGUAGE_COMPILE_FLAGS = -Wall -g
   OBJECT_DIR = CMakeFiles/mysym.dir
   POST_BUILD = :
@@ -575,7 +589,7 @@ build test/CMakeFiles/test_fraction.dir/test_fraction.cc.o: CXX_COMPILER__test_f
 
 build test/test_fraction: CXX_EXECUTABLE_LINKER__test_fraction test/CMakeFiles/test_fraction.dir/test_fraction.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_fraction.dir
   POST_BUILD = :
@@ -607,7 +621,7 @@ build test/CMakeFiles/test_simplify.dir/test_simplify.cc.o: CXX_COMPILER__test_s
 
 build test/test_simplify: CXX_EXECUTABLE_LINKER__test_simplify test/CMakeFiles/test_simplify.dir/test_simplify.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_simplify.dir
   POST_BUILD = :
@@ -649,7 +663,7 @@ build test/CMakeFiles/test_match.dir/test_match.cc.o: CXX_COMPILER__test_match .
 
 build test/test_match: CXX_EXECUTABLE_LINKER__test_match test/CMakeFiles/test_match.dir/test_match.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_match.dir
   POST_BUILD = :
@@ -681,7 +695,7 @@ build test/CMakeFiles/test_monomial.dir/test_monomial.cc.o: CXX_COMPILER__test_m
 
 build test/test_monomial: CXX_EXECUTABLE_LINKER__test_monomial test/CMakeFiles/test_monomial.dir/test_monomial.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_monomial.dir
   POST_BUILD = :
@@ -713,7 +727,7 @@ build test/CMakeFiles/test_sort.dir/test_sort.cc.o: CXX_COMPILER__test_sort ../t
 
 build test/test_sort: CXX_EXECUTABLE_LINKER__test_sort test/CMakeFiles/test_sort.dir/test_sort.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_sort.dir
   POST_BUILD = :
@@ -745,7 +759,7 @@ build test/CMakeFiles/test_degree.dir/test_degree.cc.o: CXX_COMPILER__test_degre
 
 build test/test_degree: CXX_EXECUTABLE_LINKER__test_degree test/CMakeFiles/test_degree.dir/test_degree.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_degree.dir
   POST_BUILD = :
@@ -777,7 +791,7 @@ build test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o: CXX_COMPILER__te
 
 build test/test_polynomial: CXX_EXECUTABLE_LINKER__test_polynomial test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_polynomial.dir
   POST_BUILD = :
@@ -809,7 +823,7 @@ build test/CMakeFiles/test_map.dir/test_map.cc.o: CXX_COMPILER__test_map ../test
 
 build test/test_map: CXX_EXECUTABLE_LINKER__test_map test/CMakeFiles/test_map.dir/test_map.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_map.dir
   POST_BUILD = :
@@ -841,7 +855,7 @@ build test/CMakeFiles/test_coefficient.dir/test_coefficient.cc.o: CXX_COMPILER__
 
 build test/test_coefficient: CXX_EXECUTABLE_LINKER__test_coefficient test/CMakeFiles/test_coefficient.dir/test_coefficient.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_coefficient.dir
   POST_BUILD = :
@@ -873,7 +887,7 @@ build test/CMakeFiles/test_expression.dir/test_expression.cc.o: CXX_COMPILER__te
 
 build test/test_expression: CXX_EXECUTABLE_LINKER__test_expression test/CMakeFiles/test_expression.dir/test_expression.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_expression.dir
   POST_BUILD = :
@@ -905,7 +919,7 @@ build test/CMakeFiles/test_basic.dir/test_basic.cc.o: CXX_COMPILER__test_basic .
 
 build test/test_basic: CXX_EXECUTABLE_LINKER__test_basic test/CMakeFiles/test_basic.dir/test_basic.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_basic.dir
   POST_BUILD = :
@@ -937,7 +951,7 @@ build test/CMakeFiles/test_list.dir/test_list.cc.o: CXX_COMPILER__test_list ../t
 
 build test/test_list: CXX_EXECUTABLE_LINKER__test_list test/CMakeFiles/test_list.dir/test_list.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_list.dir
   POST_BUILD = :
@@ -979,7 +993,7 @@ build test/CMakeFiles/test_cmp.dir/test_cmp.cc.o: CXX_COMPILER__test_cmp ../test
 
 build test/test_cmp: CXX_EXECUTABLE_LINKER__test_cmp test/CMakeFiles/test_cmp.dir/test_cmp.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_cmp.dir
   POST_BUILD = :
@@ -1011,7 +1025,7 @@ build test/CMakeFiles/test_term.dir/test_term.cc.o: CXX_COMPILER__test_term ../t
 
 build test/test_term: CXX_EXECUTABLE_LINKER__test_term test/CMakeFiles/test_term.dir/test_term.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_term.dir
   POST_BUILD = :
@@ -1043,7 +1057,7 @@ build test/CMakeFiles/test_exponent.dir/test_exponent.cc.o: CXX_COMPILER__test_e
 
 build test/test_exponent: CXX_EXECUTABLE_LINKER__test_exponent test/CMakeFiles/test_exponent.dir/test_exponent.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_exponent.dir
   POST_BUILD = :
@@ -1075,7 +1089,7 @@ build test/CMakeFiles/test_symopt.dir/test_symopt.cc.o: CXX_COMPILER__test_symop
 
 build test/test_symopt: CXX_EXECUTABLE_LINKER__test_symopt test/CMakeFiles/test_symopt.dir/test_symopt.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g
-  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmympf -lmympz -lmy
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_symopt.dir
   POST_BUILD = :

@@ -50,6 +50,7 @@ set(MYSYM_HEADERS
 # Mysym operator sources
 #
 set(MYSYM_OPERATOR_SRC
+  ${SRC_DIRECTORY}/operator/cmp.cc
   ${SRC_DIRECTORY}/operator/abs.cc
   ${SRC_DIRECTORY}/operator/minus.cc
   ${SRC_DIRECTORY}/operator/add.cc
@@ -104,6 +105,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/substitute.cc
   ${SRC_DIRECTORY}/expansion.cc
   ${SRC_DIRECTORY}/symopt.cc
+  ${SRC_DIRECTORY}/basic_rule.cc
   ${SRC_DIRECTORY}/rule.cc
   ${SRC_DIRECTORY}/optset.cc
   ${SRC_DIRECTORY}/factor.cc
@@ -115,12 +117,12 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/list.cc
   ${SRC_DIRECTORY}/solve.cc
   ${SRC_DIRECTORY}/rational.cc
-  ${SRC_DIRECTORY}/variables.cc
+  ${SRC_DIRECTORY}/units.cc
   ${SRC_DIRECTORY}/monomial.cc
   ${SRC_DIRECTORY}/polynomial.cc
   ${SRC_DIRECTORY}/expression.cc
   ${SRC_DIRECTORY}/degree.cc
-  ${SRC_DIRECTORY}/cmp.cc
+  ${SRC_DIRECTORY}/compare.cc
   ${SRC_DIRECTORY}/global.cc
   ${SRC_DIRECTORY}/init.cc
   ${MYSYM_OPERATOR_SRC}
@@ -128,7 +130,7 @@ add_library(${PROJECT_NAME} STATIC
   ${MYSYM_DEBUG_SRC}
 )
 # target_link_libraries(${PROJECT_NAME} mynum mympf mympz my)
-target_link_libraries(${PROJECT_NAME} mympf mympz my)
+target_link_libraries(${PROJECT_NAME} mynum mympf mympz my)
 
 #
 # Test Build

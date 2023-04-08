@@ -6,12 +6,12 @@ namespace mysym
 {
   bool match(const symbol_t &s1, const symbol_t &s2)
   {
-    return cmp(s1, s2) == 0 ? true : false;
+    return compare(s1, s2) == 0 ? true : false;
   }
 
   bool match_in(const symbol_t &s1, const symbol_t &s2)
   {
-    if (cmp(s1, s2) == 0)
+    if (compare(s1, s2) == 0)
       return true;
   
     // s1 != s2

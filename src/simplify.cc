@@ -23,86 +23,15 @@
 
 namespace mysym
 {
-
-  static symbol_t __simplify_rational_number(const symbol_t &s)
-  {
-    return s;
-  }
-
-  static symbol_t __simplify_sum(const symbol_t &s)
-  {
-    return s;
-  }
-
-  static symbol_t __simplify_factorial(const symbol_t &s)
-  {
-    return s;
-  }
-
-  static symbol_t __simplify_product(const symbol_t &s)
-  {
-    return s;
-  }
-
-  static symbol_t __simplify_pow(const symbol_t &s)
-  {
-    return s;
-  }
-
-  static symbol_t __simplify_function(const symbol_t &s)
-  {
-    return s;
-  }
-
+#if 0
   static symbol_t __automatic_simplify(const symbol_t &s)
   {
-    if (is_sym(kind(s)))
-    {
-      return s;
-    }
-    else if (is_frac(kind(s)))
-    {
-      //
-      // 如果是有理数则进行有理数化简
-      //
-      return __simplify_rational_number(s);
-    }
-    else
-    {
-      //
-      // 进行递归
-      //
-      symbol_t u = map(__automatic_simplify, s);
-      if (is_pow(kind(u)))
-        return __simplify_pow(u);
-      else if (is_mul(kind(u)))
-        return __simplify_product(u);
-      else if (is_add(kind(u)))
-        return __simplify_sum(u);
-      else if (is_fact(kind(u)))
-        return __simplify_factorial(u);
-      else
-        return __simplify_function(u);
-    }
     return s;
   }
+#endif
 
-  void automatic_simplify(symbol_t &s, bool reverse)
+  void automatic_simplify(symbol_t &s)
   {
-    //
-    // 对多项式排序
-    //
-    sort(s, reverse);
-
-    //
-    // 合并基础运算符并且合并同类项
-    //
-    merge(s);
-
-    //
-    // 对各项进行自动化简
-    //
-    __automatic_simplify(s);
-    return;
+    apply_rule(s);
   }
 } // namespace mysym

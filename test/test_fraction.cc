@@ -30,7 +30,7 @@ TEST(Sym, FractionTools) {
   symbol_t s5 = c_pow("a", create_int("5"));
   symbol_t s6 = c_pow("b", create_int("3"));
   symbol_t s7 = c_frac(s5,s6);
-  std::cout << print_string(frac_to_product(s7)) << std::endl;
+  std::cout << print_string(frac_to_prod(s7)) << std::endl;
 }
 
 int main(int argc, char* argv[]) {
