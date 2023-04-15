@@ -125,6 +125,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/compare.cc
   ${SRC_DIRECTORY}/global.cc
   ${SRC_DIRECTORY}/init.cc
+  ${SRC_DIRECTORY}/misc.cc
   ${MYSYM_OPERATOR_SRC}
   ${MYSYM_INTERPRETER_SRC}
   ${MYSYM_DEBUG_SRC}

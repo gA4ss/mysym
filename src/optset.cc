@@ -1,21 +1,8 @@
 #include <mysym/mysym.h>
-#include <regex>
+#include "__misc.h"
 
 namespace mysym
 {
-  static std::vector<std::string> __split_string(std::string str)
-  {
-    std::vector<std::string> res;
-    std::regex reg("[, ]+");
-    std::sregex_token_iterator pos(str.begin(), str.end(), reg, -1);
-    decltype(pos) end; // 自动推导类型
-    for (; pos != end; ++pos)
-    {
-      res.push_back(pos->str());
-    }
-    return res;
-  }
-
   //
   // 记录了所有的集合
   //
@@ -36,7 +23,7 @@ namespace mysym
   optset_t create_set(std::string setname, std::string optnames)
   {
     optset_t os;
-    std::vector<std::string> names = __split_string(optnames);
+    std::vector<std::string> names = split_string(optnames);
     os.name = setname;
     symopt_t sopt;
     for (auto name : names)
@@ -95,13 +82,13 @@ namespace mysym
 
   optset_t create_set_include_sets(std::string setname, std::string setnames)
   {
-    std::vector<std::string> include_sets = __split_string(setnames);
+    std::vector<std::string> include_sets = split_string(setnames);
     return __create_set_include_sets(setname, include_sets);
   }
 
   optset_t create_set_exclude_sets(std::string setname, std::string setnames)
   {
-    std::vector<std::string> names = __split_string(setnames);
+    std::vector<std::string> names = split_string(setnames);
     std::vector<std::string> include_sets;
     // 遍历所有集合
     for (auto ops : __optsets)
