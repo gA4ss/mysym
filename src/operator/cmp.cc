@@ -12,6 +12,7 @@ namespace mysym
    *************************/
   symbol_t cmp(const symbol_t &x, const symbol_t &y);
 
+#if 0
   /* none值之间的比较
    */
   static bool __c_cmp_none_xxx(const symbol_t &x, const symbol_t &y)
@@ -352,13 +353,14 @@ namespace mysym
   {
     return ge(x, y);
   }
-
+#endif
   //
   // 对比函数
   //
   symbol_t cmp(const symbol_t &x, const symbol_t &y)
   {
-    return execute_rule_table(kOptCmp, x, y);
+    // return execute_rule_table(kOptCmp, x, y);
+    return undefined;
   }
 
   symbol_t equ(const symbol_t &x, const symbol_t &y)
@@ -395,6 +397,7 @@ namespace mysym
 
   void register_cmp_rule()
   {
+#if 0
     register_rule(kOptCmp, __c_cmp_none_xxx, __e_cmp_none_xxx);
     register_rule(kOptCmp, __c_cmp_const_xxx, __e_cmp_const_xxx);
     register_rule(kOptCmp, __c_cmp_const_const, __e_cmp_const_const);
@@ -422,5 +425,6 @@ namespace mysym
     register_rule(kOptLE, __c_le_xxx_yyy, __e_le_xxx_yyy);
     register_rule(kOptGT, __c_gt_xxx_yyy, __e_gt_xxx_yyy);
     register_rule(kOptGE, __c_ge_xxx_yyy, __e_ge_xxx_yyy);
+#endif
   }
 } // namespace mysym

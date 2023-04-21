@@ -1,6 +1,5 @@
 #include <mysym/mysym.h>
-#include <regex>
-
+#include "__misc.h"
 namespace mysym
 {
   std::vector<std::string> split_string(std::string str, std::string regex_str/* = "[, ]+"*/)

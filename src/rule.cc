@@ -8,115 +8,88 @@ namespace mysym
   //
   static rule_library_t __rule_library;
 
-  void register_rule(opt_t opt, fptr_condition_s_t fcondition, fptr_execute_s_t fexecute)
+  ///////////////////////////////////////////////////////////////////////
+  void append_entry(opt_t opt, fptr_entry_t fentry)
   {
-    if (__rule_library.rs.find(opt) == __rule_library.rs.end())
-    {
-      __rule_library.rs[opt] = {{fcondition, fexecute}};
-    }
-    else
-    {
-      __rule_library.rs[opt].push_back({fcondition, fexecute});
-    }
+    __rule_library.entries[opt] = fentry;
   }
 
-  void register_rule(opt_t opt, fptr_condition_d_t fcondition, fptr_execute_d_t fexecute)
+  void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
   {
-    if (__rule_library.rd.find(opt) == __rule_library.rd.end())
-    {
-      __rule_library.rd[opt] = {{fcondition, fexecute}};
-    }
-    else
-    {
-      __rule_library.rd[opt].push_back({fcondition, fexecute});
-    }
+    __rule_library.cases[opt][sign] = fexecute;
   }
 
-  bool find_rule_table_s(opt_t opt, rule_table_s_t &tab)
+  bool find_entry(opt_t opt)
   {
-    if (__rule_library.rs.find(opt) == __rule_library.rs.end())
-      return false;
-    tab = __rule_library.rs[opt];
-    return true;
+    return __rule_library.entries.find(opt) != __rule_library.entries.end();
   }
-  bool find_rule_table_d(opt_t opt, rule_table_d_t &tab)
+
+  bool find_case(opt_t opt, optsign_t ops)
   {
-    if (__rule_library.rd.find(opt) == __rule_library.rd.end())
+    if (__rule_library.cases.find(opt) == __rule_library.cases.end())
       return false;
-    tab = __rule_library.rd[opt];
+    if (__rule_library.cases[opt].find(ops) == __rule_library.cases[opt].end())
+      return false;
     return true;
   }
 
-  bool is_empty(const rule_table_s_t &tab)
+  // t一定是单个运算符号
+  // m可能是运算符号可能是运算符号集合
+  static bool __match_opt(opt_t m, opt_t t)
   {
-    return tab.empty();
-  }
-  bool is_empty(const rule_table_d_t &tab)
-  {
-    return tab.empty();
-  }
-
-  //////////////////////////////////////////////////////////////////////////////////////////
-
-  symbol_t execute_rule_table(const rule_table_s_t &r, const symbol_t &x)
-  {
-    for (auto it = r.begin(); it != r.end(); it++)
+    if (is_symopt(m))
     {
-      if (it->first(x))
-        return it->second(x);
+      if (m == t)
+        return true;
+      else
+        return false;
     }
-    return undefined;
+
+    return in_optset(m, t);
   }
 
-  symbol_t execute_rule_table(opt_t opt, const symbol_t &x)
+  bool meet_conditions(opt_t opt, const symbol_t &x, const symbol_t &y)
   {
-    rule_table_s_t tab;
-    if (!find_rule_table_s(opt, tab))
-      return undefined;
-    return execute_rule_table(tab, x);
-  }
-
-  symbol_t execute_rule_table(const rule_table_d_t &r, const symbol_t &x, const symbol_t &y)
-  {
-    for (auto it = r.begin(); it != r.end(); it++)
+    opt_t xo = kind(x), yo = kind(y);
+    optsign_t xys = make_optsign(xo, yo);
+    if (find_case(opt, xys) == true)
+      return true;
+    //
+    // 遍历注册得运算符号集合
+    //
+    auto it = __rule_library.cases[opt].begin();
+    for (; it != __rule_library.cases[opt].end(); it++)
     {
-      if (it->first(x, y))
-        return it->second(x, y);
+      optsign_t ops = it->first;
+      optpair_t opp = split_optcase(ops);
+
+      //
+      // 判断
+      //
+      if (__match_opt(opp.first, xo) && __match_opt(opp.second, yo))
+        return true;
     }
-    return undefined;
+    return false;
   }
 
-  symbol_t execute_rule_table(opt_t opt, const symbol_t &x, const symbol_t &y)
+  symbol_t execute_entry(const symbol_t &x)
   {
-    rule_table_d_t tab;
-    if (!find_rule_table_d(opt, tab))
+    if (find_entry(kind(x)) == false)
       return undefined;
-    return execute_rule_table(tab, x, y);
+    return __rule_library.entries[kind(x)](x);
+  }
+
+  symbol_t execute_cases(opt_t opt, const symbol_t &x, const symbol_t &y)
+  {
+    if (meet_conditions(opt, x, y) == false)
+      return undefined;
+    optsign_t sign = make_optsign(kind(x), kind(y));
+    return __rule_library.cases[opt][sign](x, y);
   }
 
   void apply_rule(symbol_t &x)
   {
-    x = execute_rule_table(x.opt, x);
-  }
-
-  static bool __c_atom_entry(const symbol_t &x)
-  {
-    return is_atom(kind(x));
-  }
-  static symbol_t __e_atom_entry(const symbol_t &x)
-  {
-    return x;
-  }
-
-  void register_atom_rule()
-  {
-    register_rule(kOptVariate, __c_atom_entry, __e_atom_entry);
-    register_rule(kOptNumber, __c_atom_entry, __e_atom_entry);
-    register_rule(kOptFrac, __c_atom_entry, __e_atom_entry);
-    register_rule(kOptConstE, __c_atom_entry, __e_atom_entry);
-    register_rule(kOptConstPI, __c_atom_entry, __e_atom_entry);
-    register_rule(kOptConstInf, __c_atom_entry, __e_atom_entry);
-    register_rule(kOptConstNegInf, __c_atom_entry, __e_atom_entry);
+    x = execute_entry(x);
   }
 
   void init_rule()
@@ -124,5 +97,20 @@ namespace mysym
     register_atom_rule();
     register_add_rule();
     register_cmp_rule();
+  }
+
+  std::string basic_optsets()
+  {
+    return "basic,const";
+  }
+
+  symbol_t default_entry(const symbol_t &x)
+  {
+    return x;
+  }
+
+  symbol_t default_execute(opt_t opt, const symbol_t &x, const symbol_t &y)
+  {
+    return just_make2(opt, x, y);
   }
 } // namespace mysym

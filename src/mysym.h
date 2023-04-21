@@ -156,6 +156,7 @@ namespace mysym
 
   std::string print_string(const symbol_t &s);
   std::string print_string(const list_t &l);
+  std::string print_string(const set_t& s);
 
   //
   // 分数运算
@@ -170,39 +171,50 @@ namespace mysym
   //
   // 规则表
   //
+  // 运算符匹配情况
+  typedef std::string optsign_t;
+  typedef std::vector<std::string> optcase_t;
+  typedef std::pair<opt_t, opt_t> optpair_t;
+  bool is_optsign(optsign_t sign);
+  optsign_t make_optsign(opt_t opt1, opt_t opt2);
+  optpair_t split_optcase(optsign_t sign);
+  optcase_t generate_optcase(std::string ops);
+
   // 条件-执行表
-  typedef bool (*fptr_condition_s_t)(const symbol_t &);
-  typedef bool (*fptr_condition_d_t)(const symbol_t &, const symbol_t &);
-  typedef symbol_t (*fptr_execute_s_t)(const symbol_t &);
-  typedef symbol_t (*fptr_execute_d_t)(const symbol_t &, const symbol_t &);
-  typedef std::vector<std::pair<fptr_condition_s_t, fptr_execute_s_t>> rule_table_s_t;
-  typedef std::vector<std::pair<fptr_condition_d_t, fptr_execute_d_t>> rule_table_d_t;
+  typedef bool (*fptr_condition_t)(opt_t, const symbol_t &, const symbol_t &);
+  typedef symbol_t (*fptr_entry_t)(const symbol_t &);
+  typedef symbol_t (*fptr_execute_t)(const symbol_t &, const symbol_t &);
+  typedef std::map<optsign_t, fptr_execute_t> rule_table_t;
 
   // 条件执行项目
-  typedef std::map<opt_t, rule_table_s_t> rule_object_s_t;
-  typedef std::map<opt_t, rule_table_d_t> rule_object_d_t;
+  typedef std::map<opt_t, fptr_entry_t> rule_entry_t;
+  typedef std::map<opt_t, rule_table_t> rule_object_t;
 
   typedef struct __rule_library_t
   {
-    rule_object_s_t rs;
-    rule_object_d_t rd;
+    rule_entry_t entries;
+    rule_object_t cases;
   } rule_library_t;
 
+  std::string basic_optsets();
+  symbol_t default_entry(const symbol_t &x);
+  symbol_t default_execute(opt_t opt, const symbol_t &x, const symbol_t &y);
+
+  void register_atom_rule();
   void register_add_rule();
   void register_cmp_rule();
-
-  void register_rule(opt_t opt, fptr_condition_s_t fcondition, fptr_execute_s_t fexecute);
-  void register_rule(opt_t opt, fptr_condition_d_t fcondition, fptr_execute_d_t fexecute);
-  bool find_rule_table_s(opt_t opt, rule_table_s_t &tab);
-  bool find_rule_table_d(opt_t opt, rule_table_d_t &tab);
-  bool is_empty(const rule_table_s_t &tab);
-  bool is_empty(const rule_table_d_t &tab);
-  symbol_t execute_rule_table(const rule_table_s_t &r, const symbol_t &x);
-  symbol_t execute_rule_table(const rule_table_d_t &r, const symbol_t &x, const symbol_t &y);
-  symbol_t execute_rule_table(opt_t opt, const symbol_t &x);
-  symbol_t execute_rule_table(opt_t opt, const symbol_t &x, const symbol_t &y);
-  void apply_rule(symbol_t &x);
   void init_rule();
+
+  
+  bool find_entry(opt_t opt);
+  bool find_case(opt_t opt, optsign_t ops);
+  void append_entry(opt_t opt, fptr_entry_t fentry);
+  void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
+  symbol_t execute_entry(const symbol_t &x);
+  symbol_t execute_cases(opt_t opt, const symbol_t &x, const symbol_t &y);
+  void register_rule(opt_t opt, std::string cases);
+  void apply_rule(symbol_t &x);
+  
 
   //
   // 基础运算律
@@ -287,6 +299,8 @@ namespace mysym
   extern flt_t gConstInf;
   extern flt_t gConstNegInf;
   extern symbol_t gConstUDF;
+  extern std::vector<std::string> gSymOpts;
+  extern std::vector<std::string> gOptSets;
 
 } // namespace mysym
 

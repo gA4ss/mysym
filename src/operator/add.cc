@@ -3,6 +3,7 @@
 
 namespace mysym
 {
+#if 0
   static inline symbol_t __mympf_to_symbol(const mympf::float_t &f)
   {
     return create_flt(mympf::print_string(f));
@@ -291,20 +292,23 @@ namespace mysym
     combine_like_terms(_x);
     return _x;
   }
+#endif
 
   symbol_t add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = execute_rule_table(kOptAdd, x, y);
+    // symbol_t z = execute_rule_table(kOptAdd, x, y);
 
-    //
-    // 交换律对z进行排序，之前结合与分配律都在子项完成。
-    //
-    apply_commutative_law(z);
-    return z;
+    // //
+    // // 交换律对z进行排序，之前结合与分配律都在子项完成。
+    // //
+    // apply_commutative_law(z);
+    // return z;
+    return undefined;
   }
 
   void register_add_rule()
   {
+#if 0
     // 数值 + xxx
     register_rule(kOptAdd, __c_add_num_num, __e_add_num_num);
     register_rule(kOptAdd, __c_add_num_frac, __e_add_num_frac);
@@ -341,5 +345,6 @@ namespace mysym
 
     // 入口
     register_rule(kOptAdd, __c_add_entry, __e_add_entry);
+#endif
   }
 } // namespace mysym

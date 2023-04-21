@@ -1,439 +1,402 @@
 [
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/mysym.cc.o -c /mnt/e/workspace/mysym/src/mysym.cc",
-  "file": "/mnt/e/workspace/mysym/src/mysym.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/mysym.cc.o -c /Users/gal0is/workspace/mysym/src/mysym.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/mysym.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/create.cc.o -c /mnt/e/workspace/mysym/src/create.cc",
-  "file": "/mnt/e/workspace/mysym/src/create.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/create.cc.o -c /Users/gal0is/workspace/mysym/src/create.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/create.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/copy.cc.o -c /mnt/e/workspace/mysym/src/copy.cc",
-  "file": "/mnt/e/workspace/mysym/src/copy.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/copy.cc.o -c /Users/gal0is/workspace/mysym/src/copy.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/copy.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/coefficient.cc.o -c /mnt/e/workspace/mysym/src/coefficient.cc",
-  "file": "/mnt/e/workspace/mysym/src/coefficient.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/coefficient.cc.o -c /Users/gal0is/workspace/mysym/src/coefficient.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/coefficient.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/make.cc.o -c /mnt/e/workspace/mysym/src/make.cc",
-  "file": "/mnt/e/workspace/mysym/src/make.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/make.cc.o -c /Users/gal0is/workspace/mysym/src/make.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/make.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/tree.cc.o -c /mnt/e/workspace/mysym/src/tree.cc",
-  "file": "/mnt/e/workspace/mysym/src/tree.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/tree.cc.o -c /Users/gal0is/workspace/mysym/src/tree.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/tree.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/merge.cc.o -c /mnt/e/workspace/mysym/src/merge.cc",
-  "file": "/mnt/e/workspace/mysym/src/merge.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/merge.cc.o -c /Users/gal0is/workspace/mysym/src/merge.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/merge.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operand.cc.o -c /mnt/e/workspace/mysym/src/operand.cc",
-  "file": "/mnt/e/workspace/mysym/src/operand.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operand.cc.o -c /Users/gal0is/workspace/mysym/src/operand.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operand.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/base.cc.o -c /mnt/e/workspace/mysym/src/base.cc",
-  "file": "/mnt/e/workspace/mysym/src/base.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/base.cc.o -c /Users/gal0is/workspace/mysym/src/base.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/base.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/exponent.cc.o -c /mnt/e/workspace/mysym/src/exponent.cc",
-  "file": "/mnt/e/workspace/mysym/src/exponent.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/exponent.cc.o -c /Users/gal0is/workspace/mysym/src/exponent.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/exponent.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/term.cc.o -c /mnt/e/workspace/mysym/src/term.cc",
-  "file": "/mnt/e/workspace/mysym/src/term.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/term.cc.o -c /Users/gal0is/workspace/mysym/src/term.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/term.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/simplify.cc.o -c /mnt/e/workspace/mysym/src/simplify.cc",
-  "file": "/mnt/e/workspace/mysym/src/simplify.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/simplify.cc.o -c /Users/gal0is/workspace/mysym/src/simplify.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/simplify.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/map.cc.o -c /mnt/e/workspace/mysym/src/map.cc",
-  "file": "/mnt/e/workspace/mysym/src/map.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/map.cc.o -c /Users/gal0is/workspace/mysym/src/map.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/map.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/sort.cc.o -c /mnt/e/workspace/mysym/src/sort.cc",
-  "file": "/mnt/e/workspace/mysym/src/sort.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/set.cc.o -c /Users/gal0is/workspace/mysym/src/set.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/set.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/find.cc.o -c /mnt/e/workspace/mysym/src/find.cc",
-  "file": "/mnt/e/workspace/mysym/src/find.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/sort.cc.o -c /Users/gal0is/workspace/mysym/src/sort.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/sort.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/match.cc.o -c /mnt/e/workspace/mysym/src/match.cc",
-  "file": "/mnt/e/workspace/mysym/src/match.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/find.cc.o -c /Users/gal0is/workspace/mysym/src/find.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/find.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/pattern.cc.o -c /mnt/e/workspace/mysym/src/pattern.cc",
-  "file": "/mnt/e/workspace/mysym/src/pattern.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/match.cc.o -c /Users/gal0is/workspace/mysym/src/match.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/match.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/substitute.cc.o -c /mnt/e/workspace/mysym/src/substitute.cc",
-  "file": "/mnt/e/workspace/mysym/src/substitute.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/pattern.cc.o -c /Users/gal0is/workspace/mysym/src/pattern.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/pattern.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/expansion.cc.o -c /mnt/e/workspace/mysym/src/expansion.cc",
-  "file": "/mnt/e/workspace/mysym/src/expansion.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/substitute.cc.o -c /Users/gal0is/workspace/mysym/src/substitute.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/substitute.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/symopt.cc.o -c /mnt/e/workspace/mysym/src/symopt.cc",
-  "file": "/mnt/e/workspace/mysym/src/symopt.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/expansion.cc.o -c /Users/gal0is/workspace/mysym/src/expansion.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/expansion.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/basic_rule.cc.o -c /mnt/e/workspace/mysym/src/basic_rule.cc",
-  "file": "/mnt/e/workspace/mysym/src/basic_rule.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/symopt.cc.o -c /Users/gal0is/workspace/mysym/src/symopt.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/symopt.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/rule.cc.o -c /mnt/e/workspace/mysym/src/rule.cc",
-  "file": "/mnt/e/workspace/mysym/src/rule.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/basic_rule.cc.o -c /Users/gal0is/workspace/mysym/src/basic_rule.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/basic_rule.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/optset.cc.o -c /mnt/e/workspace/mysym/src/optset.cc",
-  "file": "/mnt/e/workspace/mysym/src/optset.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/rule.cc.o -c /Users/gal0is/workspace/mysym/src/rule.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/rule.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/factor.cc.o -c /mnt/e/workspace/mysym/src/factor.cc",
-  "file": "/mnt/e/workspace/mysym/src/factor.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/optset.cc.o -c /Users/gal0is/workspace/mysym/src/optset.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/optset.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/fraction.cc.o -c /mnt/e/workspace/mysym/src/fraction.cc",
-  "file": "/mnt/e/workspace/mysym/src/fraction.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/optcase.cc.o -c /Users/gal0is/workspace/mysym/src/optcase.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/optcase.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/limit.cc.o -c /mnt/e/workspace/mysym/src/limit.cc",
-  "file": "/mnt/e/workspace/mysym/src/limit.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/factor.cc.o -c /Users/gal0is/workspace/mysym/src/factor.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/factor.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/integral.cc.o -c /mnt/e/workspace/mysym/src/integral.cc",
-  "file": "/mnt/e/workspace/mysym/src/integral.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/fraction.cc.o -c /Users/gal0is/workspace/mysym/src/fraction.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/fraction.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/constant.cc.o -c /mnt/e/workspace/mysym/src/constant.cc",
-  "file": "/mnt/e/workspace/mysym/src/constant.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/limit.cc.o -c /Users/gal0is/workspace/mysym/src/limit.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/limit.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/library.cc.o -c /mnt/e/workspace/mysym/src/library.cc",
-  "file": "/mnt/e/workspace/mysym/src/library.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/integral.cc.o -c /Users/gal0is/workspace/mysym/src/integral.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/integral.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/list.cc.o -c /mnt/e/workspace/mysym/src/list.cc",
-  "file": "/mnt/e/workspace/mysym/src/list.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/constant.cc.o -c /Users/gal0is/workspace/mysym/src/constant.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/constant.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/solve.cc.o -c /mnt/e/workspace/mysym/src/solve.cc",
-  "file": "/mnt/e/workspace/mysym/src/solve.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/library.cc.o -c /Users/gal0is/workspace/mysym/src/library.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/library.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/rational.cc.o -c /mnt/e/workspace/mysym/src/rational.cc",
-  "file": "/mnt/e/workspace/mysym/src/rational.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/list.cc.o -c /Users/gal0is/workspace/mysym/src/list.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/list.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/units.cc.o -c /mnt/e/workspace/mysym/src/units.cc",
-  "file": "/mnt/e/workspace/mysym/src/units.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/solve.cc.o -c /Users/gal0is/workspace/mysym/src/solve.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/solve.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/monomial.cc.o -c /mnt/e/workspace/mysym/src/monomial.cc",
-  "file": "/mnt/e/workspace/mysym/src/monomial.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/rational.cc.o -c /Users/gal0is/workspace/mysym/src/rational.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/rational.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/polynomial.cc.o -c /mnt/e/workspace/mysym/src/polynomial.cc",
-  "file": "/mnt/e/workspace/mysym/src/polynomial.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/units.cc.o -c /Users/gal0is/workspace/mysym/src/units.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/units.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/expression.cc.o -c /mnt/e/workspace/mysym/src/expression.cc",
-  "file": "/mnt/e/workspace/mysym/src/expression.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/monomial.cc.o -c /Users/gal0is/workspace/mysym/src/monomial.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/monomial.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/degree.cc.o -c /mnt/e/workspace/mysym/src/degree.cc",
-  "file": "/mnt/e/workspace/mysym/src/degree.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/polynomial.cc.o -c /Users/gal0is/workspace/mysym/src/polynomial.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/polynomial.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/compare.cc.o -c /mnt/e/workspace/mysym/src/compare.cc",
-  "file": "/mnt/e/workspace/mysym/src/compare.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/expression.cc.o -c /Users/gal0is/workspace/mysym/src/expression.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/expression.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/global.cc.o -c /mnt/e/workspace/mysym/src/global.cc",
-  "file": "/mnt/e/workspace/mysym/src/global.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/degree.cc.o -c /Users/gal0is/workspace/mysym/src/degree.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/degree.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/init.cc.o -c /mnt/e/workspace/mysym/src/init.cc",
-  "file": "/mnt/e/workspace/mysym/src/init.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/compare.cc.o -c /Users/gal0is/workspace/mysym/src/compare.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/compare.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/cmp.cc.o -c /mnt/e/workspace/mysym/src/operator/cmp.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/cmp.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/global.cc.o -c /Users/gal0is/workspace/mysym/src/global.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/global.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/abs.cc.o -c /mnt/e/workspace/mysym/src/operator/abs.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/abs.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/init.cc.o -c /Users/gal0is/workspace/mysym/src/init.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/init.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/minus.cc.o -c /mnt/e/workspace/mysym/src/operator/minus.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/minus.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/misc.cc.o -c /Users/gal0is/workspace/mysym/src/misc.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/misc.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/add.cc.o -c /mnt/e/workspace/mysym/src/operator/add.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/add.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/cmp.cc.o -c /Users/gal0is/workspace/mysym/src/operator/cmp.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/cmp.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/sub.cc.o -c /mnt/e/workspace/mysym/src/operator/sub.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/sub.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/atom.cc.o -c /Users/gal0is/workspace/mysym/src/operator/atom.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/atom.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/mul.cc.o -c /mnt/e/workspace/mysym/src/operator/mul.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/mul.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/abs.cc.o -c /Users/gal0is/workspace/mysym/src/operator/abs.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/abs.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/div.cc.o -c /mnt/e/workspace/mysym/src/operator/div.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/div.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/minus.cc.o -c /Users/gal0is/workspace/mysym/src/operator/minus.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/minus.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/mod.cc.o -c /mnt/e/workspace/mysym/src/operator/mod.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/mod.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/add.cc.o -c /Users/gal0is/workspace/mysym/src/operator/add.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/add.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o -c /mnt/e/workspace/mysym/src/operator/sqrt.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/sqrt.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/sub.cc.o -c /Users/gal0is/workspace/mysym/src/operator/sub.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/sub.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/pow.cc.o -c /mnt/e/workspace/mysym/src/operator/pow.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/pow.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/mul.cc.o -c /Users/gal0is/workspace/mysym/src/operator/mul.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/mul.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/log.cc.o -c /mnt/e/workspace/mysym/src/operator/log.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/log.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/div.cc.o -c /Users/gal0is/workspace/mysym/src/operator/div.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/div.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/fact.cc.o -c /mnt/e/workspace/mysym/src/operator/fact.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/fact.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/mod.cc.o -c /Users/gal0is/workspace/mysym/src/operator/mod.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/mod.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/trigo.cc.o -c /mnt/e/workspace/mysym/src/operator/trigo.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/trigo.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/sqrt.cc.o -c /Users/gal0is/workspace/mysym/src/operator/sqrt.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/sqrt.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/hyper.cc.o -c /mnt/e/workspace/mysym/src/operator/hyper.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/hyper.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/pow.cc.o -c /Users/gal0is/workspace/mysym/src/operator/pow.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/pow.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/frac.cc.o -c /mnt/e/workspace/mysym/src/operator/frac.cc",
-  "file": "/mnt/e/workspace/mysym/src/operator/frac.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/log.cc.o -c /Users/gal0is/workspace/mysym/src/operator/log.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/log.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o -c /mnt/e/workspace/mysym/src/interpreter/interpreter.cc",
-  "file": "/mnt/e/workspace/mysym/src/interpreter/interpreter.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/fact.cc.o -c /Users/gal0is/workspace/mysym/src/operator/fact.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/fact.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/print.cc.o -c /mnt/e/workspace/mysym/src/print.cc",
-  "file": "/mnt/e/workspace/mysym/src/print.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/trigo.cc.o -c /Users/gal0is/workspace/mysym/src/operator/trigo.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/trigo.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_fraction.dir/test_fraction.cc.o -c /mnt/e/workspace/mysym/test/test_fraction.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_fraction.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/hyper.cc.o -c /Users/gal0is/workspace/mysym/src/operator/hyper.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/hyper.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_simplify.dir/test_simplify.cc.o -c /mnt/e/workspace/mysym/test/test_simplify.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_simplify.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/operator/frac.cc.o -c /Users/gal0is/workspace/mysym/src/operator/frac.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/operator/frac.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_match.dir/test_match.cc.o -c /mnt/e/workspace/mysym/test/test_match.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_match.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/interpreter/interpreter.cc.o -c /Users/gal0is/workspace/mysym/src/interpreter/interpreter.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/interpreter/interpreter.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_monomial.dir/test_monomial.cc.o -c /mnt/e/workspace/mysym/test/test_monomial.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_monomial.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/mysym.dir/src/print.cc.o -c /Users/gal0is/workspace/mysym/src/print.cc",
+  "file": "/Users/gal0is/workspace/mysym/src/print.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_sort.dir/test_sort.cc.o -c /mnt/e/workspace/mysym/test/test_sort.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_sort.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_basic.dir/test_basic.cc.o -c /Users/gal0is/workspace/mysym/test/test_basic.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_basic.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_degree.dir/test_degree.cc.o -c /mnt/e/workspace/mysym/test/test_degree.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_degree.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_map.dir/test_map.cc.o -c /Users/gal0is/workspace/mysym/test/test_map.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_map.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_polynomial.dir/test_polynomial.cc.o -c /mnt/e/workspace/mysym/test/test_polynomial.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_polynomial.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_simplify.dir/test_simplify.cc.o -c /Users/gal0is/workspace/mysym/test/test_simplify.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_simplify.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_map.dir/test_map.cc.o -c /mnt/e/workspace/mysym/test/test_map.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_map.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_monomial.dir/test_monomial.cc.o -c /Users/gal0is/workspace/mysym/test/test_monomial.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_monomial.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_coefficient.dir/test_coefficient.cc.o -c /mnt/e/workspace/mysym/test/test_coefficient.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_coefficient.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_polynomial.dir/test_polynomial.cc.o -c /Users/gal0is/workspace/mysym/test/test_polynomial.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_polynomial.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_expression.dir/test_expression.cc.o -c /mnt/e/workspace/mysym/test/test_expression.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_expression.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_fraction.dir/test_fraction.cc.o -c /Users/gal0is/workspace/mysym/test/test_fraction.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_fraction.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_basic.dir/test_basic.cc.o -c /mnt/e/workspace/mysym/test/test_basic.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_basic.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_expression.dir/test_expression.cc.o -c /Users/gal0is/workspace/mysym/test/test_expression.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_expression.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_list.dir/test_list.cc.o -c /mnt/e/workspace/mysym/test/test_list.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_list.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_list.dir/test_list.cc.o -c /Users/gal0is/workspace/mysym/test/test_list.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_list.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_cmp.dir/test_cmp.cc.o -c /mnt/e/workspace/mysym/test/test_cmp.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_cmp.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_term.dir/test_term.cc.o -c /Users/gal0is/workspace/mysym/test/test_term.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_term.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_term.dir/test_term.cc.o -c /mnt/e/workspace/mysym/test/test_term.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_term.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_exponent.dir/test_exponent.cc.o -c /Users/gal0is/workspace/mysym/test/test_exponent.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_exponent.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_exponent.dir/test_exponent.cc.o -c /mnt/e/workspace/mysym/test/test_exponent.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_exponent.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_cmp.dir/test_cmp.cc.o -c /Users/gal0is/workspace/mysym/test/test_cmp.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_cmp.cc"
 },
-
 {
-  "directory": "/mnt/e/workspace/mysym/build",
-  "command": "/usr/bin/x86_64-linux-gnu-g++-7  -DDEBUG -I../. -I/usr/local/include -I../test/../src  -Wall -g   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o test/CMakeFiles/test_symopt.dir/test_symopt.cc.o -c /mnt/e/workspace/mysym/test/test_symopt.cc",
-  "file": "/mnt/e/workspace/mysym/test/test_symopt.cc"
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_sort.dir/test_sort.cc.o -c /Users/gal0is/workspace/mysym/test/test_sort.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_sort.cc"
+},
+{
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_match.dir/test_match.cc.o -c /Users/gal0is/workspace/mysym/test/test_match.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_match.cc"
+},
+{
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_degree.dir/test_degree.cc.o -c /Users/gal0is/workspace/mysym/test/test_degree.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_degree.cc"
+},
+{
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_coefficient.dir/test_coefficient.cc.o -c /Users/gal0is/workspace/mysym/test/test_coefficient.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_coefficient.cc"
+},
+{
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_symopt.dir/test_symopt.cc.o -c /Users/gal0is/workspace/mysym/test/test_symopt.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_symopt.cc"
+},
+{
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_optset.dir/test_optset.cc.o -c /Users/gal0is/workspace/mysym/test/test_optset.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_optset.cc"
+},
+{
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_misc.dir/test_misc.cc.o -c /Users/gal0is/workspace/mysym/test/test_misc.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_misc.cc"
+},
+{
+  "directory": "/Users/gal0is/workspace/mysym/build/test",
+  "command": "/usr/bin/clang++ -DDEBUG -I/Users/gal0is/workspace/mysym/. -I/usr/local/include -I/Users/gal0is/workspace/mysym/test/../src -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk   -std=c++11 -g -O0 -Wunused-variable -std=c++11 -g -O0 -Wunused-variable -o CMakeFiles/test_set.dir/test_set.cc.o -c /Users/gal0is/workspace/mysym/test/test_set.cc",
+  "file": "/Users/gal0is/workspace/mysym/test/test_set.cc"
 }
 ]

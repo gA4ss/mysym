@@ -1,4 +1,5 @@
 #include <mysym/mysym.h>
+#include "__misc.h"
 
 namespace mysym
 {
@@ -10,8 +11,10 @@ namespace mysym
   flt_t gConstInf;
   flt_t gConstNegInf;
   symbol_t gConstUDF;
+  std::vector<std::string> gSymOpts;
+  std::vector<std::string> gOptSets;
 
-  void init_global()
+  static void __init_consts()
   {
     gConstZero = create_int("0");
     gConstOne = create_int("1");
@@ -21,5 +24,19 @@ namespace mysym
     gConstInf = create_opt(kOptConstInf);
     gConstNegInf = create_opt(kOptConstNegInf);
     gConstUDF = create_opt(kOptNone);
+  }
+
+  static void __init_symopts()
+  {
+    std::string s1 = symopts();
+    std::string s2 = optsets();
+    gSymOpts = split_string(s1);
+    gOptSets = split_string(s2);
+  }
+
+  void init_global()
+  {
+    __init_consts();
+    __init_symopts();
   }
 } // namespace mysym

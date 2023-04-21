@@ -9,7 +9,7 @@ namespace mysym
     //
     if (!is_var(kind(x)))
     {
-      mysym_invalid_param_type_exception("it's must be variate type, it's %d.", kind(x));
+      mysym_invalid_param_type_exception("it's must be variate type, it's %s.", kind(x).c_str());
     }
 
     if (is_monomial(s, x))

@@ -138,7 +138,7 @@ namespace mysym
         if (std::find(combined.begin(), combined.end(), j) != combined.end())
           continue;
 
-        t = execute_rule_table(opt, z, operand(x, j));
+        t = execute_cases(opt, z, operand(x, j));
 
         //
         // 如果z的符合与opt一致，则说明两项没有合并，不一致则说明合并了

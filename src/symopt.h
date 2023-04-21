@@ -1,9 +1,12 @@
 #ifndef MYSYM_SYMOPT_H_
 #define MYSYM_SYMOPT_H_
 
+#include <mysym/set.h>
+
 namespace mysym
 {
   typedef std::string opt_t;
+  typedef std::vector<opt_t> opts_t;
   typedef struct __symopt_attribute_t
   {
     bool continuous; // 是否是连续的
@@ -21,6 +24,7 @@ namespace mysym
   } symopt_t;
 #define distributive_law(s) (s.distributives.size() != 0)
 
+  bool is_symopt(std::string name);
   bool find_symopt(std::string name, symopt_t &out);
   std::string opt_name(opt_t o);
   int opt_priority(opt_t o);
@@ -36,15 +40,19 @@ namespace mysym
   {
     std::string name;
     std::map<std::string, symopt_t> items;
+    set_t index;
   } optset_t;
 
+  size_t size(optset_t os);
+  bool is_optset(std::string name);
   bool find_optset(std::string name, optset_t &out);
-  optset_t create_set(std::string setname, std::string optnames);
-  optset_t create_set(std::string setname, std::vector<std::string> optnames);
-  optset_t create_set_include_sets(std::string setname, std::string setnames);
-  optset_t create_set_exclude_sets(std::string setname, std::string setnames);
-  bool in_set(std::string setname, std::string optname);
-  std::vector<std::string> in_set(std::string setname, std::vector<std::string> optnames);
+  optset_t create_optset(std::string setname, std::string names);
+  optset_t create_optset(std::string setname, std::vector<std::string> names);
+  optset_t create_optset_exclude(std::string setname, std::string setnames);
+  bool in_optset(std::string setname, std::string optname);
+  opts_t in_optset(std::string setname, opts_t optnames);
+  opts_t expand_optset(const optset_t& s);
+  opts_t expand_optset(std::string setname);
   std::string optsets();
   void init_symopt();
   void init_symset();
@@ -123,19 +131,20 @@ namespace mysym
 #define is_inf(o) (o == kOptConstInf)
 #define is_neg_inf(o) (o == kOptConstNegInf)
 
-#define is_opt(o) (in_set("opt", o))
-#define is_basic(o) (in_set("basic", o))
-#define is_atom(o) (in_set("atom", o))
-#define is_sym(o) (in_set("atom", o) || in_set("func", o))
-#define is_const(o) (in_set("const", o))
-#define is_nature(o) (in_set("nature", o))
-#define is_basic_func(o) (in_set("basicf", o))
-#define is_trigo(o) (in_set("trigo", o))
-#define is_inv_trigo(o) (in_set("itrigo", o))
-#define is_hyper(o) (in_set("hyper", o))
-#define is_inv_hyper(o) (in_set("ihyper", o))
-#define is_func(o) (in_set("func", o))
-#define is_2ps_func(o) (in_set("func2p", o))
+#define is_all(o) (in_optset("all", o))
+#define is_opt(o) (in_optset("opt", o))
+#define is_basic(o) (in_optset("basic", o))
+#define is_atom(o) (in_optset("atom", o))
+#define is_sym(o) (in_optset("atom", o) || in_optset("func", o))
+#define is_const(o) (in_optset("const", o))
+#define is_nature(o) (in_optset("nature", o))
+#define is_basic_func(o) (in_optset("basicf", o))
+#define is_trigo(o) (in_optset("trigo", o))
+#define is_inv_trigo(o) (in_optset("itrigo", o))
+#define is_hyper(o) (in_optset("hyper", o))
+#define is_inv_hyper(o) (in_optset("ihyper", o))
+#define is_func(o) (in_optset("func", o))
+#define is_2ps_func(o) (in_optset("func2p", o))
 
 } // namespace mysym
 

@@ -44,6 +44,7 @@ set(MYSYM_HEADERS
   ${SRC_DIRECTORY}/compile.h
   ${SRC_DIRECTORY}/exception.h
   ${SRC_DIRECTORY}/debug.h
+  ${SRC_DIRECTORY}/set.hp
 )
 
 #
@@ -51,6 +52,7 @@ set(MYSYM_HEADERS
 #
 set(MYSYM_OPERATOR_SRC
   ${SRC_DIRECTORY}/operator/cmp.cc
+  ${SRC_DIRECTORY}/operator/atom.cc
   ${SRC_DIRECTORY}/operator/abs.cc
   ${SRC_DIRECTORY}/operator/minus.cc
   ${SRC_DIRECTORY}/operator/add.cc
@@ -98,6 +100,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/term.cc
   ${SRC_DIRECTORY}/simplify.cc
   ${SRC_DIRECTORY}/map.cc
+  ${SRC_DIRECTORY}/set.cc
   ${SRC_DIRECTORY}/sort.cc
   ${SRC_DIRECTORY}/find.cc
   ${SRC_DIRECTORY}/match.cc
@@ -108,6 +111,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/basic_rule.cc
   ${SRC_DIRECTORY}/rule.cc
   ${SRC_DIRECTORY}/optset.cc
+  ${SRC_DIRECTORY}/optcase.cc
   ${SRC_DIRECTORY}/factor.cc
   ${SRC_DIRECTORY}/fraction.cc
   ${SRC_DIRECTORY}/limit.cc
@@ -180,7 +184,8 @@ add_test(NAME test_coefficient COMMAND test_coefficient)
 set_tests_properties(test_coefficient PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_symopt COMMAND test_symopt)
 set_tests_properties(test_symopt PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-
+add_test(NAME test_optset COMMAND test_optset)
+set_tests_properties(test_optset PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 #
 # Auto Test
 #

@@ -52,7 +52,7 @@ namespace mysym
   {                                                                                                                                     \
     if (kind(s) != (ty))                                                                                                                \
     {                                                                                                                                   \
-      mysym_invalid_param_type_exception("\'%s\' must be \'%s\' type, it's %s.", (s).literal.c_str(), opt_name(ty), opt_name(kind(s))); \
+      mysym_invalid_param_type_exception("\'%s\' must be \'%s\' type, it's %s.", (s).literal.c_str(), opt_name(ty).c_str(), opt_name(kind(s)).c_str()); \
     }                                                                                                                                   \
   }
 
@@ -62,7 +62,7 @@ namespace mysym
     {                                                                                                                              \
       if (!is_var(kind(*it)))                                                                                                      \
       {                                                                                                                            \
-        mysym_invalid_param_type_exception("\'%s\' must be variate type, it's \'%s\'.", it->literal.c_str(), opt_name(kind(*it))); \
+        mysym_invalid_param_type_exception("\'%s\' must be variate type, it's \'%s\'.", it->literal.c_str(), opt_name(kind(*it)).c_str()); \
       }                                                                                                                            \
     }                                                                                                                              \
   }

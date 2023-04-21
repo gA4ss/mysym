@@ -19,7 +19,7 @@ namespace mysym
       s.literal = opt_name(opt);
       if (s.literal == "")
       {
-        mysym_not_found_operator_exception("opt = %d", opt);
+        mysym_not_found_operator_exception("opt = %s", opt.c_str());
       }
     }
     else
@@ -28,14 +28,14 @@ namespace mysym
       {
         if (!__check_variate_format(literal))
         {
-          mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt, literal.c_str());
+          mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt.c_str(), literal.c_str());
         }
       }
       else if (opt == kOptNumber)
       {
         if (!__check_number_format(literal))
         {
-          mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt, literal.c_str());
+          mysym_invalid_symbol_format_exception("type = %d, literal = %s", opt.c_str(), literal.c_str());
         }
       }
       s.literal = literal;

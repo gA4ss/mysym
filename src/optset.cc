@@ -7,9 +7,20 @@ namespace mysym
   // 记录了所有的集合
   //
   static std::map<std::string, optset_t> __optsets;
+
+  size_t size(optset_t os)
+  {
+    return os.items.size();
+  }
+
   static inline void __update_optsets(optset_t &ops)
   {
     __optsets[ops.name] = ops;
+  }
+
+  bool is_optset(std::string name)
+  {
+    return (__optsets.find(name) != __optsets.end());
   }
 
   bool find_optset(std::string name, optset_t &out)
@@ -20,59 +31,25 @@ namespace mysym
     return true;
   }
 
-  optset_t create_set(std::string setname, std::string optnames)
+  optset_t create_optset(std::string setname, std::vector<std::string> names)
   {
-    optset_t os;
-    std::vector<std::string> names = split_string(optnames);
+    optset_t os, found;
     os.name = setname;
     symopt_t sopt;
     for (auto name : names)
     {
-      // 跳过找不到的符号名
       if (find_symopt(name, sopt))
-        os.items[name] = sopt;
-    }
-    __update_optsets(os);
-    return os;
-  }
-
-  optset_t create_set(std::string setname, std::vector<std::string> optnames)
-  {
-    optset_t os;
-    os.name = setname;
-    symopt_t sopt;
-    for (auto name : optnames)
-    {
-      // 跳过找不到的符号名
-      if (find_symopt(name, sopt))
-        os.items[name] = sopt;
-    }
-    __update_optsets(os);
-    return os;
-  }
-
-  static optset_t __create_set_include_sets(std::string setname, std::vector<std::string> setnames)
-  {
-    optset_t os;
-    os.name = setname;
-
-    optset_t ops;
-    // 遍历集合名称
-    for (auto sname : setnames)
-    {
-      // 取出集合
-      if (find_optset(sname, ops))
       {
-        //
-        // 如果找到则查看是否有同名的
-        //
-        for (auto i : ops.items)
+        os.items[name] = sopt;
+      }
+      else if (find_optset(name, found))
+      {
+        opts_t opts = expand_optset(found);
+        for (auto it = opts.begin(); it != opts.end(); it++)
         {
-          // 仅保存没有的
-          if (os.items.find(i.first) == os.items.end())
-          {
-            os.items[i.first] = i.second;
-          }
+          symopt_t sopt;
+          if (find_symopt(*it, sopt))
+            os.items[*it] = sopt;
         }
       }
     }
@@ -80,13 +57,13 @@ namespace mysym
     return os;
   }
 
-  optset_t create_set_include_sets(std::string setname, std::string setnames)
+  optset_t create_optset(std::string setname, std::string names)
   {
-    std::vector<std::string> include_sets = split_string(setnames);
-    return __create_set_include_sets(setname, include_sets);
+    std::vector<std::string> strs = split_string(names);
+    return create_optset(setname, strs);
   }
 
-  optset_t create_set_exclude_sets(std::string setname, std::string setnames)
+  optset_t create_optset_exclude(std::string setname, std::string setnames)
   {
     std::vector<std::string> names = split_string(setnames);
     std::vector<std::string> include_sets;
@@ -99,11 +76,10 @@ namespace mysym
         include_sets.push_back(ops.first);
       }
     }
-
-    return __create_set_include_sets(setname, include_sets);
+    return create_optset(setname, include_sets);
   }
 
-  bool in_set(std::string setname, std::string optname)
+  bool in_optset(std::string setname, std::string optname)
   {
     optset_t ops;
     if (find_optset(setname, ops))
@@ -114,9 +90,9 @@ namespace mysym
     return false;
   }
 
-  std::vector<std::string> in_set(std::string setname, std::vector<std::string> optnames)
+  opts_t in_optset(std::string setname, opts_t optnames)
   {
-    std::vector<std::string> ons;
+    opts_t ons;
     optset_t ops;
     if (find_optset(setname, ops))
     {
@@ -127,6 +103,24 @@ namespace mysym
       }
     }
     return ons;
+  }
+
+  opts_t expand_optset(const optset_t& s)
+  {
+    opts_t opts;
+    for (auto it = s.items.begin(); it != s.items.end(); it++)
+    {
+      opts.push_back(it->first);
+    }
+    return opts;
+  }
+
+  opts_t expand_optset(std::string setname)
+  {
+    optset_t s;
+    if (find_optset(setname, s) == false)
+      return {};
+    return expand_optset(s);
   }
 
   std::string optsets()
@@ -143,9 +137,8 @@ namespace mysym
     return res;
   }
 
-#define define_opt_set(sn, ons) create_set(sn, ons)
-#define define_opt_set_include_sets(sn, oss) create_set_include_sets(sn, oss)
-#define define_opt_set_exclude_sets(sn, oss) create_set_exclude_sets(sn, oss)
+#define define_optset(sn, ons) create_optset(sn, ons)
+#define define_optset_exclude(sn, oss) create_optset_exclude(sn, oss)
 
   void init_symset()
   {

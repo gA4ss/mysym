@@ -1,4 +1,4 @@
-# Install script for directory: /mnt/e/workspace/mysym
+# Install script for directory: /Users/gal0is/workspace/mysym
 
 # Set the install prefix
 if(NOT DEFINED CMAKE_INSTALL_PREFIX)
@@ -27,33 +27,38 @@ if(NOT CMAKE_INSTALL_COMPONENT)
   endif()
 endif()
 
-# Install shared libraries without execute permission?
-if(NOT DEFINED CMAKE_INSTALL_SO_NO_EXE)
-  set(CMAKE_INSTALL_SO_NO_EXE "1")
-endif()
-
 # Is this installation the result of a crosscompile?
 if(NOT DEFINED CMAKE_CROSSCOMPILING)
   set(CMAKE_CROSSCOMPILING "FALSE")
 endif()
 
+# Set default install directory permissions.
+if(NOT DEFINED CMAKE_OBJDUMP)
+  set(CMAKE_OBJDUMP "/usr/bin/objdump")
+endif()
+
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
-  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/mnt/e/workspace/mysym/build/libmysym.a")
+  file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/lib" TYPE STATIC_LIBRARY FILES "/Users/gal0is/workspace/mysym/build/libmysym.a")
+  if(EXISTS "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libmysym.a" AND
+     NOT IS_SYMLINK "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libmysym.a")
+    execute_process(COMMAND "/usr/bin/ranlib" "$ENV{DESTDIR}${CMAKE_INSTALL_PREFIX}/lib/libmysym.a")
+  endif()
 endif()
 
 if("x${CMAKE_INSTALL_COMPONENT}x" STREQUAL "xUnspecifiedx" OR NOT CMAKE_INSTALL_COMPONENT)
   file(INSTALL DESTINATION "${CMAKE_INSTALL_PREFIX}/include/mysym" TYPE FILE FILES
-    "/mnt/e/workspace/mysym/./src/mysym.h"
-    "/mnt/e/workspace/mysym/./src/symopt.h"
-    "/mnt/e/workspace/mysym/./src/compile.h"
-    "/mnt/e/workspace/mysym/./src/exception.h"
-    "/mnt/e/workspace/mysym/./src/debug.h"
+    "/Users/gal0is/workspace/mysym/./src/mysym.h"
+    "/Users/gal0is/workspace/mysym/./src/symopt.h"
+    "/Users/gal0is/workspace/mysym/./src/compile.h"
+    "/Users/gal0is/workspace/mysym/./src/exception.h"
+    "/Users/gal0is/workspace/mysym/./src/debug.h"
+    "/Users/gal0is/workspace/mysym/./src/set.hp"
     )
 endif()
 
 if(NOT CMAKE_INSTALL_LOCAL_ONLY)
   # Include the install script for each subdirectory.
-  include("/mnt/e/workspace/mysym/build/test/cmake_install.cmake")
+  include("/Users/gal0is/workspace/mysym/build/test/cmake_install.cmake")
 
 endif()
 
@@ -65,5 +70,5 @@ endif()
 
 string(REPLACE ";" "\n" CMAKE_INSTALL_MANIFEST_CONTENT
        "${CMAKE_INSTALL_MANIFEST_FILES}")
-file(WRITE "/mnt/e/workspace/mysym/build/${CMAKE_INSTALL_MANIFEST}"
+file(WRITE "/Users/gal0is/workspace/mysym/build/${CMAKE_INSTALL_MANIFEST}"
      "${CMAKE_INSTALL_MANIFEST_CONTENT}")

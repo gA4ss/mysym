@@ -13,6 +13,11 @@ namespace mysym
 #include "symopt.def"
   }
 
+  bool is_symopt(std::string name)
+  {
+    return __symopts.find(name) != __symopts.end();
+  }
+
   bool find_symopt(std::string name, symopt_t &out)
   {
     if (__symopts.find(name) == __symopts.end())

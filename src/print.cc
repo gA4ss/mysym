@@ -117,4 +117,15 @@ namespace mysym
     str.pop_back(); // 删除最后一个","号
     return str + "}";
   }
+
+  std::string print_string(const set_t& s)
+  {
+    std::string str;
+    for (auto it = s.begin(); it != s.end(); it++)
+    {
+      str += (*it + ',');
+    }
+    str.pop_back();
+    return str;
+  }
 } // namespace mysym
