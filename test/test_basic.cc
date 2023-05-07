@@ -51,18 +51,6 @@ TEST(Sym, Create2)
   // std::cout << print_string(r) << std::endl;
 }
 
-TEST(Sym, Opt)
-{
-  for (int i = 0; i < kOptMax; i++)
-  {
-    std::cout << opt_name(i) << ", "
-              << opt_prio(i) << ", "
-              << opt_asso(i) << ", "
-              << std::endl;
-  }
-  std::cout << std::endl;
-}
-
 // TEST(Sym, Opt) {
 //   symbol_ptr_t s1 = add_("x", "y");
 //   symbol_ptr_t s2 = add(create_var("z"), mul_("a", "b"));

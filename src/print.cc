@@ -118,14 +118,25 @@ namespace mysym
     return str + "}";
   }
 
-  std::string print_string(const set_t& s)
+  std::string print_string(const optset_t& s)
+  {
+    std::string str;
+    for (auto it = s.items.elements.begin(); it != s.items.elements.end(); it++)
+    {
+      str += (it->first + ',');
+    }
+    str.pop_back();
+    return str;
+  }
+
+  std::string print_string(const optcase_t& s)
   {
     std::string str;
     for (auto it = s.begin(); it != s.end(); it++)
     {
-      str += (*it + ',');
+      str += (*it + '\n');
     }
-    str.pop_back();
+    // str.pop_back();
     return str;
   }
 } // namespace mysym

@@ -44,7 +44,7 @@ set(MYSYM_HEADERS
   ${SRC_DIRECTORY}/compile.h
   ${SRC_DIRECTORY}/exception.h
   ${SRC_DIRECTORY}/debug.h
-  ${SRC_DIRECTORY}/set.hp
+  ${SRC_DIRECTORY}/set.hpp
 )
 
 #
@@ -100,7 +100,6 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/term.cc
   ${SRC_DIRECTORY}/simplify.cc
   ${SRC_DIRECTORY}/map.cc
-  ${SRC_DIRECTORY}/set.cc
   ${SRC_DIRECTORY}/sort.cc
   ${SRC_DIRECTORY}/find.cc
   ${SRC_DIRECTORY}/match.cc
@@ -186,6 +185,10 @@ add_test(NAME test_symopt COMMAND test_symopt)
 set_tests_properties(test_symopt PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_optset COMMAND test_optset)
 set_tests_properties(test_optset PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_optcase COMMAND test_optcase)
+set_tests_properties(test_optcase PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_rule COMMAND test_rule)
+set_tests_properties(test_rule PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 #
 # Auto Test
 #

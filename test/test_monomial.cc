@@ -19,7 +19,7 @@ TEST(Sym, Monomial)
   EXPECT_TRUE(is_monomial(s4, create_var("a")));
   symbol_t s5 = c_pow("a", create_int("5"));
   symbol_t s6 = c_pow("a", create_int("3"));
-  symbol_t s7 = c_mul(s6, s7);
+  symbol_t s7 = c_mul(s6, s5);
   EXPECT_TRUE(is_monomial(s7, create_var("a")));
 }
 
@@ -35,7 +35,7 @@ TEST(Sym, MonomialGME)
   EXPECT_TRUE(is_monomial(s4, {create_var("a")}));
   symbol_t s5 = c_pow("a", create_int("5"));
   symbol_t s6 = c_pow("a", create_int("3"));
-  symbol_t s7 = c_mul(s6, s7);
+  symbol_t s7 = c_mul(s6, s6);
   EXPECT_TRUE(is_monomial(s7, {create_var("a"), create_var("b")}));
 }
 

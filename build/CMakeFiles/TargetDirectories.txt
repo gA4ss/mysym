@@ -23,8 +23,10 @@
 /Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_coefficient.dir
 /Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_symopt.dir
 /Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_optset.dir
-/Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_misc.dir
+/Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_optcase.dir
+/Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_rule.dir
 /Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_set.dir
+/Users/gal0is/workspace/mysym/build/test/CMakeFiles/test_misc.dir
 /Users/gal0is/workspace/mysym/build/test/CMakeFiles/test.dir
 /Users/gal0is/workspace/mysym/build/test/CMakeFiles/edit_cache.dir
 /Users/gal0is/workspace/mysym/build/test/CMakeFiles/rebuild_cache.dir

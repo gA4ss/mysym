@@ -7,20 +7,20 @@
 
 using namespace mysym;
 
-TEST(Sym, Set)
+TEST(Sym, OptSet)
 {
-  list_t l;
-  symbol_t x = create_var("x");
-  append(l, x);
-  symbol_t y = create_var("y");
-  append(l, y);
-  symbol_t z = create_var("z");
-  append(l, z, true);
-  append(l, z, true);
-  append(l, z, true);
-  EXPECT_EQ(size(l), 3);
+  // std::string os = optsets();
+  // std::cout << os << std::endl;
+  // optset_t s;
+  // if (find_optset("all", s))
+  //   std::cout << print_string(s) << std::endl;
 
-  std::cout << print_string(l) << std::endl;
+  optset_t const_set, atom_set;
+  EXPECT_TRUE(find_optset("const", const_set));
+  EXPECT_TRUE(find_optset("atom", atom_set));
+  opts_t iss = intersection_optset("const", "atom");
+  EXPECT_EQ(iss.size(), size_optset("const"));
+  EXPECT_EQ(relation_optset("const", "atom"), kSet2Include1);
 }
 
 int main(int argc, char *argv[])

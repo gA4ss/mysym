@@ -97,6 +97,10 @@
     "complex": "cpp",
     "condition_variable": "cpp",
     "mutex": "cpp",
-    "unordered_set": "cpp"
+    "unordered_set": "cpp",
+    "queue": "cpp",
+    "semaphore": "cpp",
+    "stack": "cpp",
+    "thread": "cpp"
   }
 }

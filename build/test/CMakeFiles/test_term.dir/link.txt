@@ -1,1 +1,0 @@
-/usr/bin/clang++ -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk -Wl,-search_paths_first -Wl,-headerpad_max_install_names CMakeFiles/test_term.dir/test_term.cc.o -o test_term   -L/usr/local/lib  -Wl,-rpath,/usr/local/lib ../libmysym.a -lgtest -lpthread -lmynum -lmympf -lmympz -lmy 

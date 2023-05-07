@@ -1,7 +1,7 @@
 #ifndef MYSYM_SYMOPT_H_
 #define MYSYM_SYMOPT_H_
 
-#include <mysym/set.h>
+#include <mysym/set.hpp>
 
 namespace mysym
 {
@@ -36,14 +36,16 @@ namespace mysym
   bool can_distributive(opt_t os, opt_t od);
   std::string symopts();
 
+  typedef set_t<symopt_t> symopt_set_t;
+
   typedef struct __optset_t
   {
     std::string name;
-    std::map<std::string, symopt_t> items;
-    set_t index;
+    symopt_set_t items;
   } optset_t;
 
   size_t size(optset_t os);
+  size_t size_optset(std::string setname);
   bool is_optset(std::string name);
   bool find_optset(std::string name, optset_t &out);
   optset_t create_optset(std::string setname, std::string names);
@@ -53,6 +55,9 @@ namespace mysym
   opts_t in_optset(std::string setname, opts_t optnames);
   opts_t expand_optset(const optset_t& s);
   opts_t expand_optset(std::string setname);
+  opts_t intersection_optset(std::string s1, std::string s2);
+  opts_t union_optset(std::string s1, std::string s2);
+  set_relation_t relation_optset(std::string s1, std::string s2);
   std::string optsets();
   void init_symopt();
   void init_symset();

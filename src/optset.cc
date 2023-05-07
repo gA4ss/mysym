@@ -1,4 +1,5 @@
 #include <mysym/mysym.h>
+#include <mysym/set.hpp>
 #include "__misc.h"
 
 namespace mysym
@@ -10,6 +11,14 @@ namespace mysym
 
   size_t size(optset_t os)
   {
+    return os.items.size();
+  }
+
+  size_t size_optset(std::string setname)
+  {
+    optset_t os;
+    if (find_optset(setname, os) == false)
+      return -1;
     return os.items.size();
   }
 
@@ -40,7 +49,7 @@ namespace mysym
     {
       if (find_symopt(name, sopt))
       {
-        os.items[name] = sopt;
+        os.items.elements[name] = sopt;
       }
       else if (find_optset(name, found))
       {
@@ -49,9 +58,9 @@ namespace mysym
         {
           symopt_t sopt;
           if (find_symopt(*it, sopt))
-            os.items[*it] = sopt;
+            os.items.elements[*it] = sopt;
         }
-      }
+      }/* else if */
     }
     __update_optsets(os);
     return os;
@@ -84,8 +93,7 @@ namespace mysym
     optset_t ops;
     if (find_optset(setname, ops))
     {
-      if (ops.items.find(optname) != ops.items.end())
-        return true;
+      return in_set<symopt_t>(ops.items, optname);
     }
     return false;
   }
@@ -98,7 +106,7 @@ namespace mysym
     {
       for (auto opt : optnames)
       {
-        if (ops.items.find(opt) != ops.items.end())
+        if (in_set<symopt_t>(ops.items, opt))
           ons.push_back(opt);
       }
     }
@@ -108,7 +116,7 @@ namespace mysym
   opts_t expand_optset(const optset_t& s)
   {
     opts_t opts;
-    for (auto it = s.items.begin(); it != s.items.end(); it++)
+    for (auto it = s.items.elements.begin(); it != s.items.elements.end(); it++)
     {
       opts.push_back(it->first);
     }
@@ -121,6 +129,48 @@ namespace mysym
     if (find_optset(setname, s) == false)
       return {};
     return expand_optset(s);
+  }
+
+  opts_t intersection_optset(std::string s1, std::string s2)
+  {
+    optset_t os1,os2;
+    if ((find_optset(s1, os1) == false) || (find_optset(s2, os2) == false))
+      return {};
+    symopt_set_t is = intersection_set<symopt_t>(os1.items, os2.items);
+    if (is.size() == 0)
+      return {};
+
+    opts_t r;
+    for (auto it = is.elements.begin(); it != is.elements.end(); it++)
+    {
+      r.push_back(it->first);
+    }
+    return r;
+  }
+
+  opts_t union_optset(std::string s1, std::string s2)
+  {
+    optset_t os1,os2;
+    if ((find_optset(s1, os1) == false) || (find_optset(s2, os2) == false))
+      return {};
+    symopt_set_t is = union_set<symopt_t>(os1.items, os2.items);
+    if (is.size() == 0)
+      return {};
+
+    opts_t r;
+    for (auto it = is.elements.begin(); it != is.elements.end(); it++)
+    {
+      r.push_back(it->first);
+    }
+    return r;
+  }
+
+  set_relation_t relation_optset(std::string s1, std::string s2)
+  {
+    optset_t os1,os2;
+    if ((find_optset(s1, os1) == false) || (find_optset(s2, os2) == false))
+      return {};
+    return relation_set<symopt_t>(os1.items, os2.items);
   }
 
   std::string optsets()
