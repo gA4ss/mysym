@@ -82,12 +82,124 @@ namespace mysym
     optpair_t ip = split_optcase(i);
     optpair_t jp = split_optcase(j);
 
-    int si = __score_optpair(ip);
-    int sj = __score_optpair(jp);
+    int si = __score_optpair(ip), sj = __score_optpair(jp);
+    bool r = false;
 
-    // FIXME:
-    // 这里其实不考虑两个pair的相关性，算法不是很好。有待研究
-    return si < sj;
+    //  如果两个分值一致，则考虑考虑细则
+    if (si == sj)
+    {
+      switch (si)
+      {
+      case 1: // i,j都是运算符，且相等
+      {
+        // 优先级越大，越靠前
+        int c = cmp_operator_priority(ip.first, jp.first);
+        r = c == 1 ? true : false;
+      } break;
+      case 2: // i,j都是运算符，但是不相等
+      {
+        int ci = opt_priority(ip.first) + opt_priority(ip.second);
+        int cj = opt_priority(jp.first) + opt_priority(jp.second);
+        r = ci > cj ? true : false;
+      } break;
+      case 3: // i,j其中一个是运算符，一个是运算符集合，且运算符在集合内
+      case 4: // i,j其中一个是运算符，一个是运算符集合，且运算符不在集合内
+      {
+        opt_t x1, x2;
+        std::string y1, y2;
+        if (is_symopt(ip.first))
+        {
+          x1 = ip.first;
+          y1 = ip.second;
+        }
+        else
+        {
+          x1 = ip.second;
+          y1 = ip.first;
+        }
+
+        if (is_symopt(jp.first))
+        {
+          x2 = jp.first;
+          y2 = jp.second;
+        }
+        else
+        {
+          x2 = jp.second;
+          y2 = jp.first;
+        }
+
+        set_relation_t rel = relation_optset(y1, y2);
+        if (rel == kSet1Include2)
+        {
+          r = false;
+        }
+        else if (rel == kSet2Include1)
+        {
+          r = true;
+        }
+        else if ((rel == kSetNoneIntersect) || 
+                 (rel == kSet1Equ2) || 
+                 (rel == kSetIntersect))
+        {
+          int c = cmp_operator_priority(x1, x2);
+          r = c == 1 ? true : false;
+        }
+      } break;
+      case 5: // i,j都是运算符集合，且相等
+      {
+        set_relation_t rel = relation_optset(ip.first, jp.first);
+        if ((rel == kSet1Include2) || (rel == kSet1Equ2))
+        {
+          r = false;
+        }
+        else if (rel == kSet2Include1)
+        {
+          r = true;
+        }
+        else if ((rel == kSetNoneIntersect) || (rel == kSetIntersect))
+        {
+          r = size_optset(ip.first) < size_optset(jp.first) ? true : false;
+        }
+      } break;
+      case 6: // i,j都是运算符集合，且一个被一个包含
+      {
+        set_relation_t rel = relation_optset(ip.first, ip.second);
+        std::string x = rel == kSet1Include2 ? ip.first : ip.second;
+        rel = relation_optset(jp.first, jp.second);
+        std::string y = rel == kSet1Include2 ? jp.first : jp.second;
+
+        // 比较两个集合
+        rel = relation_optset(x, y);
+        if ((rel == kSet1Include2) || (rel == kSet1Equ2))
+        {
+          r = false;
+        }
+        else if (rel == kSet2Include1)
+        {
+          r = true;
+        }
+        else if ((rel == kSetNoneIntersect) || (rel == kSetIntersect))
+        {
+          r = size_optset(x) < size_optset(y) ? true : false;
+        }
+      } break;
+      case 7: // i,j都是运算符集合，且相交
+      case 8: // i,j都是运算符集合，且无交集
+      {
+        opts_t x = union_optset(ip.first, ip.second);
+        opts_t y = union_optset(jp.first, jp.second);
+        r = x.size() < y.size() ? true : false;
+      } break;
+      default:
+      // 异常
+        break;
+      }
+    }
+    else
+      r = si < sj;
+
+    return r;
   }
 
   // i < j return true
