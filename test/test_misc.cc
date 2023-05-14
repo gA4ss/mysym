@@ -7,6 +7,8 @@
 #include <iostream>
 #include <stdexcept>
 
+#include "../src/__misc.h"
+
 // template<typename ... Args>
 // std::string string_format( const std::string& format, Args ... args )
 // {
@@ -21,5 +23,7 @@
 int main(int argc, char* argv[]) {
   std::string s1 = "hello", s2 = "world";
   std::cout << s1 + " " + s2 << std::endl;
+
+  std::cout << mysym::random_string() << std::endl;
   return 0;
 }

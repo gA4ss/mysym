@@ -310,41 +310,41 @@ namespace mysym
   {
 #if 0
     // 数值 + xxx
-    register_rule(kOptAdd, __c_add_num_num, __e_add_num_num);
-    register_rule(kOptAdd, __c_add_num_frac, __e_add_num_frac);
-    register_rule(kOptAdd, __c_add_num_nature, __e_add_num_nature);
-    register_rule(kOptAdd, __c_add_num_var, __e_add_num_var);
-    register_rule(kOptAdd, __c_add_num_func, __e_add_num_func);
+    register_case(kOptAdd, __c_add_num_num, __e_add_num_num);
+    register_case(kOptAdd, __c_add_num_frac, __e_add_num_frac);
+    register_case(kOptAdd, __c_add_num_nature, __e_add_num_nature);
+    register_case(kOptAdd, __c_add_num_var, __e_add_num_var);
+    register_case(kOptAdd, __c_add_num_func, __e_add_num_func);
 
     // 分数 + xxx
-    register_rule(kOptAdd, __c_add_frac_frac, __e_add_frac_frac);
-    register_rule(kOptAdd, __c_add_frac_nature, __e_add_frac_nature);
-    register_rule(kOptAdd, __c_add_frac_var, __e_add_frac_var);
-    register_rule(kOptAdd, __c_add_frac_func, __e_add_frac_func);
+    register_case(kOptAdd, __c_add_frac_frac, __e_add_frac_frac);
+    register_case(kOptAdd, __c_add_frac_nature, __e_add_frac_nature);
+    register_case(kOptAdd, __c_add_frac_var, __e_add_frac_var);
+    register_case(kOptAdd, __c_add_frac_func, __e_add_frac_func);
 
     // 常数 + xxx
-    register_rule(kOptAdd, __c_add_nature_nature, __e_add_nature_nature);
-    register_rule(kOptAdd, __c_add_nature_var, __e_add_nature_var);
-    register_rule(kOptAdd, __c_add_nature_func, __e_add_nature_func);
+    register_case(kOptAdd, __c_add_nature_nature, __e_add_nature_nature);
+    register_case(kOptAdd, __c_add_nature_var, __e_add_nature_var);
+    register_case(kOptAdd, __c_add_nature_func, __e_add_nature_func);
 
     // 变量 + xxx
-    register_rule(kOptAdd, __c_add_var_var, __e_add_var_var);
-    register_rule(kOptAdd, __c_add_var_func, __e_add_var_func);
+    register_case(kOptAdd, __c_add_var_var, __e_add_var_var);
+    register_case(kOptAdd, __c_add_var_func, __e_add_var_func);
 
     // 函数 + xxx
-    register_rule(kOptAdd, __c_add_func_func, __e_add_func_func);
+    register_case(kOptAdd, __c_add_func_func, __e_add_func_func);
 
     // 符号(数值、分数、常数、变量、函数) + 单项式 or 多项式
-    register_rule(kOptAdd, __c_add_sym_mul, __e_add_sym_mul);
-    register_rule(kOptAdd, __c_add_sym_add, __e_add_sym_add);
+    register_case(kOptAdd, __c_add_sym_mul, __e_add_sym_mul);
+    register_case(kOptAdd, __c_add_sym_add, __e_add_sym_add);
 
     // 多项式 与 单项式
-    register_rule(kOptAdd, __c_add_mul_mul, __e_add_mul_mul);
-    register_rule(kOptAdd, __c_add_add_add, __e_add_add_add);
-    register_rule(kOptAdd, __c_add_mul_add, __e_add_mul_add);
+    register_case(kOptAdd, __c_add_mul_mul, __e_add_mul_mul);
+    register_case(kOptAdd, __c_add_add_add, __e_add_add_add);
+    register_case(kOptAdd, __c_add_mul_add, __e_add_mul_add);
 
     // 入口
-    register_rule(kOptAdd, __c_add_entry, __e_add_entry);
+    register_case(kOptAdd, __c_add_entry, __e_add_entry);
 #endif
   }
 } // namespace mysym

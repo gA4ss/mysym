@@ -1336,7 +1336,7 @@ build test/test_set: CXX_EXECUTABLE_LINKER__test_set_Debug test/CMakeFiles/test_
 #############################################
 # Order-only phony target for test_misc
 
-build cmake_object_order_depends_target_test_misc: phony || test/CMakeFiles/test_misc.dir
+build cmake_object_order_depends_target_test_misc: phony || cmake_object_order_depends_target_mysym
 
 build test/CMakeFiles/test_misc.dir/test_misc.cc.o: CXX_COMPILER__test_misc_unscanned_Debug /Users/gal0is/workspace/mysym/test/test_misc.cc || cmake_object_order_depends_target_test_misc
   DEFINES = -DDEBUG
@@ -1354,8 +1354,9 @@ build test/CMakeFiles/test_misc.dir/test_misc.cc.o: CXX_COMPILER__test_misc_unsc
 #############################################
 # Link the executable test/test_misc
 
-build test/test_misc: CXX_EXECUTABLE_LINKER__test_misc_Debug test/CMakeFiles/test_misc.dir/test_misc.cc.o
+build test/test_misc: CXX_EXECUTABLE_LINKER__test_misc_Debug test/CMakeFiles/test_misc.dir/test_misc.cc.o | libmysym.a || libmysym.a
   FLAGS = -Wall -g -arch arm64 -isysroot /Library/Developer/CommandLineTools/SDKs/MacOSX11.3.sdk
+  LINK_LIBRARIES = -Wl,-rpath,/usr/local/lib  libmysym.a  -lgtest  -lpthread  -lmynum  -lmympf  -lmympz  -lmy
   LINK_PATH = -L/usr/local/lib
   OBJECT_DIR = test/CMakeFiles/test_misc.dir
   POST_BUILD = :

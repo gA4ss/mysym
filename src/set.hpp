@@ -115,6 +115,40 @@ namespace mysym
   }
 
   template <typename T>
+  set_t<T> complementary_set(const set_t<T>& s, const set_t<T>& i)
+  {
+    set_t<T> c;
+    for (auto it = s.elements.begin(); it != s.elements.end(); it++)
+    {
+      if (!in_set(i, it->first))
+      {
+        c.elements[it->first] = it->second;
+      }
+    }
+    return c;
+  }
+
+  template <typename T>
+  std::pair<set_t<T>, set_t<T>> difference_set(const set_t<T>& s1, const set_t<T>& s2)
+  {
+    std::pair<set_t<T>, set_t<T>> ds;
+    set_t<T> i = intersection_set(s1, s2);
+
+    if (i.size() == 0)
+    {
+      ds.first = s1;
+      ds.second = s2;
+    }
+    else
+    {
+      ds.first = complementary_set(s1, i);
+      ds.second = complementary_set(s2, i);
+    }
+
+    return ds;
+  }
+
+  template <typename T>
   set_relation_t relation_set(const set_t<T>& s1, const set_t<T>& s2)
   {
     set_t<T> r = intersection_set(s1, s2);

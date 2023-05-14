@@ -24,6 +24,15 @@ namespace mysym
     __rule_library.cases[opt][sign] = fexecute;
   }
 
+  void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
+  {
+    __rule_library.cases[opt][sign] = fexecute;
+    // 替换两个位置
+    optpair_t opp = split_optsign(sign);
+    optsign_t rsign = make_optsign(opp.second, opp.first);
+    __rule_library.cases[opt][rsign] = fexecute;
+  }
+
   bool find_entry(opt_t opt)
   {
     return __rule_library.entries.find(opt) != __rule_library.entries.end();
@@ -74,7 +83,7 @@ namespace mysym
     for (; it != __rule_library.cases[opt].end(); it++)
     {
       optsign_t ops = it->first;
-      optpair_t opp = split_optcase(ops);
+      optpair_t opp = split_optsign(ops);
 
       //
       // 判断
@@ -100,7 +109,7 @@ namespace mysym
     optsign_t sign;
     if (__meet_conditions(opt, x, y, sign) == false)
       return undefined;
-    return __rule_library.cases[opt][sign](opt, x, y);
+    return __rule_library.cases[opt][sign](x, y);
   }
 
   void apply_rule(symbol_t &x)
@@ -115,19 +124,14 @@ namespace mysym
     register_cmp_rule();
   }
 
-  std::string basic_optsets()
-  {
-    return "basic,const";
-  }
-
   symbol_t default_entry(const symbol_t &x)
   {
     return x;
   }
 
-  symbol_t default_execute(const opt_t &opt, const symbol_t &x, const symbol_t &y)
+  symbol_t default_execute(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(opt, x, y);
+    return just_make2(kOptNone, x, y);
   }
 
   void default_cases(opt_t opt, std::string ops)

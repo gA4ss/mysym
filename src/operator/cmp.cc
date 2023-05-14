@@ -12,36 +12,24 @@ namespace mysym
    *************************/
   symbol_t cmp(const symbol_t &x, const symbol_t &y);
 
-#if 0
   /* none值之间的比较
    */
-  static bool __c_cmp_none_xxx(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_none_xxx(const symbol_t &x, const symbol_t &y)
   {
-    return __test_or(is_none, x, y);
-  }
-  static symbol_t __e_cmp_none_xxx(const symbol_t &x, const symbol_t &y)
-  {
-    return is_none(kind(x)) ? gConstNegOne : gConstOne;
+    return is_none(kind(x)) && is_none(kind(y)) ? gConstZero :
+           is_none(kind(x)) && !is_none(kind(y)) ? gConstNegOne : gConstOne;
   }
 
   /* 常数与符号以及函数的比较
    */
-  static bool __c_cmp_const_xxx(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_or(is_const, x, y);
-  }
-  static symbol_t __e_cmp_const_xxx(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_const_xxx(const symbol_t &x, const symbol_t &y)
   {
     return is_const(kind(x)) ? gConstNegOne : gConstOne;
   }
 
   /* 常数间的比较
    */
-  static bool __c_cmp_const_const(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_const, x, y);
-  }
-  static symbol_t __e_cmp_const_const(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_const_const(const symbol_t &x, const symbol_t &y)
   {
     mympf::float_t f1;
     mympf::float_t f2;
@@ -114,22 +102,14 @@ namespace mysym
 
   /* 变量与运算符或者函数之间的比较
    */
-  static bool __c_cmp_var_xxx(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_or(is_var, x, y);
-  }
-  static symbol_t __e_cmp_var_xxx(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_var_xxx(const symbol_t &x, const symbol_t &y)
   {
     return is_var(kind(x)) ? gConstNegOne : gConstOne;
   }
 
   /* 两个变量间的比较
    */
-  static bool __c_cmp_var_var(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_var, x, y);
-  }
-  static symbol_t __e_cmp_var_var(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_var_var(const symbol_t &x, const symbol_t &y)
   {
     return ((x.literal < y.literal) ? gConstNegOne : (x.literal > y.literal) ? gConstOne
                                                                              : gConstZero);
@@ -137,11 +117,7 @@ namespace mysym
 
   /* 两个指数函数做比较
    */
-  static bool __c_cmp_pow_pow(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_pow, x, y);
-  }
-  static symbol_t __e_cmp_pow_pow(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_pow_pow(const symbol_t &x, const symbol_t &y)
   {
     symbol_t c = cmp(base(x), base(y));
     if (c.literal == "0")
@@ -153,11 +129,7 @@ namespace mysym
 
   /* 两个对数函数做比较
    */
-  static bool __c_cmp_log_log(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_log, x, y);
-  }
-  static symbol_t __e_cmp_log_log(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_log_log(const symbol_t &x, const symbol_t &y)
   {
     symbol_t c = cmp(base(x), base(y));
     if (c.literal == "0")
@@ -169,11 +141,7 @@ namespace mysym
 
   /* 两个模函数做比较
    */
-  static bool __c_cmp_mod_mod(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_mod, x, y);
-  }
-  static symbol_t __e_cmp_mod_mod(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_mod_mod(const symbol_t &x, const symbol_t &y)
   {
     symbol_t c = cmp(x.items[0], y.items[0]);
     if (c.literal == "0")
@@ -185,11 +153,7 @@ namespace mysym
 
   /* 两个函数做比较
    */
-  static bool __c_cmp_func_func(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_func, x, y);
-  }
-  static symbol_t __e_cmp_func_func(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_func_func(const symbol_t &x, const symbol_t &y)
   {
     if (kind(x) != kind(y))
     {
@@ -200,23 +164,24 @@ namespace mysym
 
   /* 和积与其他的比较
    */
-  static bool __c_cmp_basic_xxx(const symbol_t &x, const symbol_t &y)
-  {
-    return (__test_or(is_basic, x, y));
-  }
-  static symbol_t __e_cmp_basic_xxx(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_basic_xxx(const symbol_t &x, const symbol_t &y)
   {
     return (is_basic(kind(x))) ? gConstOne : gConstNegOne;
   }
 
   /* 相同基础运算符作比较
    */
-  static bool __c_cmp_basic(const symbol_t &x, const symbol_t &y)
+  static symbol_t __cmp_basic(const symbol_t &x, const symbol_t &y)
   {
-    return ((__test_and(is_add, x, y)) || (__test_and(is_mul, x, y)));
-  }
-  static symbol_t __e_cmp_basic(const symbol_t &x, const symbol_t &y)
-  {
+    //
+    // 如果x,y不是相同运算符号
+    // 则和大于积
+    //
+    if (kind(x) != kind(y))
+    {
+      return (is_add(kind(x))) ? gConstOne : gConstNegOne;
+    }
+
     if (symbol_size(x) < symbol_size(y))
     {
       return gConstNegOne;
@@ -236,17 +201,6 @@ namespace mysym
     return gConstZero;
   }
 
-  /* 和与积作比较，和大于积
-   */
-  static bool __c_cmp_add_mul(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_add, is_mul, x, y);
-  }
-  static symbol_t __e_cmp_add_mul(const symbol_t &x, const symbol_t &y)
-  {
-    return (is_add(kind(x))) ? gConstOne : gConstNegOne;
-  }
-
 #define check_cmp_number_of_params_number(x)                                 \
   {                                                                          \
     if (symbol_size(x) != 2)                                                 \
@@ -257,11 +211,7 @@ namespace mysym
     }                                                                        \
   }
 
-  static bool __c_cmp_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptCmp, x);
-  }
-  static symbol_t __e_cmp_entry(const symbol_t &x)
+  static symbol_t __cmp_entry(const symbol_t &x)
   {
     symbol_t _x = x;
     check_cmp_number_of_params_number(_x);
@@ -271,96 +221,45 @@ namespace mysym
   }
 
   // equ neq lt le gt ge的通用处理函数
-#define __e_order_entry __e_cmp_entry
-
-  static bool __c_equ_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptEqu, x);
-  }
-  static bool __c_neq_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptNotEqu, x);
-  }
-  static bool __c_lt_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptLT, x);
-  }
-  static bool __c_le_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptLE, x);
-  }
-  static bool __c_gt_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptGT, x);
-  }
-  static bool __c_ge_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptGE, x);
-  }
+#define __order_entry __cmp_entry
 
   ///////////////////////////////////////////////////
-
-  static bool __c_equ_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return true;
-  }
-  static symbol_t __e_equ_xxx_yyy(const symbol_t &x, const symbol_t &y)
+  static symbol_t __equ_xxx_yyy(const symbol_t &x, const symbol_t &y)
   {
     return equ(x, y);
   }
 
-  static bool __c_neq_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return true;
-  }
-  static symbol_t __e_neq_xxx_yyy(const symbol_t &x, const symbol_t &y)
+  static symbol_t __neq_xxx_yyy(const symbol_t &x, const symbol_t &y)
   {
     return neq(x, y);
   }
 
-  static bool __c_lt_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return true;
-  }
-  static symbol_t __e_lt_xxx_yyy(const symbol_t &x, const symbol_t &y)
+  static symbol_t __lt_xxx_yyy(const symbol_t &x, const symbol_t &y)
   {
     return lt(x, y);
   }
 
-  static bool __c_le_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return true;
-  }
-  static symbol_t __e_le_xxx_yyy(const symbol_t &x, const symbol_t &y)
+  static symbol_t __le_xxx_yyy(const symbol_t &x, const symbol_t &y)
   {
     return le(x, y);
   }
 
-  static bool __c_gt_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return true;
-  }
-  static symbol_t __e_gt_xxx_yyy(const symbol_t &x, const symbol_t &y)
+  static symbol_t __gt_xxx_yyy(const symbol_t &x, const symbol_t &y)
   {
     return gt(x, y);
   }
 
-  static bool __c_ge_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return true;
-  }
-  static symbol_t __e_ge_xxx_yyy(const symbol_t &x, const symbol_t &y)
+  static symbol_t __ge_xxx_yyy(const symbol_t &x, const symbol_t &y)
   {
     return ge(x, y);
   }
-#endif
+
   //
   // 对比函数
   //
   symbol_t cmp(const symbol_t &x, const symbol_t &y)
   {
-    // return execute_rule_table(kOptCmp, x, y);
-    return undefined;
+    return execute_cases(kOptCmp, x, y);
   }
 
   symbol_t equ(const symbol_t &x, const symbol_t &y)
@@ -397,34 +296,31 @@ namespace mysym
 
   void register_cmp_rule()
   {
-#if 0
-    register_rule(kOptCmp, __c_cmp_none_xxx, __e_cmp_none_xxx);
-    register_rule(kOptCmp, __c_cmp_const_xxx, __e_cmp_const_xxx);
-    register_rule(kOptCmp, __c_cmp_const_const, __e_cmp_const_const);
-    register_rule(kOptCmp, __c_cmp_var_xxx, __e_cmp_var_xxx);
-    register_rule(kOptCmp, __c_cmp_var_var, __e_cmp_var_var);
-    register_rule(kOptCmp, __c_cmp_pow_pow, __e_cmp_pow_pow);
-    register_rule(kOptCmp, __c_cmp_log_log, __e_cmp_log_log);
-    register_rule(kOptCmp, __c_cmp_mod_mod, __e_cmp_mod_mod);
-    register_rule(kOptCmp, __c_cmp_func_func, __e_cmp_func_func);
-    register_rule(kOptCmp, __c_cmp_basic_xxx, __e_cmp_basic_xxx);
-    register_rule(kOptCmp, __c_cmp_basic, __e_cmp_basic);
-    register_rule(kOptCmp, __c_cmp_add_mul, __e_cmp_add_mul);
-    register_rule(kOptCmp, __c_cmp_entry, __e_cmp_entry);
+    register_case(kOptCmp, make_optsign_any(kOptNone), __cmp_none_xxx);
+    register_case(kOptCmp, make_optsign_exclude("const"), __cmp_const_xxx);
+    register_case(kOptCmp, make_optsign("const", "const"), __cmp_const_const);
+    register_case(kOptCmp, make_optsign_any(kOptVariate), __cmp_var_xxx);
+    register_case(kOptCmp, make_optsign(kOptVariate, kOptVariate), __cmp_var_var);
+    register_case(kOptCmp, make_optsign(kOptPow, kOptPow), __cmp_pow_pow);
+    register_case(kOptCmp, make_optsign(kOptLog, kOptLog), __cmp_log_log);
+    register_case(kOptCmp, make_optsign(kOptMod, kOptMod), __cmp_mod_mod);
+    register_case(kOptCmp, make_optsign("func", "func"), __cmp_func_func);
+    register_case(kOptCmp, make_optsign_exclude("basic"), __cmp_basic_xxx);
+    register_case(kOptCmp, make_optsign("basic", "basic"), __cmp_basic);
+    append_entry(kOptCmp, __cmp_entry);
     // ----------------------------------------
-    register_rule(kOptEqu, __c_equ_entry, __e_order_entry);
-    register_rule(kOptNotEqu, __c_neq_entry, __e_order_entry);
-    register_rule(kOptLT, __c_lt_entry, __e_order_entry);
-    register_rule(kOptLE, __c_le_entry, __e_order_entry);
-    register_rule(kOptGT, __c_gt_entry, __e_order_entry);
-    register_rule(kOptGE, __c_ge_entry, __e_order_entry);
+    append_entry(kOptEqu, __order_entry);
+    append_entry(kOptNotEqu, __order_entry);
+    append_entry(kOptLT, __order_entry);
+    append_entry(kOptLE, __order_entry);
+    append_entry(kOptGT, __order_entry);
+    append_entry(kOptGE, __order_entry);
     // ----------------------------------------
-    register_rule(kOptEqu, __c_equ_xxx_yyy, __e_equ_xxx_yyy);
-    register_rule(kOptNotEqu, __c_neq_xxx_yyy, __e_neq_xxx_yyy);
-    register_rule(kOptLT, __c_lt_xxx_yyy, __e_lt_xxx_yyy);
-    register_rule(kOptLE, __c_le_xxx_yyy, __e_le_xxx_yyy);
-    register_rule(kOptGT, __c_gt_xxx_yyy, __e_gt_xxx_yyy);
-    register_rule(kOptGE, __c_ge_xxx_yyy, __e_ge_xxx_yyy);
-#endif
+    register_case(kOptEqu, make_optsign("all", "all"), __equ_xxx_yyy);
+    register_case(kOptNotEqu, make_optsign("all", "all"), __neq_xxx_yyy);
+    register_case(kOptLT, make_optsign("all", "all"), __lt_xxx_yyy);
+    register_case(kOptLE, make_optsign("all", "all"), __le_xxx_yyy);
+    register_case(kOptGT, make_optsign("all", "all"), __gt_xxx_yyy);
+    register_case(kOptGE, make_optsign("all", "all"), __ge_xxx_yyy);
   }
 } // namespace mysym

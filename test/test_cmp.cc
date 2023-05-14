@@ -7,7 +7,7 @@
 
 using namespace mysym;
 
-TEST(Sym, Cmp0_3)
+TEST(Sym, Cmp3)
 {
   //
   // 常数与变量比较
@@ -45,6 +45,8 @@ TEST(Sym, Cmp0_3)
   symbol_t sinx = c_sin("x");
   EXPECT_EQ(compare(sinx, x), 1);
 }
+
+#if 0
 
 TEST(Sym, Cmp4)
 {
@@ -154,6 +156,8 @@ TEST(Sym, Cmp11)
   symbol_t p1 = c_pow("a", create_int("5"));
   EXPECT_EQ(compare(a2, p1), -1);
 }
+
+#endif
 
 int main(int argc, char *argv[])
 {

@@ -1,5 +1,8 @@
 #include <mysym/mysym.h>
 #include "__misc.h"
+
+#include <random>
+
 namespace mysym
 {
   std::vector<std::string> split_string(std::string str, std::string regex_str/* = "[, ]+"*/)
@@ -13,5 +16,25 @@ namespace mysym
       res.push_back(pos->str());
     }
     return res;
+  }
+
+  std::string random_string(size_t length)
+  {
+    char tmp;
+    std::string buffer;
+    std::random_device rd;
+    std::default_random_engine random(rd());
+    
+    for (size_t i = 0; i < length; i++) {
+      tmp = random() % 36;
+      if (tmp < 10) {
+        tmp += '0';
+      } else {
+        tmp -= 10;
+        tmp += 'A';
+      }
+      buffer += tmp;
+    }
+    return buffer;
   }
 } // namespace mysym

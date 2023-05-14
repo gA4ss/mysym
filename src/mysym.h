@@ -166,18 +166,20 @@ namespace mysym
   //
   // 运算符匹配情况
   typedef std::string optsign_t;
-  typedef std::vector<std::string> optcase_t;
+  typedef std::vector<optsign_t> optcase_t;
   typedef std::pair<opt_t, opt_t> optpair_t;
   bool is_optsign(optsign_t sign);
   optsign_t make_optsign(opt_t opt1, opt_t opt2);
-  optpair_t split_optcase(optsign_t sign);
+  optsign_t make_optsign_any(opt_t opt);
+  optsign_t make_optsign_exclude(opt_t opt);
+  optpair_t split_optsign(optsign_t sign);
   bool cmp_optsign(const optsign_t& i, const optsign_t& j);
   optcase_t generate_optcase(std::string ops);
 
   // 条件-执行表
   typedef bool (*fptr_condition_t)(opt_t, const symbol_t &, const symbol_t &);
   typedef symbol_t (*fptr_entry_t)(const symbol_t &);
-  typedef symbol_t (*fptr_execute_t)(const opt_t &, const symbol_t &, const symbol_t &);
+  typedef symbol_t (*fptr_execute_t)(const symbol_t &, const symbol_t &);
   typedef struct __cmp_rule_table_t
   {
     bool operator()(const optsign_t &i, const optsign_t &j) const
@@ -207,14 +209,13 @@ namespace mysym
   bool find_case(opt_t opt, optsign_t ops);
   void append_entry(opt_t opt, fptr_entry_t fentry);
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
+  void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
   symbol_t execute_entry(const symbol_t &x);
   symbol_t execute_cases(opt_t opt, const symbol_t &x, const symbol_t &y);
-  void register_rule(opt_t opt, std::string cases);
   void apply_rule(symbol_t &x);
 
-  std::string basic_optsets();
   symbol_t default_entry(const symbol_t &x);
-  symbol_t default_execute(opt_t opt, const symbol_t &x, const symbol_t &y);
+  symbol_t default_execute(const symbol_t &x, const symbol_t &y);
   void default_cases(opt_t opt, std::string ops);
   void append_optcase_string(std::string &ops, const std::string op);
   void append_optcase_string(std::string &ops, const std::vector<std::string> opl);

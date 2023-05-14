@@ -2,11 +2,13 @@
 #define MYSYM_SYMOPT_H_
 
 #include <mysym/set.hpp>
+#include <unordered_set>
 
 namespace mysym
 {
   typedef std::string opt_t;
   typedef std::vector<opt_t> opts_t;
+  typedef std::pair<opts_t, opts_t> opts_pair_t;
   typedef struct __symopt_attribute_t
   {
     bool continuous; // 是否是连续的
@@ -28,6 +30,7 @@ namespace mysym
   bool find_symopt(std::string name, symopt_t &out);
   std::string opt_name(opt_t o);
   int opt_priority(opt_t o);
+  double opts_priority(const opts_t &opts);
   bool opt_associative_law(opt_t o);
   bool opt_commutative_law(opt_t o);
   bool opt_distributive_law(opt_t o);
@@ -37,26 +40,36 @@ namespace mysym
   std::string symopts();
 
   typedef set_t<symopt_t> symopt_set_t;
+  typedef std::pair<symopt_set_t, symopt_set_t> symopt_set_pair_t;
 
   typedef struct __optset_t
   {
-    std::string name;
-    symopt_set_t items;
+    std::string name;                         // 名称
+    symopt_set_t items;                       // 符号集合
+    std::unordered_set<int> priority_array;   // 优先级队列
+    int max_priority;                         // 最大优先级
+    int min_priority;                         // 最小优先级
+    double average_priority;                  // 平均优先级
   } optset_t;
 
   size_t size(optset_t os);
   size_t size_optset(std::string setname);
   bool is_optset(std::string name);
+  bool as_symopt(std::string name);
   bool find_optset(std::string name, optset_t &out);
   optset_t create_optset(std::string setname, std::string names);
   optset_t create_optset(std::string setname, std::vector<std::string> names);
   optset_t create_optset_exclude(std::string setname, std::string setnames);
   bool in_optset(std::string setname, std::string optname);
+  bool as_symopt(std::string name);
+  int optset_priority(std::string name);
   opts_t in_optset(std::string setname, opts_t optnames);
   opts_t expand_optset(const optset_t& s);
   opts_t expand_optset(std::string setname);
   opts_t intersection_optset(std::string s1, std::string s2);
   opts_t union_optset(std::string s1, std::string s2);
+  opts_t complementary_optset(std::string s, std::string i);
+  opts_pair_t difference_optset(std::string s1, std::string s2);
   set_relation_t relation_optset(std::string s1, std::string s2);
   std::string optsets();
   void init_symopt();
@@ -110,12 +123,12 @@ namespace mysym
 #define kOptArcCsch "arccsch"
 
 #define kOptVariate "$"
-#define kOptNumber "%"
-#define kOptFrac "/"
 #define kOptConstE "e"
 #define kOptConstPI "pi"
 #define kOptConstInf "inf"
 #define kOptConstNegInf "-inf"
+#define kOptFrac "/"
+#define kOptNumber "%"
 
 #define is_none(o) (o == kOptNone)
 #define is_und(o) is_none(o)

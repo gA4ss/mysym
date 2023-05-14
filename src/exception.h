@@ -36,6 +36,12 @@ namespace mysym
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
+#define mysym_not_found_operator_set_exception(format, ...)                           \
+  {                                                                               \
+    throw my::MyException("<mysym> can't found operator set",                         \
+                          __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
+  }
+
 #define mysym_param_is_out_of_range_exception(format, ...)                        \
   {                                                                               \
     throw my::MyException("<mysym> param is out of the range",                    \

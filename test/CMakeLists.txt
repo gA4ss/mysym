@@ -73,6 +73,7 @@ add_executable(test_set ${SRC_DIRECTORY}/test_set.cc)
 target_link_libraries(test_set my)
 # DO NOT add test cases
 add_executable(test_misc ${SRC_DIRECTORY}/test_misc.cc)
+target_link_libraries(test_misc mysym gtest pthread)
 
 # add_executable(test_addsub ${SRC_DIRECTORY}/test_addsub.cc)
 # target_link_libraries(test_addsub mympf gtest pthread)

@@ -40,6 +40,16 @@ namespace mysym
     return __symopts[o].priority;
   }
 
+  double opts_priority(const opts_t &opts)
+  {
+    double p = 0.0;
+    for (auto it : opts)
+    {
+      p += opt_priority(it);
+    }
+    return p / opts.size();
+  }
+
   bool opt_associative_law(opt_t o)
   {
     if (__symopts.find(o) == __symopts.end())

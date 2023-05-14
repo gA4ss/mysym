@@ -32,12 +32,52 @@ namespace mysym
     return (__optsets.find(name) != __optsets.end());
   }
 
+  bool as_symopt(std::string name)
+  {
+    if (__optsets.find(name) == __optsets.end())
+      return false;
+    auto it = __optsets[name].items.elements.begin();
+    int priority = it->second.priority;
+    for (; it != __optsets[name].items.elements.end(); it++)
+    {
+      if (priority != it->second.priority)
+        return false;
+    }
+    return true;
+  }
+
+  int optset_priority(std::string name)
+  {
+    if (__optsets.find(name) == __optsets.end())
+      return -2;
+    return __optsets[name].average_priority;
+  }
+
   bool find_optset(std::string name, optset_t &out)
   {
     if (__optsets.find(name) == __optsets.end())
       return false;
     out = __optsets[name];
     return true;
+  }
+
+  static void __fill_priority(optset_t &os)
+  {
+    int priority = 0, c = 0;
+    double total = 0.0;
+    os.max_priority = 0; os.min_priority = 100;
+    for (auto it = os.items.elements.begin(); it != os.items.elements.end(); it++)
+    {
+      priority = it->second.priority;
+      os.priority_array.insert(priority);
+      if (os.min_priority > priority)
+        os.min_priority = priority;
+      if (os.max_priority < priority)
+        os.max_priority = priority;
+      total += priority;
+      c++;
+    }
+    os.average_priority = total / c;
   }
 
   optset_t create_optset(std::string setname, std::vector<std::string> names)
@@ -62,6 +102,11 @@ namespace mysym
         }
       }/* else if */
     }
+
+    // 填充优先级
+    __fill_priority(os);
+
+    // 更新集合
     __update_optsets(os);
     return os;
   }
@@ -75,17 +120,31 @@ namespace mysym
   optset_t create_optset_exclude(std::string setname, std::string setnames)
   {
     std::vector<std::string> names = split_string(setnames);
-    std::vector<std::string> include_sets;
-    // 遍历所有集合
-    for (auto ops : __optsets)
+    opts_t include_symopts = expand_optset("all");
+    for (auto name : names)
     {
-      // 如果在排除集合中没有找到
-      if (std::find(names.begin(), names.end(), ops.first) == names.end())
+      if (is_symopt(name))
       {
-        include_sets.push_back(ops.first);
+        auto found = std::find(include_symopts.begin(), include_symopts.end(), name);
+        if (found != std::end(include_symopts))
+        {
+          include_symopts.erase(found);
+        }
       }
+      else if (is_optset(name))
+      {
+        opts_t opts = expand_optset(name);
+        for (auto opt : opts)
+        {
+          auto found = std::find(include_symopts.begin(), include_symopts.end(), opt);
+          if (found != std::end(include_symopts))
+          {
+            include_symopts.erase(found);
+          }
+        }
+      }/* end else if */
     }
-    return create_optset(setname, include_sets);
+    return create_optset(setname, include_symopts);
   }
 
   bool in_optset(std::string setname, std::string optname)
@@ -131,15 +190,17 @@ namespace mysym
     return expand_optset(s);
   }
 
-  opts_t intersection_optset(std::string s1, std::string s2)
+  typedef symopt_set_t (*fptr_do_optset_t)(const symopt_set_t& s1, const symopt_set_t& s2);
+  static opts_t __do_optset(std::string s1, std::string s2, fptr_do_optset_t func)
   {
     optset_t os1,os2;
     if ((find_optset(s1, os1) == false) || (find_optset(s2, os2) == false))
       return {};
-    symopt_set_t is = intersection_set<symopt_t>(os1.items, os2.items);
+    symopt_set_t is = func(os1.items, os2.items);
     if (is.size() == 0)
       return {};
 
+    // 将symopt_set_t类型专程opts_t类型
     opts_t r;
     for (auto it = is.elements.begin(); it != is.elements.end(); it++)
     {
@@ -148,19 +209,36 @@ namespace mysym
     return r;
   }
 
+  opts_t intersection_optset(std::string s1, std::string s2)
+  {
+    return __do_optset(s1, s2, intersection_set<symopt_t>);
+  }
+
   opts_t union_optset(std::string s1, std::string s2)
+  {
+    return __do_optset(s1, s2, union_set<symopt_t>);
+  }
+
+  opts_t complementary_optset(std::string s, std::string i)
+  {
+    return __do_optset(s, i, complementary_set<symopt_t>);
+  }
+
+  opts_pair_t difference_optset(std::string s1, std::string s2)
   {
     optset_t os1,os2;
     if ((find_optset(s1, os1) == false) || (find_optset(s2, os2) == false))
       return {};
-    symopt_set_t is = union_set<symopt_t>(os1.items, os2.items);
-    if (is.size() == 0)
-      return {};
+    symopt_set_pair_t ds = difference_set<symopt_t>(os1.items, os2.items);
 
-    opts_t r;
-    for (auto it = is.elements.begin(); it != is.elements.end(); it++)
+    opts_pair_t r;
+    for (auto it = ds.first.elements.begin(); it != ds.first.elements.end(); it++)
     {
-      r.push_back(it->first);
+      r.first.push_back(it->first);
+    }
+    for (auto it = ds.second.elements.begin(); it != ds.second.elements.end(); it++)
+    {
+      r.second.push_back(it->first);
     }
     return r;
   }

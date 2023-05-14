@@ -28,11 +28,62 @@ namespace mysym
     return opt1 + "," + opt2;
   }
 
-  optpair_t split_optcase(optsign_t sign)
+  optsign_t make_optsign_any(opt_t opt)
+  {
+    return opt + "," + "all";
+  }
+
+  optsign_t make_optsign_exclude(opt_t opt)
+  {
+    optset_t optset = create_optset_exclude(random_string(), opt);
+    return opt + "," + optset.name;
+  }
+
+  optpair_t split_optsign(optsign_t sign)
   {
     std::vector<std::string> s = split_string(sign);
     mysym_assert(s.size() == 2, "size of optcase is not 2, opc = \'%s\'", sign.c_str());
     return {s[0], s[1]};
+  }
+
+  /* 如果一个运算符集合内的运算符的优先级都是一致的
+   * 则将这个集合当作一个符号
+   */
+  // static bool __is_symopt(const opt_t &opt)
+  // {
+  //   if (is_symopt(opt))
+  //     return true;
+  //   return as_symopt(opt);
+  // }
+
+  static double __priority(const opt_t &opt)
+  {
+    if (is_symopt(opt))
+      return opt_priority(opt);
+    return optset_priority(opt);
+  }
+
+  static int __cmp_priority(const opt_t &opt1, const opt_t &opt2)
+  {
+    double p1 = is_symopt(opt1) ? opt_priority(opt1) : optset_priority(opt1);
+    double p2 = is_symopt(opt2) ? opt_priority(opt2) : optset_priority(opt2);
+    return p1 == p2 ? 0 : p1 < p2 ? -1 : 1;
+  }
+
+  static std::pair<opt_t, opt_t> __on_symopt_optset_order(const opt_t &opt1, const opt_t &opt2)
+  {
+    opt_t s, os;
+    if (is_symopt(opt1))
+    {
+      s = opt1;
+      os = opt2;
+    }
+    else
+    {
+      s = opt2;
+      os = opt1;
+    }
+    return {s, os};
   }
 
   /* p的几种情况
@@ -45,89 +96,309 @@ namespace mysym
    * 7. i,j都是运算符集合，且相交
    * 8. i,j都是运算符集合，且无交集
    */
-  static int __score_optpair(const optpair_t& p)
+  static std::pair<int, double> __score_optpair(const optpair_t& p)
   {
+    int mode = 0;
+    double score = 0.0, p1 = 0.0, p2 = 0.0;
     opt_t i = p.first, j = p.second;
     if (is_symopt(i) && is_symopt(j))
     {
-      return i == j ? 1 : 2;
+      mode = i == j ? 1 : 2;
+      p1 = __priority(i); p2 = __priority(j);
+      score = p1 > p2 ? p1 : p2;
     }
     else if (is_symopt(i) && !is_symopt(j))
     {
-      return in_optset(j, i) ? 3 : 4;
+      if (in_optset(j, i))
+      {
+        mode = 3;
+        score = optset_priority(j);
+      }
+      else
+      {
+        mode = 4;
+        p1 = __priority(i); p2 = __priority(j);
+        score = p1 > p2 ? p1 : p2;
+      }
     }
     else if (!is_symopt(i) && is_symopt(j))
     {
-      return in_optset(i, j) ? 3 : 4;
+      if (in_optset(i, j))
+      {
+        mode = 3;
+        score = optset_priority(i);
+      }
+      else
+      {
+        mode = 4;
+        p1 = __priority(i); p2 = __priority(j);
+        score = p1 > p2 ? p1 : p2;
+      }
     }
     else
     {
       // 两个都是optset
       set_relation_t rel = relation_optset(i, j);
       if (rel == kSet1Equ2)
-        return 5;
-      else if ((rel == kSet1Include2) || (rel == kSet2Include1))
-        return 6;
-      else if (rel == kSetIntersect)
-        return 7;
-      else if (rel == kSetNoneIntersect)
-        return 8;
+      {
+        mode = 5;
+        score = optset_priority(i);
+      }
+      else if (rel == kSet1Include2)
+      {
+        mode = 6;
+        score = optset_priority(i);
+      }
+      else if (rel == kSet2Include1)
+      {
+        mode = 6;
+        score = optset_priority(j);
+      }
+      else if ((rel == kSetIntersect) || (rel == kSetNoneIntersect))
+      {
+        mode = rel == kSetIntersect ? 7 : 8;
+        p1 = __priority(i); p2 = __priority(j);
+        score = p1 > p2 ? p1 : p2;
+      }
     }
-    return 0;
+    return {mode, score};
+  }
+
+  // 注意!!!
+  // 以下的__cmp_when_x中i与j不可能拥有相同的模式
+  // 它们在模式判断不同下被调用。
+  //
+
+#define __switch_opt_pair_score(mode, ip, jp, si, sj, xp, yp, sx, sy) \
+{                       \
+  if (si.first == mode) \
+  {                     \
+    xp = ip; yp = jp;   \
+    sx = si; sy = sj;   \
+  } else {              \
+    xp = jp; yp = ip;   \
+    sx = sj; sy = si;   \
+  }                     \
+}
+
+  static bool __cmp_when_1(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
+  {
+    bool r = true;
+    optpair_t xp, yp;
+    std::pair<int, double> sx, sy;
+    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    int ym = sy.first;
+    if (ym == 2)
+    {
+
+    }
+    else if (ym == 3)
+    {
+
+    }
+    else if (ym == 4)
+    {
+      
+    }
+    else if (ym == 5)
+    {
+      
+    }
+    else if (ym == 6)
+    {
+      
+    }
+    else if (ym == 7)
+    {
+      
+    }
+    else if (ym == 8)
+    {
+      
+    }
+    return r;
+  }
+
+  static bool __cmp_when_2(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
+  {
+    bool r = true;
+    optpair_t xp, yp;
+    std::pair<int, double> sx, sy;
+    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    int ym = sy.first;
+    if (ym == 3)
+    {
+
+    }
+    else if (ym == 4)
+    {
+      
+    }
+    else if (ym == 5)
+    {
+      
+    }
+    else if (ym == 6)
+    {
+      
+    }
+    else if (ym == 7)
+    {
+      
+    }
+    else if (ym == 8)
+    {
+      
+    }
+    return r;
+  }
+
+  static bool __cmp_when_3(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
+  {
+    bool r = true;
+    optpair_t xp, yp;
+    std::pair<int, double> sx, sy;
+    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    int ym = sy.first;
+    if (ym == 4)
+    {
+      
+    }
+    else if (ym == 5)
+    {
+      
+    }
+    else if (ym == 6)
+    {
+      
+    }
+    else if (ym == 7)
+    {
+      
+    }
+    else if (ym == 8)
+    {
+      
+    }
+    return r;
+  }
+
+  static bool __cmp_when_4(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
+  {
+    bool r = true;
+    optpair_t xp, yp;
+    std::pair<int, double> sx, sy;
+    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    int ym = sy.first;
+    if (ym == 5)
+    {
+      
+    }
+    else if (ym == 6)
+    {
+      
+    }
+    else if (ym == 7)
+    {
+      
+    }
+    else if (ym == 8)
+    {
+      
+    }
+    return r;
+  }
+
+  static bool __cmp_when_5(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
+  {
+    bool r = true;
+    optpair_t xp, yp;
+    std::pair<int, double> sx, sy;
+    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    int ym = sy.first;
+    if (ym == 6)
+    {
+      
+    }
+    else if (ym == 7)
+    {
+      
+    }
+    else if (ym == 8)
+    {
+      
+    }
+    return r;
+  }
+
+  static bool __cmp_when_6(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
+  {
+    bool r = true;
+    optpair_t xp, yp;
+    std::pair<int, double> sx, sy;
+    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    int ym = sy.first;
+    if (ym == 7)
+    {
+      
+    }
+    else if (ym == 8)
+    {
+      
+    }
+    return r;
+  }
+
+  static bool __cmp_when_7(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
+  {
+    bool r = true;
+    optpair_t xp, yp;
+    std::pair<int, double> sx, sy;
+    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    int ym = sy.first;
+    if (ym == 8)
+    {
+      
+    }
+    return r;
   }
 
   // i < j return true else false
   bool cmp_optsign(const optsign_t& i, const optsign_t& j)
   {
-    optpair_t ip = split_optcase(i);
-    optpair_t jp = split_optcase(j);
+    optpair_t ip = split_optsign(i);
+    optpair_t jp = split_optsign(j);
 
-    int si = __score_optpair(ip), sj = __score_optpair(jp);
+    std::pair<int, double> si = __score_optpair(ip), sj = __score_optpair(jp);
     bool r = false;
 
     //  如果两个分值一致，则考虑考虑细则
-    if (si == sj)
+    if (si.first == sj.first)
     {
-      switch (si)
+      switch (si.first)
       {
       case 1: // i,j都是运算符，且相等
       {
-        // 优先级越大，越靠前
-        int c = cmp_operator_priority(ip.first, jp.first);
-        r = c == 1 ? true : false;
+        r = si.second > sj.second ? true : false; // 优先级越大，越靠前
       } break;
       case 2: // i,j都是运算符，但是不相等
       {
-        int ci = opt_priority(ip.first) + opt_priority(ip.second);
-        int cj = opt_priority(jp.first) + opt_priority(jp.second);
-        r = ci > cj ? true : false;
+        r = si.second > sj.second ? true : false; // 优先级越大，越靠前
       } break;
       case 3: // i,j其中一个是运算符，一个是运算符集合，且运算符在集合内
-      case 4: // i,j其中一个是运算符，一个是运算符集合，且运算符不在集合内
       {
+        //
+        // 因为符号被集合包含所以主要对比集合为主。
+        //
         opt_t x1, x2;
         std::string y1, y2;
-        if (is_symopt(ip.first))
-        {
-          x1 = ip.first;
-          y1 = ip.second;
-        }
-        else
-        {
-          x1 = ip.second;
-          y1 = ip.first;
-        }
-
-        if (is_symopt(jp.first))
-        {
-          x2 = jp.first;
-          y2 = jp.second;
-        }
-        else
-        {
-          x2 = jp.second;
-          y2 = jp.first;
-        }
+        std::pair<opt_t, opt_t> pp;
+        pp = __on_symopt_optset_order(ip.first, ip.second);
+        x1 = pp.first;
+        y1 = pp.second;
+        pp = __on_symopt_optset_order(jp.first, jp.second);
+        x2 = pp.first;
+        y2 = pp.second;
 
         set_relation_t rel = relation_optset(y1, y2);
         if (rel == kSet1Include2)
@@ -142,9 +413,28 @@ namespace mysym
                  (rel == kSet1Equ2) || 
                  (rel == kSetIntersect))
         {
-          int c = cmp_operator_priority(x1, x2);
+          // 对比两个集合的优先级
+          int c = __cmp_priority(y1, y2);
           r = c == 1 ? true : false;
         }
+      } break;
+      case 4: // i,j其中一个是运算符，一个是运算符集合，且运算符不在集合内
+      {
+        //
+        // 因为没有包含，这里无论y1,y2的关系如何，都以x1,x2的优先级作为对比。
+        //
+        opt_t x1, x2;
+        std::string y1, y2;
+        std::pair<opt_t, opt_t> pp;
+        pp = __on_symopt_optset_order(ip.first, ip.second);
+        x1 = pp.first;
+        y1 = pp.second;
+        pp = __on_symopt_optset_order(jp.first, jp.second);
+        x2 = pp.first;
+        y2 = pp.second;
+
+        int c = cmp_operator_priority(x1, x2);
+        r = c == 1 ? true : false;
       } break;
       case 5: // i,j都是运算符集合，且相等
       {
@@ -159,7 +449,7 @@ namespace mysym
         }
         else if ((rel == kSetNoneIntersect) || (rel == kSetIntersect))
         {
-          r = size_optset(ip.first) < size_optset(jp.first) ? true : false;
+          r = si.second > sj.second ? true : false;
         }
       } break;
       case 6: // i,j都是运算符集合，且一个被一个包含
@@ -181,15 +471,13 @@ namespace mysym
         }
         else if ((rel == kSetNoneIntersect) || (rel == kSetIntersect))
         {
-          r = size_optset(x) < size_optset(y) ? true : false;
+          r = si.second > sj.second ? true : false;
         }
       } break;
       case 7: // i,j都是运算符集合，且相交
       case 8: // i,j都是运算符集合，且无交集
       {
-        opts_t x = union_optset(ip.first, ip.second);
-        opts_t y = union_optset(jp.first, jp.second);
-        r = x.size() < y.size() ? true : false;
+        r = si.second > sj.second ? true : false;
       } break;
       default:
       // 异常
@@ -197,8 +485,27 @@ namespace mysym
       }
     }
     else
-      r = si < sj;
-
+    {
+      //
+      // 这里按照通常顺序先得到一个结果
+      // 随后处理一些特殊情况
+      //
+      int im = si.first, jm = sj.first;
+      if ((im == 1) || (jm == 1))
+        r = __cmp_when_1(ip, jp, si, sj);
+      else if ((im == 2) || (jm == 2))
+        r = __cmp_when_2(ip, jp, si, sj);
+      else if ((im == 3) || (jm == 3))
+        r = __cmp_when_3(ip, jp, si, sj);
+      else if ((im == 4) || (jm == 4))
+        r = __cmp_when_4(ip, jp, si, sj);
+      else if ((im == 5) || (jm == 5))
+        r = __cmp_when_5(ip, jp, si, sj);
+      else if ((im == 6) || (jm == 6))
+        r = __cmp_when_6(ip, jp, si, sj);
+      else if ((im == 7) || (jm == 7))
+        r = __cmp_when_7(ip, jp, si, sj);
+    }
     return r;
   }
 
@@ -221,49 +528,75 @@ namespace mysym
       else
         return false;
     }
-    else if (is_symopt(i) && !is_symopt(j))
+    else if ((is_symopt(i) && !is_symopt(j)) || (!is_symopt(i) && is_symopt(j)))
     {
-      return true;
-    }
-    else if (!is_symopt(i) && is_symopt(j))
-    {
-      return false;
+      bool i_is_symopt = is_symopt(i);
+      std::string x, y;
+      if (is_symopt(i))
+      {
+        x = i;
+        y = j;
+      }
+      else
+      {
+        x = j;
+        y = i;
+      }
+      if (in_optset(y, x))
+      {
+        return i_is_symopt ? true : false;
+      }
+      
+      symopt_t sx;
+      optset_t oy;
+      if (find_symopt(x, sx) == false)
+      {
+        mysym_not_found_operator_exception("%s", x.c_str());
+      }
+      if (find_optset(y, oy) == false)
+      {
+        mysym_not_found_operator_set_exception("%s", y.c_str());
+      }
+
+      bool p = sx.priority < oy.average_priority;
+      return p && i_is_symopt;
     }
     else 
     {
       // 两个都是optset
       set_relation_t rel = relation_optset(i, j);
-      if (rel == kSetNoneIntersect)
-        return false;
-      else if (rel == kSet1Equ2)
-        return false;
-      else if (rel == kSet1Include2)
-        return false;
-      else if (rel == kSet2Include1)
+      if (rel == kSet2Include1)
+      {
         return true;
+      }
+      else if ((rel == kSet1Include2) || (rel == kSet1Equ2))
+      {
+        return false;
+      }
+      else if (rel == kSetNoneIntersect)
+      {
+        optset_t oi, oj;
+        if (find_optset(i, oi) == false)
+        {
+          mysym_not_found_operator_set_exception("%s", i.c_str());
+        }
+        if (find_optset(j, oj) == false)
+        {
+          mysym_not_found_operator_set_exception("%s", j.c_str());
+        }
+        return oi.average_priority < oj.average_priority;
+      }
       else if (rel == kSetIntersect)
       {
-        size_t ni = size_optset(i), nj = size_optset(j);
-        if (ni < nj)
-          return true;
-        else if (ni > nj)
-          return false;
-        else
-        {
-          // 集合数量一致判断集合内元素优先级
-          // 优先级越高，在队列中越前
-          optset_t opts;
-          find_optset(i, opts);
-          int ip = 0, jp = 0;
-          for (auto it = opts.items.elements.begin(); it != opts.items.elements.end(); it++)
-            ip += it->second.priority;
-          for (auto jt = opts.items.elements.begin(); jt != opts.items.elements.end(); jt++)
-            jp += jt->second.priority;
-          if (ip > jp)
-            return true;
-          else
-            return false;
-        }
+        opts_pair_t ds = difference_optset(i, j);
+        double p1 = 0, p2 = 0;
+        for (auto p : ds.first)
+          p1 += opt_priority(p);
+        for (auto p : ds.second)
+          p2 += opt_priority(p);
+        p1 /= ds.first.size();
+        p2 /= ds.second.size();
+        return p1 < p2;
       }/* end else if */
     }
     return false;
