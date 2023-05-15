@@ -112,13 +112,15 @@ namespace mysym
       if (in_optset(j, i))
       {
         mode = 3;
-        score = optset_priority(j);
+        // score = optset_priority(j);
+        score = opt_priority(i);
       }
       else
       {
         mode = 4;
-        p1 = __priority(i); p2 = __priority(j);
-        score = p1 > p2 ? p1 : p2;
+        // p1 = __priority(i); p2 = __priority(j);
+        // score = p1 > p2 ? p1 : p2;
+        score = opt_priority(i);
       }
     }
     else if (!is_symopt(i) && is_symopt(j))
@@ -126,13 +128,15 @@ namespace mysym
       if (in_optset(i, j))
       {
         mode = 3;
-        score = optset_priority(i);
+        // score = optset_priority(i);
+        score = opt_priority(j);
       }
       else
       {
         mode = 4;
-        p1 = __priority(i); p2 = __priority(j);
-        score = p1 > p2 ? p1 : p2;
+        // p1 = __priority(i); p2 = __priority(j);
+        // score = p1 > p2 ? p1 : p2;
+        score = opt_priority(j);
       }
     }
     else
@@ -164,204 +168,170 @@ namespace mysym
     return {mode, score};
   }
 
+// #define __DETAIL_CMP_MODE_NOT_MATCHED         1
+#ifdef __DETAIL_CMP_MODE_NOT_MATCHED
   // 注意!!!
   // 以下的__cmp_when_x中i与j不可能拥有相同的模式
   // 它们在模式判断不同下被调用。
   //
-
-#define __switch_opt_pair_score(mode, ip, jp, si, sj, xp, yp, sx, sy) \
+#define __switch_opt_pair_score(mode, ip, jp, si, sj, xp, yp, sx, sy, xmd) \
 {                       \
   if (si.first == mode) \
   {                     \
     xp = ip; yp = jp;   \
     sx = si; sy = sj;   \
+    xmd = true;         \
   } else {              \
     xp = jp; yp = ip;   \
     sx = sj; sy = si;   \
+    xmd = false;        \
   }                     \
 }
 
   static bool __cmp_when_1(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
   {
-    bool r = true;
+    bool r = true, xmd = false;
     optpair_t xp, yp;
     std::pair<int, double> sx, sy;
-    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    __switch_opt_pair_score(1, ip, jp, si, sj, xp, yp, sx, sy, xmd);
     int ym = sy.first;
     if (ym == 2)
     {
-
+      r = sx.second > sy.second ? true : false;
     }
     else if (ym == 3)
     {
-
+      //
+      // 取出yp的符号部分，以符号优先级为优先
+      // 返回的优先级是集合的优先级
+      //
+      // std::pair<opt_t, opt_t> pp = __on_symopt_optset_order(yp.first, yp.second);
+      // r = sx.second > opt_priority(pp.first) ? true : false;
+      r = sx.second > sy.second ? true : false;
     }
     else if (ym == 4)
     {
-      
+      // 以符号优先级为标准
+      // std::pair<opt_t, opt_t> pp = __on_symopt_optset_order(yp.first, yp.second);
+      // r = sx.second > opt_priority(pp.first) ? true : false;
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 5)
+    else if ((ym == 5) || (ym == 6) || (ym == 7) || (ym == 8))
     {
-      
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 6)
-    {
-      
-    }
-    else if (ym == 7)
-    {
-      
-    }
-    else if (ym == 8)
-    {
-      
-    }
-    return r;
+    return r & xmd;
   }
 
   static bool __cmp_when_2(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
   {
-    bool r = true;
+    bool r = true, xmd = false;
     optpair_t xp, yp;
     std::pair<int, double> sx, sy;
-    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    __switch_opt_pair_score(2, ip, jp, si, sj, xp, yp, sx, sy, xmd);
     int ym = sy.first;
     if (ym == 3)
     {
-
+      //
+      // 取出yp的符号部分，以符号优先级为优先
+      // 返回的优先级是集合的优先级
+      //
+      // std::pair<opt_t, opt_t> pp = __on_symopt_optset_order(yp.first, yp.second);
+      // r = sx.second > opt_priority(pp.first) ? true : false;
+      r = sx.second > sy.second ? true : false;
     }
     else if (ym == 4)
     {
-      
+      // 以符号优先级为标准
+      // std::pair<opt_t, opt_t> pp = __on_symopt_optset_order(yp.first, yp.second);
+      // r = sx.second > opt_priority(pp.first) ? true : false;
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 5)
+    else if ((ym == 5) || (ym == 6) || (ym == 7) || (ym == 8))
     {
-      
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 6)
-    {
-      
-    }
-    else if (ym == 7)
-    {
-      
-    }
-    else if (ym == 8)
-    {
-      
-    }
-    return r;
+    return r & xmd;
   }
 
   static bool __cmp_when_3(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
   {
-    bool r = true;
+    bool r = true, xmd = false;
     optpair_t xp, yp;
     std::pair<int, double> sx, sy;
-    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    __switch_opt_pair_score(3, ip, jp, si, sj, xp, yp, sx, sy, xmd);
     int ym = sy.first;
     if (ym == 4)
     {
-      
+      // 取出两个对的符号部分做比较
+      // std::pair<opt_t, opt_t> pp1 = __on_symopt_optset_order(xp.first, xp.second);
+      // std::pair<opt_t, opt_t> pp2 = __on_symopt_optset_order(yp.first, yp.second);
+      // r = opt_priority(pp1.first) > opt_priority(pp2.first) ? true : false;
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 5)
+    else if ((ym == 5) || (ym == 6) || (ym == 7) || (ym == 8))
     {
-      
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 6)
-    {
-      
-    }
-    else if (ym == 7)
-    {
-      
-    }
-    else if (ym == 8)
-    {
-      
-    }
-    return r;
+    return r & xmd;
   }
 
   static bool __cmp_when_4(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
   {
-    bool r = true;
+    bool r = true, xmd = false;
     optpair_t xp, yp;
     std::pair<int, double> sx, sy;
-    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    __switch_opt_pair_score(4, ip, jp, si, sj, xp, yp, sx, sy, xmd);
     int ym = sy.first;
-    if (ym == 5)
+    if ((ym == 5) || (ym == 6) || (ym == 7) || (ym == 8))
     {
-      
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 6)
-    {
-      
-    }
-    else if (ym == 7)
-    {
-      
-    }
-    else if (ym == 8)
-    {
-      
-    }
-    return r;
+    return r & xmd;
   }
 
   static bool __cmp_when_5(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
   {
-    bool r = true;
+    bool r = true, xmd = false;
     optpair_t xp, yp;
     std::pair<int, double> sx, sy;
-    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    __switch_opt_pair_score(5, ip, jp, si, sj, xp, yp, sx, sy, xmd);
     int ym = sy.first;
-    if (ym == 6)
+    if ((ym == 6) || (ym == 7) || (ym == 8))
     {
-      
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 7)
-    {
-      
-    }
-    else if (ym == 8)
-    {
-      
-    }
-    return r;
+    return r & xmd;
   }
 
   static bool __cmp_when_6(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
   {
-    bool r = true;
+    bool r = true, xmd = false;
     optpair_t xp, yp;
     std::pair<int, double> sx, sy;
-    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    __switch_opt_pair_score(6, ip, jp, si, sj, xp, yp, sx, sy, xmd);
     int ym = sy.first;
-    if (ym == 7)
+    if ((ym == 7) || (ym == 8))
     {
-      
+      r = sx.second > sy.second ? true : false;
     }
-    else if (ym == 8)
-    {
-      
-    }
-    return r;
+    return r & xmd;
   }
 
   static bool __cmp_when_7(const optpair_t& ip, const optpair_t& jp, const std::pair<int, double> &si, const std::pair<int, double> &sj)
   {
-    bool r = true;
+    bool r = true, xmd = false;
     optpair_t xp, yp;
     std::pair<int, double> sx, sy;
-    __switch_opt_pair_score(si.first, ip, jp, si, sj, xp, yp, sx, sy);
+    __switch_opt_pair_score(7, ip, jp, si, sj, xp, yp, sx, sy, xmd);
     int ym = sy.first;
     if (ym == 8)
     {
-      
+      r = sx.second > sy.second ? true : false;
     }
-    return r;
+    return r & xmd;
   }
+#endif
 
   // i < j return true else false
   bool cmp_optsign(const optsign_t& i, const optsign_t& j)
@@ -423,18 +393,19 @@ namespace mysym
         //
         // 因为没有包含，这里无论y1,y2的关系如何，都以x1,x2的优先级作为对比。
         //
-        opt_t x1, x2;
-        std::string y1, y2;
-        std::pair<opt_t, opt_t> pp;
-        pp = __on_symopt_optset_order(ip.first, ip.second);
-        x1 = pp.first;
-        y1 = pp.second;
-        pp = __on_symopt_optset_order(jp.first, jp.second);
-        x2 = pp.first;
-        y2 = pp.second;
+        // opt_t x1, x2;
+        // std::string y1, y2;
+        // std::pair<opt_t, opt_t> pp;
+        // pp = __on_symopt_optset_order(ip.first, ip.second);
+        // x1 = pp.first;
+        // y1 = pp.second;
+        // pp = __on_symopt_optset_order(jp.first, jp.second);
+        // x2 = pp.first;
+        // y2 = pp.second;
 
-        int c = cmp_operator_priority(x1, x2);
-        r = c == 1 ? true : false;
+        // int c = cmp_operator_priority(x1, x2);
+        // r = c == 1 ? true : false;
+        r = si.second > sj.second ? true : false;
       } break;
       case 5: // i,j都是运算符集合，且相等
       {
@@ -487,9 +458,9 @@ namespace mysym
     else
     {
       //
-      // 这里按照通常顺序先得到一个结果
-      // 随后处理一些特殊情况
+      // 处理模式不一致的地方
       //
+#ifdef __DETAIL_CMP_MODE_NOT_MATCHED
       int im = si.first, jm = sj.first;
       if ((im == 1) || (jm == 1))
         r = __cmp_when_1(ip, jp, si, sj);
@@ -505,6 +476,9 @@ namespace mysym
         r = __cmp_when_6(ip, jp, si, sj);
       else if ((im == 7) || (jm == 7))
         r = __cmp_when_7(ip, jp, si, sj);
+#else
+      r = si.second > sj.second ? true : false;
+#endif
     }
     return r;
   }

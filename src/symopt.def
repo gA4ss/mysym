@@ -1,4 +1,3 @@
-define_opt(kOptNone, -1, false, false, {}, "none", {false});
 define_opt(kOptAdd, 1, true, true, {}, "0", {true});
 define_opt(kOptMul, 2, true, true, {kOptAdd}, "1", {true});
 define_opt(kOptEqu, 0, false, false, {}, "none", {false});
@@ -44,3 +43,4 @@ define_opt(kOptConstInf, 8, false, false, {}, "none", {false});
 define_opt(kOptConstNegInf, 8, false, false, {}, "none", {false});
 define_opt(kOptFrac, 9, false, false, {}, "none", {false});
 define_opt(kOptNumber, 10, false, false, {}, "none", {false});
+define_opt(kOptNone, 11, false, false, {}, "none", {false});

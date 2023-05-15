@@ -75,8 +75,6 @@ namespace mysym
   void init_symopt();
   void init_symset();
 
-#define kOptNone "none"
-
 #define kOptAdd "+"
 #define kOptMul "*"
 
@@ -129,6 +127,7 @@ namespace mysym
 #define kOptConstNegInf "-inf"
 #define kOptFrac "/"
 #define kOptNumber "%"
+#define kOptNone "none"
 
 #define is_none(o) (o == kOptNone)
 #define is_und(o) is_none(o)

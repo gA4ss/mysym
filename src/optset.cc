@@ -49,7 +49,7 @@ namespace mysym
   int optset_priority(std::string name)
   {
     if (__optsets.find(name) == __optsets.end())
-      return -2;
+      return -1;
     return __optsets[name].average_priority;
   }
 
