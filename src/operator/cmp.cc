@@ -104,7 +104,8 @@ namespace mysym
    */
   static symbol_t __cmp_var_xxx(const symbol_t &x, const symbol_t &y)
   {
-    return is_var(kind(x)) ? gConstNegOne : gConstOne;
+    // return is_var(kind(x)) ? gConstNegOne : gConstOne;
+    return (auto_priority(kind(x)) < auto_priority(kind(y))) ? gConstOne : gConstNegOne;
   }
 
   /* 两个变量间的比较
@@ -166,7 +167,7 @@ namespace mysym
    */
   static symbol_t __cmp_basic_xxx(const symbol_t &x, const symbol_t &y)
   {
-    return (is_basic(kind(x))) ? gConstOne : gConstNegOne;
+    return (auto_priority(kind(x)) < auto_priority(kind(y))) ? gConstOne : gConstNegOne;
   }
 
   /* 相同基础运算符作比较
@@ -299,7 +300,7 @@ namespace mysym
     register_case(kOptCmp, make_optsign_any(kOptNone), __cmp_none_xxx);
     register_case(kOptCmp, make_optsign_exclude("const"), __cmp_const_xxx);
     register_case(kOptCmp, make_optsign("const", "const"), __cmp_const_const);
-    register_case(kOptCmp, make_optsign_any(kOptVariate), __cmp_var_xxx);
+    register_case(kOptCmp, make_optsign_exclude(kOptVariate), __cmp_var_xxx);
     register_case(kOptCmp, make_optsign(kOptVariate, kOptVariate), __cmp_var_var);
     register_case(kOptCmp, make_optsign(kOptPow, kOptPow), __cmp_pow_pow);
     register_case(kOptCmp, make_optsign(kOptLog, kOptLog), __cmp_log_log);

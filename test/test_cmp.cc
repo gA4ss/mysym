@@ -158,10 +158,11 @@ TEST(Sym, Cmp11)
 {
   symbol_t a1 = c_mul("x", "y");
   symbol_t f1 = c_sin("a");
-  EXPECT_EQ(compare(a1, f1), -1);
+  EXPECT_EQ(compare(a1, f1), 1);
   symbol_t a2 = c_mul("x", create_int("1"));
   symbol_t p1 = c_pow("a", create_int("5"));
-  EXPECT_EQ(compare(a2, p1), -1);
+  EXPECT_EQ(compare(a2, p1), 1);
+  EXPECT_EQ(compare(p1, a2), -1);
 }
 
 // #endif

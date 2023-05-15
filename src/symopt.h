@@ -63,6 +63,7 @@ namespace mysym
   bool in_optset(std::string setname, std::string optname);
   bool as_symopt(std::string name);
   int optset_priority(std::string name);
+  double auto_priority(std::string name);
   opts_t in_optset(std::string setname, opts_t optnames);
   opts_t expand_optset(const optset_t& s);
   opts_t expand_optset(std::string setname);

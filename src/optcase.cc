@@ -56,13 +56,6 @@ namespace mysym
   //   return as_symopt(opt);
   // }
 
-  static double __priority(const opt_t &opt)
-  {
-    if (is_symopt(opt))
-      return opt_priority(opt);
-    return optset_priority(opt);
-  }
-
   static int __cmp_priority(const opt_t &opt1, const opt_t &opt2)
   {
     double p1 = is_symopt(opt1) ? opt_priority(opt1) : optset_priority(opt1);
@@ -104,7 +97,7 @@ namespace mysym
     if (is_symopt(i) && is_symopt(j))
     {
       mode = i == j ? 1 : 2;
-      p1 = __priority(i); p2 = __priority(j);
+      p1 = auto_priority(i); p2 = auto_priority(j);
       score = p1 > p2 ? p1 : p2;
     }
     else if (is_symopt(i) && !is_symopt(j))
@@ -118,7 +111,7 @@ namespace mysym
       else
       {
         mode = 4;
-        // p1 = __priority(i); p2 = __priority(j);
+        // p1 = auto_priority(i); p2 = auto_priority(j);
         // score = p1 > p2 ? p1 : p2;
         score = opt_priority(i);
       }
@@ -134,7 +127,7 @@ namespace mysym
       else
       {
         mode = 4;
-        // p1 = __priority(i); p2 = __priority(j);
+        // p1 = auto_priority(i); p2 = auto_priority(j);
         // score = p1 > p2 ? p1 : p2;
         score = opt_priority(j);
       }
@@ -161,7 +154,7 @@ namespace mysym
       else if ((rel == kSetIntersect) || (rel == kSetNoneIntersect))
       {
         mode = rel == kSetIntersect ? 7 : 8;
-        p1 = __priority(i); p2 = __priority(j);
+        p1 = auto_priority(i); p2 = auto_priority(j);
         score = p1 > p2 ? p1 : p2;
       }
     }
@@ -562,15 +555,18 @@ namespace mysym
       }
       else if (rel == kSetIntersect)
       {
-        opts_pair_t ds = difference_optset(i, j);
-        double p1 = 0, p2 = 0;
-        for (auto p : ds.first)
-          p1 += opt_priority(p);
-        for (auto p : ds.second)
-          p2 += opt_priority(p);
-        p1 /= ds.first.size();
-        p2 /= ds.second.size();
-        return p1 < p2;
+        // 比较差集的优先级与直接比较是相同的
+        // 在两个集合相交的情况下，这是一个简单的运算
+        // opts_pair_t ds = difference_optset(i, j);
+        // double p1 = 0, p2 = 0;
+        // for (auto p : ds.first)
+        //   p1 += opt_priority(p);
+        // for (auto p : ds.second)
+        //   p2 += opt_priority(p);
+        // p1 /= ds.first.size();
+        // p2 /= ds.second.size();
+        // return p1 < p2;
+        return optset_priority(i) < optset_priority(j);
       }/* end else if */
     }
     return false;

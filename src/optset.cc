@@ -53,6 +53,13 @@ namespace mysym
     return __optsets[name].average_priority;
   }
 
+  double auto_priority(std::string name)
+  {
+    if (is_symopt(name))
+      return opt_priority(name);
+    return optset_priority(name);
+  }
+
   bool find_optset(std::string name, optset_t &out)
   {
     if (__optsets.find(name) == __optsets.end())

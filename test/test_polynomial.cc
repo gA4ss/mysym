@@ -18,7 +18,7 @@ TEST(Sym, Polynomial) {
   EXPECT_FALSE(is_polynomial(s4, create_var("b")));
   symbol_t s5 = c_pow("a", create_int("5"));
   symbol_t s6 = c_pow("a", create_int("3"));
-  symbol_t s7 = c_add(s6,s7);
+  symbol_t s7 = c_add(s5,s6);
   EXPECT_TRUE(is_polynomial(s7, create_var("a")));
 }
 
