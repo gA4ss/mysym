@@ -21,16 +21,42 @@ namespace mysym
 
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
   {
-    __rule_library.cases[opt][sign] = fexecute;
+    for (auto it = __rule_library.cases[opt].begin();
+         it != __rule_library.cases[opt].end();
+         it++)
+    {
+      if (it->first == sign)
+      {
+        it->second = fexecute;
+        return;
+      }
+    }
+    __rule_library.cases[opt].push_back({sign, fexecute});
   }
 
   void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
   {
-    __rule_library.cases[opt][sign] = fexecute;
+    // __rule_library.cases[opt][sign] = fexecute;
+    append_case(opt, sign, fexecute);
     // 替换两个位置
     optpair_t opp = split_optsign(sign);
     optsign_t rsign = make_optsign(opp.second, opp.first);
-    __rule_library.cases[opt][rsign] = fexecute;
+    // __rule_library.cases[opt][rsign] = fexecute;
+    append_case(opt, rsign, fexecute);
+  }
+
+  static bool __cmp_case(const rule_case_t &c1, const rule_case_t &c2)
+  {
+    return cmp_optsign(c1.first, c2.first);
+  }
+
+  void sort_case(opt_t opt)
+  {
+    if (find_entry(opt) == false)
+      return;
+    std::sort(__rule_library.cases[opt].begin(), 
+              __rule_library.cases[opt].end(),
+              __cmp_case);
   }
 
   bool find_entry(opt_t opt)
@@ -38,13 +64,25 @@ namespace mysym
     return __rule_library.entries.find(opt) != __rule_library.entries.end();
   }
 
-  bool find_case(opt_t opt, optsign_t ops)
+  bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr)
   {
     if (__rule_library.cases.find(opt) == __rule_library.cases.end())
       return false;
-    if (__rule_library.cases[opt].find(ops) == __rule_library.cases[opt].end())
-      return false;
-    return true;
+    // if (__rule_library.cases[opt].find(ops) == __rule_library.cases[opt].end())
+    //   return false;
+    for (auto it = __rule_library.cases[opt].begin();
+         it != __rule_library.cases[opt].end();
+         it++)
+    {
+      if (it->first == ops)
+      {
+        if (fptr) *fptr = it->second;
+        return true;
+      }
+    }
+
+    if (fptr) fptr = nullptr;
+    return false;
   }
 
   // t一定是单个运算符号
@@ -75,7 +113,11 @@ namespace mysym
     opt_t xo = kind(x), yo = kind(y);
     optsign_t xys = make_optsign(xo, yo);
     if (find_case(opt, xys) == true)
+    {
+      z = xys;
       return true;
+    }
+
     //
     // 遍历注册得运算符号集合
     //
@@ -100,7 +142,7 @@ namespace mysym
   symbol_t execute_entry(const symbol_t &x)
   {
     if (find_entry(kind(x)) == false)
-      return undefined;
+      return x;
     return __rule_library.entries[kind(x)](x);
   }
 
@@ -108,8 +150,13 @@ namespace mysym
   {
     optsign_t sign;
     if (__meet_conditions(opt, x, y, sign) == false)
-      return undefined;
-    return __rule_library.cases[opt][sign](x, y);
+      return just_make2(opt, x, y);
+    fptr_execute_t fptr = nullptr;
+    if (find_case(opt, sign, &fptr))
+    {
+      return fptr(x, y);
+    }
+    return just_make2(opt, x, y);
   }
 
   void apply_rule(symbol_t &x)

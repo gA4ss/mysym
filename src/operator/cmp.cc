@@ -307,6 +307,7 @@ namespace mysym
     register_case(kOptCmp, make_optsign("func", "func"), __cmp_func_func);
     register_case(kOptCmp, make_optsign_exclude("basic"), __cmp_basic_xxx);
     register_case(kOptCmp, make_optsign("basic", "basic"), __cmp_basic);
+    sort_case(kOptCmp);
     append_entry(kOptCmp, __cmp_entry);
     // ----------------------------------------
     append_entry(kOptEqu, __order_entry);

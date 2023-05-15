@@ -6,7 +6,7 @@ namespace mysym
    */
   symbol_t operand(const symbol_t &s, size_t i)
   {
-    if (is_sym(kind(s)))
+    if (is_atom(kind(s)))
     {
       if (i == 0)
       {

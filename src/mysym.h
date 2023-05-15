@@ -180,15 +180,16 @@ namespace mysym
   typedef bool (*fptr_condition_t)(opt_t, const symbol_t &, const symbol_t &);
   typedef symbol_t (*fptr_entry_t)(const symbol_t &);
   typedef symbol_t (*fptr_execute_t)(const symbol_t &, const symbol_t &);
-  typedef struct __cmp_rule_table_t
-  {
-    bool operator()(const optsign_t &i, const optsign_t &j) const
-    {
-      return cmp_optsign(i, j);
-    }
-  } cmp_rule_table_t;
-  typedef std::map<optsign_t, fptr_execute_t, cmp_rule_table_t> rule_table_t;
-
+  // typedef struct __cmp_rule_table_t
+  // {
+  //   bool operator()(const optsign_t &i, const optsign_t &j) const
+  //   {
+  //     return cmp_optsign(i, j);
+  //   }
+  // } cmp_rule_table_t;
+  // typedef std::map<optsign_t, fptr_execute_t, cmp_rule_table_t> rule_table_t;
+  typedef std::pair<optsign_t, fptr_execute_t> rule_case_t;
+  typedef std::vector<rule_case_t> rule_table_t;
   // 条件执行项目
   typedef std::map<opt_t, fptr_entry_t> rule_entry_t;
   typedef std::map<opt_t, rule_table_t> rule_object_t;
@@ -206,10 +207,11 @@ namespace mysym
   void init_rule();
   
   bool find_entry(opt_t opt);
-  bool find_case(opt_t opt, optsign_t ops);
+  bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr = nullptr);
   void append_entry(opt_t opt, fptr_entry_t fentry);
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
   void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
+  void sort_case(opt_t opt);
   symbol_t execute_entry(const symbol_t &x);
   symbol_t execute_cases(opt_t opt, const symbol_t &x, const symbol_t &y);
   void apply_rule(symbol_t &x);

@@ -16,46 +16,44 @@ TEST(Sym, PrintCmd)
   }
 }
 
-// TEST(Sym, Cmp3)
-// {
-//   //
-//   // 常数与变量比较
-//   //
-//   symbol_t x = create_var("x");
-//   symbol_t c1 = create_flt("1.5");
-//   EXPECT_EQ(compare(x, c1), 1);
+TEST(Sym, Cmp3)
+{
+  //
+  // 常数与变量比较
+  //
+  symbol_t x = create_var("x");
+  symbol_t c1 = create_flt("1.5");
+  EXPECT_EQ(compare(x, c1), 1);
 
-//   symbol_t fr = c_frac(c1, create_int("5"));
-//   EXPECT_EQ(compare(x, fr), 1);
+  symbol_t fr = c_frac(c1, create_int("5"));
+  EXPECT_EQ(compare(x, fr), 1);
 
-//   //
-//   // 常数与常数间比较
-//   //
-//   symbol_t c2 = create_flt("3.14");
-//   symbol_t c3 = create_flt("2.78");
-//   EXPECT_EQ(compare(c3, c2), -1);
-//   EXPECT_EQ(compare(c2, c3), 1);
-//   EXPECT_EQ(compare(c2, c2), 0);
+  //
+  // 常数与常数间比较
+  //
+  symbol_t c2 = create_flt("3.14");
+  symbol_t c3 = create_flt("2.78");
+  EXPECT_EQ(compare(c3, c2), -1);
+  EXPECT_EQ(compare(c2, c3), 1);
+  EXPECT_EQ(compare(c2, c2), 0);
 
-//   EXPECT_EQ(compare(c1, fr), 1);
-//   EXPECT_EQ(compare(fr, c2), -1);
-//   EXPECT_EQ(compare(c3, fr), 1);
+  EXPECT_EQ(compare(c1, fr), 1);
+  EXPECT_EQ(compare(fr, c2), -1);
+  EXPECT_EQ(compare(c3, fr), 1);
 
-//   //
-//   // 符号间的比较
-//   //
-//   symbol_t y = create_var("y");
-//   EXPECT_EQ(compare(x, y), -1);
-//   EXPECT_EQ(compare(x, x), 0);
+  //
+  // 符号间的比较
+  //
+  symbol_t y = create_var("y");
+  EXPECT_EQ(compare(x, y), -1);
+  EXPECT_EQ(compare(x, x), 0);
 
-//   //
-//   // 符号与函数间比较
-//   //
-//   symbol_t sinx = c_sin("x");
-//   EXPECT_EQ(compare(sinx, x), 1);
-// }
-
-#if 0
+  //
+  // 符号与函数间比较
+  //
+  symbol_t sinx = c_sin("x");
+  EXPECT_EQ(compare(sinx, x), 1);
+}
 
 TEST(Sym, Cmp4)
 {
@@ -166,7 +164,7 @@ TEST(Sym, Cmp11)
   EXPECT_EQ(compare(a2, p1), -1);
 }
 
-#endif
+// #endif
 
 int main(int argc, char *argv[])
 {

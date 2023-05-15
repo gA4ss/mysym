@@ -88,8 +88,7 @@ namespace mysym
     {
       mysym_invalid_symbol_format_exception("invalid symbol literal format = %s", literal.c_str());
     }
-
-    if (st == kStrTypeNum)
+    else if ((st == kStrTypeInt) || (st == kStrTypeReal))
     {
       s.opt = kOptNumber;
       s.literal = literal;
