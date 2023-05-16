@@ -141,7 +141,7 @@ namespace mysym
         t = execute_cases(opt, z, operand(x, j));
 
         //
-        // 如果z的符合与opt一致，则说明两项没有合并，不一致则说明合并了
+        // 如果z的运算符与opt一致，则说明两项没有合并，不一致则说明合并了
         // 合并后，记录当前j节点。之后遇到则跳过。
         //
         if (kind(t) != opt)
@@ -181,11 +181,6 @@ namespace mysym
       else
         x.items = new_symbol_items;
       append(x.items, independent);
-    }
-    else
-    {
-      mysym_assert(independent.size() == n, "independent size = \'%lu\', n = \'%lu\' not same",
-                   independent.size(), n);
     }
     return;
   }

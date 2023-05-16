@@ -150,13 +150,13 @@ namespace mysym
   {
     optsign_t sign;
     if (__meet_conditions(opt, x, y, sign) == false)
-      return undefined;
+      return just_make2(opt, x, y);
     fptr_execute_t fptr = nullptr;
     if (find_case(opt, sign, &fptr))
     {
       return fptr(x, y);
     }
-    return undefined;
+    return just_make2(opt, x, y);
   }
 
   void apply_rule(symbol_t &x)
