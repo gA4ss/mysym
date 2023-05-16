@@ -15,6 +15,8 @@ TEST(Sym, Coefficient)
   x3 = c_mul(create_int("2"), x3);
   symbol_t y3 = c_pow("y", create_int("2"));
   y3 = c_mul(create_int("6"), y3);
+  std::cout << "x3 = "<< print_string(x3) << std::endl;
+  std::cout << "y3 = "<< print_string(y3) << std::endl;
   symbol_t xpy = c_add(x3, y3);
   xpy = c_add(xpy, create_int("9"));
   std::cout << print_string(xpy) << std::endl;

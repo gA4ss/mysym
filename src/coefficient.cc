@@ -42,15 +42,26 @@ namespace mysym
         else
         {
           //
-          // 非x的单项式则跳过
+          // 这里修订一个当表达式没有进行自动化简时
+          // 对取系数的一个增强。如果自动化简过后
+          // 这里一定是全部单项式
           //
-          if (!is_monomial(*it, x))
-            continue;
-
-          k = degree(*it, x);
-          if (compare(k, d) == 0)
-            return constant(*it);
-        }
+          if (is_monomial(*it, x))
+          {
+            k = degree(*it, x);
+            if (compare(k, d) == 0)
+              return constant(*it);
+          }
+          else
+          {
+            //
+            // 这里是非单项式，进行递归
+            //
+            k = coefficient(*it, x, d);
+            if (!is_undefined(k))
+              return k;
+          }/* end else */
+        }/* end else */
       }
     }
 

@@ -3,7 +3,6 @@
 
 namespace mysym
 {
-#if 0
   static inline symbol_t __mympf_to_symbol(const mympf::float_t &f)
   {
     return create_flt(mympf::print_string(f));
@@ -14,22 +13,14 @@ namespace mysym
     return c_frac(mympz::print_string(f.first), mympz::print_string(f.second));
   }
 
-  static bool __c_add_num_num(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_num, x, y);
-  }
-  static symbol_t __e_add_num_num(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_num_num(const symbol_t &x, const symbol_t &y)
   {
     mympf::float_t f1 = mympf::create(x.literal);
     mympf::float_t f2 = mympf::create(y.literal);
     return __mympf_to_symbol(mympf::add(f1, f2));
   }
 
-  static bool __c_add_num_frac(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_num, is_frac, x, y);
-  }
-  static symbol_t __e_add_num_frac(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_num_frac(const symbol_t &x, const symbol_t &y)
   {
     mympf::float_t f1, f2;
     if (is_frac(kind(x)))
@@ -45,33 +36,22 @@ namespace mysym
     return __mympf_to_symbol(mympf::add(f1, f2));
   }
 
-  static bool __c_add_num_nature(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_num, is_nature, x, y);
-  }
-  static symbol_t __e_add_num_nature(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_num_nature(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_num_var(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_num, is_var, x, y);
-  }
-  static symbol_t __e_add_num_var(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_num_var(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_num_func(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_num, is_func, x, y);
-  }
-  static symbol_t __e_add_num_func(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_num_func(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
+#if 0
   static bool __c_add_frac_frac(const symbol_t &x, const symbol_t &y)
   {
     return __test_and(is_frac, x, y);
@@ -277,12 +257,9 @@ namespace mysym
   {
     return undefined;
   }
+#endif
 
-  static bool __c_add_entry(const symbol_t &x)
-  {
-    return __test_opt(kOptAdd, x);
-  }
-  static symbol_t __e_add_entry(const symbol_t &x)
+  static symbol_t __add_entry(const symbol_t &x)
   {
     symbol_t _x = x;
 
@@ -292,30 +269,27 @@ namespace mysym
     combine_like_terms(_x);
     return _x;
   }
-#endif
 
   symbol_t add(const symbol_t &x, const symbol_t &y)
   {
-    // symbol_t z = execute_rule_table(kOptAdd, x, y);
-
-    // //
-    // // 交换律对z进行排序，之前结合与分配律都在子项完成。
-    // //
-    // apply_commutative_law(z);
-    // return z;
-    return undefined;
+    symbol_t z = execute_cases(kOptAdd, x, y);
+    //
+    // 交换律对加法后的结果进行排序
+    //
+    apply_commutative_law(z);
+    return z;
   }
 
   void register_add_rule()
   {
-#if 0
     // 数值 + xxx
-    register_case(kOptAdd, __c_add_num_num, __e_add_num_num);
-    register_case(kOptAdd, __c_add_num_frac, __e_add_num_frac);
-    register_case(kOptAdd, __c_add_num_nature, __e_add_num_nature);
-    register_case(kOptAdd, __c_add_num_var, __e_add_num_var);
-    register_case(kOptAdd, __c_add_num_func, __e_add_num_func);
+    register_case(kOptAdd, make_optsign(kOptNumber, kOptNumber), __add_num_num);
+    register_case(kOptAdd, make_optsign(kOptNumber, kOptFrac), __add_num_frac);
+    register_case(kOptAdd, make_optsign(kOptNumber, "nature"), __add_num_nature);
+    register_case(kOptAdd, make_optsign(kOptNumber, kOptVariate), __add_num_var);
+    register_case(kOptAdd, make_optsign(kOptNumber, "func"), __add_num_func);
 
+#if 0
     // 分数 + xxx
     register_case(kOptAdd, __c_add_frac_frac, __e_add_frac_frac);
     register_case(kOptAdd, __c_add_frac_nature, __e_add_frac_nature);
@@ -342,9 +316,8 @@ namespace mysym
     register_case(kOptAdd, __c_add_mul_mul, __e_add_mul_mul);
     register_case(kOptAdd, __c_add_add_add, __e_add_add_add);
     register_case(kOptAdd, __c_add_mul_add, __e_add_mul_add);
-
-    // 入口
-    register_case(kOptAdd, __c_add_entry, __e_add_entry);
 #endif
+    // 入口
+    append_entry(kOptAdd, __add_entry);
   }
 } // namespace mysym
