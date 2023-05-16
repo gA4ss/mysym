@@ -51,46 +51,32 @@ namespace mysym
     return just_make2(kOptAdd, x, y);
   }
 
-#if 0
-  static bool __c_add_frac_frac(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_frac_frac(const symbol_t &x, const symbol_t &y)
   {
-    return __test_and(is_frac, x, y);
-  }
-  static symbol_t __e_add_frac_frac(const symbol_t &x, const symbol_t &y)
-  {
-    mympf::float_t v1 = mympf::create(x.literal), v2 = mympf::create(y.literal);
-    mynum::fraction_t f1 = mynum::f::fraction(v1), f2 = mynum::f::fraction(v2);
+    // mympf::float_t v1 = mympf::create(x.literal), v2 = mympf::create(y.literal);
+    // mynum::fraction_t f1 = mynum::f::fraction(v1), f2 = mynum::f::fraction(v2);
+    mynum::fraction_t f1 = {mympz::create(numerator(x).literal), mympz::create(denominator(x).literal)};
+    mynum::fraction_t f2 = {mympz::create(numerator(y).literal), mympz::create(denominator(y).literal)};
     mynum::fraction_t f3 = mynum::f::add(f1, f2);
     return __mympf_fraction_to_symbol(f3);
   }
 
-  static bool __c_add_frac_nature(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_frac, is_nature, x, y);
-  }
-  static symbol_t __e_add_frac_nature(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_frac_nature(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_frac_var(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_frac, x, y);
-  }
-  static symbol_t __e_add_frac_var(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_frac_var(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_frac_func(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_frac, is_func, x, y);
-  }
-  static symbol_t __e_add_frac_func(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_frac_func(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
+#if 0
   static bool __c_add_nature_nature(const symbol_t &x, const symbol_t &y)
   {
     return __test_and(is_nature, x, y);
@@ -289,13 +275,13 @@ namespace mysym
     register_case(kOptAdd, make_optsign(kOptNumber, kOptVariate), __add_num_var);
     register_case(kOptAdd, make_optsign(kOptNumber, "func"), __add_num_func);
 
-#if 0
     // 分数 + xxx
-    register_case(kOptAdd, __c_add_frac_frac, __e_add_frac_frac);
-    register_case(kOptAdd, __c_add_frac_nature, __e_add_frac_nature);
-    register_case(kOptAdd, __c_add_frac_var, __e_add_frac_var);
-    register_case(kOptAdd, __c_add_frac_func, __e_add_frac_func);
+    register_case(kOptAdd, make_optsign(kOptFrac, kOptFrac), __add_frac_frac);
+    register_case(kOptAdd, make_optsign(kOptFrac, "nature"), __add_frac_nature);
+    register_case(kOptAdd, make_optsign(kOptFrac, kOptVariate), __add_frac_var);
+    register_case(kOptAdd, make_optsign(kOptFrac, "func"), __add_frac_func);
 
+#if 0
     // 常数 + xxx
     register_case(kOptAdd, __c_add_nature_nature, __e_add_nature_nature);
     register_case(kOptAdd, __c_add_nature_var, __e_add_nature_var);

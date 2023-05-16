@@ -171,8 +171,6 @@ add_test(NAME test_term COMMAND test_term)
 set_tests_properties(test_term PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_exponent COMMAND test_exponent)
 set_tests_properties(test_exponent PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-add_test(NAME test_cmp COMMAND test_cmp)
-set_tests_properties(test_cmp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_sort COMMAND test_sort)
 set_tests_properties(test_sort PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_match COMMAND test_match)
@@ -189,6 +187,11 @@ add_test(NAME test_optcase COMMAND test_optcase)
 set_tests_properties(test_optcase PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_rule COMMAND test_rule)
 set_tests_properties(test_rule PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+# Test Operator
+add_test(NAME test_cmp COMMAND test_cmp)
+set_tests_properties(test_cmp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_add COMMAND test_add)
+set_tests_properties(test_add PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 #
 # Auto Test
 #
