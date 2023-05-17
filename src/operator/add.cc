@@ -76,12 +76,7 @@ namespace mysym
     return just_make2(kOptAdd, x, y);
   }
 
-#if 0
-  static bool __c_add_nature_nature(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_nature, x, y);
-  }
-  static symbol_t __e_add_nature_nature(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_nature_nature(const symbol_t &x, const symbol_t &y)
   {
     if (compare(x, y) == 0)
     {
@@ -103,24 +98,17 @@ namespace mysym
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_nature_var(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_nature, is_var, x, y);
-  }
-  static symbol_t __e_add_nature_var(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_nature_var(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_nature_func(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_nature, is_func, x, y);
-  }
-  static symbol_t __e_add_nature_func(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_nature_func(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
+#if 0
   static bool __c_add_var_var(const symbol_t &x, const symbol_t &y)
   {
     return __test_and(is_var, x, y);
@@ -281,12 +269,12 @@ namespace mysym
     register_case(kOptAdd, make_optsign(kOptFrac, kOptVariate), __add_frac_var);
     register_case(kOptAdd, make_optsign(kOptFrac, "func"), __add_frac_func);
 
-#if 0
     // 常数 + xxx
-    register_case(kOptAdd, __c_add_nature_nature, __e_add_nature_nature);
-    register_case(kOptAdd, __c_add_nature_var, __e_add_nature_var);
-    register_case(kOptAdd, __c_add_nature_func, __e_add_nature_func);
+    register_case(kOptAdd, make_optsign("nature", "nature"), __add_nature_nature);
+    register_case(kOptAdd, make_optsign("nature", kOptVariate), __add_nature_var);
+    register_case(kOptAdd, make_optsign("nature", "func"), __add_nature_func);
 
+#if 0
     // 变量 + xxx
     register_case(kOptAdd, __c_add_var_var, __e_add_var_var);
     register_case(kOptAdd, __c_add_var_func, __e_add_var_func);

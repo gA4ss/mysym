@@ -58,13 +58,38 @@ TEST(Sym, Frac)
   EXPECT_STREQ(print_string(z).c_str(), "1/2+e");
   EXPECT_EQ(compare(z, c_add("0.5", "e")), 0);
 
-  // x = create_var("x");
-  // y = create_flt("1.5");
-  // EXPECT_STREQ(print_string(add(x, y)).c_str(), "1.5+x");
+  x = create_var("x");
+  y = c_frac("1", "2");
+  EXPECT_STREQ(print_string(add(x, y)).c_str(), "1/2+x");
 
-  // x = create_flt("3.1415");
-  // y = c_sin("y");
-  // EXPECT_STREQ(print_string(add(x, y)).c_str(), "3.1415+sin(y)");
+  x = c_frac("1", "2");
+  y = c_sin("y");
+  EXPECT_STREQ(print_string(add(x, y)).c_str(), "1/2+sin(y)");
+}
+
+TEST(Sym, Nature)
+{
+  //
+  // 常数与变量比较
+  //
+  symbol_t x = gConstE;
+  symbol_t y = gConstPI;
+  symbol_t z = add(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "e+pi");
+
+  x = gConstE;
+  y = gConstInf;
+  z = add(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "inf");
+
+  x = create_var("x");
+  y = gConstE;
+  z = add(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "e+x");
+
+  x = gConstPI;
+  y = c_sin("y");
+  EXPECT_STREQ(print_string(add(x, y)).c_str(), "pi+sin(y)");
 }
 
 int main(int argc, char *argv[])

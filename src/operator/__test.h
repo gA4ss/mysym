@@ -11,7 +11,7 @@ namespace mysym
 #define __test_and(is_xxx, x, y) (is_xxx(kind(x)) && is_xxx(kind(y)))
 
 #define __test_and_or(is_xxx, is_yyy, x, y) ((is_xxx(kind(x)) && is_yyy(kind(y))) || \
-                                             (is_yyy(kind(y)) && is_xxx(kind(x))))
+                                             (is_yyy(kind(x)) && is_xxx(kind(y))))
 
 } // namespace mysym
 
