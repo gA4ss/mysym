@@ -93,7 +93,7 @@ namespace mysym
       {
         str = numerator(s).literal;
         str += "/";
-        str = denominator(s).literal;
+        str += denominator(s).literal;
       }
       else
       {

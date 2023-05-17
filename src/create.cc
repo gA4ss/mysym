@@ -80,23 +80,25 @@ namespace mysym
       s.opt = kOptConstNegInf;
       s.literal = opt_name(kOptConstNegInf);
     }
+    else
+    {
+      // 通过字符串判断类型
 
-    // 通过字符串判断类型
-
-    size_t st = static_cast<size_t>(my::type_of_string(literal));
-    if (st == kStrTypeErr)
-    {
-      mysym_invalid_symbol_format_exception("invalid symbol literal format = %s", literal.c_str());
-    }
-    else if ((st == kStrTypeInt) || (st == kStrTypeReal))
-    {
-      s.opt = kOptNumber;
-      s.literal = literal;
-    }
-    else if (st == kStrTypeVar)
-    {
-      s.opt = kOptVariate;
-      s.literal = literal;
+      size_t st = static_cast<size_t>(my::type_of_string(literal));
+      if (st == kStrTypeErr)
+      {
+        mysym_invalid_symbol_format_exception("invalid symbol literal format = %s", literal.c_str());
+      }
+      else if ((st == kStrTypeInt) || (st == kStrTypeReal))
+      {
+        s.opt = kOptNumber;
+        s.literal = literal;
+      }
+      else if (st == kStrTypeVar)
+      {
+        s.opt = kOptVariate;
+        s.literal = literal;
+      }
     }
 
     return s;

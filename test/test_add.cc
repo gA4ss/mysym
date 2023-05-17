@@ -56,7 +56,7 @@ TEST(Sym, Frac)
   y = c_frac("1", "2");
   z = add(x, y);
   EXPECT_STREQ(print_string(z).c_str(), "1/2+e");
-  // EXPECT_EQ(compare(z, c_add("0.5", "e")), 0);
+  EXPECT_EQ(compare(z, c_add("0.5", "e")), 0);
 
   // x = create_var("x");
   // y = create_flt("1.5");
