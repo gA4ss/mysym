@@ -1,4 +1,5 @@
 #include <mysym/mysym.h>
+#include <unordered_set>
 
 namespace mysym
 {
@@ -104,8 +105,8 @@ namespace mysym
       return;
 
     symbol_t z, t;
-    list_t new_symbol_items, independent;
-    std::vector<size_t> combined;
+    list_t new_symbol_items;
+    std::unordered_set<size_t> combined;
     bool new_z = false;
 
     opt_t opt = kind(x);
@@ -146,28 +147,22 @@ namespace mysym
         //
         if (kind(t) != opt)
         {
-          combined.push_back(j);
+          combined.insert(j);
           z = t;
           new_z = true;
         }
-      }
+      }/* j的循环 */
 
       //
       // 判断改变标志，改变了则压入新的队列
       //
       if (new_z)
       {
+        // 有新的z产生说明当前i也被合并了
+        combined.insert(i);
         new_symbol_items.push_back(z);
       }
-      else
-      {
-        //
-        // 如果有没新的z产生，说明当前i节点
-        // 与任何节点都不相关
-        //
-        independent.push_back(operand(x, i));
-      }
-    } /* end for */
+    } /* i的循环 */
 
     //
     // 如果新的符号队列为空，则说明x的各个项都不能合并
@@ -175,12 +170,31 @@ namespace mysym
     //
     if (new_symbol_items.size() != 0)
     {
-      // 如果仅有1个，说明所有符号都经过了合并。直接替换
-      if (new_symbol_items.size() == 1)
-        x = new_symbol_items[0];
+      symbol_t _x; _x.opt = kind(x);
+
+      //
+      // 全部都结合了并且结果为1，说明所有符号都经过了合并。直接替换
+      //
+      if ((combined.size() == symbol_size(x)) && (new_symbol_items.size() == 1))
+      {
+        _x = new_symbol_items[0];
+      }
       else
-        x.items = new_symbol_items;
-      append(x.items, independent);
+      {
+        _x.items = new_symbol_items;
+        //
+        // 将未参与合并的符号压入结果
+        //
+        for (size_t k = 0; k < symbol_size(x); k++)
+        {
+          // 不在已经合并索引中
+          if (combined.find(k) == combined.end())
+            append(_x, operand(x, k));
+        }
+      }
+
+      // 更新结果
+      x = _x;
     }
     return;
   }
@@ -215,6 +229,14 @@ namespace mysym
       n = symbol_size(x);
     } while (kind(x) != opt);
     return;
+  }
+
+  void apply_basic_rule(symbol_t &x)
+  {
+    apply_associative_law(x);
+    apply_distributive_law(x);
+    apply_commutative_law(x);
+    combine_like_terms(x);
   }
 
 } // namespace mysym

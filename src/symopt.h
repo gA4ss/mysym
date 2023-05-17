@@ -153,7 +153,7 @@ namespace mysym
 #define is_opt(o) (in_optset("opt", o))
 #define is_basic(o) (in_optset("basic", o))
 #define is_atom(o) (in_optset("atom", o))
-#define is_sym(o) (in_optset("atom", o) || in_optset("func", o))
+#define is_sym(o) (in_optset("sym", o))
 #define is_const(o) (in_optset("const", o))
 #define is_nature(o) (in_optset("nature", o))
 #define is_basic_func(o) (in_optset("basicf", o))

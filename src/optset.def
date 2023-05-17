@@ -10,5 +10,6 @@ define_optset("hyper", kOptSinh "," kOptCosh "," kOptTanh "," kOptCoth "," kOptS
 define_optset("ihyper", kOptArcSinh "," kOptArcCosh "," kOptArcTanh "," kOptArcCoth "," kOptArcSech "," kOptArcCsch);
 define_optset("func2p", kOptPow "," kOptLog "," kOptMod);
 define_optset("func", "basicf, trigo, itrigo, hyper, ihyper");
+define_optset("sym", "atom, func");
 define_optset("opt", "basic, order, func");
 define_optset("all", symopts());

@@ -108,43 +108,26 @@ namespace mysym
     return just_make2(kOptAdd, x, y);
   }
 
-#if 0
-  static bool __c_add_var_var(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_var, x, y);
-  }
-  static symbol_t __e_add_var_var(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_var_var(const symbol_t &x, const symbol_t &y)
   {
     if (compare(x, y) == 0)
       return just_make2(kOptMul, "2", x);
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_var_func(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_var, is_func, x, y);
-  }
-  static symbol_t __e_add_var_func(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_var_func(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_func_func(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_func, x, y);
-  }
-  static symbol_t __e_add_func_func(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_func_func(const symbol_t &x, const symbol_t &y)
   {
     if (compare(x, y) == 0)
       return just_make2(kOptMul, "2", x);
     return just_make2(kOptAdd, x, y);
   }
 
-  static bool __c_add_sym_mul(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_sym, is_mul, x, y);
-  }
-  static symbol_t __e_add_sym_mul(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_sym_mul(const symbol_t &x, const symbol_t &y)
   {
     symbol_t _x, _y;
     if (is_sym(kind(x)))
@@ -158,38 +141,6 @@ namespace mysym
       _y = x;
     }
 
-    list_t vars = variables(_y);
-    if (size(vars) != 1)
-    {
-      return just_make2(kOptAdd, x, y);
-    }
-    else if (compare(_x, vars[0]) == 0)
-    {
-      // 可以相加
-      symbol_t a = __e_add_num_num(gConstOne, constant(_y));
-      return just_make2(kOptMul, a, _x);
-    }
-    return just_make2(kOptAdd, x, y);
-  }
-
-  static bool __c_add_sym_add(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_sym, is_add, x, y);
-  }
-  static symbol_t __e_add_sym_add(const symbol_t &x, const symbol_t &y)
-  {
-    // symbol_t _x, _y;
-    // if (is_sym(kind(x)))
-    // {
-    //   _x = x;
-    //   _y = y;
-    // }
-    // else
-    // {
-    //   _x = y;
-    //   _y = x;
-    // }
-
     // list_t vars = variables(_y);
     // if (size(vars) != 1)
     // {
@@ -198,13 +149,32 @@ namespace mysym
     // else if (compare(_x, vars[0]) == 0)
     // {
     //   // 可以相加
-    //   symbol_t a = __e_add_num_num(gConstOne, constant(_y));
+    //   symbol_t a = __add_num_num(gConstOne, constant(_y));
     //   return just_make2(kOptMul, a, _x);
     // }
-    // return just_make2(kOptAdd, x, y);
-    return undefined;
+    return just_make2(kOptAdd, _x, _y);
   }
 
+  static symbol_t __add_sym_add(const symbol_t &x, const symbol_t &y)
+  {
+    symbol_t _x, _y;
+    if (is_sym(kind(x)))
+    {
+      _x = x;
+      _y = y;
+    }
+    else
+    {
+      _x = y;
+      _y = x;
+    }
+
+    _y = just_make2(kOptAdd, _x, _y);
+    apply_basic_rule(_y);
+    return _y;
+  }
+
+#if 0
   static bool __c_add_mul_mul(const symbol_t &x, const symbol_t &y)
   {
     return __test_and(is_mul, x, y);
@@ -236,11 +206,7 @@ namespace mysym
   static symbol_t __add_entry(const symbol_t &x)
   {
     symbol_t _x = x;
-
-    apply_associative_law(_x);
-    apply_distributive_law(_x);
-    apply_commutative_law(_x);
-    combine_like_terms(_x);
+    apply_basic_rule(_x);
     return _x;
   }
 
@@ -274,18 +240,18 @@ namespace mysym
     register_case(kOptAdd, make_optsign("nature", kOptVariate), __add_nature_var);
     register_case(kOptAdd, make_optsign("nature", "func"), __add_nature_func);
 
-#if 0
     // 变量 + xxx
-    register_case(kOptAdd, __c_add_var_var, __e_add_var_var);
-    register_case(kOptAdd, __c_add_var_func, __e_add_var_func);
+    register_case(kOptAdd, make_optsign(kOptVariate, kOptVariate), __add_var_var);
+    register_case(kOptAdd, make_optsign(kOptVariate, "func"), __add_var_func);
 
     // 函数 + xxx
-    register_case(kOptAdd, __c_add_func_func, __e_add_func_func);
+    register_case(kOptAdd, make_optsign("func", "func"), __add_func_func);
 
     // 符号(数值、分数、常数、变量、函数) + 单项式 or 多项式
-    register_case(kOptAdd, __c_add_sym_mul, __e_add_sym_mul);
-    register_case(kOptAdd, __c_add_sym_add, __e_add_sym_add);
+    register_case(kOptAdd, make_optsign("sym", kOptMul), __add_sym_mul);
+    register_case(kOptAdd, make_optsign("sym", kOptAdd), __add_sym_add);
 
+#if 0
     // 多项式 与 单项式
     register_case(kOptAdd, __c_add_mul_mul, __e_add_mul_mul);
     register_case(kOptAdd, __c_add_add_add, __e_add_add_add);

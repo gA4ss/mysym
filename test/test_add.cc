@@ -92,6 +92,48 @@ TEST(Sym, Nature)
   EXPECT_STREQ(print_string(add(x, y)).c_str(), "pi+sin(y)");
 }
 
+TEST(Sym, VarFunc)
+{
+  symbol_t x = create_sym("x");
+  symbol_t y = create_sym("y");
+  symbol_t z = add(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "x+y");
+
+  x = create_sym("x");
+  y = create_sym("x");
+  z = add(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "2*x");
+
+  x = create_sym("x");
+  y = c_cos("a");
+  z = add(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "x+cos(a)");
+
+  x = c_cos("a");
+  y = c_cos("a");
+  z = add(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "2*cos(a)");
+}
+
+TEST(Sym, Basic)
+{
+  symbol_t x = create_sym("x");
+  symbol_t y = create_sym("y");
+  symbol_t z1 = c_add(x, y);
+  symbol_t z2 = c_mul(x, y);
+  symbol_t a = create_sym("a");
+  symbol_t r = add(a, z1);
+  EXPECT_STREQ(print_string(r).c_str(), "a+x+y");
+  r = add(a, z2);
+  EXPECT_STREQ(print_string(r).c_str(), "a+x*y");
+  x = create_sym("x");
+  y = create_sym("a");
+  z1 = add(x, y);
+  // a + a + x
+  r = add(a, z1);
+  EXPECT_STREQ(print_string(r).c_str(), "x+2*a");
+}
+
 int main(int argc, char *argv[])
 {
   init();
