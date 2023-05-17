@@ -129,9 +129,9 @@ TEST(Sym, Basic)
   x = create_sym("x");
   y = create_sym("a");
   z1 = add(x, y);
-  // a + a + x
   r = add(a, z1);
   EXPECT_STREQ(print_string(r).c_str(), "x+2*a");
+  
 }
 
 int main(int argc, char *argv[])

@@ -231,6 +231,13 @@ namespace mysym
     return;
   }
 
+  void format(symbol_t &x)
+  {
+    apply_associative_law(x);
+    apply_distributive_law(x);
+    apply_commutative_law(x);
+  }
+
   void apply_basic_rule(symbol_t &x)
   {
     apply_associative_law(x);

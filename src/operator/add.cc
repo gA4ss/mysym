@@ -174,34 +174,20 @@ namespace mysym
     return _y;
   }
 
-#if 0
-  static bool __c_add_mul_mul(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_mul, x, y);
-  }
-  static symbol_t __e_add_mul_mul(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_mul_mul(const symbol_t &x, const symbol_t &y)
   {
     return undefined;
   }
 
-  static bool __c_add_add_add(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and(is_add, x, y);
-  }
-  static symbol_t __e_add_add_add(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_add_add(const symbol_t &x, const symbol_t &y)
   {
     return undefined;
   }
 
-  static bool __c_add_mul_add(const symbol_t &x, const symbol_t &y)
-  {
-    return __test_and_or(is_add, is_mul, x, y);
-  }
-  static symbol_t __e_add_mul_add(const symbol_t &x, const symbol_t &y)
+  static symbol_t __add_mul_add(const symbol_t &x, const symbol_t &y)
   {
     return undefined;
   }
-#endif
 
   static symbol_t __add_entry(const symbol_t &x)
   {
@@ -251,12 +237,11 @@ namespace mysym
     register_case(kOptAdd, make_optsign("sym", kOptMul), __add_sym_mul);
     register_case(kOptAdd, make_optsign("sym", kOptAdd), __add_sym_add);
 
-#if 0
     // 多项式 与 单项式
-    register_case(kOptAdd, __c_add_mul_mul, __e_add_mul_mul);
-    register_case(kOptAdd, __c_add_add_add, __e_add_add_add);
-    register_case(kOptAdd, __c_add_mul_add, __e_add_mul_add);
-#endif
+    register_case(kOptAdd, make_optsign(kOptMul, kOptMul), __add_mul_mul);
+    register_case(kOptAdd, make_optsign(kOptAdd, kOptAdd), __add_add_add);
+    register_case(kOptAdd, make_optsign(kOptMul, kOptAdd), __add_mul_add);
+
     // 入口
     append_entry(kOptAdd, __add_entry);
   }

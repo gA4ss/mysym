@@ -229,6 +229,7 @@ namespace mysym
   void apply_commutative_law(symbol_t &x);
   void apply_distributive_law(symbol_t &x);
   void combine_like_terms(symbol_t &x);
+  void format(symbol_t &x);
   void apply_basic_rule(symbol_t &x);
 
   //
