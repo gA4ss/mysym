@@ -129,30 +129,7 @@ namespace mysym
 
   static symbol_t __add_sym_mul(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t _x, _y;
-    if (is_sym(kind(x)))
-    {
-      _x = x;
-      _y = y;
-    }
-    else
-    {
-      _x = y;
-      _y = x;
-    }
-
-    // list_t vars = variables(_y);
-    // if (size(vars) != 1)
-    // {
-    //   return just_make2(kOptAdd, x, y);
-    // }
-    // else if (compare(_x, vars[0]) == 0)
-    // {
-    //   // 可以相加
-    //   symbol_t a = __add_num_num(gConstOne, constant(_y));
-    //   return just_make2(kOptMul, a, _x);
-    // }
-    return just_make2(kOptAdd, _x, _y);
+    return just_make2(kOptAdd, x, y);
   }
 
   static symbol_t __add_sym_add(const symbol_t &x, const symbol_t &y)
@@ -176,17 +153,23 @@ namespace mysym
 
   static symbol_t __add_mul_mul(const symbol_t &x, const symbol_t &y)
   {
-    return undefined;
+    if (compare(x, y) == 0)
+      return make(kOptMul, create_int("2"), x);
+    return just_make2(kOptAdd, x, y);
   }
 
   static symbol_t __add_add_add(const symbol_t &x, const symbol_t &y)
   {
-    return undefined;
+    symbol_t z = c_add(x, y);
+    combine_like_terms(z);
+    return z;
   }
 
   static symbol_t __add_mul_add(const symbol_t &x, const symbol_t &y)
   {
-    return undefined;
+    symbol_t z = c_add(x, y);
+    apply_rule(z);
+    return z;
   }
 
   static symbol_t __add_entry(const symbol_t &x)

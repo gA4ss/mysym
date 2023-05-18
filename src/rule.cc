@@ -31,7 +31,10 @@ namespace mysym
         return;
       }
     }
+
+    // 更新表
     __rule_library.cases[opt].push_back({sign, fexecute});
+    __rule_library.casetbl[opt][sign] = __rule_library.cases[opt].size() - 1;
   }
 
   void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
@@ -57,6 +60,18 @@ namespace mysym
     std::sort(__rule_library.cases[opt].begin(), 
               __rule_library.cases[opt].end(),
               __cmp_case);
+
+    //
+    // 更新索引
+    //
+    size_t i = 0;
+    for (auto it = __rule_library.cases[opt].begin();
+         it != __rule_library.cases[opt].end();
+         it++)
+    {
+      __rule_library.casetbl[opt][it->first] = i;
+      ++i;
+    }
   }
 
   bool find_entry(opt_t opt)
@@ -66,23 +81,18 @@ namespace mysym
 
   bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr)
   {
-    if (__rule_library.cases.find(opt) == __rule_library.cases.end())
+    if (fptr) *fptr = nullptr;
+    if (__rule_library.casetbl.find(opt) == __rule_library.casetbl.end())
       return false;
-    // if (__rule_library.cases[opt].find(ops) == __rule_library.cases[opt].end())
-    //   return false;
-    for (auto it = __rule_library.cases[opt].begin();
-         it != __rule_library.cases[opt].end();
-         it++)
+    if (__rule_library.casetbl[opt].find(ops) == __rule_library.casetbl[opt].end())
+      return false;
+    
+    if (fptr)
     {
-      if (it->first == ops)
-      {
-        if (fptr) *fptr = it->second;
-        return true;
-      }
+      size_t k = __rule_library.casetbl[opt][ops];
+      *fptr = __rule_library.cases[opt][k].second;
     }
-
-    if (fptr) fptr = nullptr;
-    return false;
+    return true;
   }
 
   // t一定是单个运算符号

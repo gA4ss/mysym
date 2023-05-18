@@ -131,7 +131,34 @@ TEST(Sym, Basic)
   z1 = add(x, y);
   r = add(a, z1);
   EXPECT_STREQ(print_string(r).c_str(), "x+2*a");
-  
+}
+
+TEST(Sym, Basic2)
+{
+  symbol_t x = create_sym("x");
+  symbol_t y = create_sym("y");
+  symbol_t z1 = c_mul(x, y);
+  symbol_t z2 = c_mul(x, y);
+  symbol_t z3 = add(z1, z2);
+  EXPECT_STREQ(print_string(z3).c_str(), "2*x*y");
+  x = create_sym("a");
+  y = create_sym("b");
+  z2 = c_mul(x, y);
+  z3 = add(z1, z2);
+  EXPECT_STREQ(print_string(z3).c_str(), "a*b+x*y");
+
+  symbol_t a = create_sym("x");
+  symbol_t b = create_sym("a");
+  z1 = add(x, y);
+  // std::cout << print_string(z1) << std::endl;
+  z2 = add(a, b);
+  // std::cout << print_string(z2) << std::endl;
+  z3 = add(z1, z2); // (x+y) + (x+a) = a+y+2*x
+  EXPECT_STREQ(print_string(z3).c_str(), "b+x+2*a");
+
+  z2 = c_mul(x, y);
+  z3 = add(z1, z2);
+  EXPECT_STREQ(print_string(z3).c_str(), "a+b+a*b");
 }
 
 int main(int argc, char *argv[])

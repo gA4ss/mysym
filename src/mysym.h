@@ -11,6 +11,7 @@
 #include <vector>
 #include <set>
 #include <map>
+#include <unordered_map>
 
 #include <mympz/mympz.h>
 #include <mympf/mympf.h>
@@ -190,14 +191,17 @@ namespace mysym
   // typedef std::map<optsign_t, fptr_execute_t, cmp_rule_table_t> rule_table_t;
   typedef std::pair<optsign_t, fptr_execute_t> rule_case_t;
   typedef std::vector<rule_case_t> rule_table_t;
+  typedef std::unordered_map<optsign_t, size_t> rule_table_index_t;
+  typedef std::unordered_map<opt_t, rule_table_index_t> rule_case_query_t;
   // 条件执行项目
-  typedef std::map<opt_t, fptr_entry_t> rule_entry_t;
-  typedef std::map<opt_t, rule_table_t> rule_object_t;
+  typedef std::unordered_map<opt_t, fptr_entry_t> rule_entry_t;
+  typedef std::unordered_map<opt_t, rule_table_t> rule_object_t;
 
   typedef struct __rule_library_t
   {
     rule_entry_t entries;
     rule_object_t cases;
+    rule_case_query_t casetbl;
   } rule_library_t;
   rule_library_t &rule_library();
 
