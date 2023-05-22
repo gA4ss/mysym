@@ -63,14 +63,33 @@ TEST(Sym, SymMul)
   symbol_t x = create_sym("x");
   symbol_t y = create_sym("y");
   symbol_t z1 = c_mul("z", "x");
-  // std::cout << print_string(z1) << std::endl;
   symbol_t z2 = c_add("a", c_mul("x", "y"));
-  // std::cout << print_string(z2) << std::endl;
   symbol_t z3 = mul(x, z1);
-  std::cout << print_string(z3) << std::endl;
+  // std::cout << print_string(z3) << std::endl;
+  EXPECT_STREQ(print_string(z3).c_str(), "z*^(x,2)");
   symbol_t z4 = mul(x, z2);
-  std::cout << print_string(z4) << std::endl;
-  // EXPECT_EQ(compare(mul(x, y), create_flt("4.71")), 0);
+  EXPECT_STREQ(print_string(z4).c_str(), "a*x+y*^(x,2)");
+  // std::cout << print_string(z4) << std::endl;
+}
+
+TEST(Sym, MutilMul)
+{
+  symbol_t x = create_sym("x");
+  symbol_t y = create_sym("y");
+  symbol_t z1 = c_mul("z", "x");
+  symbol_t z2 = c_mul("5", "a");
+  symbol_t z3 = c_add("a", c_mul("x", "y"));
+  symbol_t z4 = c_add("5", "x");
+  symbol_t k = mul(z1, z2);
+  EXPECT_STREQ(print_string(k).c_str(), "5*a*x*z");
+  // (a+x*y)*(5+x) = 5*a+5*x*y+a*x+y*^(x,2)
+  k = mul(z3, z4);
+  EXPECT_STREQ(print_string(k).c_str(), "5*a+5*x*y+a*x+y*^(x,2)");
+  // std::cout << print_string(k) << std::endl;
+  // (x*z) * (a + x*y) = a*x*z + y*z*^(x,2)
+  k = mul(z1, z3);
+  EXPECT_STREQ(print_string(k).c_str(), "a*x*z+y*z*^(x,2)");
+  // std::cout << print_string(k) << std::endl;
 }
 
 int main(int argc, char *argv[])

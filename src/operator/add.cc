@@ -126,14 +126,14 @@ namespace mysym
     }
 
     _y = just_make2(kOptAdd, _x, _y);
-    apply_basic_rule(_y);
+    play(_y);
     return _y;
   }
 
   static symbol_t __add_mul_mul(const symbol_t &x, const symbol_t &y)
   {
     if (compare(x, y) == 0)
-      return make(kOptMul, create_int("2"), x);
+      return just_make2(kOptMul, create_int("2"), x);
     return just_make2(kOptAdd, x, y);
   }
 
@@ -161,10 +161,7 @@ namespace mysym
   symbol_t add(const symbol_t &x, const symbol_t &y)
   {
     symbol_t z = execute_cases(kOptAdd, x, y);
-    //
-    // 交换律对加法后的结果进行排序
-    //
-    apply_commutative_law(z);
+    sort(z);
     return z;
   }
 

@@ -15,7 +15,7 @@ namespace mysym
     return u;
   }
 
-  symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o)
+  symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o, bool ex)
   {
     opt_t opt = (o == kOptNone ? kOptMul : o);
     if (is_sym(kind(u)))
@@ -26,18 +26,25 @@ namespace mysym
     symbol_t v = create(u.opt);
     for (auto it1 = u.items.begin(); it1 != u.items.end(); it1++)
     {
-      if (is_sym(kind(s)))
+      if (ex)
       {
-        append(v, make(opt, *it1, s));
+        if (is_sym(kind(s)))
+        {
+          append(v, make(opt, *it1, s));
+        }
+        else
+        {
+          for (auto it2 = s.items.begin(); it2 != s.items.end(); it2++)
+          {
+            // std::cout << print_string(*it1) << std::endl;
+            // std::cout << print_string(*it2) << std::endl;
+            append(v, make(opt, *it1, *it2));
+          }
+        }
       }
       else
       {
-        for (auto it2 = s.items.begin(); it2 != s.items.end(); it2++)
-        {
-          // std::cout << print_string(*it1) << std::endl;
-          // std::cout << print_string(*it2) << std::endl;
-          append(v, make(opt, *it1, *it2));
-        }
+        append(v, make(opt, *it1, s));
       }
     }
     return v;

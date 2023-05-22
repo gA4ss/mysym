@@ -121,7 +121,7 @@ namespace mysym
     }
     // return map(_y, _x, kOptMul);
     _y = just_make2(kOptMul, _x, _y);
-    apply_basic_rule(_y);
+    play(_y);
     return _y;
     // symbol_t v = create(kOptMul);
     // for (auto it1 = _y.items.begin(); it1 != _y.items.end(); it1++)
@@ -146,32 +146,34 @@ namespace mysym
     }
 
     _y = just_make2(kOptMul, _x, _y);
-    apply_basic_rule(_y);
+    play(_y);
     return _y;
   }
 
-#if 0
   static symbol_t __mul_mul_mul(const symbol_t &x, const symbol_t &y)
   {
     if (compare(x, y) == 0)
-      return make(kOptMul, create_int("2"), x);
-    return just_make2(kOptAdd, x, y);
+      return c_pow(x, "2");
+    symbol_t z = just_make2(kOptMul, x, y);
+    play(z);
+    return z;
   }
 
   static symbol_t __mul_add_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = c_add(x, y);
-    combine_like_terms(z);
+    if (compare(x, y) == 0)
+      return just_make2(kOptPow, x, create_int("2"));
+    symbol_t z = just_make2(kOptMul, x, y);
+    play(z);
     return z;
   }
 
   static symbol_t __mul_mul_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = c_add(x, y);
-    apply_rule(z);
+    symbol_t z = just_make2(kOptMul, x, y);
+    play(z);
     return z;
   }
-#endif
 
   static symbol_t __mul_entry(const symbol_t &x)
   {
@@ -183,10 +185,8 @@ namespace mysym
   symbol_t mul(const symbol_t &x, const symbol_t &y)
   {
     symbol_t z = execute_cases(kOptMul, x, y);
-    //
-    // 交换律对加法后的结果进行排序
-    //
-    apply_commutative_law(z);
+    // 整理结果
+    sort(z);
     return z;
   }
 
@@ -221,12 +221,11 @@ namespace mysym
     register_case(kOptMul, make_optsign("sym", kOptMul), __mul_sym_mul);
     register_case(kOptMul, make_optsign("sym", kOptAdd), __mul_sym_add);
 
-#if 0
     // 多项式 与 单项式
     register_case(kOptMul, make_optsign(kOptMul, kOptMul), __mul_mul_mul);
     register_case(kOptMul, make_optsign(kOptAdd, kOptAdd), __mul_add_add);
     register_case(kOptMul, make_optsign(kOptMul, kOptAdd), __mul_mul_add);
-#endif
+
     // 入口
     append_entry(kOptMul, __mul_entry);
   }

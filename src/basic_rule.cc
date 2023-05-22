@@ -38,11 +38,39 @@ namespace mysym
     return;
   }
 
+  static bool __symbol_cmp(const symbol_t &s1, const symbol_t &s2)
+  {
+    int c = compare(s1, s2);
+    return (c == -1) ? true : false;
+  }
+
   /* 交换律就是排序
    */
   void apply_commutative_law(symbol_t &x)
   {
-    sort(x);
+    if (symbol_size(x) == 0)
+      return;
+
+    //
+    // 符合交换律的才可以进行排序
+    //
+    if (!opt_commutative_law(kind(x)))
+      return;
+    
+    //
+    // 排序
+    //
+    std::sort(x.items.begin(), x.items.end(), __symbol_cmp);
+
+    //
+    // 应用交换律到子序列
+    //
+    for (auto it = x.items.begin(); it != x.items.end(); it++)
+    {
+      apply_commutative_law(*it);
+    }
+
+    return;
   }
 
   /* 在现实意义中的数学仅有*法对+法的分配律
@@ -276,12 +304,19 @@ namespace mysym
     apply_commutative_law(x);
   }
 
+  void play(symbol_t &x)
+  {
+    apply_associative_law(x);
+    apply_distributive_law(x);
+    combine_like_terms(x);
+  }
+
   void apply_basic_rule(symbol_t &x)
   {
     apply_associative_law(x);
     apply_distributive_law(x);
-    apply_commutative_law(x);
     combine_like_terms(x);
+    apply_commutative_law(x);
   }
 
 } // namespace mysym

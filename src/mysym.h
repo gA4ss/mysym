@@ -159,7 +159,7 @@ namespace mysym
 
   typedef symbol_t (*fptr_map_t)(const symbol_t &);
   symbol_t map(fptr_map_t fmap, const symbol_t &s);
-  symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o = kOptNone);
+  symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o = kOptNone, bool ex = false);
 
   //
   // 分数运算
@@ -247,6 +247,7 @@ namespace mysym
   void apply_distributive_law(symbol_t &x);
   void combine_like_terms(symbol_t &x);
   void format(symbol_t &x);
+  void play(symbol_t &x);
   void apply_basic_rule(symbol_t &x);
 
   //
