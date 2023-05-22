@@ -18,7 +18,7 @@ namespace mysym
   symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o)
   {
     opt_t opt = (o == kOptNone ? kOptMul : o);
-    if (is_atom(kind(u)))
+    if (is_sym(kind(u)))
     {
       return make(opt, u, s);
     }
@@ -26,7 +26,7 @@ namespace mysym
     symbol_t v = create(u.opt);
     for (auto it1 = u.items.begin(); it1 != u.items.end(); it1++)
     {
-      if (is_atom(kind(s)))
+      if (is_sym(kind(s)))
       {
         append(v, make(opt, *it1, s));
       }

@@ -39,11 +39,12 @@ namespace mysym
 
   } symbol_t;
 
-  void append(symbol_t &y, const symbol_t &x);
-
   typedef std::shared_ptr<symbol_t> symbol_ptr_t;
   typedef std::vector<symbol_t> symbol_items_t;
   typedef std::map<opt_t, std::string> operator_names_t;
+
+  void append(symbol_t &y, const symbol_t &x);
+  void append(symbol_t& y, const symbol_items_t &x);
 
   //
   // 使用符号严格限定的几个类型
@@ -69,9 +70,15 @@ namespace mysym
   // 知识库
   // 用于存储一些全局公共变量的数据
   //
+  typedef struct __config_t
+  {
+    // 遇到浮点数与分数相加是否运算，默认不运算，保留两个符号。
+    bool is_compute_frac_float;
+  } config_t;
   typedef struct __library_t
   {
     __library_t();
+    config_t config;
   } library_t;
   typedef std::shared_ptr<library_t> library_ptr_t;
 
@@ -88,6 +95,7 @@ namespace mysym
   void init_global();
   void init();
   symbol_t create(opt_t opt, std::string literal = "");
+  symbol_t create(opt_t opt, const symbol_items_t &items);
   symbol_t create_symbol(std::string literal);
 
   symbol_t make(opt_t opt, const symbol_t &s, bool nas = false);
@@ -107,6 +115,8 @@ namespace mysym
 #define create_int(literal) create(kOptNumber, literal)
 #define create_flt(literal) create(kOptNumber, literal)
 #define create_sym(literal) create_symbol(literal)
+#define create_monomial(items) create(kOptMul, items)
+#define create_polynomial(items) create(kOptAdd, items)
 #define undefined create_none()
 
   void copy(const symbol_t &s, symbol_t &d);
@@ -127,7 +137,6 @@ namespace mysym
 
   int compare(const symbol_t &s1, const symbol_t &s2);
   void sort(symbol_t &s, bool reverse = false);
-  void merge(symbol_t &s);
   void automatic_simplify(symbol_t &s);
 
   list_t complete_sub_expressions(const symbol_t &s, bool found = false);
@@ -161,6 +170,9 @@ namespace mysym
   symbol_t frac_to_num(const symbol_t &s);
   symbol_t num_to_frac(const symbol_t &s);
   mynum::fraction_t frac_to_mynum_fraction(const symbol_t &s);
+  symbol_t mynum_fraction_to_frac(const mynum::fraction_t &f);
+  symbol_t compute_frac_num(opt_t opt, const symbol_t &x, const symbol_t &y);
+  symbol_t compute_frac_frac(opt_t opt, const symbol_t &x, const symbol_t &y);
 
   //
   // 规则表
@@ -206,8 +218,9 @@ namespace mysym
   rule_library_t &rule_library();
 
   void register_atom_rule();
-  void register_add_rule();
   void register_cmp_rule();
+  void register_add_rule();
+  void register_mul_rule();
   void init_rule();
   
   bool find_entry(opt_t opt);
@@ -270,7 +283,7 @@ namespace mysym
 #define c_tanh(s) make(kOptTanh, s, false)
 #define c_coth(s) make(kOptCoth, s, false)
 #define c_sech(s) make(kOptSech, s, false)
-#define c_c_csch(s) make(kOptCsch, s, false)
+#define c_csch(s) make(kOptCsch, s, false)
 #define c_asinh(s) make(kOptArcSinh, s, false)
 #define c_acosh(s) make(kOptArcCosh, s, false)
 #define c_atanh(s) make(kOptArcTanh, s, false)
@@ -291,7 +304,7 @@ namespace mysym
   // 符号运算符
   //
   symbol_t add(const symbol_t &x, const symbol_t &y);
-  // symbol_t mul(const symbol_t &x, const symbol_t &y);
+  symbol_t mul(const symbol_t &x, const symbol_t &y);
   symbol_t equ(const symbol_t &x, const symbol_t &y);
   symbol_t neq(const symbol_t &x, const symbol_t &y);
   symbol_t lt(const symbol_t &x, const symbol_t &y);

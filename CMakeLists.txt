@@ -93,7 +93,6 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/coefficient.cc
   ${SRC_DIRECTORY}/make.cc
   ${SRC_DIRECTORY}/tree.cc
-  ${SRC_DIRECTORY}/merge.cc
   ${SRC_DIRECTORY}/operand.cc
   ${SRC_DIRECTORY}/base.cc
   ${SRC_DIRECTORY}/exponent.cc
@@ -119,7 +118,6 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/library.cc
   ${SRC_DIRECTORY}/list.cc
   ${SRC_DIRECTORY}/solve.cc
-  ${SRC_DIRECTORY}/rational.cc
   ${SRC_DIRECTORY}/units.cc
   ${SRC_DIRECTORY}/monomial.cc
   ${SRC_DIRECTORY}/polynomial.cc
@@ -187,11 +185,15 @@ add_test(NAME test_optcase COMMAND test_optcase)
 set_tests_properties(test_optcase PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_rule COMMAND test_rule)
 set_tests_properties(test_rule PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_units COMMAND test_units)
+set_tests_properties(test_units PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 # Test Operator
 add_test(NAME test_cmp COMMAND test_cmp)
 set_tests_properties(test_cmp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_add COMMAND test_add)
 set_tests_properties(test_add PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_mul COMMAND test_mul)
+set_tests_properties(test_mul PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 #
 # Auto Test
 #

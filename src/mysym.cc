@@ -11,4 +11,9 @@ namespace mysym
   {
     y.items.push_back(x);
   }
+
+  void append(symbol_t& y, const symbol_items_t &x)
+  {
+    append(y.items, x);
+  }
 } // namespace mysym

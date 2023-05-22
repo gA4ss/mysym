@@ -13,7 +13,6 @@ namespace mysym
   symbol_t create(opt_t opt, std::string literal)
   {
     symbol_t s;
-    s.opt = opt;
     if (is_opt(opt) || is_nature(opt) || is_frac(opt))
     {
       s.literal = opt_name(opt);
@@ -40,6 +39,16 @@ namespace mysym
       }
       s.literal = literal;
     }
+    s.opt = opt;
+    return s;
+  }
+
+  symbol_t create(opt_t opt, const symbol_items_t &items)
+  {
+    symbol_t s;
+    s.opt = opt;
+    s.items = items;
+    s.literal = print_string(s);
     return s;
   }
 

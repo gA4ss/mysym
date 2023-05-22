@@ -177,8 +177,9 @@ namespace mysym
   void init_rule()
   {
     register_atom_rule();
-    register_add_rule();
     register_cmp_rule();
+    register_add_rule();
+    register_mul_rule();
   }
 
   symbol_t default_entry(const symbol_t &x)

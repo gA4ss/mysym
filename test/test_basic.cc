@@ -51,11 +51,16 @@ TEST(Sym, Create2)
   // std::cout << print_string(r) << std::endl;
 }
 
-// TEST(Sym, Opt) {
-//   symbol_ptr_t s1 = add_("x", "y");
-//   symbol_ptr_t s2 = add(create_var("z"), mul_("a", "b"));
-//   symbol_ptr_t s3 = add(s1, create_var("i"));
-// }
+TEST(Sym, CreateList)
+{
+  symbol_items_t l = {create_sym("x"),create_sym("y"), create_sym("z")};
+  symbol_t m = create_monomial(l);
+  std::cout << print_string(m) << std::endl;
+
+  l = {create_sym("x"),create_sym("y"), create_sym("z")};
+  m = create_polynomial(l);
+  std::cout << print_string(m) << std::endl;
+}
 
 int main(int argc, char *argv[])
 {

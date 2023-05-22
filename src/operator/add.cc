@@ -8,11 +8,6 @@ namespace mysym
     return create_flt(mympf::print_string(f));
   }
 
-  static inline symbol_t __mympf_fraction_to_symbol(const mynum::fraction_t &f)
-  {
-    return c_frac(mympz::print_string(f.first), mympz::print_string(f.second));
-  }
-
   static symbol_t __add_num_num(const symbol_t &x, const symbol_t &y)
   {
     mympf::float_t f1 = mympf::create(x.literal);
@@ -22,18 +17,7 @@ namespace mysym
 
   static symbol_t __add_num_frac(const symbol_t &x, const symbol_t &y)
   {
-    mympf::float_t f1, f2;
-    if (is_frac(kind(x)))
-    {
-      f1 = mympf::create(frac_to_num(x).literal);
-      f2 = mympf::create(y.literal);
-    }
-    else
-    {
-      f1 = mympf::create(frac_to_num(y).literal);
-      f2 = mympf::create(x.literal);
-    }
-    return __mympf_to_symbol(mympf::add(f1, f2));
+    return compute_frac_num(kOptAdd, x, y);
   }
 
   static symbol_t __add_num_nature(const symbol_t &x, const symbol_t &y)
@@ -53,12 +37,7 @@ namespace mysym
 
   static symbol_t __add_frac_frac(const symbol_t &x, const symbol_t &y)
   {
-    // mympf::float_t v1 = mympf::create(x.literal), v2 = mympf::create(y.literal);
-    // mynum::fraction_t f1 = mynum::f::fraction(v1), f2 = mynum::f::fraction(v2);
-    mynum::fraction_t f1 = {mympz::create(numerator(x).literal), mympz::create(denominator(x).literal)};
-    mynum::fraction_t f2 = {mympz::create(numerator(y).literal), mympz::create(denominator(y).literal)};
-    mynum::fraction_t f3 = mynum::f::add(f1, f2);
-    return __mympf_fraction_to_symbol(f3);
+    return compute_frac_frac(kOptAdd, x, y);
   }
 
   static symbol_t __add_frac_nature(const symbol_t &x, const symbol_t &y)

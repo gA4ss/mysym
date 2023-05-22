@@ -7,6 +7,7 @@ namespace mysym
 
   __library_t::__library_t()
   {
+    config.is_compute_frac_float = false;
   }
 
   library_ptr_t init_library()

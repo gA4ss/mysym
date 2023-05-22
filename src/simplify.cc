@@ -23,13 +23,6 @@
 
 namespace mysym
 {
-#if 0
-  static symbol_t __automatic_simplify(const symbol_t &s)
-  {
-    return s;
-  }
-#endif
-
   void automatic_simplify(symbol_t &s)
   {
     apply_rule(s);

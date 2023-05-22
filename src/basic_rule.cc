@@ -5,7 +5,37 @@ namespace mysym
 {
   void apply_associative_law(symbol_t &x)
   {
-    merge(x);
+    symbol_items_t new_items;
+    opt_t opt = x.opt;
+    for (auto it = x.items.begin(); it != x.items.end(); it++)
+    {
+      //
+      // 这里允许对子项进行合并，为了
+      // f((x+(y+z)), 1)，这种情况。
+      //
+      apply_associative_law(*it);
+
+      // 判断当前运算符是否一致
+      if ((*it).opt == opt)
+      {
+        //
+        // 判断当运算是否符合结合律
+        // 如果不符合则直接压入子项
+        // 目，为了最后直接替换的代
+        // 码统一掉。
+        //
+        if (opt_associative_law(kind(x)))
+          new_items.insert(new_items.end(), (*it).items.begin(), (*it).items.end());
+        else
+          new_items.push_back(*it);
+      }
+      else
+      {
+        new_items.push_back(*it);
+      }
+    }
+    x.items = new_items;
+    return;
   }
 
   /* 交换律就是排序
@@ -31,8 +61,16 @@ namespace mysym
   {
     if (!can_distributive(opt, kind(y)))
     {
-      // 不能分配则将x与y合并成一项，这里使用just_make不进行任何自动的排序。
-      return just_make2(opt, x, y);
+      if (kind(x) == opt)
+      {
+        symbol_t _x = x;
+        append(_x, y);
+        return _x;
+      }
+      else
+      {
+        return just_make2(opt, x, y);
+      }
     }
 
     //
