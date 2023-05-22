@@ -54,19 +54,16 @@ set(MYSYM_OPERATOR_SRC
   ${SRC_DIRECTORY}/operator/cmp.cc
   ${SRC_DIRECTORY}/operator/atom.cc
   ${SRC_DIRECTORY}/operator/abs.cc
-  ${SRC_DIRECTORY}/operator/minus.cc
   ${SRC_DIRECTORY}/operator/add.cc
-  ${SRC_DIRECTORY}/operator/sub.cc
   ${SRC_DIRECTORY}/operator/mul.cc
-  ${SRC_DIRECTORY}/operator/div.cc
   ${SRC_DIRECTORY}/operator/mod.cc
-  ${SRC_DIRECTORY}/operator/sqrt.cc
   ${SRC_DIRECTORY}/operator/pow.cc
   ${SRC_DIRECTORY}/operator/log.cc
   ${SRC_DIRECTORY}/operator/fact.cc
   ${SRC_DIRECTORY}/operator/trigo.cc
   ${SRC_DIRECTORY}/operator/hyper.cc
   ${SRC_DIRECTORY}/operator/frac.cc
+  ${SRC_DIRECTORY}/operator/func.cc
 )
 
 #

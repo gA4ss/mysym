@@ -180,6 +180,7 @@ namespace mysym
     register_cmp_rule();
     register_add_rule();
     register_mul_rule();
+    register_func_rule();
   }
 
   symbol_t default_entry(const symbol_t &x)

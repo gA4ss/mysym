@@ -221,6 +221,7 @@ namespace mysym
   void register_cmp_rule();
   void register_add_rule();
   void register_mul_rule();
+  void register_func_rule();
   void init_rule();
   
   bool find_entry(opt_t opt);
@@ -235,6 +236,7 @@ namespace mysym
 
   symbol_t default_entry(const symbol_t &x);
   symbol_t default_execute(const symbol_t &x, const symbol_t &y);
+
   void default_cases(opt_t opt, std::string ops);
   void append_optcase_string(std::string &ops, const std::string op);
   void append_optcase_string(std::string &ops, const std::vector<std::string> opl);
@@ -304,6 +306,9 @@ namespace mysym
   //
   // 符号运算符
   //
+  symbol_t frac_entry(const symbol_t &x);   // 分数运算的入口需要特殊处理
+  symbol_t default_func_handler(opt_t opt, const symbol_t &x);
+  symbol_t default_func_handler(opt_t opt, const symbol_t &x, const symbol_t &y);
   symbol_t add(const symbol_t &x, const symbol_t &y);
   symbol_t mul(const symbol_t &x, const symbol_t &y);
   symbol_t equ(const symbol_t &x, const symbol_t &y);
@@ -313,6 +318,36 @@ namespace mysym
   symbol_t gt(const symbol_t &x, const symbol_t &y);
   symbol_t ge(const symbol_t &x, const symbol_t &y);
   symbol_t cmp(const symbol_t &x, const symbol_t &y);
+  symbol_t abs(const symbol_t &x);
+  symbol_t fact(const symbol_t &x);
+  symbol_t frac(const symbol_t &x, const symbol_t &y);
+  symbol_t pow(const symbol_t &x, const symbol_t &y);
+  symbol_t log(const symbol_t &x, const symbol_t &y);
+  symbol_t mod(const symbol_t &x, const symbol_t &y);
+  symbol_t sin(const symbol_t &x);
+  symbol_t cos(const symbol_t &x);
+  symbol_t tan(const symbol_t &x);
+  symbol_t cot(const symbol_t &x);
+  symbol_t sec(const symbol_t &x);
+  symbol_t csc(const symbol_t &x);
+  symbol_t arcsin(const symbol_t &x);
+  symbol_t arccos(const symbol_t &x);
+  symbol_t arctan(const symbol_t &x);
+  symbol_t arccot(const symbol_t &x);
+  symbol_t arcsec(const symbol_t &x);
+  symbol_t arccsc(const symbol_t &x);
+  symbol_t sinh(const symbol_t &x);
+  symbol_t cosh(const symbol_t &x);
+  symbol_t tanh(const symbol_t &x);
+  symbol_t coth(const symbol_t &x);
+  symbol_t sech(const symbol_t &x);
+  symbol_t csch(const symbol_t &x);
+  symbol_t arcsinh(const symbol_t &x);
+  symbol_t arccosh(const symbol_t &x);
+  symbol_t arctanh(const symbol_t &x);
+  symbol_t arccoth(const symbol_t &x);
+  symbol_t arcsech(const symbol_t &x);
+  symbol_t arccsch(const symbol_t &x);
 
   //
   // 全局变量
