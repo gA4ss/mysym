@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/wrapper.h>
 
 using namespace mysym;
 
@@ -90,6 +91,14 @@ TEST(Sym, MutilMul)
   k = mul(z1, z3);
   EXPECT_STREQ(print_string(k).c_str(), "a*x*z+y*z*^(x,2)");
   // std::cout << print_string(k) << std::endl;
+}
+
+TEST(Sym, Pow)
+{
+  symbol_t x = create_sym("x");
+  symbol_t y = create_sym("y");
+  symbol_t e1 = c_pow(x + y, "2");
+  std::cout << print_string(e1) << std::endl;
 }
 
 int main(int argc, char *argv[])

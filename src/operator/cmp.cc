@@ -1,4 +1,5 @@
 #include <mysym/mysym.h>
+#include <mynum/wrapper.h>
 #include "__test.h"
 
 namespace mysym
@@ -31,8 +32,8 @@ namespace mysym
    */
   static symbol_t __cmp_const_const(const symbol_t &x, const symbol_t &y)
   {
-    mympf::float_t f1;
-    mympf::float_t f2;
+    number_t f1;
+    number_t f2;
 
     //
     // 常数的一些比对
@@ -57,13 +58,13 @@ namespace mysym
     //
     if ((kind(x) == kOptFrac))
     {
-      mympf::float_t n = mympf::create(numerator(x).literal);
-      mympf::float_t d = mympf::create(denominator(x).literal);
-      f1 = mympf::div(n, d);
+      number_t n = number_t(numerator(x).literal);
+      number_t d = number_t(denominator(x).literal);
+      f1 = n / d;
     }
     else if (is_num(kind(x)))
     {
-      f1 = mympf::create(x.literal);
+      f1 = number_t(x.literal);
     }
     else if (is_e(kind(x)))
     {
@@ -78,13 +79,13 @@ namespace mysym
 
     if ((kind(y) == kOptFrac))
     {
-      mympf::float_t n = mympf::create(numerator(y).literal);
-      mympf::float_t d = mympf::create(denominator(y).literal);
-      f2 = mympf::div(n, d);
+      number_t n = number_t(numerator(y).literal);
+      number_t d = number_t(denominator(y).literal);
+      f2 = n / d;
     }
     else if (is_num(kind(y)))
     {
-      f2 = mympf::create(y.literal);
+      f2 = number_t(y.literal);
     }
     else if (is_e(kind(y)))
     {
@@ -95,7 +96,7 @@ namespace mysym
       f2 = mynum::f::approximate_pi();
     }
 
-    int c = mympf::cmp(f1, f2);
+    int c = mynum::cmp(f1, f2);
     return c == 0 ? gConstZero : c == 1 ? gConstOne
                                         : gConstNegOne;
   }

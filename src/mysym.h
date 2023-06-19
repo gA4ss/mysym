@@ -17,10 +17,10 @@
 #include <mympf/mympf.h>
 #include <mynum/mynum.h>
 
-#include <mysym/symopt.h>
 #include <mysym/compile.h>
 #include <mysym/exception.h>
 #include <mysym/debug.h>
+#include <mysym/symopt.h>
 
 namespace mysym
 {
@@ -28,21 +28,23 @@ namespace mysym
   // typedef mympz::bignum_t symnum_t;
   typedef mympz::bignum_t integer_t;
   typedef mympf::float_t float_t;
+  typedef mynum::number_t number_t;
 
   typedef struct __symbol_t
   {
     opt_t opt; // 操作符
     std::string literal;
     std::vector<struct __symbol_t> items;
-
+    
     __symbol_t();
-
+    __symbol_t& operator[](size_t i);
   } symbol_t;
 
   typedef std::shared_ptr<symbol_t> symbol_ptr_t;
   typedef std::vector<symbol_t> symbol_items_t;
   typedef std::map<opt_t, std::string> operator_names_t;
 
+  size_t size(const symbol_t &s);
   void append(symbol_t &y, const symbol_t &x);
   void append(symbol_t& y, const symbol_items_t &x);
 
@@ -53,6 +55,15 @@ namespace mysym
   typedef symbol_t num_t;
   typedef symbol_t int_t;
   typedef symbol_t flt_t;
+
+  bool symbol_is_integer(const num_t &x);
+  bool symbol_is_real(const num_t &x);
+#define symbol_is_number(x) (symbol_is_integer(x) || symbol_is_real(x))
+
+#define kSignPositive       true
+#define kSignNegative       false
+  bool sign(const symbol_t &x);
+  symbol_t opposite(const symbol_t &x);
 
   //
   // 列表
@@ -129,8 +140,8 @@ namespace mysym
   symbol_t term(const symbol_t &s);
   symbol_t constant(const symbol_t &s);
 #define antilog(s) exponent(s)
-  symbol_t term(const symbol_t &s);
   symbol_t constant(const symbol_t &s);
+  symbol_t expansion(const symbol_t &s);
 
   bool match(const symbol_t &s1, const symbol_t &s2);
   bool match_in(const symbol_t &s1, const symbol_t &s2);
@@ -173,6 +184,12 @@ namespace mysym
   symbol_t mynum_fraction_to_frac(const mynum::fraction_t &f);
   symbol_t compute_frac_num(opt_t opt, const symbol_t &x, const symbol_t &y);
   symbol_t compute_frac_frac(opt_t opt, const symbol_t &x, const symbol_t &y);
+
+  //
+  // 数运算
+  //
+  symbol_t number_to_symbol(const number_t &f);
+  number_t symbol_to_number(const symbol_t &s);
 
   //
   // 规则表
@@ -307,10 +324,14 @@ namespace mysym
   // 符号运算符
   //
   symbol_t frac_entry(const symbol_t &x);   // 分数运算的入口需要特殊处理
+  symbol_t pow_entry(const symbol_t &x);
+  symbol_t log_entry(const symbol_t &x);
   symbol_t default_func_handler(opt_t opt, const symbol_t &x);
   symbol_t default_func_handler(opt_t opt, const symbol_t &x, const symbol_t &y);
   symbol_t add(const symbol_t &x, const symbol_t &y);
+  symbol_t sub(const symbol_t &x, const symbol_t &y);
   symbol_t mul(const symbol_t &x, const symbol_t &y);
+  symbol_t div(const symbol_t &x, const symbol_t &y);
   symbol_t equ(const symbol_t &x, const symbol_t &y);
   symbol_t neq(const symbol_t &x, const symbol_t &y);
   symbol_t lt(const symbol_t &x, const symbol_t &y);

@@ -21,7 +21,6 @@ namespace mysym
     return z;
   }
 
-
   static symbol_t __default_func_entry(const symbol_t &x)
   {
     symbol_t _x = x;
@@ -38,8 +37,8 @@ namespace mysym
     append_entry(kOptFact, __default_func_entry);
     append_entry(kOptFrac, frac_entry);
     append_entry(kOptMod, __default_func_entry);
-    append_entry(kOptPow, __default_func_entry);
-    append_entry(kOptLog, __default_func_entry);
+    append_entry(kOptPow, pow_entry);
+    append_entry(kOptLog, log_entry);
     append_entry(kOptSin, __default_func_entry);
     append_entry(kOptCos, __default_func_entry);
     append_entry(kOptTan, __default_func_entry);

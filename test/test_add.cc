@@ -25,9 +25,17 @@ TEST(Sym, Number)
   symbol_t y = create_flt("1.5");
   EXPECT_EQ(compare(add(x, y), create_flt("4.64")), 0);
 
+  x = create_symbol("-3.14");
+  y = create_flt("1.5");
+  EXPECT_EQ(compare(add(x, y), create_flt("-1.64")), 0);
+
+  x = create_symbol("5.3");
+  y = create_flt("-0.3");
+  EXPECT_EQ(compare(add(x, y), create_flt("5")), 0);
+
   x = c_frac("1", "2");
   y = create_flt("1.5");
-  EXPECT_EQ(compare(add(x, y), create_int("2")), 0);
+  EXPECT_EQ(compare(add(x, y), c_add("1.5", x)), 0);
 
   x = gConstE;
   y = create_flt("1.5");

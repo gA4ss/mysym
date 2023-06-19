@@ -1,18 +1,14 @@
 #include <mysym/mysym.h>
+#include <mynum/wrapper.h>
 #include "__test.h"
 
 namespace mysym
 {
-  static inline symbol_t __mympf_to_symbol(const mympf::float_t &f)
-  {
-    return create_flt(mympf::print_string(f));
-  }
-
   static symbol_t __mul_num_num(const symbol_t &x, const symbol_t &y)
   {
-    mympf::float_t f1 = mympf::create(x.literal);
-    mympf::float_t f2 = mympf::create(y.literal);
-    return __mympf_to_symbol(mympf::mul(f1, f2));
+    number_t f1 = number_t(x.literal);
+    number_t f2 = number_t(y.literal);
+    return number_to_symbol(f1 * f2);
   }
 
   static symbol_t __mul_num_frac(const symbol_t &x, const symbol_t &y)
@@ -96,6 +92,15 @@ namespace mysym
 
   static symbol_t __mul_var_func(const symbol_t &x, const symbol_t &y)
   {
+    return just_make2(kOptMul, x, y);
+  }
+
+  #include "__mul_pow.cc"
+
+  static symbol_t __mul_log_log(const symbol_t &x, const symbol_t &y)
+  {
+    if (compare(x, y) == 0)
+      return just_make2(kOptPow, x, "2");
     return just_make2(kOptMul, x, y);
   }
 
@@ -213,6 +218,10 @@ namespace mysym
     // 变量 + xxx
     register_case(kOptMul, make_optsign(kOptVariate, kOptVariate), __mul_var_var);
     register_case(kOptMul, make_optsign(kOptVariate, "func"), __mul_var_func);
+
+    // 特别函数
+    register_case(kOptMul, make_optsign(kOptPow, kOptPow), __mul_pow_pow);
+    register_case(kOptMul, make_optsign(kOptLog, kOptLog), __mul_log_log);
 
     // 函数 + xxx
     register_case(kOptMul, make_optsign("func", "func"), __mul_func_func);

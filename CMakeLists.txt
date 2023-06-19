@@ -56,6 +56,7 @@ set(MYSYM_OPERATOR_SRC
   ${SRC_DIRECTORY}/operator/abs.cc
   ${SRC_DIRECTORY}/operator/add.cc
   ${SRC_DIRECTORY}/operator/mul.cc
+  ${SRC_DIRECTORY}/operator/div.cc
   ${SRC_DIRECTORY}/operator/mod.cc
   ${SRC_DIRECTORY}/operator/pow.cc
   ${SRC_DIRECTORY}/operator/log.cc
@@ -124,6 +125,8 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/global.cc
   ${SRC_DIRECTORY}/init.cc
   ${SRC_DIRECTORY}/misc.cc
+  ${SRC_DIRECTORY}/number.cc
+  ${SRC_DIRECTORY}/wrapper.cc
   ${MYSYM_OPERATOR_SRC}
   ${MYSYM_INTERPRETER_SRC}
   ${MYSYM_DEBUG_SRC}
@@ -184,6 +187,8 @@ add_test(NAME test_rule COMMAND test_rule)
 set_tests_properties(test_rule PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_units COMMAND test_units)
 set_tests_properties(test_units PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_symbol COMMAND test_symbol)
+set_tests_properties(test_symbol PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 # Test Operator
 add_test(NAME test_cmp COMMAND test_cmp)
 set_tests_properties(test_cmp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
@@ -191,6 +196,13 @@ add_test(NAME test_add COMMAND test_add)
 set_tests_properties(test_add PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_mul COMMAND test_mul)
 set_tests_properties(test_mul PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_div COMMAND test_div)
+set_tests_properties(test_div PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_abs COMMAND test_abs)
+set_tests_properties(test_abs PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_pow COMMAND test_pow)
+set_tests_properties(test_pow PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+
 #
 # Auto Test
 #

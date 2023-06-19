@@ -1,4 +1,5 @@
 #include <mysym/mysym.h>
+#include <mynum/wrapper.h>
 
 namespace mysym
 {
@@ -33,10 +34,10 @@ namespace mysym
     if (kind(s) != kOptFrac)
       return s;
 
-    mympf::float_t nf = mympf::create(numerator(s).literal);
-    mympf::float_t df = mympf::create(denominator(s).literal);
-    mympf::float_t rf = mympf::div(nf, df);
-    return create_flt(mympf::print_string(rf));
+    number_t nf = number_t(numerator(s).literal);
+    number_t df = number_t(denominator(s).literal);
+    number_t rf = nf / df;
+    return create_flt(rf.value());
   }
 
   symbol_t num_to_frac(const symbol_t &s)
