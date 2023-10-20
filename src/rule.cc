@@ -179,6 +179,7 @@ namespace mysym
     register_atom_rule();
     register_cmp_rule();
     register_add_rule();
+    register_sub_rule();
     register_mul_rule();
     register_func_rule();
   }

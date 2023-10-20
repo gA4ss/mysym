@@ -14,9 +14,32 @@ namespace mysym
 
   symbol_t make(opt_t opt, const symbol_t &s1, const symbol_t &s2, bool nas)
   {
-    symbol_t u = create_opt(opt);
-    append(u, s1);
-    append(u, s2);
+    symbol_t u;
+    if (is_sub(opt))
+    {
+      symbol_t ns2 = create_opt(kOptMul);
+      append(ns2, gConstNegOne);
+      append(ns2, s2);
+      u = create_opt(kOptAdd);
+      append(u, s1);
+      append(u, ns2);
+    }
+    else if (is_div(opt))
+    {
+      symbol_t ds2 = create_opt(kOptPow);
+      append(ds2, s2);
+      append(ds2, gConstNegOne);
+      u = create_opt(kOptMul);
+      append(u, s1);
+      append(u, ds2);
+    }
+    else
+    {
+      u = create_opt(opt);
+      append(u, s1);
+      append(u, s2);
+    }
+
     if (!nas)
       automatic_simplify(u);
     return u;

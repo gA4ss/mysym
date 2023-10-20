@@ -100,8 +100,12 @@ namespace mysym
     // 计算
     if (is_add(opt))
       return mynum_fraction_to_frac(mynum::f::add(f1, f2));
+    else if (is_sub(opt))
+      return mynum_fraction_to_frac(mynum::f::sub(f1, f2));
     else if (is_mul(opt))
       return mynum_fraction_to_frac(mynum::f::mul(f1, f2));
+    else if (is_div(opt))
+      return mynum_fraction_to_frac(mynum::f::div(f1, f2));
     return just_make2(opt, mynum_fraction_to_frac(f1), mynum_fraction_to_frac(f2));
   }
 
@@ -112,8 +116,12 @@ namespace mysym
     mynum::fraction_t f3;
     if (is_add(opt))
       f3 = mynum::f::add(f1, f2);
+    else if (is_sub(opt))
+      f3 = mynum::f::sub(f1, f2);
     else if (is_mul(opt))
       f3 = mynum::f::mul(f1, f2);
+    else if (is_div(opt))
+      f3 = mynum::f::div(f1, f2);
     else
       return just_make2(opt, x, y);
     return mynum_fraction_to_frac(f3);

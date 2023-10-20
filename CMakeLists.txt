@@ -55,6 +55,7 @@ set(MYSYM_OPERATOR_SRC
   ${SRC_DIRECTORY}/operator/atom.cc
   ${SRC_DIRECTORY}/operator/abs.cc
   ${SRC_DIRECTORY}/operator/add.cc
+  ${SRC_DIRECTORY}/operator/sub.cc
   ${SRC_DIRECTORY}/operator/mul.cc
   ${SRC_DIRECTORY}/operator/div.cc
   ${SRC_DIRECTORY}/operator/mod.cc
@@ -120,6 +121,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/monomial.cc
   ${SRC_DIRECTORY}/polynomial.cc
   ${SRC_DIRECTORY}/expression.cc
+  ${SRC_DIRECTORY}/elements.cc
   ${SRC_DIRECTORY}/degree.cc
   ${SRC_DIRECTORY}/compare.cc
   ${SRC_DIRECTORY}/global.cc
@@ -173,6 +175,8 @@ add_test(NAME test_sort COMMAND test_sort)
 set_tests_properties(test_sort PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_match COMMAND test_match)
 set_tests_properties(test_match PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_elements COMMAND test_elements)
+set_tests_properties(test_elements PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_degree COMMAND test_degree)
 set_tests_properties(test_degree PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_coefficient COMMAND test_coefficient)

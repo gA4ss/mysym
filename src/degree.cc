@@ -57,6 +57,13 @@ namespace mysym
     return undefined;
   }
 
+  int_t degree(const symbol_t &s)
+  {
+    int_t d = gConstUDF;
+    list_t vars = variables(s);
+    return d;
+  }
+
   int_t degree(const symbol_t &s, const symbol_t &x)
   {
     // 检查参数

@@ -101,6 +101,15 @@ TEST(Sym, Pow)
   std::cout << print_string(e1) << std::endl;
 }
 
+TEST(Sym, Negative)
+{
+  symbol_t x = create_sym("x");
+  symbol_t y = create_sym("y");
+  symbol_t z = c_add(x, y);
+  symbol_t e = c_mul(z, "-1");
+  std::cout << print_string(e) << std::endl;
+}
+
 int main(int argc, char *argv[])
 {
   init();

@@ -51,6 +51,23 @@ TEST(Sym, Create2)
   // std::cout << print_string(r) << std::endl;
 }
 
+TEST(Sym, Create3)
+{
+  symbol_t s1 = create_var("x");
+  symbol_t s2 = create_sym("y");
+  symbol_t s3 = create_var("a");
+  symbol_t s4 = create_sym("b");
+
+  symbol_t r = make(kOptSub, s1, s2);
+  EXPECT_STREQ(print_string(r).c_str(), "x+-1*y");
+
+  r = make(kOptDiv, s3, s4);
+  EXPECT_STREQ(print_string(r).c_str(), "a*^(b,-1)");
+
+  r = c_minus("t");
+  EXPECT_STREQ(print_string(r).c_str(), "-1*t");
+}
+
 TEST(Sym, CreateList)
 {
   symbol_items_t l = {create_sym("x"),create_sym("y"), create_sym("z")};

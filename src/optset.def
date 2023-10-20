@@ -1,4 +1,4 @@
-define_optset("basic", kOptAdd "," kOptMul);
+define_optset("basic", kOptAdd "," kOptMul "," kOptSub "," kOptDiv);
 define_optset("order", kOptEqu "," kOptNotEqu "," kOptLT "," kOptLE "," kOptGT "," kOptGE);
 define_optset("nature", kOptConstE "," kOptConstPI "," kOptConstInf "," kOptConstNegInf);
 define_optset("const", kOptNumber "," kOptFrac "," "nature");

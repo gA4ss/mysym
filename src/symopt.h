@@ -11,7 +11,9 @@ namespace mysym
   typedef std::pair<opts_t, opts_t> opts_pair_t;
   typedef struct __symopt_attribute_t
   {
-    bool continuous; // 是否是连续的
+    bool continuous;        // 是否是连续的
+    // opt_t inverse_opt;   // 逆操作
+    // std::string unit1;   // 单位元
   } symopt_attr_t;
 
   typedef struct __symopt_t
@@ -77,7 +79,9 @@ namespace mysym
   void init_symset();
 
 #define kOptAdd "+"
+#define kOptSub "-"
 #define kOptMul "*"
+#define kOptDiv "/"
 
 #define kOptEqu "="
 #define kOptNotEqu "!="
@@ -126,14 +130,16 @@ namespace mysym
 #define kOptConstPI "pi"
 #define kOptConstInf "inf"
 #define kOptConstNegInf "-inf"
-#define kOptFrac "/"
+#define kOptFrac "//"
 #define kOptNumber "%"
 #define kOptNone "none"
 
 #define is_none(o) (o == kOptNone)
 #define is_und(o) is_none(o)
 #define is_add(o) (o == kOptAdd)
+#define is_sub(o) (o == kOptSub)
 #define is_mul(o) (o == kOptMul)
+#define is_div(o) (o == kOptDiv)
 #define is_pow(o) (o == kOptPow)
 #define is_log(o) (o == kOptLog)
 #define is_fact(o) (o == kOptFact)

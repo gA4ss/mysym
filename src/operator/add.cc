@@ -170,14 +170,6 @@ namespace mysym
     return z;
   }
 
-  symbol_t sub(const symbol_t &x, const symbol_t &y)
-  {
-    symbol_t _y = execute_cases(kOptMul, gConstNegOne, y);
-    symbol_t z = execute_cases(kOptAdd, x, _y);
-    sort(z);
-    return z;
-  }
-
   void register_add_rule()
   {
     // 数值 + xxx

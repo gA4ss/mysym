@@ -154,6 +154,7 @@ namespace mysym
   bool free_of(const symbol_t &s, const symbol_t &u);
   bool free_of(const symbol_t &s, const list_t &xs);
   list_t variables(const symbol_t &s);
+  list_t abstract_variables(const symbol_t &s);
   list_t constants(const symbol_t &s);
   list_t integers(const symbol_t &s);
   list_t reals(const symbol_t &s);
@@ -163,6 +164,7 @@ namespace mysym
   bool is_monomial(const symbol_t &s, const list_t &xs);
   bool is_polynomial(const symbol_t &s, const symbol_t &x);
   bool is_polynomial(const symbol_t &s, const list_t &xs);
+  int_t degree(const symbol_t &s);
   int_t degree(const symbol_t &s, const symbol_t &x);
   int_t degree(const symbol_t &s, const list_t &xs);
   int_t coefficient(const symbol_t &s, const symbol_t &x, const int_t &d);
@@ -237,6 +239,7 @@ namespace mysym
   void register_atom_rule();
   void register_cmp_rule();
   void register_add_rule();
+  void register_sub_rule();
   void register_mul_rule();
   void register_func_rule();
   void init_rule();

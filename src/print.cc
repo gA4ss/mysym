@@ -52,6 +52,52 @@ namespace mysym
     return str;
   }
 
+  static std::string __print_pow_string(const symbol_t &s)
+  {
+    std::string str;
+    symbol_t b = base(s), e = exponent(s);
+    if (is_single(b))
+    {
+      str += b.literal;
+    }
+    else
+    {
+      str += "(";
+      str += print_string(b);
+      str += ")";
+    }
+
+    str += opt_name(s.opt);
+
+    if (is_single(e))
+    {
+      str += e.literal;
+    }
+    else
+    {
+      str += "(";
+      str += print_string(e);
+      str += ")";
+    }
+    return str;
+  }
+
+  static std::string __print_func_string(const symbol_t &s)
+  {
+    std::string str = s.literal;
+    str += "(";
+
+    for (auto it = s.items.begin(); it != s.items.end(); it++)
+    {
+      str += print_string(*it);
+      str += ",";
+    }
+
+    str.pop_back(); // 删除最后一个","号
+    str += ")";
+    return str;
+  }
+
   std::string print_string(const symbol_t &s)
   {
     std::string str = "";
@@ -73,17 +119,10 @@ namespace mysym
     {
       if (is_func(s.opt))
       {
-        str = s.literal;
-        str += "(";
-
-        for (auto it = s.items.begin(); it != s.items.end(); it++)
-        {
-          str += print_string(*it);
-          str += ",";
-        }
-
-        str.pop_back(); // 删除最后一个","号
-        str += ")";
+        if (is_pow(s.opt))
+          str += __print_pow_string(s);
+        else
+          str += __print_func_string(s);
       }
       else if (is_none(s.opt))
       {
@@ -91,9 +130,30 @@ namespace mysym
       }
       else if (is_frac(s.opt))
       {
-        str = numerator(s).literal;
-        str += "/";
-        str += denominator(s).literal;
+        symbol_t n = numerator(s), d = denominator(s);
+        if (is_single(s))
+        {
+          str += n.literal;
+        }
+        else
+        {
+          str += "(";
+          str += print_string(n);
+          str += ")";
+        }
+
+        str += opt_name(s.opt);
+
+        if (is_single(s))
+        {
+          str += d.literal;
+        }
+        else
+        {
+          str += "(";
+          str += print_string(d);
+          str += ")";
+        }
       }
       else
       {
