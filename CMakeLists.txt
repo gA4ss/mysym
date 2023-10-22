@@ -122,6 +122,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/polynomial.cc
   ${SRC_DIRECTORY}/expression.cc
   ${SRC_DIRECTORY}/elements.cc
+  ${SRC_DIRECTORY}/sign.cc
   ${SRC_DIRECTORY}/degree.cc
   ${SRC_DIRECTORY}/compare.cc
   ${SRC_DIRECTORY}/global.cc
@@ -177,6 +178,8 @@ add_test(NAME test_match COMMAND test_match)
 set_tests_properties(test_match PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_elements COMMAND test_elements)
 set_tests_properties(test_elements PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_sign COMMAND test_sign)
+set_tests_properties(test_sign PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_degree COMMAND test_degree)
 set_tests_properties(test_degree PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_coefficient COMMAND test_coefficient)

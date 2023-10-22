@@ -158,6 +158,12 @@ namespace mysym
   list_t constants(const symbol_t &s);
   list_t integers(const symbol_t &s);
   list_t reals(const symbol_t &s);
+  list_t fractions(const symbol_t &s);
+  list_t natures(const symbol_t &s);
+  list_t functions(const symbol_t &s);
+  list_t pows(const symbol_t &s);
+  list_t logs(const symbol_t &s);
+  list_t abses(const symbol_t &s);
 
 #define is_undefined(s) is_none(kind(s))
   bool is_monomial(const symbol_t &s, const symbol_t &x);

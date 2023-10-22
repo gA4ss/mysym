@@ -4,42 +4,19 @@
 namespace mysym
 {
 
-// #define is_add(o) (o == kOptAdd)
-// #define is_sub(o) (o == kOptSub)
-// #define is_mul(o) (o == kOptMul)
-// #define is_div(o) (o == kOptDiv)
-// #define is_pow(o) (o == kOptPow)
-// #define is_log(o) (o == kOptLog)
-// #define is_fact(o) (o == kOptFact)
-// #define is_abs(o) (o == kOptAbs)
-// #define is_mod(o) (o == kOptMod)
-// #define is_var(o) (o == kOptVariate)
-// #define is_num(o) (o == kOptNumber)
-// #define is_int(o) is_num(o)
-// #define is_flt(o) is_num(o)
-// #define is_frac(o) (o == kOptFrac)
-
   static list_t __extract_elements(const symbol_t &s, std::function<bool(const symbol_t&)> f)
   {
     list_t l;
-    if (is_single(s))
+    if (f(s))
     {
-      if (f(s))
-        append(l, s, true);
+      append(l, s, true);
     }
-    else
+
+    if (!is_single(s))
     {
       for (auto it = s.items.begin(); it != s.items.end(); it++)
       {
-        if (!is_single(s))
-        {
-          append(l, __extract_elements(*it, f), true);
-        }
-        else
-        {
-          if (f(*it))
-            append(l, *it, true);
-        }
+        append(l, __extract_elements(*it, f), true);
       }
     }
     return l;
@@ -51,6 +28,9 @@ namespace mysym
       {return is_var(kind(x));});
   }
 
+  //
+  // 将单个变量，函数，单项式判断作为变量
+  //
   list_t abstract_variables(const symbol_t &s)
   {
     list_t l;
@@ -102,19 +82,37 @@ namespace mysym
 
   list_t fractions(const symbol_t &s)
   {
-    list_t l;
-    return l;
+    return __extract_elements(s, [](const symbol_t &x) -> bool 
+      {return is_frac(kind(x));});
   }
 
   list_t natures(const symbol_t &s)
   {
-    list_t l;
-    return l;
+    return __extract_elements(s, [](const symbol_t &x) -> bool 
+      {return is_nature(kind(x));});
   }
 
   list_t functions(const symbol_t &s)
   {
-    list_t l;
-    return l;
+    return __extract_elements(s, [](const symbol_t &x) -> bool 
+      {return is_func(kind(x));});
+  }
+
+  list_t pows(const symbol_t &s)
+  {
+    return __extract_elements(s, [](const symbol_t &x) -> bool 
+      {return is_pow(kind(x));});
+  }
+
+  list_t logs(const symbol_t &s)
+  {
+    return __extract_elements(s, [](const symbol_t &x) -> bool 
+      {return is_log(kind(x));});
+  }
+
+  list_t abses(const symbol_t &s)
+  {
+    return __extract_elements(s, [](const symbol_t &x) -> bool 
+      {return is_abs(kind(x));});
   }
 } // namespace mysym

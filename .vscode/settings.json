@@ -101,6 +101,7 @@
     "queue": "cpp",
     "semaphore": "cpp",
     "stack": "cpp",
-    "thread": "cpp"
+    "thread": "cpp",
+    "__functional_03": "cpp"
   }
 }

@@ -45,15 +45,4 @@ namespace mysym
       return false;
     return my::type_of_string(x.literal) == kStrTypeReal;
   }
-
-  bool sign(const symbol_t &x)
-  {
-    symbol_t c = constant(x);
-    return (compare(c, gConstZero) == -1) ? kSignNegative : kSignPositive;
-  }
-
-  symbol_t opposite(const symbol_t &x)
-  {
-    return mul(gConstNegOne, x);
-  }
 } // namespace mysym
