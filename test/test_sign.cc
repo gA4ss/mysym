@@ -9,16 +9,16 @@ using namespace mysym;
 
 TEST(Sym, Sign)
 {
-  std::string ops;
-  append_optcase_string(ops, "basic,atom,const,func");
-  append_optcase_string(ops, kOptPow);
-  append_optcase_string(ops, kOptLog);
-  default_cases(kOptAdd, ops);
-  rule_table_t tab = rule_library().cases[kOptAdd];
-  for (auto it = tab.begin(); it != tab.end(); it++)
-  {
-    std::cout << it->first << std::endl;
-  }
+  symbol_t x = create_var("x");
+  symbol_t y = create_var("y");
+  symbol_t x3 = c_pow("x", create_int("3"));
+  symbol_t y3 = c_pow("y", create_int("2"));
+  symbol_t xpy = c_add(x3, y3);
+  EXPECT_TRUE(sign(xpy));
+  symbol_t e = gConstE;
+  symbol_t ninf = gConstNegInf;
+  EXPECT_TRUE(sign(e));
+  EXPECT_TRUE(!sign(ninf));
 }
 
 int main(int argc, char *argv[])

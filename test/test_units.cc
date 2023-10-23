@@ -7,15 +7,15 @@
 
 using namespace mysym;
 
-TEST(Sym, Variables)
-{
-  symbol_t x = create_sym("x");
-  symbol_t y = create_sym("y");
-  symbol_t z = c_add(x, y);
-  z = c_mul(create_int("5"), z);
-  list_t l = variables(z);
-  std::cout << print_string(l) << std::endl;
-}
+// TEST(Sym, Variables)
+// {
+//   symbol_t x = create_sym("x");
+//   symbol_t y = create_sym("y");
+//   symbol_t z = c_add(x, y);
+//   z = c_mul(create_int("5"), z);
+//   list_t l = variables(z);
+//   std::cout << print_string(l) << std::endl;
+// }
 
 // TEST(Sym, Variables)
 // {

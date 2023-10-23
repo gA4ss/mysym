@@ -57,13 +57,6 @@ namespace mysym
     return undefined;
   }
 
-  int_t degree(const symbol_t &s)
-  {
-    int_t d = gConstUDF;
-    list_t vars = variables(s);
-    return d;
-  }
-
   int_t degree(const symbol_t &s, const symbol_t &x)
   {
     // 检查参数
@@ -118,4 +111,42 @@ namespace mysym
     //
     return __degree_monomial(s, xs);
   }
+
+  int_t degree(const symbol_t &s)
+  {
+    int_t d = gConstUDF;
+    if (is_single(s))
+    {
+      d = gConstOne;
+    }
+    else 
+    {
+      if (is_pow(kind(s)))
+      {
+        symbol_t e = exponent(s);
+        if (!is_single(e))
+        {
+          if (is_frac(kind(e)))
+            d = e;
+          else
+            d = gConstUDF;
+        }
+        else
+        {
+          d = e;
+        }
+      }
+      else if (is_mul(kind(s)) || is_add(kind(s)))
+      {
+        list_t vars = variables(s);
+        d = degree(s, vars);
+      }
+      else
+      {
+        d = gConstOne;
+      }
+    }
+    return d;
+  }
+
 } // namespace mysym
