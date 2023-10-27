@@ -278,6 +278,9 @@ namespace mysym
   void play(symbol_t &x);
   void apply_basic_rule(symbol_t &x);
 
+  // 公因子运算
+  symbol_t extract_factor(const symbol_t &x);
+
   //
   // 运算符号
   //

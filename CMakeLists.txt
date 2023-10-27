@@ -51,6 +51,7 @@ set(MYSYM_HEADERS
 # Mysym operator sources
 #
 set(MYSYM_OPERATOR_SRC
+  ${SRC_DIRECTORY}/operator/select.cc
   ${SRC_DIRECTORY}/operator/cmp.cc
   ${SRC_DIRECTORY}/operator/atom.cc
   ${SRC_DIRECTORY}/operator/abs.cc

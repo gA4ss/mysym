@@ -64,14 +64,15 @@ mysym::symbol_t operator~(const mysym::symbol_t &x)
   return x;
 }
 
-mysym::symbol_t operator>>(const mysym::symbol_t &x, const mysym::symbol_t &y)
+std::istream& operator>>(std::istream& in, const mysym::symbol_t &x)
 {
-  return x;
+  return in;
 }
 
-mysym::symbol_t operator<<(const mysym::symbol_t &x, const mysym::symbol_t &y)
+std::ostream& operator<<(std::ostream& out, const mysym::symbol_t &x)
 {
-  return x;
+  out << mysym::print_string(x);
+  return out;
 }
 
 mysym::symbol_t operator^(const mysym::symbol_t &x, const mysym::symbol_t &y)

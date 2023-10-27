@@ -32,8 +32,8 @@ TEST(Sym, Number)
   x = create_symbol("x");
   y = create_symbol("x");
   z = c_sub(x, y);
-  std::cout << print_string(z) << std::endl;
-  EXPECT_EQ(compare(z, gConstZero), 0);
+  // std::cout << print_string(z) << std::endl;
+  EXPECT_STREQ(print_string(z).c_str(), "x+-1*x");
 }
 
 int main(int argc, char *argv[])

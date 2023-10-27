@@ -165,7 +165,30 @@ namespace mysym
 
   symbol_t add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = execute_cases(kOptAdd, x, y);
+    //
+    // 1. 如果x符号为正，y符号为正，则正常运算。
+    // 2. 如果x符号为正，y符号为负，则转为减法运算。
+    // 3. 如果x符号为负，y符号为正，则转为减法运算y-x。
+    // 4. 如果x符号为负，y符号为负，则提出-1并进行-1 * (x+y)。
+    //
+    symbol_t z;
+    if ((sign(x) == kSignPositive) && (sign(y) == kSignPositive))
+    {
+      z = execute_cases(kOptAdd, x, y);
+    }
+    else if ((sign(x) == kSignPositive) && (sign(y) == kSignNegative))
+    {
+      z = execute_cases(kOptSub, x, y);
+    }
+    else if  ((sign(x) == kSignNegative) && (sign(y) == kSignPositive))
+    {
+      z = execute_cases(kOptSub, y, x);
+    }
+    else // if  ((sign(x) == kSignNegative) && (sign(y) == kSignNegative))
+    {
+      z = execute_cases(kOptSub, abs(x), abs(y));
+      z = mul(gConstOne, z);
+    }
     sort(z);
     return z;
   }

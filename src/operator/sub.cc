@@ -158,7 +158,24 @@ namespace mysym
 
   symbol_t sub(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = execute_cases(kOptSub, x, y);
+    symbol_t z;
+    if ((sign(x) == kSignPositive) && (sign(y) == kSignPositive))
+    {
+      z = execute_cases(kOptSub, x, y);
+    }
+    else if ((sign(x) == kSignPositive) && (sign(y) == kSignNegative))
+    {
+      z = execute_cases(kOptAdd, x, abs(y));
+    }
+    else if  ((sign(x) == kSignNegative) && (sign(y) == kSignPositive))
+    {
+      z = execute_cases(kOptAdd, abs(x), y);
+      z = mul(gConstOne, z);
+    }
+    else // if  ((sign(x) == kSignNegative) && (sign(y) == kSignNegative))
+    {
+      z = execute_cases(kOptSub, abs(y), x);
+    }
     sort(z);
     return z;
   }

@@ -12,6 +12,7 @@ namespace mysym
     // 5. 如果是函数直接返回正。
     // 6. 如果是乘号，则以第一个元素的符号为准。
     // 7. 如果是加号，则直接返回正。
+    //
     bool s = kSignPositive;
     if (is_num(kind(x)))
     {

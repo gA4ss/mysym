@@ -17,6 +17,9 @@ TEST(Sym, Abs)
   std::cout << print_string(_x) << std::endl;
   std::cout << print_string(abs(_x)) << std::endl;
 
+  _x = mul(gConstOne, _x);
+  std::cout << print_string(_x) << std::endl;
+
   symbol_t _y = c_mul("-1", c_mul("-1", c_mul(y, z)));
   std::cout << print_string(_y) << std::endl;
   std::cout << print_string(abs(_y)) << std::endl;
