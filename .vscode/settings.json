@@ -103,5 +103,6 @@
     "stack": "cpp",
     "thread": "cpp",
     "__functional_03": "cpp"
-  }
+  },
+  "python.pythonPath": "/Users/gal0is/opt/anaconda3/envs/mathematics/bin/python"
 }

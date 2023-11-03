@@ -3,18 +3,22 @@
 
 #include <mysym/set.hpp>
 #include <unordered_set>
+#include <functional>
 
 namespace mysym
 {
   typedef std::string opt_t;
   typedef std::vector<opt_t> opts_t;
   typedef std::pair<opts_t, opts_t> opts_pair_t;
-  typedef struct __symopt_attribute_t
+
+  typedef struct __symopt_function_attribute_t
   {
     bool continuous;        // 是否是连续的
-    // opt_t inverse_opt;   // 逆操作
-    // std::string unit1;   // 单位元
-  } symopt_attr_t;
+    std::string period;     // 周期
+    std::string dod;        // 定义域
+    std::string dov;        // 值域
+  } symopt_func_attr_t;
+  typedef std::shared_ptr<symopt_func_attr_t> symbol_func_attr_ptr_t;
 
   typedef struct __symopt_t
   {
@@ -22,9 +26,10 @@ namespace mysym
     int priority;                     // 优先级
     bool associative_law;             // 结合律
     bool commutative_law;             // 交换律
-    std::vector<opt_t> distributives; // 分配针对操作
-    std::string unit1;                // 单位
-    symopt_attr_t attr;               // 属性
+    std::vector<opt_t> distributives; // 分配律
+    std::string unit1;                // 单位元
+    opt_t inverse;                    // 逆操作
+    symbol_func_attr_ptr_t attr;      // 如果是函数，这里定义属性
   } symopt_t;
 #define distributive_law(s) (s.distributives.size() != 0)
 
@@ -36,7 +41,7 @@ namespace mysym
   bool opt_associative_law(opt_t o);
   bool opt_commutative_law(opt_t o);
   bool opt_distributive_law(opt_t o);
-  bool opt_continuous(opt_t o);
+  // bool opt_continuous(opt_t o);
   int cmp_operator_priority(opt_t o1, opt_t o2);
   bool can_distributive(opt_t os, opt_t od);
   std::string symopts();

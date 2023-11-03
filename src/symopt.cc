@@ -5,12 +5,21 @@ namespace mysym
   typedef std::map<std::string, symopt_t> symopts_t;
   static symopts_t __symopts;
 
-#define define_opt(opt, pri, ass, com, dis, uni, att) \
-  __symopts[opt] = {opt, pri, ass, com, dis, uni, att}
+#define define_opt(opt, pri, ass, com, dis, uni, inv, att) \
+  __symopts[opt] = {opt, pri, ass, com, dis, uni, inv, att}
+
+#define define_func(opt, con, per, dod, dov) { \
+  __symopts[opt].attr = std::make_shared<symopt_func_attr_t>(); \
+  __symopts[opt].attr->continuous = con; \
+  __symopts[opt].attr->period = per; \
+  __symopts[opt].attr->dod = dod; \
+  __symopts[opt].attr->dov = dov; \
+}
 
   void init_symopt()
   {
 #include "symopt.def"
+#include "functions.def"
   }
 
   bool is_symopt(std::string name)
@@ -71,12 +80,12 @@ namespace mysym
     return distributive_law(__symopts[o]);
   }
 
-  bool opt_continuous(opt_t o)
-  {
-    if (__symopts.find(o) == __symopts.end())
-      return false;
-    return __symopts[o].attr.continuous;
-  }
+  // bool opt_continuous(opt_t o)
+  // {
+  //   if (__symopts.find(o) == __symopts.end())
+  //     return false;
+  //   return __symopts[o].attr.continuous;
+  // }
 
   int cmp_operator_priority(opt_t o1, opt_t o2)
   {

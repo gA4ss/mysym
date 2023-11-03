@@ -121,7 +121,6 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/units.cc
   ${SRC_DIRECTORY}/monomial.cc
   ${SRC_DIRECTORY}/polynomial.cc
-  ${SRC_DIRECTORY}/expression.cc
   ${SRC_DIRECTORY}/elements.cc
   ${SRC_DIRECTORY}/sign.cc
   ${SRC_DIRECTORY}/degree.cc
@@ -130,6 +129,9 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/init.cc
   ${SRC_DIRECTORY}/misc.cc
   ${SRC_DIRECTORY}/number.cc
+  ${SRC_DIRECTORY}/equation.cc
+  ${SRC_DIRECTORY}/inequation.cc
+  ${SRC_DIRECTORY}/expression.cc
   ${SRC_DIRECTORY}/wrapper.cc
   ${MYSYM_OPERATOR_SRC}
   ${MYSYM_INTERPRETER_SRC}

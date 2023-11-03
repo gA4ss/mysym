@@ -24,7 +24,6 @@
 
 namespace mysym
 {
-
   // typedef mympz::bignum_t symnum_t;
   typedef mympz::bignum_t integer_t;
   typedef mympf::float_t float_t;
@@ -278,8 +277,12 @@ namespace mysym
   void play(symbol_t &x);
   void apply_basic_rule(symbol_t &x);
 
-  // 公因子运算
-  symbol_t extract_factor(const symbol_t &x);
+  // 因子运算
+  symbol_t gcd(const symbol_t &x);
+  symbol_t gcd(const list_t &s);
+  symbol_t lcm(const symbol_t &x);
+  symbol_t lcm(const list_t &s);
+  list_t extend_euclid(const list_t &s);
 
   //
   // 运算符号
