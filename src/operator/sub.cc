@@ -167,7 +167,7 @@ namespace mysym
     {
       z = execute_cases(kOptAdd, x, abs(y));
     }
-    else if  ((sign(x) == kSignNegative) && (sign(y) == kSignPositive))
+    else if ((sign(x) == kSignNegative) && (sign(y) == kSignPositive))
     {
       z = execute_cases(kOptAdd, abs(x), y);
       z = mul(gConstOne, z);

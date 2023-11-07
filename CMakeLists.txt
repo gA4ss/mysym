@@ -16,6 +16,7 @@ endif(DEBUG)
 
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS "${CXX_FLAGS}")
+set(CMAKE_EXPORT_COMPILE_COMMANDS ON)
 
 #
 # Sub modules directories
@@ -199,6 +200,8 @@ add_test(NAME test_units COMMAND test_units)
 set_tests_properties(test_units PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_symbol COMMAND test_symbol)
 set_tests_properties(test_symbol PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+# add_test(NAME test_io COMMAND test_io)
+# set_tests_properties(test_io PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 # Test Operator
 add_test(NAME test_cmp COMMAND test_cmp)
 set_tests_properties(test_cmp PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
@@ -212,7 +215,6 @@ add_test(NAME test_abs COMMAND test_abs)
 set_tests_properties(test_abs PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_pow COMMAND test_pow)
 set_tests_properties(test_pow PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
-
 #
 # Auto Test
 #

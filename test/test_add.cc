@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/wrapper.h>
 
 using namespace mysym;
 
@@ -63,16 +64,16 @@ TEST(Sym, Frac)
   x = gConstE;
   y = c_frac("1", "2");
   z = add(x, y);
-  EXPECT_STREQ(print_string(z).c_str(), "1/2+e");
+  EXPECT_STREQ(print_string(z).c_str(), "1//2+e");
   EXPECT_EQ(compare(z, c_add("0.5", "e")), 0);
 
   x = create_var("x");
   y = c_frac("1", "2");
-  EXPECT_STREQ(print_string(add(x, y)).c_str(), "1/2+x");
+  EXPECT_STREQ(print_string(add(x, y)).c_str(), "1//2+x");
 
   x = c_frac("1", "2");
   y = c_sin("y");
-  EXPECT_STREQ(print_string(add(x, y)).c_str(), "1/2+sin(y)");
+  EXPECT_STREQ(print_string(add(x, y)).c_str(), "1//2+sin(y)");
 }
 
 TEST(Sym, Nature)
@@ -167,6 +168,17 @@ TEST(Sym, Basic2)
   z2 = c_mul(x, y);
   z3 = add(z1, z2);
   EXPECT_STREQ(print_string(z3).c_str(), "a+b+a*b");
+}
+
+TEST(Sym, Unit)
+{
+  //
+  // 常数与变量比较
+  //
+  symbol_t x = create_symbol("x");
+  symbol_t y = x + gConstZero;
+  // std::cout << y << std::endl;
+  EXPECT_TRUE(y == x);
 }
 
 int main(int argc, char *argv[])

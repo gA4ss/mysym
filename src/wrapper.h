@@ -15,15 +15,22 @@ mysym::symbol_t operator--(mysym::symbol_t &x);
 mysym::symbol_t operator++(mysym::symbol_t &x, int i);
 mysym::symbol_t operator--(mysym::symbol_t &x, int i);
 
+//
+// 目前是取相反数
+//
+mysym::symbol_t operator~(const mysym::symbol_t &x);
+
+//
+// 逻辑运算
+//
 mysym::symbol_t operator&(const mysym::symbol_t &x, const mysym::symbol_t &y);
 mysym::symbol_t operator|(const mysym::symbol_t &x, const mysym::symbol_t &y);
-mysym::symbol_t operator~(const mysym::symbol_t &x);
 mysym::symbol_t operator^(const mysym::symbol_t &x, const mysym::symbol_t &y);
 
 //
 // 输入输出流
 //
-std::istream& operator>>(std::istream& in, const mysym::symbol_t &x);
+const mysym::symbol_t& operator>>(std::istream& in, mysym::symbol_t &x);
 std::ostream& operator<<(std::ostream& out, const mysym::symbol_t &x);
 
 bool operator||(const mysym::symbol_t &x, const mysym::symbol_t &y);

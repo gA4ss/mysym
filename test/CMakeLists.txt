@@ -75,6 +75,8 @@ add_executable(test_set ${SRC_DIRECTORY}/test_set.cc)
 target_link_libraries(test_set my)
 add_executable(test_units ${SRC_DIRECTORY}/test_units.cc)
 target_link_libraries(test_units mysym gtest pthread)
+add_executable(test_io ${SRC_DIRECTORY}/test_io.cc)
+target_link_libraries(test_io mysym gtest pthread)
 # Test Operator
 add_executable(test_cmp ${SRC_DIRECTORY}/test_cmp.cc)
 target_link_libraries(test_cmp mysym gtest pthread)

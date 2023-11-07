@@ -91,6 +91,7 @@ namespace mysym
   {
     optset_t os, found;
     os.name = setname;
+    os.id = make_optid(setname);
     symopt_t sopt;
     for (auto name : names)
     {
@@ -256,6 +257,13 @@ namespace mysym
     if ((find_optset(s1, os1) == false) || (find_optset(s2, os2) == false))
       return {};
     return relation_set<symopt_t>(os1.items, os2.items);
+  }
+
+  optid_t opts_id(std::string name)
+  {
+    if (__optsets.find(name) == __optsets.end())
+      return 0;
+    return __optsets[name].id;
   }
 
   std::string optsets()

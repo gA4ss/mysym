@@ -131,7 +131,7 @@ namespace mysym
       else if (is_frac(s.opt))
       {
         symbol_t n = numerator(s), d = denominator(s);
-        if (is_single(s))
+        if (is_single(n))
         {
           str += n.literal;
         }
@@ -144,7 +144,7 @@ namespace mysym
 
         str += opt_name(s.opt);
 
-        if (is_single(s))
+        if (is_single(d))
         {
           str += d.literal;
         }
@@ -176,6 +176,13 @@ namespace mysym
     }
     str.pop_back(); // 删除最后一个","号
     return str + "}";
+  }
+
+  std::string print_string(const symopt_t& o)
+  {
+    std::string str;
+    str += (o.opt + ":" + std::to_string(o.id));
+    return str;
   }
 
   std::string print_string(const optset_t& s)

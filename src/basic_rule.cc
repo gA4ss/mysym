@@ -164,6 +164,28 @@ namespace mysym
     return;
   }
 
+  static inline bool __is_identity(opt_t opt, const symbol_t &x)
+  {
+    //
+    // 加法与乘法加速运算
+    //
+    if (is_add(opt))
+    {
+      return compare(x, gConstZero) == 0;
+    }
+    else if (is_mul(opt))
+    {
+      return compare(x, gConstOne) == 0;
+    }
+
+    std::string ident_str = opt_identity(opt);
+    if (ident_str == "")  // 无单位元
+      return false;
+
+    symbol_t ident = create_symbol(ident_str);
+    return compare(x, ident) == 0;
+  }
+
   static void __combine_like_terms(symbol_t &x)
   {
     // 不满足结合律的运算不进行结合
@@ -189,7 +211,20 @@ namespace mysym
       // 取得本轮计算的第一个符号
       //
       z = operand(x, i);
-      new_z = false; // 重置符号
+
+      //
+      // 如果取出的z是相当于当前运算的单位元，则直接跳过并忽略z
+      //
+      // if (__is_identity(opt, z))
+      // {
+      //   combined.insert(i);
+      //   continue;
+      // }
+
+      //
+      // 重置符号
+      //
+      new_z = false;
 
       //
       // 这里更新j的索引，之前的j能合并都进行了合并，它的索引应当在i之后。
@@ -205,18 +240,36 @@ namespace mysym
         if (std::find(combined.begin(), combined.end(), j) != combined.end())
           continue;
 
-        t = execute_cases(opt, z, operand(x, j));
-
         //
-        // 如果z的运算符与opt一致，则说明两项没有合并，不一致则说明合并了
-        // 合并后，记录当前j节点。之后遇到则跳过。
+        // 这里负责具体的运算执行
+        // [1] operand(x, j)是单位元
+        // [2] operand(x, j)不是单位元
         //
-        if (kind(t) != opt)
+        if (__is_identity(opt, operand(x, j)))
         {
           combined.insert(j);
-          z = t;
+          //
+          // 这里是为了让跳出的循环，压入新的符号。
+          // 与单位元做运算虽然等于自身，但也算是
+          // 新的符号。
+          //
           new_z = true;
+          continue;
         }
+        else
+        {
+          t = execute_cases(opt, z, operand(x, j));
+          //
+          // 如果z的运算符与opt一致，则说明两项没有合并，不一致则说明合并了
+          // 合并后，记录当前j节点。之后遇到则跳过。
+          //
+          if (kind(t) != opt)
+          {
+            combined.insert(j);
+            z = t;
+            new_z = true;
+          }
+        }/* end else */
       }/* j的循环 */
 
       //

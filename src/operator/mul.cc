@@ -23,11 +23,19 @@ namespace mysym
 
   static symbol_t __mul_num_var(const symbol_t &x, const symbol_t &y)
   {
+    if (compare(x, gConstOne) == 0)
+      return y;
+    else if (compare(y, gConstOne) == 0)
+      return x;
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_num_func(const symbol_t &x, const symbol_t &y)
   {
+    if (compare(x, gConstOne) == 0)
+      return y;
+    else if (compare(y, gConstOne) == 0)
+      return x;
     return just_make2(kOptMul, x, y);
   }
 

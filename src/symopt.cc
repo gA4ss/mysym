@@ -5,21 +5,29 @@ namespace mysym
   typedef std::map<std::string, symopt_t> symopts_t;
   static symopts_t __symopts;
 
-#define define_opt(opt, pri, ass, com, dis, uni, inv, att) \
-  __symopts[opt] = {opt, pri, ass, com, dis, uni, inv, att}
+#define define_opt(opt, pri, ass, com, dis, ide, inv, att, id) \
+  __symopts[opt] = {opt, pri, ass, com, dis, ide, inv, att, id}
 
-#define define_func(opt, con, per, dod, dov) { \
-  __symopts[opt].attr = std::make_shared<symopt_func_attr_t>(); \
-  __symopts[opt].attr->continuous = con; \
-  __symopts[opt].attr->period = per; \
-  __symopts[opt].attr->dod = dod; \
-  __symopts[opt].attr->dov = dov; \
+static void __define_func(opt_t o, bool con, int odev, std::string per, std::string dod, std::string dov) {
+  if (__symopts[o].attr == nullptr)
+    __symopts[o].attr = std::make_shared<symopt_func_attr_t>();
+  __symopts[o].attr->continuous = con;
+  __symopts[o].attr->odevity = odev;
+  __symopts[o].attr->period = per;
+  __symopts[o].attr->dod = dod;
+  __symopts[o].attr->dov = dov;
 }
 
   void init_symopt()
   {
 #include "symopt.def"
 #include "functions.def"
+  }
+
+  optid_t make_optid(std::string name)
+  {
+    std::hash<std::string> hash_opt_name;
+    return hash_opt_name(name);
   }
 
   bool is_symopt(std::string name)
@@ -80,12 +88,13 @@ namespace mysym
     return distributive_law(__symopts[o]);
   }
 
-  // bool opt_continuous(opt_t o)
-  // {
-  //   if (__symopts.find(o) == __symopts.end())
-  //     return false;
-  //   return __symopts[o].attr.continuous;
-  // }
+  std::string opt_identity(opt_t o)
+  {
+    symopt_t p;
+    if (find_symopt(o, p) == false)
+      return "";
+    return p.identity;
+  }
 
   int cmp_operator_priority(opt_t o1, opt_t o2)
   {
@@ -107,6 +116,13 @@ namespace mysym
     return (std::find(__symopts[os].distributives.begin(),
                       __symopts[os].distributives.end(), od) !=
             __symopts[os].distributives.end());
+  }
+
+  optid_t opt_id(opt_t o)
+  {
+    if (__symopts.find(o) == __symopts.end())
+      return 0;
+    return __symopts[o].id;
   }
 
   std::string symopts()

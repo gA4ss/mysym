@@ -10,15 +10,22 @@ namespace mysym
   typedef std::string opt_t;
   typedef std::vector<opt_t> opts_t;
   typedef std::pair<opts_t, opts_t> opts_pair_t;
+  typedef int optid_t;
 
+#define kFuncOdevityNone    0
+#define kFuncOdevityOdd     1
+#define kFuncOdevityEven    2
   typedef struct __symopt_function_attribute_t
   {
     bool continuous;        // 是否是连续的
+    int odevity;            // 奇偶性
     std::string period;     // 周期
     std::string dod;        // 定义域
     std::string dov;        // 值域
   } symopt_func_attr_t;
   typedef std::shared_ptr<symopt_func_attr_t> symbol_func_attr_ptr_t;
+
+  void init_functions();
 
   typedef struct __symopt_t
   {
@@ -27,12 +34,14 @@ namespace mysym
     bool associative_law;             // 结合律
     bool commutative_law;             // 交换律
     std::vector<opt_t> distributives; // 分配律
-    std::string unit1;                // 单位元
+    std::string identity;             // 单位元
     opt_t inverse;                    // 逆操作
     symbol_func_attr_ptr_t attr;      // 如果是函数，这里定义属性
+    optid_t id;                       // id
   } symopt_t;
 #define distributive_law(s) (s.distributives.size() != 0)
 
+  optid_t make_optid(std::string name);
   bool is_symopt(std::string name);
   bool find_symopt(std::string name, symopt_t &out);
   std::string opt_name(opt_t o);
@@ -41,10 +50,12 @@ namespace mysym
   bool opt_associative_law(opt_t o);
   bool opt_commutative_law(opt_t o);
   bool opt_distributive_law(opt_t o);
-  // bool opt_continuous(opt_t o);
+  std::string opt_identity(opt_t o);
   int cmp_operator_priority(opt_t o1, opt_t o2);
   bool can_distributive(opt_t os, opt_t od);
+  optid_t opt_id(opt_t o);
   std::string symopts();
+  void init_symopt();
 
   typedef set_t<symopt_t> symopt_set_t;
   typedef std::pair<symopt_set_t, symopt_set_t> symopt_set_pair_t;
@@ -57,6 +68,7 @@ namespace mysym
     int max_priority;                         // 最大优先级
     int min_priority;                         // 最小优先级
     double average_priority;                  // 平均优先级
+    optid_t id;                               // id
   } optset_t;
 
   size_t size(optset_t os);
@@ -79,8 +91,8 @@ namespace mysym
   opts_t complementary_optset(std::string s, std::string i);
   opts_pair_t difference_optset(std::string s1, std::string s2);
   set_relation_t relation_optset(std::string s1, std::string s2);
+  optid_t opts_id(std::string name);
   std::string optsets();
-  void init_symopt();
   void init_symset();
 
 #define kOptAdd "+"

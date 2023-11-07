@@ -408,6 +408,7 @@ namespace mysym
 
   std::string print_string(const symbol_t &s);
   std::string print_string(const list_t &l);
+  std::string print_string(const symopt_t& o);
   std::string print_string(const optset_t& s);
   std::string print_string(const optcase_t& s);
 

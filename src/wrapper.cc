@@ -49,6 +49,11 @@ mysym::symbol_t operator--(mysym::symbol_t &x, int i)
   return y;
 }
 
+mysym::symbol_t operator~(const mysym::symbol_t &x)
+{
+  return mysym::mul(mysym::gConstNegOne, x);
+}
+
 mysym::symbol_t operator&(const mysym::symbol_t &x, const mysym::symbol_t &y)
 {
   return x;
@@ -59,14 +64,12 @@ mysym::symbol_t operator|(const mysym::symbol_t &x, const mysym::symbol_t &y)
   return x;
 }
 
-mysym::symbol_t operator~(const mysym::symbol_t &x)
+const mysym::symbol_t& operator>>(std::istream& in, mysym::symbol_t &x)
 {
+  std::string str;
+  in >> str;
+  x = mysym::create_symbol(str);
   return x;
-}
-
-std::istream& operator>>(std::istream& in, const mysym::symbol_t &x)
-{
-  return in;
 }
 
 std::ostream& operator<<(std::ostream& out, const mysym::symbol_t &x)
