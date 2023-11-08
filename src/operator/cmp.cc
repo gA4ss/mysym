@@ -58,8 +58,8 @@ namespace mysym
     //
     if ((kind(x) == kOptFrac))
     {
-      number_t n = number_t(numerator(x).literal);
-      number_t d = number_t(denominator(x).literal);
+      number_t n = mynum::integer_to_float(number_t(numerator(x).literal));
+      number_t d = mynum::integer_to_float(number_t(denominator(x).literal));
       f1 = n / d;
     }
     else if (is_num(kind(x)))
@@ -79,8 +79,8 @@ namespace mysym
 
     if ((kind(y) == kOptFrac))
     {
-      number_t n = number_t(numerator(y).literal);
-      number_t d = number_t(denominator(y).literal);
+      number_t n = mynum::integer_to_float(number_t(numerator(y).literal));
+      number_t d = mynum::integer_to_float(number_t(denominator(y).literal));
       f2 = n / d;
     }
     else if (is_num(kind(y)))

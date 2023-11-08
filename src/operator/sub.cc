@@ -174,7 +174,7 @@ namespace mysym
     }
     else // if  ((sign(x) == kSignNegative) && (sign(y) == kSignNegative))
     {
-      z = execute_cases(kOptSub, abs(y), x);
+      z = execute_cases(kOptSub, abs(y), abs(x));
     }
     sort(z);
     return z;

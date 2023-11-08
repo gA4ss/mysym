@@ -186,11 +186,11 @@ namespace mysym
     }
     else if ((sign(x) == kSignPositive) && (sign(y) == kSignNegative))
     {
-      z = execute_cases(kOptSub, x, y);
+      z = execute_cases(kOptSub, x, abs(y));
     }
     else if  ((sign(x) == kSignNegative) && (sign(y) == kSignPositive))
     {
-      z = execute_cases(kOptSub, y, x);
+      z = execute_cases(kOptSub, y, abs(x));
     }
     else // if  ((sign(x) == kSignNegative) && (sign(y) == kSignNegative))
     {
