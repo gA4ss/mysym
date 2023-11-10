@@ -23,19 +23,11 @@ namespace mysym
 
   static symbol_t __add_num_var(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, gConstZero) == 0)
-      return y;
-    else if (compare(y, gConstZero) == 0)
-      return x;
     return just_make2(kOptAdd, x, y);
   }
 
   static symbol_t __add_num_func(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, gConstZero) == 0)
-      return y;
-    else if (compare(y, gConstZero) == 0)
-      return x;
     return just_make2(kOptAdd, x, y);
   }
 
@@ -61,23 +53,6 @@ namespace mysym
 
   static symbol_t __add_nature_nature(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-    {
-      if (is_inf(kind(x)))
-        return gConstInf;
-      else if (is_neg_inf(kind(x)))
-        return gConstNegInf;
-      else
-        return just_make2(kOptMul, "2", x);
-    }
-
-    if (__test_and_or(is_inf, is_neg_inf, x, y))
-      return gConstZero;
-    else if (__test_or(is_inf, x, y))
-      return gConstInf;
-    else if (__test_or(is_neg_inf, x, y))
-      return gConstNegInf;
-
     return just_make2(kOptAdd, x, y);
   }
 
@@ -93,8 +68,6 @@ namespace mysym
 
   static symbol_t __add_var_var(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptMul, "2", x);
     return just_make2(kOptAdd, x, y);
   }
 
@@ -105,8 +78,6 @@ namespace mysym
 
   static symbol_t __add_pow_pow(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptMul, "2", x);
     return just_make2(kOptAdd, x, y);
   }
 
@@ -114,8 +85,6 @@ namespace mysym
 
   static symbol_t __add_func_func(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptMul, "2", x);
     return just_make2(kOptAdd, x, y);
   }
 
@@ -174,28 +143,53 @@ namespace mysym
   symbol_t add(const symbol_t &x, const symbol_t &y)
   {
     //
+    // x,y相同的运算
+    //
+    if (compare(x, y) == 0)
+      return just_make2(kOptMul, "2", x);
+    
+    //
+    // 与0的运算
+    //
+    if (compare(x, gConstZero) == 0)
+      return y;
+    else if (compare(y, gConstZero) == 0)
+      return x;
+
+    //
+    // 对♾️的相关计算
+    //
+    if (__test_and_or(is_inf, is_neg_inf, x, y))
+      return gConstZero;
+    else if (__test_or(is_inf, x, y))
+      return gConstInf;
+    else if (__test_or(is_neg_inf, x, y))
+      return gConstNegInf;
+
+    //
     // 1. 如果x符号为正，y符号为正，则正常运算。
     // 2. 如果x符号为正，y符号为负，则转为减法运算。
     // 3. 如果x符号为负，y符号为正，则转为减法运算y-x。
     // 4. 如果x符号为负，y符号为负，则提出-1并进行-1 * (x+y)。
     //
     symbol_t z;
-    if ((sign(x) == kSignPositive) && (sign(y) == kSignPositive))
+    int sign_x = sign(x), sign_y = sign(y);
+    if ((sign_x == kSignPositive) && (sign_y == kSignPositive))
     {
       z = execute_cases(kOptAdd, x, y);
     }
-    else if ((sign(x) == kSignPositive) && (sign(y) == kSignNegative))
+    else if ((sign_x == kSignPositive) && (sign_y == kSignNegative))
     {
       z = execute_cases(kOptSub, x, abs(y));
     }
-    else if  ((sign(x) == kSignNegative) && (sign(y) == kSignPositive))
+    else if ((sign_x == kSignNegative) && (sign_y == kSignPositive))
     {
       z = execute_cases(kOptSub, y, abs(x));
     }
-    else // if  ((sign(x) == kSignNegative) && (sign(y) == kSignNegative))
+    else // if ((sign_x == kSignNegative) && (sign_y == kSignNegative))
     {
-      z = execute_cases(kOptSub, abs(x), abs(y));
-      z = mul(gConstOne, z);
+      z = execute_cases(kOptAdd, abs(x), abs(y));
+      z = just_make2(kOptMul, gConstNegOne, x);
     }
     sort(z);
     return z;

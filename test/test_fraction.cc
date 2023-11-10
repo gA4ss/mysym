@@ -4,8 +4,26 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/wrapper.h>
 
 using namespace mysym;
+
+TEST(Sym, Number) {
+  symbol_t s1 = c_frac("1", "3");
+  symbol_t s2 = c_frac("2", "3");
+  EXPECT_TRUE(compare(s1+s2, gConstOne) == 0);
+  std::cout << s1+s2 << std::endl;
+
+  s1 = c_frac("5", "2");
+  s2 = c_frac("7", "6");
+  EXPECT_TRUE(compare(s1+s2, c_frac("11", "3")) == 0);
+  std::cout << s1+s2 << std::endl;
+
+  s1 = c_frac("5", "2");
+  s2 = c_frac("7", "6");
+  EXPECT_TRUE(compare(div(s1,s2), c_frac("15", "7")) == 0);
+  std::cout << div(s1,s2) << std::endl;
+}
 
 TEST(Sym, Fraction) {
   symbol_t s1 = c_frac("x", "y");

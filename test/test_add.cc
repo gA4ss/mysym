@@ -181,6 +181,23 @@ TEST(Sym, Unit)
   EXPECT_TRUE(y == x);
 }
 
+TEST(Sym, Log)
+{
+  //
+  // 常数与变量比较
+  //
+  symbol_t b = create_symbol("x");
+  symbol_t e1 = create_symbol("5");
+  symbol_t e2 = c_frac("1", "2");
+  symbol_t y1 = c_log(b, e1);
+  symbol_t y2 = c_log(b, e2);
+  // std::cout << y1 + y2 << std::endl;
+  EXPECT_STREQ(print_string(y1+y2).c_str(), "log(x,5//2)");
+  e1 = create_symbol("a");
+  y1 = c_log(b, e1);
+  EXPECT_STREQ(print_string(y1+y2).c_str(), "log(x,1//2*a)");
+}
+
 int main(int argc, char *argv[])
 {
   init();

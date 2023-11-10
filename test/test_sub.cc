@@ -34,6 +34,8 @@ TEST(Sym, Number)
   z = c_sub(x, y);
   // std::cout << print_string(z) << std::endl;
   EXPECT_STREQ(print_string(z).c_str(), "x+-1*x");
+  z = sub(x, y);
+  EXPECT_STREQ(print_string(z).c_str(), "0");
 }
 
 int main(int argc, char *argv[])

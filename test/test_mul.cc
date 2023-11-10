@@ -8,13 +8,25 @@
 
 using namespace mysym;
 
-TEST(Sym, PrintMul)
+// TEST(Sym, PrintMul)
+// {
+//   rule_library_t lib = rule_library();
+//   for (auto it = lib.cases[kOptMul].begin(); it != lib.cases[kOptMul].end(); it++)
+//   {
+//     std::cout << it->first << std::endl;
+//   }
+// }
+
+TEST(Sym, MulOne)
 {
-  rule_library_t lib = rule_library();
-  for (auto it = lib.cases[kOptMul].begin(); it != lib.cases[kOptMul].end(); it++)
-  {
-    std::cout << it->first << std::endl;
-  }
+  //
+  // 常数与变量比较
+  //
+  symbol_t x = create_symbol("x");
+  symbol_t y = create_int("1");
+  EXPECT_EQ(compare(x * y, x), 0);
+  y = opposite(y);
+  EXPECT_EQ(compare(x * y, opposite(x)), 0);
 }
 
 TEST(Sym, Number)
@@ -67,9 +79,9 @@ TEST(Sym, SymMul)
   symbol_t z2 = c_add("a", c_mul("x", "y"));
   symbol_t z3 = mul(x, z1);
   // std::cout << print_string(z3) << std::endl;
-  EXPECT_STREQ(print_string(z3).c_str(), "z*^(x,2)");
+  EXPECT_STREQ(print_string(z3).c_str(), "z*x^2");
   symbol_t z4 = mul(x, z2);
-  EXPECT_STREQ(print_string(z4).c_str(), "a*x+y*^(x,2)");
+  EXPECT_STREQ(print_string(z4).c_str(), "a*x+y*x^2");
   // std::cout << print_string(z4) << std::endl;
 }
 
@@ -85,11 +97,11 @@ TEST(Sym, MutilMul)
   EXPECT_STREQ(print_string(k).c_str(), "5*a*x*z");
   // (a+x*y)*(5+x) = 5*a+5*x*y+a*x+y*^(x,2)
   k = mul(z3, z4);
-  EXPECT_STREQ(print_string(k).c_str(), "5*a+5*x*y+a*x+y*^(x,2)");
+  EXPECT_STREQ(print_string(k).c_str(), "5*a+5*x*y+a*x+y*x^2");
   // std::cout << print_string(k) << std::endl;
   // (x*z) * (a + x*y) = a*x*z + y*z*^(x,2)
   k = mul(z1, z3);
-  EXPECT_STREQ(print_string(k).c_str(), "a*x*z+y*z*^(x,2)");
+  EXPECT_STREQ(print_string(k).c_str(), "a*x*z+y*z*x^2");
   // std::cout << print_string(k) << std::endl;
 }
 

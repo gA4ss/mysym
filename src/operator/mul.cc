@@ -4,6 +4,31 @@
 
 namespace mysym
 {
+// x,y相同的运算
+#define __x_equ_y(x, y) {               \
+  if (compare(x, y) == 0)               \
+    return just_make2(kOptPow, x, "2"); \
+}
+
+//
+// 与1的运算
+//
+#define __calculate_with_one(x, y) {    \
+  if (compare(x, gConstOne) == 0)       \
+    return y;                           \
+  else if (compare(y, gConstOne) == 0)  \
+    return x;                           \
+}
+
+//
+// 对♾️的相关计算
+//
+#define __calculate_with_infinite(x, y) {                           \
+  if (__test_and_or(is_inf, is_neg_inf, x, y)) return gConstNegInf; \
+  else if (__test_or(is_inf, x, y)) return gConstInf;               \
+  else if (__test_or(is_neg_inf, x, y)) return gConstNegInf;        \
+}
+
   static symbol_t __mul_num_num(const symbol_t &x, const symbol_t &y)
   {
     number_t f1 = number_t(x.literal);
@@ -18,34 +43,32 @@ namespace mysym
 
   static symbol_t __mul_num_nature(const symbol_t &x, const symbol_t &y)
   {
+    __compare_one(x, y);
+    __calculate_with_infinite(x, y);
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_num_var(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, gConstOne) == 0)
-      return y;
-    else if (compare(y, gConstOne) == 0)
-      return x;
+    __compare_one(x, y);
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_num_func(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, gConstOne) == 0)
-      return y;
-    else if (compare(y, gConstOne) == 0)
-      return x;
+    __compare_one(x, y);
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_frac_frac(const symbol_t &x, const symbol_t &y)
   {
+    __x_equ_y(x, y);
     return compute_frac_frac(kOptMul, x, y);
   }
 
   static symbol_t __mul_frac_nature(const symbol_t &x, const symbol_t &y)
   {
+    __calculate_with_infinite(x, y);
     return just_make2(kOptMul, x, y);
   }
 
@@ -71,13 +94,7 @@ namespace mysym
         return just_make2(kOptPow, x, "2");
     }
 
-    if (__test_and_or(is_inf, is_neg_inf, x, y))
-      return gConstNegInf;
-    else if (__test_or(is_inf, x, y))
-      return gConstInf;
-    else if (__test_or(is_neg_inf, x, y))
-      return gConstNegInf;
-
+    __calculate_with_infinite(x, y);
     return just_make2(kOptMul, x, y);
   }
 

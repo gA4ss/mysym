@@ -181,6 +181,7 @@ namespace mysym
     register_add_rule();
     register_sub_rule();
     register_mul_rule();
+    register_div_rule();
     register_func_rule();
   }
 

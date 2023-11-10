@@ -34,8 +34,8 @@ namespace mysym
     if (kind(s) != kOptFrac)
       return s;
 
-    number_t nf = number_t(numerator(s).literal);
-    number_t df = number_t(denominator(s).literal);
+    number_t nf = mynum::integer_to_float(number_t(numerator(s).literal));
+    number_t df = mynum::integer_to_float(number_t(denominator(s).literal));
     number_t rf = nf / df;
     return create_flt(rf.value());
   }

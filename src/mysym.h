@@ -246,6 +246,7 @@ namespace mysym
   void register_add_rule();
   void register_sub_rule();
   void register_mul_rule();
+  void register_div_rule();
   void register_func_rule();
   void init_rule();
   
