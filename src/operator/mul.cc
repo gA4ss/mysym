@@ -4,31 +4,6 @@
 
 namespace mysym
 {
-// x,y相同的运算
-#define __x_equ_y(x, y) {               \
-  if (compare(x, y) == 0)               \
-    return just_make2(kOptPow, x, "2"); \
-}
-
-//
-// 与1的运算
-//
-#define __calculate_with_one(x, y) {    \
-  if (compare(x, gConstOne) == 0)       \
-    return y;                           \
-  else if (compare(y, gConstOne) == 0)  \
-    return x;                           \
-}
-
-//
-// 对♾️的相关计算
-//
-#define __calculate_with_infinite(x, y) {                           \
-  if (__test_and_or(is_inf, is_neg_inf, x, y)) return gConstNegInf; \
-  else if (__test_or(is_inf, x, y)) return gConstInf;               \
-  else if (__test_or(is_neg_inf, x, y)) return gConstNegInf;        \
-}
-
   static symbol_t __mul_num_num(const symbol_t &x, const symbol_t &y)
   {
     number_t f1 = number_t(x.literal);
@@ -43,32 +18,26 @@ namespace mysym
 
   static symbol_t __mul_num_nature(const symbol_t &x, const symbol_t &y)
   {
-    __compare_one(x, y);
-    __calculate_with_infinite(x, y);
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_num_var(const symbol_t &x, const symbol_t &y)
   {
-    __compare_one(x, y);
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_num_func(const symbol_t &x, const symbol_t &y)
   {
-    __compare_one(x, y);
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_frac_frac(const symbol_t &x, const symbol_t &y)
   {
-    __x_equ_y(x, y);
     return compute_frac_frac(kOptMul, x, y);
   }
 
   static symbol_t __mul_frac_nature(const symbol_t &x, const symbol_t &y)
   {
-    __calculate_with_infinite(x, y);
     return just_make2(kOptMul, x, y);
   }
 
@@ -93,8 +62,6 @@ namespace mysym
       else
         return just_make2(kOptPow, x, "2");
     }
-
-    __calculate_with_infinite(x, y);
     return just_make2(kOptMul, x, y);
   }
 
@@ -212,6 +179,44 @@ namespace mysym
     return _x;
   }
 
+  static bool __mul_preprocess(const symbol_t &x, const symbol_t &y, symbol_t &z)
+  {
+    //
+    // x,y相同的运算
+    //
+    if (compare(x, y) == 0)
+      z = just_make2(kOptPow, x, "2");
+
+    //
+    // 与1的运算
+    //
+    else if (compare(x, gConstOne) == 0)
+      z = y;
+    else if (compare(y, gConstOne) == 0)
+      z = x;
+
+    //
+    // 对♾️的相关计算
+    //
+    else if (__test_and_or(is_inf, is_neg_inf, x, y))
+      z = gConstNegInf;
+    else if ((is_inf(kind(x))) && (sign(y) == kSignNegative))
+      z = gConstNegInf;
+    else if ((is_inf(kind(y))) && (sign(x) == kSignNegative))
+      z = gConstNegInf;
+    else if ((is_neg_inf(kind(x))) && (sign(y) == kSignNegative))
+      z = gConstInf;
+    else if ((is_neg_inf(kind(y))) && (sign(x) == kSignNegative))
+      z = gConstInf;
+
+    //
+    // 其他情况
+    //
+    else
+      return false;
+    return true;
+  }
+
   symbol_t mul(const symbol_t &x, const symbol_t &y)
   {
     symbol_t z = execute_cases(kOptMul, x, y);
@@ -261,6 +266,6 @@ namespace mysym
     register_case(kOptMul, make_optsign(kOptMul, kOptAdd), __mul_mul_add);
 
     // 入口
-    append_entry(kOptMul, __mul_entry);
+    append_entry(kOptMul, __mul_entry, __mul_preprocess);
   }
 } // namespace mysym

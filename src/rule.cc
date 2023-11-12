@@ -14,9 +14,10 @@ namespace mysym
   }
 
   ///////////////////////////////////////////////////////////////////////
-  void append_entry(opt_t opt, fptr_entry_t fentry)
+  void append_entry(opt_t opt, fptr_entry_t fentry, fptr_preproccess_t fpreproccess)
   {
     __rule_library.entries[opt] = fentry;
+    __rule_library.preproccesses[opt] = fpreproccess;
   }
 
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
@@ -156,15 +157,42 @@ namespace mysym
     return __rule_library.entries[kind(x)](x);
   }
 
+  static inline bool __preprocess(opt_t opt, const symbol_t &x, const symbol_t &y, 
+                                  symbol_t &z)
+  {
+    if (__rule_library.preproccesses.find(opt) != __rule_library.preproccesses.end())
+    {
+      fptr_preproccess_t preprocess = __rule_library.preproccesses[opt];
+      if (preprocess)
+        return preprocess(x, y, z);
+    }
+    z = gConstUDF;
+    return false;
+  }
+
+  //
+  // 所有具体执行都会执行到这里
+  //
   symbol_t execute_cases(opt_t opt, const symbol_t &x, const symbol_t &y)
   {
+    
+    //
+    // 进行预处理
+    //
+    symbol_t z;
+    if (__preprocess(opt, x, y, z))
+      return z;
+    //
+    // 执行对应函数
+    //
     optsign_t sign;
-    if (__meet_conditions(opt, x, y, sign) == false)
-      return just_make2(opt, x, y);
-    fptr_execute_t fptr = nullptr;
-    if (find_case(opt, sign, &fptr))
+    if (__meet_conditions(opt, x, y, sign))
     {
-      return fptr(x, y);
+      fptr_execute_t fptr = nullptr;
+      if (find_case(opt, sign, &fptr))
+      {
+        return fptr(x, y);
+      }
     }
     return just_make2(opt, x, y);
   }

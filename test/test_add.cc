@@ -22,8 +22,12 @@ TEST(Sym, Number)
   //
   // 常数与变量比较
   //
-  symbol_t x = create_symbol("3.14");
-  symbol_t y = create_flt("1.5");
+  symbol_t x = gConstInf;
+  symbol_t y = gConstNegInf;
+  EXPECT_EQ(compare(add(x, y), gConstZero), 0);
+
+  x = create_symbol("3.14");
+  y = create_flt("1.5");
   EXPECT_EQ(compare(add(x, y), create_flt("4.64")), 0);
 
   x = create_symbol("-3.14");

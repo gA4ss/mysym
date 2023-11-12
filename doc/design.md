@@ -22,6 +22,23 @@ else if (is_div(opt))
   append(u, ds2);
 }
 ```
+
+例如：如果输入一个减法构造，
+```c++
+symbol_t x = create_symbol("x");
+symbol_t y = create_symbol("y");
+symbol_t z = x - y;
+```
+则`z`等于`x+-1*y`。假设构造除法，
+```c++
+symbol_t x = create_symbol("x");
+symbol_t y = create_symbol("y");
+symbol_t z = x / y;
+```
+则`z`等于`x*y^-1"`。
+
+## 规则系统
+
 ## 运算符的执行流程
 
 ## 运算律

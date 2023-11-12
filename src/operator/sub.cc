@@ -156,32 +156,43 @@ namespace mysym
     return _x;
   }
 
-  symbol_t sub(const symbol_t &x, const symbol_t &y)
+  static bool __sub_preprocess(const symbol_t &x, const symbol_t &y, symbol_t &z)
   {
     //
     // x,y相同的运算
     //
     if (compare(x, y) == 0)
-      return just_make2(kOptMul, "2", x);
-    
+      z = gConstZero;
+
     //
     // 与0的运算
     //
-    if (compare(x, gConstZero) == 0)
-      return y;
+    else if (compare(x, gConstZero) == 0)
+      z = y;
     else if (compare(y, gConstZero) == 0)
-      return x;
+      z = x;
 
     //
     // 对♾️的相关计算
     //
-    if (__test_and_or(is_inf, is_neg_inf, x, y))
-      return gConstZero;
+    else if (is_inf(kind(x)) && is_neg_inf())
+    else if (__test_and_or(is_inf, is_neg_inf, x, y))
+      z = gConstInf;
     else if (__test_or(is_inf, x, y))
-      return gConstInf;
+      z = gConstInf;
     else if (__test_or(is_neg_inf, x, y))
-      return gConstNegInf;
+      z = gConstNegInf;
+    
+    //
+    // 错误情况
+    //
+    else
+      return false;
+    return true;
+  }
 
+  symbol_t sub(const symbol_t &x, const symbol_t &y)
+  {
     //
     // 1. 如果x符号为正，y符号为正，则正常运算。
     // 2. 如果x符号为正，y符号为负，则转为减法运算。
@@ -253,6 +264,6 @@ namespace mysym
     register_case(kOptSub, make_optsign(kOptMul, kOptAdd), __sub_mul_add);
 
     // 入口
-    append_entry(kOptSub, __sub_entry);
+    append_entry(kOptSub, __sub_entry, __sub_preprocess);
   }
 } // namespace mysym
