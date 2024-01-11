@@ -36,7 +36,8 @@ TEST(Sym, Number)
   //
   symbol_t x = create_symbol("3.14");
   symbol_t y = create_flt("1.5");
-  EXPECT_EQ(compare(mul(x, y), create_flt("4.71")), 0);
+  symbol_t ans = mul(x, y);
+  EXPECT_EQ(compare(ans, create_flt("4.71")), 0);
 
   x = c_frac("1", "2");
   y = create_flt("1.5");
@@ -109,8 +110,10 @@ TEST(Sym, Pow)
 {
   symbol_t x = create_sym("x");
   symbol_t y = create_sym("y");
-  symbol_t e1 = c_pow(x + y, "2");
-  std::cout << print_string(e1) << std::endl;
+  symbol_t z = c_add(x, y);
+  symbol_t e1 = c_pow(z, "2");
+  // std::cout << print_string(e1) << std::endl;
+  EXPECT_STREQ(print_string(e1).c_str(), "(x+y)^2");
 }
 
 TEST(Sym, Negative)
@@ -119,7 +122,8 @@ TEST(Sym, Negative)
   symbol_t y = create_sym("y");
   symbol_t z = c_add(x, y);
   symbol_t e = c_mul(z, "-1");
-  std::cout << print_string(e) << std::endl;
+  // std::cout << print_string(e) << std::endl;
+  EXPECT_STREQ(print_string(e).c_str(), "-1*x+-1*y");
 }
 
 int main(int argc, char *argv[])

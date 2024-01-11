@@ -4,6 +4,101 @@
 
 namespace mysym
 {
+  //
+  // 本函数仅在xxx_func中使用
+  //
+  static bool __handle_pow(const symbol_t &x, const symbol_t &y, symbol_t &z)
+  {
+    if (is_pow(kind(x)) && is_pow(kind(y)))
+    {
+      symbol_t x_exp = exponent(x), y_exp = exponent(y);
+      int x_sign = sign(exponent(x)), y_sign = sign(exponent(y));
+
+      if ((x_sign == kSignNegative) && (y_sign == kSignNegative))
+      {
+        symbol_t x_base = base(x), y_base = base(y);
+        z = div(gConstOne, mul(pow(x_base, abs(x_exp)), pow(y_base, abs(y_exp))));
+      }
+      else if ((x_sign == kSignNegative) && (y_sign == kSignPositive))
+      {
+        symbol_t x_base = base(x);
+        z = div(y, pow(x_base, abs(x_exp)));
+      }
+      else if ((x_sign == kSignPositive) && (y_sign == kSignNegative))
+      {
+        symbol_t y_base = base(y);
+        z = div(x, pow(y_base, abs(y_exp)));
+      }
+      else // ((x_sign == kSignPositive) && (y_sign == kSignPositive))
+      {
+        return false;
+      }
+    }
+    else if (is_pow(kind(x)))
+    {
+      symbol_t x_exp = exponent(x);
+      int x_sign = sign(exponent(x));
+
+      if (x_sign == kSignNegative)
+      {
+        symbol_t x_base = base(x);
+        z = div(y, pow(x_base, abs(x_exp)));
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else if (is_pow(kind(y)))
+    {
+      symbol_t y_exp = exponent(y);
+      int y_sign = sign(exponent(y));
+
+      if (y_sign == kSignNegative)
+      {
+        symbol_t y_base = base(y);
+        z = div(x, pow(y_base, abs(y_exp)));
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else
+    {
+      return false;
+    }
+    return true;
+  }
+
+  static bool __handle_infinity(const symbol_t &x, const symbol_t &y, symbol_t &z)
+  {
+    //
+    // 对♾️的相关计算
+    //
+    if (__test_and_or(is_inf, is_neg_inf, x, y))
+      z = gConstNegInf;
+    else if ((is_inf(kind(x))) && (sign(y) == kSignPositive))
+      z = gConstInf;
+    else if ((is_inf(kind(y))) && (sign(x) == kSignPositive))
+      z = gConstInf;
+    else if ((is_neg_inf(kind(x))) && (sign(y) == kSignPositive))
+      z = gConstNegInf;
+    else if ((is_neg_inf(kind(y))) && (sign(x) == kSignPositive))
+      z = gConstNegInf;
+    else if ((is_inf(kind(x))) && (sign(y) == kSignNegative))
+      z = gConstNegInf;
+    else if ((is_inf(kind(y))) && (sign(x) == kSignNegative))
+      z = gConstNegInf;
+    else if ((is_neg_inf(kind(x))) && (sign(y) == kSignNegative))
+      z = gConstInf;
+    else if ((is_neg_inf(kind(y))) && (sign(x) == kSignNegative))
+      z = gConstInf;
+    else
+      return false;
+    return true;
+  }
+
   static symbol_t __mul_num_num(const symbol_t &x, const symbol_t &y)
   {
     number_t f1 = number_t(x.literal);
@@ -18,7 +113,14 @@ namespace mysym
 
   static symbol_t __mul_num_nature(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptMul, x, y);
+    symbol_t z;
+
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptMul, x, y);
+    return z;
   }
 
   static symbol_t __mul_num_var(const symbol_t &x, const symbol_t &y)
@@ -28,7 +130,10 @@ namespace mysym
 
   static symbol_t __mul_num_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptMul, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptMul, x, y);
+    return z;
   }
 
   static symbol_t __mul_frac_frac(const symbol_t &x, const symbol_t &y)
@@ -38,6 +143,9 @@ namespace mysym
 
   static symbol_t __mul_frac_nature(const symbol_t &x, const symbol_t &y)
   {
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
     return just_make2(kOptMul, x, y);
   }
 
@@ -48,59 +156,84 @@ namespace mysym
 
   static symbol_t __mul_frac_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptMul, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptMul, x, y);
+    return z;
   }
 
   static symbol_t __mul_nature_nature(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-    {
-      if (is_inf(kind(x)))
-        return gConstInf;
-      else if (is_neg_inf(kind(x)))
-        return gConstInf;
-      else
-        return just_make2(kOptPow, x, "2");
-    }
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_nature_var(const symbol_t &x, const symbol_t &y)
   {
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_nature_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptMul, x, y);
+    symbol_t z;
+
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptMul, x, y);
+    return z;
   }
 
   static symbol_t __mul_var_var(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, "2");
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_var_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptMul, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptMul, x, y);
+    return z;
   }
 
-  #include "__mul_pow.cc"
+  static symbol_t __mul_pow_pow(const symbol_t &x, const symbol_t &y)
+  {
+    symbol_t z;
+    symbol_t xb = base(x), yb = base(y);
+    symbol_t xe = exponent(x), ye = exponent(y);
+    if (compare(xb, yb) == 0)
+    {
+      z = create(kOptPow);
+      append(z, xb);
+      symbol_t ze = add(xe, ye);
+      append(z, ze);
+    }
+    else
+    {
+      if (__handle_pow(x, y, z) == false)
+        z = just_make2(kOptMul, x, y);
+    }
+    return z;
+  }
 
   static symbol_t __mul_log_log(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, "2");
     return just_make2(kOptMul, x, y);
   }
 
   static symbol_t __mul_func_func(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, "2");
-    return just_make2(kOptMul, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptMul, x, y);
+    return z;
   }
 
   static symbol_t __mul_sym_mul(const symbol_t &x, const symbol_t &y)
@@ -149,8 +282,6 @@ namespace mysym
 
   static symbol_t __mul_mul_mul(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return c_pow(x, "2");
     symbol_t z = just_make2(kOptMul, x, y);
     play(z);
     return z;
@@ -158,8 +289,6 @@ namespace mysym
 
   static symbol_t __mul_add_add(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, create_int("2"));
     symbol_t z = just_make2(kOptMul, x, y);
     play(z);
     return z;
@@ -196,20 +325,6 @@ namespace mysym
       z = x;
 
     //
-    // 对♾️的相关计算
-    //
-    else if (__test_and_or(is_inf, is_neg_inf, x, y))
-      z = gConstNegInf;
-    else if ((is_inf(kind(x))) && (sign(y) == kSignNegative))
-      z = gConstNegInf;
-    else if ((is_inf(kind(y))) && (sign(x) == kSignNegative))
-      z = gConstNegInf;
-    else if ((is_neg_inf(kind(x))) && (sign(y) == kSignNegative))
-      z = gConstInf;
-    else if ((is_neg_inf(kind(y))) && (sign(x) == kSignNegative))
-      z = gConstInf;
-
-    //
     // 其他情况
     //
     else
@@ -220,7 +335,6 @@ namespace mysym
   symbol_t mul(const symbol_t &x, const symbol_t &y)
   {
     symbol_t z = execute_cases(kOptMul, x, y);
-    // 整理结果
     sort(z);
     return z;
   }

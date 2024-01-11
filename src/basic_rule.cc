@@ -169,20 +169,19 @@ namespace mysym
     //
     // 加法与乘法加速运算
     //
-    if (is_add(opt))
-    {
-      return compare(x, gConstZero) == 0;
-    }
-    else if (is_mul(opt))
-    {
-      return compare(x, gConstOne) == 0;
-    }
+    // if (is_add(opt))
+    // {
+    //   return compare(x, gConstZero) == 0;
+    // }
+    // else if (is_mul(opt))
+    // {
+    //   return compare(x, gConstOne) == 0;
+    // }
 
-    std::string ident_str = opt_identity(opt);
-    if (ident_str == "")  // 无单位元
+    symbol_t ident = opt_identity(opt);
+    if (compare(ident, gConstUDF) == 0) // 无单位元
       return false;
 
-    symbol_t ident = create_symbol(ident_str);
     return compare(x, ident) == 0;
   }
 

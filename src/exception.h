@@ -36,9 +36,9 @@ namespace mysym
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
-#define mysym_not_found_operator_set_exception(format, ...)                           \
+#define mysym_not_found_operator_set_exception(format, ...)                       \
   {                                                                               \
-    throw my::MyException("<mysym> can't found operator set",                         \
+    throw my::MyException("<mysym> can't found operator set",                     \
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
@@ -48,29 +48,35 @@ namespace mysym
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
+#define mysym_the_divisor_is_zero_exception(format, ...)                          \
+  {                                                                               \
+    throw my::MyException("<mysym> the divisor is zero",                          \
+                          __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
+  }
+
 #define mysym_assert(exp, format, ...) my_assert(exp, format, __VA_ARGS__)
 
   //////////////////////////////
   //  定义了一些常用参数检查宏   //
   //////////////////////////////
 
-#define check_param_type(s, ty)                                                                                                         \
-  {                                                                                                                                     \
-    if (kind(s) != (ty))                                                                                                                \
-    {                                                                                                                                   \
+#define check_param_type(s, ty)                                                                                                                         \
+  {                                                                                                                                                     \
+    if (kind(s) != (ty))                                                                                                                                \
+    {                                                                                                                                                   \
       mysym_invalid_param_type_exception("\'%s\' must be \'%s\' type, it's %s.", (s).literal.c_str(), opt_name(ty).c_str(), opt_name(kind(s)).c_str()); \
-    }                                                                                                                                   \
+    }                                                                                                                                                   \
   }
 
-#define check_list_all_variate_type(ps)                                                                                            \
-  {                                                                                                                                \
-    for (auto it = (ps).begin(); it != (ps).end(); it++)                                                                           \
-    {                                                                                                                              \
-      if (!is_var(kind(*it)))                                                                                                      \
-      {                                                                                                                            \
+#define check_list_all_variate_type(ps)                                                                                                    \
+  {                                                                                                                                        \
+    for (auto it = (ps).begin(); it != (ps).end(); it++)                                                                                   \
+    {                                                                                                                                      \
+      if (!is_var(kind(*it)))                                                                                                              \
+      {                                                                                                                                    \
         mysym_invalid_param_type_exception("\'%s\' must be variate type, it's \'%s\'.", it->literal.c_str(), opt_name(kind(*it)).c_str()); \
-      }                                                                                                                            \
-    }                                                                                                                              \
+      }                                                                                                                                    \
+    }                                                                                                                                      \
   }
 
 } // namespace mysym

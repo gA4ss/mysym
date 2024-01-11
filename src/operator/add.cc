@@ -4,6 +4,51 @@
 
 namespace mysym
 {
+  static bool __handle_sign(const symbol_t &x, const symbol_t &y, symbol_t& z)
+  {
+    //
+    // 1. 如果x符号为正，y符号为负，则转为减法运算。
+    // 2. 如果x符号为负，y符号为正，则转为减法运算y-x。
+    // 3. 如果x符号为负，y符号为负，则提出-1并进行-1 * (x+y)。
+    // 4. 如果x符号为正，y符号为正，则正常运算，直接返回。
+    //
+    int sign_x = sign(x), sign_y = sign(y);
+    if ((sign_x == kSignPositive) && (sign_y == kSignNegative))
+    {
+      z = execute_cases(kOptSub, x, abs(y));
+    }
+    else if ((sign_x == kSignNegative) && (sign_y == kSignPositive))
+    {
+      z = execute_cases(kOptSub, y, abs(x));
+    }
+    else if ((sign_x == kSignNegative) && (sign_y == kSignNegative))
+    {
+      z = execute_cases(kOptAdd, abs(x), abs(y));
+      z = just_make2(kOptMul, gConstNegOne, z);
+    }
+    else
+    {
+      return false;
+    }
+    return true;
+  }
+
+  static bool __handle_infinity(const symbol_t &x, const symbol_t &y, symbol_t& z)
+  {
+    //
+    // 对♾️的相关计算
+    //
+    if (__test_and_or(is_inf, is_neg_inf, x, y))
+      z = gConstZero;
+    else if (__test_or(is_inf, x, y))
+      z = gConstInf;
+    else if (__test_or(is_neg_inf, x, y))
+      z = gConstNegInf;
+    else
+      return false;
+    return true;
+  }
+
   static symbol_t __add_num_num(const symbol_t &x, const symbol_t &y)
   {
     number_t f1 = number_t(x.literal);
@@ -13,89 +58,175 @@ namespace mysym
 
   static symbol_t __add_num_frac(const symbol_t &x, const symbol_t &y)
   {
-    return compute_frac_num(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = compute_frac_num(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_num_nature(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_num_var(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_num_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_frac_frac(const symbol_t &x, const symbol_t &y)
   {
-    return compute_frac_frac(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = compute_frac_frac(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_frac_nature(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_frac_var(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_frac_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_nature_nature(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_nature_var(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_nature_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_var_var(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_var_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_pow_pow(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
-  #include "__add_log.cc"
+  static symbol_t __add_log_log(const symbol_t &x, const symbol_t &y)
+  {
+    symbol_t z;
+    symbol_t xb = base(x), yb = base(y);
+    symbol_t xe = exponent(x), ye = exponent(y);
+    if (compare(xb, yb) == 0)
+    {
+      z = create(kOptLog);
+      append(z, xb);
+      symbol_t ze = mul(xe, ye);
+      append(z, ze);
+    }
+    else
+    {
+      if (__handle_sign(x, y, z) == false)
+        z = just_make2(kOptAdd, x, y);
+    }
+    return z;
+  }
 
   static symbol_t __add_func_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_sym_mul(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_sym_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t _x, _y;
+    symbol_t _x, _y, z;
     if (is_sym(kind(x)))
     {
       _x = x;
@@ -107,16 +238,20 @@ namespace mysym
       _y = x;
     }
 
-    _y = just_make2(kOptAdd, _x, _y);
-    play(_y);
-    return _y;
+    if (__handle_sign(_x, _y, z) == false)
+    {
+      z = just_make2(kOptAdd, _x, _y);
+      play(z);
+    }
+    return z;
   }
 
   static symbol_t __add_mul_mul(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptMul, create_int("2"), x);
-    return just_make2(kOptAdd, x, y);
+    symbol_t z;
+    if (__handle_sign(x, y, z) == false)
+      z = just_make2(kOptAdd, x, y);
+    return z;
   }
 
   static symbol_t __add_add_add(const symbol_t &x, const symbol_t &y)
@@ -157,16 +292,6 @@ namespace mysym
       z = y;
     else if (compare(y, gConstZero) == 0)
       z = x;
-
-    //
-    // 对♾️的相关计算
-    //
-    else if (__test_and_or(is_inf, is_neg_inf, x, y))
-      z = gConstZero;
-    else if (__test_or(is_inf, x, y))
-      z = gConstInf;
-    else if (__test_or(is_neg_inf, x, y))
-      z = gConstNegInf;
     
     //
     // 错误情况
@@ -178,31 +303,7 @@ namespace mysym
 
   symbol_t add(const symbol_t &x, const symbol_t &y)
   {
-    //
-    // 1. 如果x符号为正，y符号为正，则正常运算。
-    // 2. 如果x符号为正，y符号为负，则转为减法运算。
-    // 3. 如果x符号为负，y符号为正，则转为减法运算y-x。
-    // 4. 如果x符号为负，y符号为负，则提出-1并进行-1 * (x+y)。
-    //
-    symbol_t z;
-    int sign_x = sign(x), sign_y = sign(y);
-    if ((sign_x == kSignPositive) && (sign_y == kSignPositive))
-    {
-      z = execute_cases(kOptAdd, x, y);
-    }
-    else if ((sign_x == kSignPositive) && (sign_y == kSignNegative))
-    {
-      z = execute_cases(kOptSub, x, abs(y));
-    }
-    else if ((sign_x == kSignNegative) && (sign_y == kSignPositive))
-    {
-      z = execute_cases(kOptSub, y, abs(x));
-    }
-    else // if ((sign_x == kSignNegative) && (sign_y == kSignNegative))
-    {
-      z = execute_cases(kOptAdd, abs(x), abs(y));
-      z = just_make2(kOptMul, gConstNegOne, x);
-    }
+    symbol_t z = z = execute_cases(kOptAdd, x, y);
     sort(z);
     return z;
   }

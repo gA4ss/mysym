@@ -20,7 +20,7 @@
 #include <mysym/compile.h>
 #include <mysym/exception.h>
 #include <mysym/debug.h>
-#include <mysym/symopt.h>
+#include <mysym/symbol.h>
 
 namespace mysym
 {
@@ -28,24 +28,6 @@ namespace mysym
   typedef mympz::bignum_t integer_t;
   typedef mympf::float_t float_t;
   typedef mynum::number_t number_t;
-
-  typedef struct __symbol_t
-  {
-    opt_t opt; // 操作符
-    std::string literal;
-    std::vector<struct __symbol_t> items;
-    
-    __symbol_t();
-    __symbol_t& operator[](size_t i);
-  } symbol_t;
-
-  typedef std::shared_ptr<symbol_t> symbol_ptr_t;
-  typedef std::vector<symbol_t> symbol_items_t;
-  typedef std::map<opt_t, std::string> operator_names_t;
-
-  size_t size(const symbol_t &s);
-  void append(symbol_t &y, const symbol_t &x);
-  void append(symbol_t& y, const symbol_items_t &x);
 
   //
   // 使用符号严格限定的几个类型

@@ -5,8 +5,8 @@ namespace mysym
   typedef std::map<std::string, symopt_t> symopts_t;
   static symopts_t __symopts;
 
-#define define_opt(opt, pri, ass, com, dis, ide, inv, att, id) \
-  __symopts[opt] = {opt, pri, ass, com, dis, ide, inv, att, id}
+#define define_opt(opt, pri, ass, com, dis, ide, inv, invu, att, id) \
+  __symopts[opt] = {opt, pri, ass, com, dis, ide, inv, invu, att, id}
 
 static void __define_func(opt_t o, bool con, int odev, std::string per, std::string dod, std::string dov) {
   if (__symopts[o].attr == nullptr)
@@ -88,12 +88,20 @@ static void __define_func(opt_t o, bool con, int odev, std::string per, std::str
     return distributive_law(__symopts[o]);
   }
 
-  std::string opt_identity(opt_t o)
+  symbol_t opt_identity(opt_t o)
   {
     symopt_t p;
     if (find_symopt(o, p) == false)
-      return "";
+      return gConstUDF;
     return p.identity;
+  }
+
+  opt_t opt_inverse(opt_t o)
+  {
+    symopt_t p;
+    if (find_symopt(o, p) == false)
+      return kOptNone;
+    return p.inverse;
   }
 
   int cmp_operator_priority(opt_t o1, opt_t o2)

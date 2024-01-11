@@ -4,6 +4,91 @@
 
 namespace mysym
 {
+  //
+  // 本函数仅在xxx_func中使用
+  //
+  static bool __handle_pow(const symbol_t &x, const symbol_t &y, symbol_t &z)
+  {
+    if (is_pow(kind(x)) && is_pow(kind(y)))
+    {
+      symbol_t x_exp = exponent(x), y_exp = exponent(y);
+      int x_sign = sign(exponent(x)), y_sign = sign(exponent(y));
+
+      if ((x_sign == kSignNegative) && (y_sign == kSignNegative))
+      {
+        symbol_t x_base = base(x), y_base = base(y);
+        z = div(pow(y_base, abs(y_exp)), pow(x_base, abs(x_exp)));
+      }
+      else if ((x_sign == kSignNegative) && (y_sign == kSignPositive))
+      {
+        symbol_t x_base = base(x);
+        z = div(gConstOne, mul(pow(x_base, abs(x_exp)), y));
+      }
+      else if ((x_sign == kSignPositive) && (y_sign == kSignNegative))
+      {
+        symbol_t y_base = base(y);
+        z = mul(x, pow(y_base, abs(y_exp)));
+      }
+      else // ((x_sign == kSignPositive) && (y_sign == kSignPositive))
+      {
+        return false;
+      }
+    }
+    else if (is_pow(kind(x)))
+    {
+      symbol_t x_exp = exponent(x);
+      int x_sign = sign(exponent(x));
+
+      if (x_sign == kSignNegative)
+      {
+        symbol_t x_base = base(x);
+        z = div(gConstOne, mul(pow(x_base, abs(x_exp)), y));
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else if (is_pow(kind(y)))
+    {
+      symbol_t y_exp = exponent(y);
+      int y_sign = sign(exponent(y));
+
+      if (y_sign == kSignNegative)
+      {
+        symbol_t y_base = base(y);
+        z = mul(x, pow(y_base, abs(y_exp)));
+      }
+      else
+      {
+        return false;
+      }
+    }
+    else
+    {
+      return false;
+    }
+    return true;
+  }
+
+  static bool __handle_infinity(const symbol_t &x, const symbol_t &y, symbol_t &z)
+  {
+    //
+    // 对♾️的相关计算
+    //
+    if (__test_and_or(is_inf, is_neg_inf, x, y))
+      z = gConstNegOne;
+    else if ((is_inf(kind(x))) && (sign(y) == kSignPositive))
+      z = gConstInf;
+    else if ((is_inf(kind(x))) && (sign(y) == kSignNegative))
+      z = gConstNegInf;
+    else if ((is_inf(kind(y))) || (is_neg_inf(kind(y))))
+      z = gConstZero;
+    else
+      return false;
+    return true;
+  }
+
   static symbol_t __div_num_num(const symbol_t &x, const symbol_t &y)
   {
     // 如果是整型，需要转换成浮点数才能得到浮点结果，否则是整型。
@@ -19,41 +104,23 @@ namespace mysym
 
   static symbol_t __div_num_nature(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(y, gConstOne) == 0)
-      return x;
-    else if (compare(y, gConstNegOne) == 0)
-      return opposite(x);
-    if (compare(y, gConstZero) == 0)
-    {
-      // 发生异常，除数不能为0
-    }
-    return make(kOptDiv, x, y);
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+    return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_num_var(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(y, gConstOne) == 0)
-      return x;
-    else if (compare(y, gConstNegOne) == 0)
-      return opposite(x);
-    if (compare(y, gConstZero) == 0)
-    {
-      // 发生异常，除数不能为0
-    }
-    return make(kOptDiv, x, y);
+    return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_num_func(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(y, gConstOne) == 0)
-      return x;
-    else if (compare(y, gConstNegOne) == 0)
-      return opposite(x);
-    if (compare(y, gConstZero) == 0)
-    {
-      // 发生异常，除数不能为0
-    }
-    return just_make2(kOptDiv, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptDiv, x, y);
+    return z;
   }
 
   static symbol_t __div_frac_frac(const symbol_t &x, const symbol_t &y)
@@ -63,6 +130,9 @@ namespace mysym
 
   static symbol_t __div_frac_nature(const symbol_t &x, const symbol_t &y)
   {
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
     return just_make2(kOptDiv, x, y);
   }
 
@@ -73,70 +143,86 @@ namespace mysym
 
   static symbol_t __div_frac_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptDiv, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptDiv, x, y);
+    return z;
   }
 
   static symbol_t __div_nature_nature(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return gConstOne;
-
-    //
-    // 对♾️的计算
-    //
-    if (__test_and_or(is_inf, is_neg_inf, x, y))
-      return gConstNegOne;
-    else if (__test_opt(kOptConstInf, x))
-      return gConstInf;
-    else if (__test_opt(kOptConstInf, y))
-      return gConstZero;
-    else if (__test_opt(kOptConstNegInf, x))
-      return gConstNegInf;
-    else if (__test_opt(kOptConstNegInf, y))
-      return gConstZero;
-
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
     return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_nature_var(const symbol_t &x, const symbol_t &y)
   {
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
     return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_nature_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptDiv, x, y);
+    symbol_t z;
+    if (__handle_infinity(x, y, z) == true)
+      return z;
+
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptDiv, x, y);
+    return z;
   }
 
   static symbol_t __div_var_var(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, "2");
     return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_var_func(const symbol_t &x, const symbol_t &y)
   {
-    return just_make2(kOptDiv, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptDiv, x, y);
+    return z;
   }
 
-  #include "__div_pow.cc"
+  static symbol_t __div_pow_pow(const symbol_t &x, const symbol_t &y)
+  {
+    symbol_t z;
+    symbol_t xb = base(x), yb = base(y);
+    symbol_t xe = exponent(x), ye = exponent(y);
+    if (compare(xb, yb) == 0)
+    {
+      z = create(kOptPow);
+      append(z, xb);
+      symbol_t ze = sub(xe, ye);
+      append(z, ze);
+    }
+    else
+    {
+      if (__handle_pow(x, y, z) == false)
+        z = just_make2(kOptDiv, x, y);
+    }
+    return z;
+  }
 
   static symbol_t __div_log_log(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, "2");
     return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_func_func(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, "2");
-    return just_make2(kOptDiv, x, y);
+    symbol_t z;
+    if (__handle_pow(x, y, z) == false)
+      z = just_make2(kOptDiv, x, y);
+    return z;
   }
 
-  #include "__polynomial_div.cc"
+#include "__polynomial_div.cc"
 
   static symbol_t __div_sym_mul(const symbol_t &x, const symbol_t &y)
   {
@@ -184,27 +270,17 @@ namespace mysym
 
   static symbol_t __div_mul_mul(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return c_pow(x, "2");
-    symbol_t z = just_make2(kOptDiv, x, y);
-    play(z);
-    return z;
+    return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_add_add(const symbol_t &x, const symbol_t &y)
   {
-    if (compare(x, y) == 0)
-      return just_make2(kOptPow, x, create_int("2"));
-    symbol_t z = just_make2(kOptDiv, x, y);
-    play(z);
-    return z;
+    return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_mul_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = just_make2(kOptMul, x, y);
-    play(z);
-    return z;
+    return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_entry(const symbol_t &x)
@@ -212,6 +288,46 @@ namespace mysym
     symbol_t _x = x;
     apply_basic_rule(_x);
     return _x;
+  }
+
+  static bool __div_preprocess(const symbol_t &x, const symbol_t &y, symbol_t &z)
+  {
+    //
+    // 除数为0
+    //
+    if (compare(y, gConstZero) == 0)
+    {
+      mysym_the_divisor_is_zero_exception("%s", "y == 0");
+    }
+
+    //
+    // x,y相同的运算
+    //
+    if (compare(abs(x), abs(y)) == 0)
+    {
+      if ((sign(x) != sign(y)))
+        z = gConstNegOne;
+      else
+        z = gConstOne;
+    }
+
+    //
+    // 被除数为0
+    // 除数为1或者-1
+    //
+    else if (compare(x, gConstZero) == 0)
+      z = gConstZero;
+    else if (compare(y, gConstOne) == 0)
+      z = x;
+    else if (compare(y, gConstNegOne) == 0)
+      z = opposite(x);
+
+    //
+    // 其他情况
+    //
+    else
+      return false;
+    return true;
   }
 
   symbol_t div(const symbol_t &x, const symbol_t &y)
@@ -263,6 +379,6 @@ namespace mysym
     register_case(kOptDiv, make_optsign(kOptMul, kOptAdd), __div_mul_add);
 
     // 入口
-    append_entry(kOptDiv, __div_entry);
+    append_entry(kOptDiv, __div_entry, __div_preprocess);
   }
 } // namespace mysym

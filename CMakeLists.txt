@@ -41,7 +41,7 @@ link_directories(/usr/local/lib)
 #
 set(MYSYM_HEADERS
   ${SRC_DIRECTORY}/mysym.h
-  ${SRC_DIRECTORY}/symopt.h
+  ${SRC_DIRECTORY}/symbol.h
   ${SRC_DIRECTORY}/compile.h
   ${SRC_DIRECTORY}/exception.h
   ${SRC_DIRECTORY}/debug.h
@@ -88,6 +88,7 @@ set(MYSYM_DEBUG_SRC
 #
 add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/mysym.cc
+  ${SRC_DIRECTORY}/symbol.cc
   ${SRC_DIRECTORY}/create.cc
   ${SRC_DIRECTORY}/copy.cc
   ${SRC_DIRECTORY}/coefficient.cc
@@ -108,6 +109,7 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/symopt.cc
   ${SRC_DIRECTORY}/basic_rule.cc
   ${SRC_DIRECTORY}/rule.cc
+  ${SRC_DIRECTORY}/optinv.cc
   ${SRC_DIRECTORY}/optset.cc
   ${SRC_DIRECTORY}/optcase.cc
   ${SRC_DIRECTORY}/factor.cc

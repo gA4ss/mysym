@@ -54,6 +54,18 @@ namespace mysym
       return gConstZero;
 
     //
+    // 与自然常数的对比
+    //
+    if (is_e(kind(x)) && is_pi(kind(y)))
+      return gConstNegOne;
+    else if (is_pi(kind(x)) && is_e(kind(y)))
+      return gConstOne;
+    else if (is_e(kind(x)) || is_pi(kind(x)))
+      return gConstOne;
+    else if (is_e(kind(y)) || is_pi(kind(y)))
+      return gConstNegOne;
+
+    //
     // 比较数值
     //
     if ((kind(x) == kOptFrac))
@@ -66,14 +78,14 @@ namespace mysym
     {
       f1 = number_t(x.literal);
     }
-    else if (is_e(kind(x)))
-    {
-      f1 = mynum::f::approximate_e();
-    }
-    else if (is_pi(kind(x)))
-    {
-      f1 = mynum::f::approximate_pi();
-    }
+    // else if (is_e(kind(x)))
+    // {
+    //   f1 = mynum::f::approximate_e();
+    // }
+    // else if (is_pi(kind(x)))
+    // {
+    //   f1 = mynum::f::approximate_pi();
+    // }
 
     // precision
 

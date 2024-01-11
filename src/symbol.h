@@ -1,5 +1,5 @@
-#ifndef MYSYM_SYMOPT_H_
-#define MYSYM_SYMOPT_H_
+#ifndef MYSYM_SYMBOL_H_
+#define MYSYM_SYMBOL_H_
 
 #include <mysym/set.hpp>
 #include <unordered_set>
@@ -7,10 +7,34 @@
 
 namespace mysym
 {
+  //
+  // 操作符标识定义
+  //
   typedef std::string opt_t;
   typedef std::vector<opt_t> opts_t;
   typedef std::pair<opts_t, opts_t> opts_pair_t;
   typedef int optid_t;
+
+  //
+  // 符号定义
+  //
+  typedef struct __symbol_t
+  {
+    opt_t opt; // 操作符
+    std::string literal;
+    std::vector<struct __symbol_t> items;
+    
+    __symbol_t();
+    __symbol_t& operator[](size_t i);
+  } symbol_t;
+
+  typedef std::shared_ptr<symbol_t> symbol_ptr_t;
+  typedef std::vector<symbol_t> symbol_items_t;
+  typedef std::map<opt_t, std::string> operator_names_t;
+
+  size_t size(const symbol_t &s);
+  void append(symbol_t &y, const symbol_t &x);
+  void append(symbol_t& y, const symbol_items_t &x);
 
 #define kFuncOdevityNone    0
 #define kFuncOdevityOdd     1
@@ -25,8 +49,10 @@ namespace mysym
   } symopt_func_attr_t;
   typedef std::shared_ptr<symopt_func_attr_t> symbol_func_attr_ptr_t;
 
-  void init_functions();
-
+  //
+  // 运算符定义
+  //
+  typedef symbol_t (*fptr_inverse_t)(const symbol_t &);
   typedef struct __symopt_t
   {
     opt_t opt;
@@ -34,12 +60,16 @@ namespace mysym
     bool associative_law;             // 结合律
     bool commutative_law;             // 交换律
     std::vector<opt_t> distributives; // 分配律
-    std::string identity;             // 单位元
-    opt_t inverse;                    // 逆操作
+    symbol_t identity;                // 单位元
+    opt_t inverse;                    // 逆运算
+    fptr_inverse_t invunit;           // 逆元
     symbol_func_attr_ptr_t attr;      // 如果是函数，这里定义属性
     optid_t id;                       // id
   } symopt_t;
 #define distributive_law(s) (s.distributives.size() != 0)
+
+  symbol_t inverse_add(const symbol_t &x);
+  symbol_t inverse_mul(const symbol_t &x);
 
   optid_t make_optid(std::string name);
   bool is_symopt(std::string name);
@@ -50,7 +80,8 @@ namespace mysym
   bool opt_associative_law(opt_t o);
   bool opt_commutative_law(opt_t o);
   bool opt_distributive_law(opt_t o);
-  std::string opt_identity(opt_t o);
+  symbol_t opt_identity(opt_t o);
+  opt_t opt_inverse(opt_t o);
   int cmp_operator_priority(opt_t o1, opt_t o2);
   bool can_distributive(opt_t os, opt_t od);
   optid_t opt_id(opt_t o);
@@ -174,6 +205,7 @@ namespace mysym
 
 #define is_all(o) (in_optset("all", o))
 #define is_opt(o) (in_optset("opt", o))
+#define is_order(o) (in_optset("order", o))
 #define is_basic(o) (in_optset("basic", o))
 #define is_atom(o) (in_optset("atom", o))
 #define is_sym(o) (in_optset("sym", o))
@@ -189,4 +221,4 @@ namespace mysym
 
 } // namespace mysym
 
-#endif // MYSYM_SYMOPT_H_
+#endif // MYSYM_SYMBOL_H_
