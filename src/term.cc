@@ -8,7 +8,7 @@ namespace mysym
       return s;
 
     if (is_const(kind(s)))
-      return undefined;
+      return gConstOne;
 
     //
     // 到这里只剩乘法操作
@@ -18,6 +18,12 @@ namespace mysym
     {
       symbol_t u = s;
       u.items.erase(u.items.begin());
+
+      // 仅有一个元素，则直接变成单个符号。
+      if (size(u) == 1)
+      {
+        u = u[0];
+      }
       return u;
     }
 

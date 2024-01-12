@@ -121,7 +121,6 @@ namespace mysym
   symbol_t term(const symbol_t &s);
   symbol_t constant(const symbol_t &s);
 #define antilog(s) exponent(s)
-  symbol_t constant(const symbol_t &s);
   symbol_t expansion(const symbol_t &s);
 
   bool match(const symbol_t &s1, const symbol_t &s2);
@@ -200,6 +199,7 @@ namespace mysym
   typedef symbol_t (*fptr_entry_t)(const symbol_t &);
   typedef bool (*fptr_preproccess_t)(const symbol_t &, const symbol_t &, symbol_t &);
   typedef symbol_t (*fptr_execute_t)(const symbol_t &, const symbol_t &);
+  typedef symbol_t (*fptr_postproccess_t)(const symbol_t &);
   // typedef struct __cmp_rule_table_t
   // {
   //   bool operator()(const optsign_t &i, const optsign_t &j) const
@@ -215,12 +215,14 @@ namespace mysym
   // 条件执行项目
   typedef std::unordered_map<opt_t, fptr_entry_t> rule_entry_t;
   typedef std::unordered_map<opt_t, fptr_preproccess_t> rule_preproccess_t;
+  typedef std::unordered_map<opt_t, fptr_postproccess_t> rule_postproccess_t;
   typedef std::unordered_map<opt_t, rule_table_t> rule_object_t;
 
   typedef struct __rule_library_t
   {
     rule_entry_t entries;
     rule_preproccess_t preproccesses;
+    rule_postproccess_t postproccesses;
     rule_object_t cases;
     rule_case_query_t casetbl;
   } rule_library_t;
@@ -237,7 +239,9 @@ namespace mysym
   
   bool find_entry(opt_t opt);
   bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr = nullptr);
-  void append_entry(opt_t opt, fptr_entry_t fentry, fptr_preproccess_t fpreproccess = nullptr);
+  void append_entry(opt_t opt, fptr_entry_t fentry, 
+                    fptr_preproccess_t fpreproccess = nullptr,
+                    fptr_postproccess_t fpostproccess = nullptr);
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
   void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
   void sort_case(opt_t opt);

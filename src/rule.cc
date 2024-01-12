@@ -14,10 +14,12 @@ namespace mysym
   }
 
   ///////////////////////////////////////////////////////////////////////
-  void append_entry(opt_t opt, fptr_entry_t fentry, fptr_preproccess_t fpreproccess)
+  void append_entry(opt_t opt, fptr_entry_t fentry,
+                    fptr_preproccess_t fpreproccess, fptr_postproccess_t fpostproccess)
   {
     __rule_library.entries[opt] = fentry;
     __rule_library.preproccesses[opt] = fpreproccess;
+    __rule_library.postproccesses[opt] = fpostproccess;
   }
 
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
@@ -58,7 +60,7 @@ namespace mysym
   {
     if (find_entry(opt) == false)
       return;
-    std::sort(__rule_library.cases[opt].begin(), 
+    std::sort(__rule_library.cases[opt].begin(),
               __rule_library.cases[opt].end(),
               __cmp_case);
 
@@ -82,12 +84,13 @@ namespace mysym
 
   bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr)
   {
-    if (fptr) *fptr = nullptr;
+    if (fptr)
+      *fptr = nullptr;
     if (__rule_library.casetbl.find(opt) == __rule_library.casetbl.end())
       return false;
     if (__rule_library.casetbl[opt].find(ops) == __rule_library.casetbl[opt].end())
       return false;
-    
+
     if (fptr)
     {
       size_t k = __rule_library.casetbl[opt][ops];
@@ -114,7 +117,7 @@ namespace mysym
     return in_optset(m, t);
   }
 
-  static bool __meet_conditions(opt_t opt, const symbol_t &x, const symbol_t &y, 
+  static bool __meet_conditions(opt_t opt, const symbol_t &x, const symbol_t &y,
                                 optsign_t &z)
   {
     //
@@ -157,7 +160,7 @@ namespace mysym
     return __rule_library.entries[kind(x)](x);
   }
 
-  static inline bool __preprocess(opt_t opt, const symbol_t &x, const symbol_t &y, 
+  static inline bool __preprocess(opt_t opt, const symbol_t &x, const symbol_t &y,
                                   symbol_t &z)
   {
     if (__rule_library.preproccesses.find(opt) != __rule_library.preproccesses.end())
@@ -170,12 +173,23 @@ namespace mysym
     return false;
   }
 
+  static inline symbol_t __postprocess(opt_t opt, const symbol_t &z)
+  {
+    if (__rule_library.postproccesses.find(opt) != __rule_library.postproccesses.end())
+    {
+      fptr_postproccess_t postprocess = __rule_library.postproccesses[opt];
+      if (postprocess)
+        return postprocess(z);
+    }
+    return z;
+  }
+
   //
   // 所有具体执行都会执行到这里
   //
   symbol_t execute_cases(opt_t opt, const symbol_t &x, const symbol_t &y)
   {
-    
+
     //
     // 进行预处理
     //
@@ -191,10 +205,13 @@ namespace mysym
       fptr_execute_t fptr = nullptr;
       if (find_case(opt, sign, &fptr))
       {
-        return fptr(x, y);
+        z = fptr(x, y);
+        return __postprocess(kind(z), z);
       }
     }
-    return just_make2(opt, x, y);
+
+    z = just_make2(opt, x, y);
+    return __postprocess(kind(z), z);
   }
 
   void apply_rule(symbol_t &x)

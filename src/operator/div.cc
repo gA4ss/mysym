@@ -330,12 +330,24 @@ namespace mysym
     return true;
   }
 
+  static symbol_t __div_postprocess(const symbol_t &z)
+  {
+    symbol_t _z = z;
+    if (is_basic(kind(_z)))
+    {
+      // 基础单元运算都是二元运算
+      if (size(_z) == 1)
+      {
+        _z = _z[0];
+      }
+    }
+    sort(_z);
+    return _z;
+  }
+
   symbol_t div(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = execute_cases(kOptDiv, x, y);
-    // 整理结果
-    sort(z);
-    return z;
+    return execute_cases(kOptDiv, x, y);
   }
 
   void register_div_rule()
@@ -379,6 +391,6 @@ namespace mysym
     register_case(kOptDiv, make_optsign(kOptMul, kOptAdd), __div_mul_add);
 
     // 入口
-    append_entry(kOptDiv, __div_entry, __div_preprocess);
+    append_entry(kOptDiv, __div_entry, __div_preprocess, __div_postprocess);
   }
 } // namespace mysym

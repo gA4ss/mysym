@@ -20,7 +20,7 @@ namespace mysym
     else if ((sign_x == kSignNegative) && (sign_y == kSignPositive))
     {
       z = execute_cases(kOptAdd, abs(x), y);
-      z = mul(gConstOne, z);
+      z = just_make2(kOptMul, gConstNegOne, z);
     }
     else if ((sign_x == kSignNegative) && (sign_y == kSignNegative))
     {
@@ -222,31 +222,82 @@ namespace mysym
     return z;
   }
 
+  //////////////////////////////////////////////////
+  // 这里进入单个符号与单项式与多项式的处理
+  //////////////////////////////////////////////////
+
   static symbol_t __sub_sym_mul(const symbol_t &x, const symbol_t &y)
   {
     symbol_t z;
     if (__handle_sign(x, y, z) == false)
-      z = just_make2(kOptSub, x, y);
+    {
+      symbol_t xt = term(x), xc = constant(x);
+      symbol_t yt = term(y), yc = constant(y);
+      if (compare(xt, yt) == 0)
+      {
+        symbol_t c = sub(xc, yc);
+        z = just_make2(kOptMul, c, xt);
+      }
+      else
+      {
+        z = just_make2(kOptSub, x, y);
+      }
+    }
     return z;
   }
 
-  static symbol_t __sub_sym_add(const symbol_t &x, const symbol_t &y)
+  static void __order_sym_operand(const symbol_t &x, const symbol_t &y,
+                                  symbol_t &_x, symbol_t &_y, opt_t &opt)
   {
-    symbol_t _x, _y, z;
     if (is_sym(kind(x)))
     {
       _x = x;
       _y = y;
+      opt = kOptSub;
     }
     else
     {
-      _x = y;
+      _x = opposite(y);
       _y = x;
+      opt = kOptAdd;
     }
+    return;
+  }
 
-    if (__handle_sign(_x, _y, z) == false)
-      z = just_make2(kOptSub, x, y);
-    play(z);
+  static symbol_t __sub_sym_add(const symbol_t &x, const symbol_t &y)
+  {
+    symbol_t z = create_opt(kOptAdd);
+    opt_t opt;
+    if (__handle_sign(x, y, z) == false)
+    {
+      bool s = false;
+      symbol_t _x, _y;
+      __order_sym_operand(x, y, _x, _y, opt);
+
+      size_t n = size(_y);
+      for (size_t i = 0; i < n; i++)
+      {
+        symbol_t k = execute_cases(opt, _x, _y[i]);
+
+        // 由于_x 与 _y[i]都是单项式或者单个符号，则如果结果
+        // 出现+号，则表明_x与_y[i]不能合并。
+        if (is_add(kind(k)))
+        {
+          append(z, _y[i]);
+        }
+        else
+        {
+          if (compare(k, gConstZero) != 0)
+            append(z, k);
+          z.items.insert(z.items.end(), _y.items.begin() + i + 1, _y.items.end());
+          s = true;
+          break;
+        }
+      } /* end for */
+
+      if (s == false)
+        append(z, _x);
+    }
     return z;
   }
 
@@ -254,14 +305,66 @@ namespace mysym
   {
     symbol_t z;
     if (__handle_sign(x, y, z) == false)
-      z = just_make2(kOptSub, x, y);
+    {
+      symbol_t _x = term(x), _y = term(y);
+      if (compare(_x, _y) == 0)
+      {
+        symbol_t xc = constant(x), yc = constant(y);
+        symbol_t c = sub(xc, yc);
+        z = mul(c, _x);
+      }
+      else
+      {
+        z = just_make2(kOptSub, x, y);
+      }
+    }
     return z;
   }
 
   static symbol_t __sub_add_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = c_sub(x, y);
-    combine_like_terms(z);
+    symbol_t _x = x, _y = y, z;
+    size_t nx = size(_x), ny = size(_y);
+    bool s = false;
+    for (size_t i = 0; i < nx; i++)
+    {
+      //
+      // 遍历找到一个可以与_x[i]做减法的_y中的项目
+      // 如果找到了，则做运行并将结果保存。
+      // 没有找到，则直接保存_x[i]到z中。
+      //
+      s = false;
+      for (size_t j = 0; j < ny; j++)
+      {
+        symbol_t k = sub(_x[i], _y[j]);
+        // 由于_x[i] 与 _y[j]都是单项式或者单个符号，则如果结果
+        // 出现+号，则表明_x[i]与_y[j]不能合并。
+        if (is_add(kind(k)))
+        {
+          continue;
+        }
+        else
+        {
+          s = true;
+          _y.items[j] = k;
+          break;
+        }
+      } /* end for */
+
+      //
+      // 记录没有合并的_x[i]
+      //
+      if (s == false)
+      {
+        append(z, _x[i]);
+      }
+    }
+
+    if (size(z) == 0)
+      z = just_make2(kOptSub, _x, _y);
+    else
+      z.items.insert(z.items.end(), _y.items.begin(), _y.items.end());
+
     return z;
   }
 
@@ -303,11 +406,24 @@ namespace mysym
     return true;
   }
 
+  static symbol_t __sub_postprocess(const symbol_t &z)
+  {
+    symbol_t _z = z;
+    if (is_basic(kind(_z)))
+    {
+      // 基础单元运算都是二元运算
+      if (size(_z) == 1)
+      {
+        _z = _z[0];
+      }
+    }
+    sort(_z);
+    return _z;
+  }
+
   symbol_t sub(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = execute_cases(kOptSub, x, y);
-    sort(z);
-    return z;
+    return execute_cases(kOptSub, x, y);
   }
 
   void register_sub_rule()
@@ -351,6 +467,6 @@ namespace mysym
     register_case(kOptSub, make_optsign(kOptMul, kOptAdd), __sub_mul_add);
 
     // 入口
-    append_entry(kOptSub, __sub_entry, __sub_preprocess);
+    append_entry(kOptSub, __sub_entry, __sub_preprocess, __sub_postprocess);
   }
 } // namespace mysym

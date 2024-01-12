@@ -8,14 +8,14 @@
 
 using namespace mysym;
 
-TEST(Sym, PrintAdd)
-{
-  rule_library_t lib = rule_library();
-  for (auto it = lib.cases[kOptAdd].begin(); it != lib.cases[kOptAdd].end(); it++)
-  {
-    std::cout << it->first << std::endl;
-  }
-}
+// TEST(Sym, PrintAdd)
+// {
+//   rule_library_t lib = rule_library();
+//   for (auto it = lib.cases[kOptAdd].begin(); it != lib.cases[kOptAdd].end(); it++)
+//   {
+//     std::cout << it->first << std::endl;
+//   }
+// }
 
 TEST(Sym, Number)
 {

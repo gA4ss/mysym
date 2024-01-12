@@ -4,14 +4,15 @@ namespace mysym
 {
   symbol_t abs(const symbol_t &x)
   {
-    // 对负无穷的处理
+    // 对一些特殊值的处理
     if (is_neg_inf(kind(x)))
       return gConstInf;
+    else if (compare(x, gConstZero) == 0)
+      return x;
 
     if (sign(x) == kSignNegative)
     {
-      symbol_t _x = mul(gConstNegOne, x);
-      return _x;
+      return opposite(x);
     }
     return default_func_handler(kOptAbs, x);
   }

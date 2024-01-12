@@ -7,14 +7,14 @@
 
 using namespace mysym;
 
-TEST(Sym, PrintSub)
-{
-  rule_library_t lib = rule_library();
-  for (auto it = lib.cases[kOptSub].begin(); it != lib.cases[kOptSub].end(); it++)
-  {
-    std::cout << it->first << std::endl;
-  }
-}
+// TEST(Sym, PrintSub)
+// {
+//   rule_library_t lib = rule_library();
+//   for (auto it = lib.cases[kOptSub].begin(); it != lib.cases[kOptSub].end(); it++)
+//   {
+//     std::cout << it->first << std::endl;
+//   }
+// }
 
 TEST(Sym, Number)
 {
@@ -33,9 +33,27 @@ TEST(Sym, Number)
   y = create_symbol("x");
   z = c_sub(x, y);
   // std::cout << print_string(z) << std::endl;
-  EXPECT_STREQ(print_string(z).c_str(), "x+-1*x");
+  EXPECT_STREQ(print_string(z).c_str(), "0");
   z = sub(x, y);
   EXPECT_STREQ(print_string(z).c_str(), "0");
+}
+
+TEST(Sym, SubSymMul)
+{
+  symbol_t x = create_symbol("x");
+  symbol_t y = create_symbol("y");
+  symbol_t x3 = mul(create_int("3"), x);
+  symbol_t z = sub(x, x3);
+  EXPECT_STREQ(print_string(z).c_str(), "-2*x");
+}
+
+TEST(Sym, SubSymAdd)
+{
+  symbol_t x = create_symbol("x");
+  symbol_t y = create_symbol("y");
+  symbol_t xy = add(x, y);
+  symbol_t z = sub(xy, x);
+  EXPECT_STREQ(print_string(z).c_str(), "y");
 }
 
 int main(int argc, char *argv[])

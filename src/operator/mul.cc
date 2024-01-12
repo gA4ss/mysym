@@ -332,11 +332,24 @@ namespace mysym
     return true;
   }
 
+  static symbol_t __mul_postprocess(const symbol_t &z)
+  {
+    symbol_t _z = z;
+    if (is_basic(kind(_z)))
+    {
+      // 基础单元运算都是二元运算
+      if (size(_z) == 1)
+      {
+        _z = _z[0];
+      }
+    }
+    sort(_z);
+    return _z;
+  }
+
   symbol_t mul(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = execute_cases(kOptMul, x, y);
-    sort(z);
-    return z;
+    return execute_cases(kOptMul, x, y);
   }
 
   void register_mul_rule()
@@ -380,6 +393,6 @@ namespace mysym
     register_case(kOptMul, make_optsign(kOptMul, kOptAdd), __mul_mul_add);
 
     // 入口
-    append_entry(kOptMul, __mul_entry, __mul_preprocess);
+    append_entry(kOptMul, __mul_entry, __mul_preprocess, __mul_postprocess);
   }
 } // namespace mysym
