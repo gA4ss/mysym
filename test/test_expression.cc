@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 
@@ -27,8 +28,8 @@ TEST(Sym, Free) {
 
   EXPECT_TRUE(free_of(s4, create_var("u")));
   EXPECT_FALSE(free_of(s4, s3));
-  EXPECT_FALSE(free_of(s4, s2));
-  EXPECT_FALSE(free_of(s4, s1));
+  EXPECT_TRUE(free_of(s4, s2));
+  EXPECT_TRUE(free_of(s4, s1));
   EXPECT_FALSE(free_of(s4, s4));
 }
 

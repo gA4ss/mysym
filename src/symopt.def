@@ -1,5 +1,8 @@
 define_opt(kOptAdd, 1, true, true, {}, gConstZero, kOptSub, inverse_add, nullptr, make_optid(kOptAdd));
 define_opt(kOptMul, 2, true, true, std::vector<opt_t>({kOptAdd, kOptSub}), gConstOne, kOptDiv, inverse_mul, nullptr, make_optid(kOptMul));
+define_opt(kOptNot, 0, false, false, {}, gConstUDF, kOptNone, nullptr, nullptr, make_optid(kOptNot));
+define_opt(kOptAnd, 0, false, false, {}, gConstUDF, kOptNone, nullptr, nullptr, make_optid(kOptAnd));
+define_opt(kOptOr, 0, false, false, {}, gConstUDF, kOptNone, nullptr, nullptr, make_optid(kOptOr));
 define_opt(kOptEqu, 0, false, false, {}, gConstUDF, kOptNotEqu, nullptr, nullptr, make_optid(kOptEqu));
 define_opt(kOptNotEqu, 0, false, false, {}, gConstUDF, kOptEqu, nullptr, nullptr, make_optid(kOptNotEqu));
 define_opt(kOptLT, 0, false, false, {}, gConstUDF, kOptGE, nullptr, nullptr, make_optid(kOptLT));

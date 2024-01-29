@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
 #include <mysym/wrapper.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 
@@ -31,7 +32,7 @@ TEST(Sym, Constants)
   symbol_t z = create_var("z");
   symbol_t px3 = x ^ create_int("3");
   symbol_t py2 = y ^ create_int("4");
-  symbol_t logyn5 = log(y, create_int("-5"));
+  symbol_t logyn5 = log(y, create_int("5"));
   symbol_t xay = c_add(px3, py2);
   symbol_t epr = x + y + z + x * y * z + px3 * py2 + px3 + py2 + xay + logyn5;
   std::cout << print_string(epr) << std::endl;
@@ -46,7 +47,7 @@ TEST(Sym, Integers)
   symbol_t z = create_var("z");
   symbol_t px3 = x ^ create_int("3");
   symbol_t py2 = y ^ create_int("4");
-  symbol_t logyn5 = log(y, create_int("-5"));
+  symbol_t logyn5 = log(y, create_int("5"));
   symbol_t xay = px3 + py2;
   symbol_t fr = frac(px3, z ^ create_int("7"));
   symbol_t epr = x + y + z + x * y * z + px3 * py2 + px3 + py2 + xay + logyn5 * fr;
@@ -62,7 +63,7 @@ TEST(Sym, Reals)
   symbol_t z = create_var("z");
   symbol_t px3 = x ^ create_int("3");
   symbol_t py2 = y ^ create_int("4");
-  symbol_t logyn5 = log(y, create_int("-5"));
+  symbol_t logyn5 = log(y, create_int("5"));
   symbol_t xay = px3 + py2;
   symbol_t fr = frac(px3, z ^ create_int("7.5"));
   symbol_t epr = x + y + z + x * y * z + px3 * py2 + \
@@ -79,7 +80,7 @@ TEST(Sym, Logs)
   symbol_t z = create_var("z");
   symbol_t px3 = x ^ create_int("3");
   symbol_t py2 = y ^ create_int("4");
-  symbol_t logyn5 = log(y, create_int("-5"));
+  symbol_t logyn5 = log(y, create_int("5"));
   symbol_t xay = px3 + py2;
   symbol_t fr = frac(px3, z ^ create_int("7.5"));
   symbol_t epr = x + y + z + x * y * z + px3 * py2 + \

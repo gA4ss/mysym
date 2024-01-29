@@ -7,8 +7,8 @@ namespace mysym
 //
 // 调试选项
 //
-#ifdef DEBUG
-
+#ifndef DEBUG
+  #define DEBUG             1
 #endif
 
 

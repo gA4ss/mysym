@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 
@@ -161,8 +162,8 @@ TEST(Sym, Cmp11)
   EXPECT_EQ(compare(a1, f1), 1);
   symbol_t a2 = c_mul("x", create_int("1"));
   symbol_t p1 = c_pow("a", create_int("5"));
-  EXPECT_EQ(compare(a2, p1), 1);
-  EXPECT_EQ(compare(p1, a2), -1);
+  EXPECT_EQ(compare(a2, p1), -1);
+  EXPECT_EQ(compare(p1, a2), 1);
 }
 
 // #endif

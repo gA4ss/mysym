@@ -15,16 +15,26 @@ namespace mysym
     int sign_x = sign(x), sign_y = sign(y);
     if ((sign_x == kSignPositive) && (sign_y == kSignNegative))
     {
-      z = execute_cases(kOptAdd, x, abs(y));
+      z = execute_cases(kOptAdd, x, opposite(y));
     }
     else if ((sign_x == kSignNegative) && (sign_y == kSignPositive))
     {
-      z = execute_cases(kOptAdd, abs(x), y);
-      z = just_make2(kOptMul, gConstNegOne, z);
+      z = execute_cases(kOptAdd, opposite(x), y);
+      if (is_single(z))
+      {
+        z = mul(gConstNegOne, z);
+      }
+      else
+      {
+        for (size_t i = 0; i < size(z); i++)
+        {
+          z[i] = mul(gConstNegOne, z[i]);
+        }
+      }/* end else */
     }
     else if ((sign_x == kSignNegative) && (sign_y == kSignNegative))
     {
-      z = execute_cases(kOptSub, abs(y), abs(x));
+      z = execute_cases(kOptSub, opposite(y), opposite(x));
     }
     else
     {
@@ -323,17 +333,16 @@ namespace mysym
 
   static symbol_t __sub_add_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t _x = x, _y = y, z;
+    symbol_t _x = x, _y = mul(gConstNegOne, y), z = create_opt(kOptAdd);
     size_t nx = size(_x), ny = size(_y);
-    bool s = false;
+    std::vector<size_t> used_x;
     for (size_t i = 0; i < nx; i++)
     {
       //
-      // 遍历找到一个可以与_x[i]做减法的_y中的项目
+      // 遍历找到一个可以与_x[i]做加法的_y中的项目
       // 如果找到了，则做运行并将结果保存。
       // 没有找到，则直接保存_x[i]到z中。
       //
-      s = false;
       for (size_t j = 0; j < ny; j++)
       {
         symbol_t k = sub(_x[i], _y[j]);
@@ -345,41 +354,77 @@ namespace mysym
         }
         else
         {
-          s = true;
-          _y.items[j] = k;
+          if (compare(k, gConstZero) != 0)
+            _y.items[j] = k;
+          used_x.push_back(i);
           break;
         }
       } /* end for */
-
-      //
-      // 记录没有合并的_x[i]
-      //
-      if (s == false)
-      {
-        append(z, _x[i]);
-      }
     }
 
-    if (size(z) == 0)
-      z = just_make2(kOptSub, _x, _y);
-    else
-      z.items.insert(z.items.end(), _y.items.begin(), _y.items.end());
-
+    //
+    // 将没有用的_x的值都合并到结果中。
+    //
+    z = _y;
+    for (size_t i = 0; i < nx; i++)
+    {
+      if (std::find(used_x.begin(), used_x.end(), i) != used_x.end())
+        continue;
+      append(z, _x[i]);
+    }
     return z;
+  }
+
+  static void __order_monomial_operand(const symbol_t &x, const symbol_t &y,
+                                       symbol_t &_x, symbol_t &_y, opt_t &opt)
+  {
+    if (is_mul(kind(x)))
+    {
+      _x = x;
+      _y = y;
+      opt = kOptSub;
+    }
+    else
+    {
+      _x = opposite(y);
+      _y = x;
+      opt = kOptAdd;
+    }
+    return;
   }
 
   static symbol_t __sub_mul_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t z = c_sub(x, y);
-    apply_rule(z);
-    return z;
-  }
+    opt_t opt;
+    symbol_t _x, _y, z = create_opt(kOptAdd);
+    __order_monomial_operand(x, y, _x, _y, opt);
 
-  static symbol_t __sub_entry(const symbol_t &x)
-  {
-    symbol_t _x = x;
-    apply_basic_rule(_x);
-    return _x;
+    bool s = false;
+    size_t n = size(_y);
+    for (size_t i = 0; i < n; i++)
+    {
+      symbol_t k = execute_cases(opt, _x, _y[i]);
+
+      // 由于_x 与 _y[i]都是单项式或者单个符号，则如果结果
+      // 出现+号，则表明_x与_y[i]不能合并。
+      if (is_add(kind(k)))
+      {
+        append(z, _y[i]);
+      }
+      else
+      {
+        if (compare(k, gConstZero) != 0)
+          append(z, k);
+        z.items.insert(z.items.end(), _y.items.begin() + i + 1, _y.items.end());
+        s = true;
+        break;
+      }
+    } /* end for */
+
+    if (s == false)
+      append(z, _x);
+
+    return z;
   }
 
   static bool __sub_preprocess(const symbol_t &x, const symbol_t &y, symbol_t &z)
@@ -409,7 +454,7 @@ namespace mysym
   static symbol_t __sub_postprocess(const symbol_t &z)
   {
     symbol_t _z = z;
-    if (is_basic(kind(_z)))
+    if (is_normal(kind(_z)))
     {
       // 基础单元运算都是二元运算
       if (size(_z) == 1)
@@ -466,7 +511,8 @@ namespace mysym
     register_case(kOptSub, make_optsign(kOptAdd, kOptAdd), __sub_add_add);
     register_case(kOptSub, make_optsign(kOptMul, kOptAdd), __sub_mul_add);
 
-    // 入口
-    append_entry(kOptSub, __sub_entry, __sub_preprocess, __sub_postprocess);
+    // 预处理与后置处理
+    register_preprocess(kOptSub, __sub_preprocess);
+    register_postprocess(kOptSub, __sub_postprocess);
   }
 } // namespace mysym

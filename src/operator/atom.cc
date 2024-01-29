@@ -2,14 +2,20 @@
 
 namespace mysym
 {
+
+  static symbol_t __atom(const symbol_t &x)
+  {
+    return x;
+  }
+
   void register_atom_rule()
   {
-    append_entry(kOptVariate, default_entry);
-    append_entry(kOptNumber, default_entry);
-    append_entry(kOptFrac, default_entry);
-    append_entry(kOptConstE, default_entry);
-    append_entry(kOptConstPI, default_entry);
-    append_entry(kOptConstInf, default_entry);
-    append_entry(kOptConstNegInf, default_entry);
+    // register_case(kOptVariate, __atom);
+    // register_case(kOptNumber, __atom);
+    // register_case(kOptFrac, __atom);
+    // register_case(kOptConstE, __atom);
+    // register_case(kOptConstPI, __atom);
+    // register_case(kOptConstInf, __atom);
+    // register_case(kOptConstNegInf, __atom);
   }
 } // namespace mysym

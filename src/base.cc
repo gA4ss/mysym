@@ -12,6 +12,8 @@ namespace mysym
     {
       return s;
     }
-    return operand(s, 0);
+    if (size(s))
+      return operand(s, 0);
+    return gConstUDF;
   }
 } // namespace mysym

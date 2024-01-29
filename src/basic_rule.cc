@@ -1,3 +1,5 @@
+#if 0
+
 #include <mysym/mysym.h>
 #include <unordered_set>
 
@@ -348,27 +350,6 @@ namespace mysym
     } while (kind(x) != opt);
     return;
   }
-
-  void format(symbol_t &x)
-  {
-    apply_associative_law(x);
-    apply_distributive_law(x);
-    apply_commutative_law(x);
-  }
-
-  void play(symbol_t &x)
-  {
-    apply_associative_law(x);
-    apply_distributive_law(x);
-    combine_like_terms(x);
-  }
-
-  void apply_basic_rule(symbol_t &x)
-  {
-    apply_associative_law(x);
-    apply_distributive_law(x);
-    combine_like_terms(x);
-    apply_commutative_law(x);
-  }
-
 } // namespace mysym
+
+#endif

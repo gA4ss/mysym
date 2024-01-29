@@ -25,6 +25,106 @@ mysym::symbol_t operator%(const mysym::symbol_t &x, const mysym::symbol_t &y)
   return mysym::mod(x, y);
 }
 
+mysym::symbol_t operator+(const mysym::symbol_t &x, std::string y)
+{
+  return mysym::add(x, mysym::create_symbol(y));
+}
+
+mysym::symbol_t operator-(const mysym::symbol_t &x, std::string y)
+{
+  return mysym::sub(x, mysym::create_symbol(y));
+}
+
+mysym::symbol_t operator*(const mysym::symbol_t &x, std::string y)
+{
+  return mysym::mul(x, mysym::create_symbol(y));
+}
+
+mysym::symbol_t operator/(const mysym::symbol_t &x, std::string y)
+{
+  return mysym::div(x, mysym::create_symbol(y));
+}
+
+mysym::symbol_t operator%(const mysym::symbol_t &x, std::string y)
+{
+  return mysym::mod(x, mysym::create_symbol(y));
+}
+
+mysym::symbol_t operator+(std::string x, const mysym::symbol_t &y)
+{
+  return mysym::add(mysym::create_symbol(x), y);
+}
+
+mysym::symbol_t operator-(std::string x, const mysym::symbol_t &y)
+{
+  return mysym::sub(mysym::create_symbol(x), y);
+}
+
+mysym::symbol_t operator*(std::string x, const mysym::symbol_t &y)
+{
+  return mysym::mul(mysym::create_symbol(x), y);
+}
+
+mysym::symbol_t operator/(std::string x, const mysym::symbol_t &y)
+{
+  return mysym::div(mysym::create_symbol(x), y);
+}
+
+mysym::symbol_t operator%(std::string x, const mysym::symbol_t &y)
+{
+  return mysym::mod(mysym::create_symbol(x), y);
+}
+
+mysym::symbol_t operator+(const mysym::symbol_t &x, mysym::real_t y)
+{
+  return mysym::add(x, mysym::create_symbol(std::to_string(y)));
+}
+
+mysym::symbol_t operator-(const mysym::symbol_t &x, mysym::real_t y)
+{
+  return mysym::sub(x, mysym::create_symbol(std::to_string(y)));
+}
+
+mysym::symbol_t operator*(const mysym::symbol_t &x, mysym::real_t y)
+{
+  return mysym::mul(x, mysym::create_symbol(std::to_string(y)));
+}
+
+mysym::symbol_t operator/(const mysym::symbol_t &x, mysym::real_t y)
+{
+  return mysym::div(x, mysym::create_symbol(std::to_string(y)));
+}
+
+mysym::symbol_t operator%(const mysym::symbol_t &x, mysym::real_t y)
+{
+  return mysym::mod(x, mysym::create_symbol(std::to_string(y)));
+}
+
+mysym::symbol_t operator+(mysym::real_t x, const mysym::symbol_t &y)
+{
+  return mysym::add(mysym::create_symbol(std::to_string(x)), y);
+}
+
+mysym::symbol_t operator-(mysym::real_t x, const mysym::symbol_t &y)
+{
+  return mysym::sub(mysym::create_symbol(std::to_string(x)), y);
+}
+
+mysym::symbol_t operator*(mysym::real_t x, const mysym::symbol_t &y)
+{
+  return mysym::mul(mysym::create_symbol(std::to_string(x)), y);
+}
+
+mysym::symbol_t operator/(mysym::real_t x, const mysym::symbol_t &y)
+{
+  return mysym::div(mysym::create_symbol(std::to_string(x)), y);
+}
+
+mysym::symbol_t operator%(mysym::real_t x, const mysym::symbol_t &y)
+{
+  return mysym::mod(mysym::create_symbol(std::to_string(x)), y);
+}
+
 mysym::symbol_t operator++(mysym::symbol_t &x)
 {
   return add(x, mysym::gConstOne);

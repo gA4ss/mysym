@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 

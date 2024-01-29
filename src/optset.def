@@ -1,4 +1,6 @@
-define_optset("basic", kOptAdd "," kOptMul "," kOptSub "," kOptDiv);
+define_optset("basic", kOptAdd "," kOptMul);
+define_optset("normal", kOptAdd "," kOptMul "," kOptSub "," kOptDiv);
+define_optset("logic", kOptNot "," kOptAnd "," kOptOr);
 define_optset("order", kOptEqu "," kOptNotEqu "," kOptLT "," kOptLE "," kOptGT "," kOptGE);
 define_optset("nature", kOptConstE "," kOptConstPI "," kOptConstInf "," kOptConstNegInf);
 define_optset("const", kOptNumber "," kOptFrac "," "nature");
@@ -11,5 +13,5 @@ define_optset("ihyper", kOptArcSinh "," kOptArcCosh "," kOptArcTanh "," kOptArcC
 define_optset("func2p", kOptPow "," kOptLog "," kOptMod);
 define_optset("func", "basicf, trigo, itrigo, hyper, ihyper");
 define_optset("sym", "atom, func");
-define_optset("opt", "basic, order, func");
+define_optset("opt", "normal, logic, order, func");
 define_optset("all", symopts());

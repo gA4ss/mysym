@@ -15,16 +15,26 @@ namespace mysym
     int sign_x = sign(x), sign_y = sign(y);
     if ((sign_x == kSignPositive) && (sign_y == kSignNegative))
     {
-      z = execute_cases(kOptSub, x, abs(y));
+      z = execute_cases(kOptSub, x, opposite(y));
     }
     else if ((sign_x == kSignNegative) && (sign_y == kSignPositive))
     {
-      z = execute_cases(kOptSub, y, abs(x));
+      z = execute_cases(kOptSub, y, opposite(x));
     }
     else if ((sign_x == kSignNegative) && (sign_y == kSignNegative))
     {
-      z = execute_cases(kOptAdd, abs(x), abs(y));
-      z = just_make2(kOptMul, gConstNegOne, z);
+      z = execute_cases(kOptAdd, opposite(x), opposite(y));
+      if (is_single(z))
+      {
+        z = mul(gConstNegOne, z);
+      }
+      else
+      {
+        for (size_t i = 0; i < size(z); i++)
+        {
+          z[i] = mul(gConstNegOne, z[i]);
+        }
+      }/* end else */
     }
     else
     {
@@ -317,7 +327,7 @@ namespace mysym
   {
     symbol_t _x = x, _y = y, z = create_opt(kOptAdd);;
     size_t nx = size(_x), ny = size(_y);
-    bool s = false;
+    std::vector<size_t> used_x;
     for (size_t i = 0; i < nx; i++)
     {
       //
@@ -325,7 +335,6 @@ namespace mysym
       // 如果找到了，则做运行并将结果保存。
       // 没有找到，则直接保存_x[i]到z中。
       //
-      s = false;
       for (size_t j = 0; j < ny; j++)
       {
         symbol_t k = add(_x[i], _y[j]);
@@ -337,27 +346,24 @@ namespace mysym
         }
         else
         {
-          s = true;
           if (compare(k, gConstZero) != 0)
             _y.items[j] = k;
+          used_x.push_back(i);
           break;
         }
       } /* end for */
-
-      //
-      // 记录没有合并的_x[i]
-      //
-      if (s == false)
-      {
-        append(z, _x[i]);
-      }
     }
 
-    if (size(z) == 0)
-      z = just_make2(kOptAdd, _x, _y);
-    else
-      z.items.insert(z.items.end(), _y.items.begin(), _y.items.end());
-
+    //
+    // 将没有用的_x的值都合并到结果中。
+    //
+    z = _y;
+    for (size_t i = 0; i < nx; i++)
+    {
+      if (std::find(used_x.begin(), used_x.end(), i) != used_x.end())
+        continue;
+      append(z, _x[i]);
+    }
     return z;
   }
 
@@ -410,13 +416,6 @@ namespace mysym
     return z;
   }
 
-  static symbol_t __add_entry(const symbol_t &x)
-  {
-    symbol_t _x = x;
-    apply_basic_rule(_x);
-    return _x;
-  }
-
   static bool __add_preprocess(const symbol_t &x, const symbol_t &y, symbol_t &z)
   {
     //
@@ -424,7 +423,7 @@ namespace mysym
     //
     if (compare(x, y) == 0)
     {
-      z = just_make2(kOptMul, "2", x);
+      z = mul(create_int("2"), x);
     }
 
     //
@@ -446,7 +445,7 @@ namespace mysym
   static symbol_t __add_postprocess(const symbol_t &z)
   {
     symbol_t _z = z;
-    if (is_basic(kind(_z)))
+    if (is_normal(kind(_z)))
     {
       // 基础单元运算都是二元运算
       if (size(_z) == 1)
@@ -503,7 +502,8 @@ namespace mysym
     register_case(kOptAdd, make_optsign(kOptAdd, kOptAdd), __add_add_add);
     register_case(kOptAdd, make_optsign(kOptMul, kOptAdd), __add_mul_add);
 
-    // 入口
-    append_entry(kOptAdd, __add_entry, __add_preprocess, __add_postprocess);
+    // 预处理与后置处理
+    register_preprocess(kOptAdd, __add_preprocess);
+    register_postprocess(kOptAdd, __add_postprocess);
   }
 } // namespace mysym

@@ -54,6 +54,18 @@ namespace mysym
                           __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
   }
 
+#define mysym_the_domain_of_definition_is_out_of_range_exception(format, ...)     \
+  {                                                                               \
+    throw my::MyException("<mysym> the domain of definition is out of range",     \
+                          __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
+  }
+
+#define mysym_the_value_domain_is_out_of_range_exception(format, ...)             \
+  {                                                                               \
+    throw my::MyException("<mysym> the value domain is out of range",             \
+                          __FILE__, __LINE__, __FUNCTION__, format, __VA_ARGS__); \
+  }
+
 #define mysym_assert(exp, format, ...) my_assert(exp, format, __VA_ARGS__)
 
   //////////////////////////////

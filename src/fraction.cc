@@ -7,7 +7,9 @@ namespace mysym
   {
     if (kind(s) != kOptFrac)
       return s;
-    return s.items[0];
+    if (size(s))
+      return s.items[0];
+    return gConstUDF;
   }
 
   symbol_t denominator(const symbol_t &s)
@@ -16,7 +18,9 @@ namespace mysym
     {
       return create_int("1");
     }
-    return s.items[1];
+    if (size(s) > 1)
+      return s.items[1];
+    return gConstUDF;
   }
 
   symbol_t frac_to_prod(const symbol_t &s)
@@ -24,8 +28,8 @@ namespace mysym
     if (kind(s) != kOptFrac)
       return s;
 
-    symbol_t p = c_frac(create_int("1"), denominator(s));
-    symbol_t u = c_mul(p, numerator(s));
+    symbol_t p = frac(create_int("1"), denominator(s));
+    symbol_t u = mul(p, numerator(s));
     return u;
   }
 
@@ -47,7 +51,7 @@ namespace mysym
 
     mympf::float_t c = mympf::create(s.literal);
     mynum::fraction_t f = mynum::f::fraction(c);
-    return c_frac(mympz::print_string(f.first), mympz::print_string(f.second));
+    return frac(create_int(mympz::print_string(f.first)), create_int(mympz::print_string(f.second)));
   }
 
   mynum::fraction_t frac_to_mynum_fraction(const symbol_t &s)
@@ -60,7 +64,7 @@ namespace mysym
 
   symbol_t mynum_fraction_to_frac(const mynum::fraction_t &f)
   {
-    return c_frac(mympz::print_string(f.first), mympz::print_string(f.second));
+    return frac(create_int(mympz::print_string(f.first)), create_int(mympz::print_string(f.second)));
   }
 
   symbol_t compute_frac_num(opt_t opt, const symbol_t &x, const symbol_t &y)

@@ -37,4 +37,13 @@ namespace mysym
     }
     return false;
   }
+
+  // typedef std::vector<int> polynomial_t;
+  // typedef std::vector<int> multi_polynomial_t;
+
+  // symbol_t create_polynomial(const polynomial_t &cs)
+  // {
+  //   symbol_t p;
+  //   return p;
+  // }
 } // namespace mysym

@@ -4,6 +4,7 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/construct.h>
 #include <mysym/wrapper.h>
 
 using namespace mysym;
@@ -200,6 +201,24 @@ TEST(Sym, Log)
   e1 = create_symbol("a");
   y1 = c_log(b, e1);
   EXPECT_STREQ(print_string(y1+y2).c_str(), "log(x,1//2*a)");
+}
+
+TEST(Sym, Polynomial)
+{
+  //
+  // 常数与变量比较
+  //
+  symbol_t x = create_symbol("x");
+  symbol_t y = create_symbol("y");
+  symbol_t z = create_symbol("z");
+  symbol_t p1 = x + y;
+  symbol_t p2 = x + "2"*y + z;
+  symbol_t p3 = p1 + p2;
+  EXPECT_STREQ(print_string(p3).c_str(), "z+2*x+3*y");
+
+  symbol_t _z = opposite(z);
+  symbol_t p4 = p3 + _z;
+  EXPECT_STREQ(print_string(p4).c_str(), "2*x+3*y");
 }
 
 int main(int argc, char *argv[])

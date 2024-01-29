@@ -59,13 +59,13 @@ namespace mysym
 
   symbol_t opposite(const symbol_t &x)
   {
-    symbol_t c = constant(x);
+    // symbol_t c = constant(x);
 
-    // 如果系数是-1，则直接返回term。
-    if (compare(c, gConstNegOne) == 0)
-    {
-      return term(x);
-    }
+    // // 如果系数是-1，则直接返回term。
+    // if (compare(c, gConstNegOne) == 0)
+    // {
+    //   return term(x);
+    // }
 
     // 除了系数是-1的剩下情况全部乘以-1改变符号。
     return mul(gConstNegOne, x);

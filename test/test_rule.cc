@@ -4,16 +4,16 @@
 #include <iostream>
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 
 TEST(Sym, Rule)
 {
-  std::string ops;
-  append_optcase_string(ops, "basic,atom,const,func");
-  append_optcase_string(ops, kOptPow);
-  append_optcase_string(ops, kOptLog);
-  default_cases(kOptAdd, ops);
+  // std::string ops;
+  // append_optcase_string(ops, "basic,atom,const,func");
+  // append_optcase_string(ops, kOptPow);
+  // append_optcase_string(ops, kOptLog);
   rule_table_t tab = rule_library().cases[kOptAdd];
   for (auto it = tab.begin(); it != tab.end(); it++)
   {

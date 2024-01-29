@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
 #include <mysym/wrapper.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 

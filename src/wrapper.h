@@ -10,6 +10,31 @@ mysym::symbol_t operator-(const mysym::symbol_t &x, const mysym::symbol_t &y);
 mysym::symbol_t operator*(const mysym::symbol_t &x, const mysym::symbol_t &y);
 mysym::symbol_t operator/(const mysym::symbol_t &x, const mysym::symbol_t &y);
 mysym::symbol_t operator%(const mysym::symbol_t &x, const mysym::symbol_t &y);
+
+mysym::symbol_t operator+(const mysym::symbol_t &x, std::string y);
+mysym::symbol_t operator-(const mysym::symbol_t &x, std::string y);
+mysym::symbol_t operator*(const mysym::symbol_t &x, std::string y);
+mysym::symbol_t operator/(const mysym::symbol_t &x, std::string y);
+mysym::symbol_t operator%(const mysym::symbol_t &x, std::string y);
+
+mysym::symbol_t operator+(std::string x, const mysym::symbol_t &y);
+mysym::symbol_t operator-(std::string x, const mysym::symbol_t &y);
+mysym::symbol_t operator*(std::string x, const mysym::symbol_t &y);
+mysym::symbol_t operator/(std::string x, const mysym::symbol_t &y);
+mysym::symbol_t operator%(std::string x, const mysym::symbol_t &y);
+
+mysym::symbol_t operator+(const mysym::symbol_t &x, mysym::real_t y);
+mysym::symbol_t operator-(const mysym::symbol_t &x, mysym::real_t y);
+mysym::symbol_t operator*(const mysym::symbol_t &x, mysym::real_t y);
+mysym::symbol_t operator/(const mysym::symbol_t &x, mysym::real_t y);
+mysym::symbol_t operator%(const mysym::symbol_t &x, mysym::real_t y);
+
+mysym::symbol_t operator+(mysym::real_t x, const mysym::symbol_t &y);
+mysym::symbol_t operator-(mysym::real_t x, const mysym::symbol_t &y);
+mysym::symbol_t operator*(mysym::real_t x, const mysym::symbol_t &y);
+mysym::symbol_t operator/(mysym::real_t x, const mysym::symbol_t &y);
+mysym::symbol_t operator%(mysym::real_t x, const mysym::symbol_t &y);
+
 mysym::symbol_t operator++(mysym::symbol_t &x);
 mysym::symbol_t operator--(mysym::symbol_t &x);
 mysym::symbol_t operator++(mysym::symbol_t &x, int i);

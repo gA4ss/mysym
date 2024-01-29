@@ -28,6 +28,8 @@ namespace mysym
   typedef mympz::bignum_t integer_t;
   typedef mympf::float_t float_t;
   typedef mynum::number_t number_t;
+  typedef long double real_t;
+  typedef long long int long_t;
 
   //
   // 使用符号严格限定的几个类型
@@ -41,8 +43,8 @@ namespace mysym
   bool symbol_is_real(const num_t &x);
 #define symbol_is_number(x) (symbol_is_integer(x) || symbol_is_real(x))
 
-#define kSignPositive       true
-#define kSignNegative       false
+#define kSignPositive true
+#define kSignNegative false
   bool sign(const symbol_t &x);
   symbol_t opposite(const symbol_t &x);
 
@@ -66,6 +68,8 @@ namespace mysym
   {
     // 遇到浮点数与分数相加是否运算，默认不运算，保留两个符号。
     bool is_compute_frac_float;
+    // 乘法遇到多项式乘以某个符号时候，不进行展开。
+    bool is_mul_polynomial_not_expand;
   } config_t;
   typedef struct __library_t
   {
@@ -107,8 +111,8 @@ namespace mysym
 #define create_int(literal) create(kOptNumber, literal)
 #define create_flt(literal) create(kOptNumber, literal)
 #define create_sym(literal) create_symbol(literal)
-#define create_monomial(items) create(kOptMul, items)
-#define create_polynomial(items) create(kOptAdd, items)
+#define create_mul_items(items) create(kOptMul, items)
+#define create_add_items(items) create(kOptAdd, items)
 #define undefined create_none()
 
   void copy(const symbol_t &s, symbol_t &d);
@@ -119,6 +123,7 @@ namespace mysym
   symbol_t base(const symbol_t &s);
   symbol_t exponent(const symbol_t &s);
   symbol_t term(const symbol_t &s);
+  list_t terms(const symbol_t &s);
   symbol_t constant(const symbol_t &s);
 #define antilog(s) exponent(s)
   symbol_t expansion(const symbol_t &s);
@@ -127,6 +132,7 @@ namespace mysym
   bool match_in(const symbol_t &s1, const symbol_t &s2);
 
   int compare(const symbol_t &s1, const symbol_t &s2);
+  void merge(symbol_t &x);
   void sort(symbol_t &s, bool reverse = false);
   void automatic_simplify(symbol_t &s);
 
@@ -150,15 +156,36 @@ namespace mysym
   bool is_monomial(const symbol_t &s, const list_t &xs);
   bool is_polynomial(const symbol_t &s, const symbol_t &x);
   bool is_polynomial(const symbol_t &s, const list_t &xs);
+
+  //
+  // 多项式运算
+  //
   int_t degree(const symbol_t &s);
   int_t degree(const symbol_t &s, const symbol_t &x);
   int_t degree(const symbol_t &s, const list_t &xs);
+  list_t coefficients(const symbol_t &s);
   int_t coefficient(const symbol_t &s, const symbol_t &x, const int_t &d);
   int_t leading_coefficient(const symbol_t &s, const symbol_t &x);
 
+  long_t next_prime(int i);
+  // typedef long long int exponent_t;
+  // typedef symbol_t monomial_t;
+  // typedef std::queue<symbol_t> polynomial_t;
+  // polynomial_t create_polynomial(const list_t& l);
+
+  //
+  // map运算
+  //
   typedef symbol_t (*fptr_map_t)(const symbol_t &);
   symbol_t map(fptr_map_t fmap, const symbol_t &s);
   symbol_t map(const symbol_t &u, const symbol_t &s, opt_t o = kOptNone, bool ex = false);
+
+  //
+  // 迭代运算
+  //
+  typedef symbol_t (*fptr_iteration_t)(const symbol_t &, const symbol_t &);
+  symbol_t iterate(fptr_iteration_t fptr, const list_t &s);
+  symbol_t iterate(opt_t opt, const list_t &s);
 
   //
   // 分数运算
@@ -191,13 +218,13 @@ namespace mysym
   optsign_t make_optsign_any(opt_t opt);
   optsign_t make_optsign_exclude(opt_t opt);
   optpair_t split_optsign(optsign_t sign);
-  bool cmp_optsign(const optsign_t& i, const optsign_t& j);
+  bool cmp_optsign(const optsign_t &i, const optsign_t &j);
   optcase_t generate_optcase(std::string ops);
 
   // 条件-执行表
   typedef bool (*fptr_condition_t)(opt_t, const symbol_t &, const symbol_t &);
-  typedef symbol_t (*fptr_entry_t)(const symbol_t &);
   typedef bool (*fptr_preproccess_t)(const symbol_t &, const symbol_t &, symbol_t &);
+  typedef symbol_t (*fptr_single_execute_t)(const symbol_t &);
   typedef symbol_t (*fptr_execute_t)(const symbol_t &, const symbol_t &);
   typedef symbol_t (*fptr_postproccess_t)(const symbol_t &);
   // typedef struct __cmp_rule_table_t
@@ -208,21 +235,22 @@ namespace mysym
   //   }
   // } cmp_rule_table_t;
   // typedef std::map<optsign_t, fptr_execute_t, cmp_rule_table_t> rule_table_t;
+  typedef std::unordered_map<opt_t, fptr_single_execute_t> rule_single_table_t;
   typedef std::pair<optsign_t, fptr_execute_t> rule_case_t;
   typedef std::vector<rule_case_t> rule_table_t;
   typedef std::unordered_map<optsign_t, size_t> rule_table_index_t;
   typedef std::unordered_map<opt_t, rule_table_index_t> rule_case_query_t;
   // 条件执行项目
-  typedef std::unordered_map<opt_t, fptr_entry_t> rule_entry_t;
   typedef std::unordered_map<opt_t, fptr_preproccess_t> rule_preproccess_t;
   typedef std::unordered_map<opt_t, fptr_postproccess_t> rule_postproccess_t;
+  typedef std::unordered_map<opt_t, rule_single_table_t> rule_single_object_t;
   typedef std::unordered_map<opt_t, rule_table_t> rule_object_t;
 
   typedef struct __rule_library_t
   {
-    rule_entry_t entries;
     rule_preproccess_t preproccesses;
     rule_postproccess_t postproccesses;
+    rule_single_object_t single_cases;
     rule_object_t cases;
     rule_case_query_t casetbl;
   } rule_library_t;
@@ -230,113 +258,108 @@ namespace mysym
 
   void register_atom_rule();
   void register_cmp_rule();
+
   void register_add_rule();
   void register_sub_rule();
   void register_mul_rule();
   void register_div_rule();
-  void register_func_rule();
+  void register_mod_rule();
+
+  void register_abs_rule();
+  void register_fact_rule();
+  void register_frac_rule();
+
+  void register_pow_rule();
+  void register_log_rule();
+
+  void register_sin_rule();
+  void register_cos_rule();
+  void register_tan_rule();
+  void register_cot_rule();
+  void register_sec_rule();
+  void register_csc_rule();
+
+  void register_arcsin_rule();
+  void register_arccos_rule();
+  void register_arctan_rule();
+  void register_arccot_rule();
+  void register_arcsec_rule();
+  void register_arccsc_rule();
+
+  void register_sinh_rule();
+  void register_cosh_rule();
+  void register_tanh_rule();
+  void register_coth_rule();
+  void register_sech_rule();
+  void register_csch_rule();
+
+  void register_arcsinh_rule();
+  void register_arccosh_rule();
+  void register_arctanh_rule();
+  void register_arccoth_rule();
+  void register_arcsech_rule();
+  void register_arccsch_rule();
+
+  void register_lnot_rule();
+  void register_land_rule();
+  void register_lor_rule();
+
+  void register_equ_rule();
+  void register_neq_rule();
+  void register_ge_rule();
+  void register_gt_rule();
+  void register_le_rule();
+  void register_lt_rule();
+
   void init_rule();
-  
-  bool find_entry(opt_t opt);
+
+  bool find_single_case(opt_t opt, opt_t param, fptr_single_execute_t *fptr = nullptr);
   bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr = nullptr);
-  void append_entry(opt_t opt, fptr_entry_t fentry, 
-                    fptr_preproccess_t fpreproccess = nullptr,
-                    fptr_postproccess_t fpostproccess = nullptr);
+  void append_single_case(opt_t opt, std::string param, fptr_single_execute_t fptr);
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
+  void register_preprocess(opt_t opt, fptr_preproccess_t fpreproccess);
+  void register_postprocess(opt_t opt, fptr_postproccess_t fpostproccess);
+  void register_case(opt_t opt, opt_t param, fptr_single_execute_t fexecute);
   void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute);
   void sort_case(opt_t opt);
-  symbol_t execute_entry(const symbol_t &x);
+  symbol_t execute_cases(opt_t opt, const symbol_t &x);
   symbol_t execute_cases(opt_t opt, const symbol_t &x, const symbol_t &y);
-  void apply_rule(symbol_t &x);
-
-  symbol_t default_entry(const symbol_t &x);
-  symbol_t default_execute(const symbol_t &x, const symbol_t &y);
-
-  void default_cases(opt_t opt, std::string ops);
   void append_optcase_string(std::string &ops, const std::string op);
   void append_optcase_string(std::string &ops, const std::vector<std::string> opl);
 
-  //
-  // 基础运算律
-  //
-  void apply_associative_law(symbol_t &x);
-  void apply_commutative_law(symbol_t &x);
-  void apply_distributive_law(symbol_t &x);
-  void combine_like_terms(symbol_t &x);
-  void format(symbol_t &x);
-  void play(symbol_t &x);
-  void apply_basic_rule(symbol_t &x);
+  // //
+  // // 基础运算律
+  // //
+  // void apply_associative_law(symbol_t &x);
+  // void apply_commutative_law(symbol_t &x);
+  // void apply_distributive_law(symbol_t &x);
+  // void combine_like_terms(symbol_t &x);
+  // void format(symbol_t &x);
+  // void play(symbol_t &x);
+  // void apply_basic_rule(symbol_t &x);
 
   // 因子运算
   symbol_t gcd(const symbol_t &x);
+  symbol_t gcd(const symbol_t &x, symbol_t &l);
   symbol_t gcd(const list_t &s);
+  symbol_t gcd(const list_t &s, list_t &l);
   symbol_t lcm(const symbol_t &x);
   symbol_t lcm(const list_t &s);
   list_t extend_euclid(const list_t &s);
 
   //
-  // 运算符号
-  //
-#define c_add(s1, s2) make(kOptAdd, s1, s2, false)
-#define c_mul(s1, s2) make(kOptMul, s1, s2, false)
-#define c_equ(s1, s2) make(kOptEqu, s1, s2, false)
-#define c_neq(s1, s2) make(kOptNotEqu, s1, s2, false)
-#define c_lt(s1, s2) make(kOptLT, s1, s2, false)
-#define c_le(s1, s2) make(kOptLE, s1, s2, false)
-#define c_gt(s1, s2) make(kOptGT, s1, s2, false)
-#define c_ge(s1, s2) make(kOptGE, s1, s2, false)
-#define c_cmp(s1, s2) make(kOptCmp, s1, s2, false)
-#define c_pow(s1, s2) make(kOptPow, s1, s2, false)
-#define c_log(s1, s2) make(kOptLog, s1, s2, false)
-#define c_fact(s1, s2) make(kOptFact, s1, s2, false)
-#define c_abs(s) make(kOptAbs, s, false)
-#define c_mod(s1, s2) make(kOptMod, s1, s2, false)
-#define c_sin(s) make(kOptSin, s, false)
-#define c_cos(s) make(kOptCos, s, false)
-#define c_tan(s) make(kOptTan, s, false)
-#define c_cot(s) make(kOptCot, s, false)
-#define c_sec(s) make(kOptSec, s, false)
-#define c_csc(s) make(kOptCsc, s, false)
-#define c_asin(s) make(kOptArcSin, s, false)
-#define c_acos(s) make(kOptArcCos, s, false)
-#define c_atan(s) make(kOptArcTan, s, false)
-#define c_acot(s) make(kOptArcCot, s, false)
-#define c_asec(s) make(kOptArcSec, s, false)
-#define c_acsc(s) make(kOptArcCsc, s, false)
-#define c_sinh(s) make(kOptSinh, s, false)
-#define c_cosh(s) make(kOptCosh, s, false)
-#define c_tanh(s) make(kOptTanh, s, false)
-#define c_coth(s) make(kOptCoth, s, false)
-#define c_sech(s) make(kOptSech, s, false)
-#define c_csch(s) make(kOptCsch, s, false)
-#define c_asinh(s) make(kOptArcSinh, s, false)
-#define c_acosh(s) make(kOptArcCosh, s, false)
-#define c_atanh(s) make(kOptArcTanh, s, false)
-#define c_acoth(s) make(kOptArcCoth, s, false)
-#define c_asech(s) make(kOptArcSech, s, false)
-#define c_acsch(s) make(kOptArcCsch, s, false)
-#define c_frac(s1, s2) make(kOptFrac, s1, s2, false)
-
-  //
-  // 扩展运算符
-  //
-#define c_minus(s) c_mul(create_int("-1"), s)
-#define c_sub(s1, s2) make(kOptAdd, s1, c_mul(create_int("-1"), s2), false)
-#define c_div(s1, s2) make(kOptMul, s1, c_pow(s2, create_int("-1")), false)
-#define c_sqrt(s) make(kOptPow, s, create_frac("1", "2"), false)
-
-  //
   // 符号运算符
   //
-  symbol_t frac_entry(const symbol_t &x);   // 分数运算的入口需要特殊处理
-  symbol_t pow_entry(const symbol_t &x);
-  symbol_t log_entry(const symbol_t &x);
-  symbol_t default_func_handler(opt_t opt, const symbol_t &x);
-  symbol_t default_func_handler(opt_t opt, const symbol_t &x, const symbol_t &y);
+  typedef symbol_t (*fptr_single_operator_t)(const symbol_t &);
+  typedef symbol_t (*fptr_operator_t)(const symbol_t &, const symbol_t &);
+
   symbol_t add(const symbol_t &x, const symbol_t &y);
   symbol_t sub(const symbol_t &x, const symbol_t &y);
   symbol_t mul(const symbol_t &x, const symbol_t &y);
   symbol_t div(const symbol_t &x, const symbol_t &y);
+  symbol_t lnot(const symbol_t &x);
+  symbol_t land(const symbol_t &x, const symbol_t &y);
+  symbol_t lor(const symbol_t &x, const symbol_t &y);
   symbol_t equ(const symbol_t &x, const symbol_t &y);
   symbol_t neq(const symbol_t &x, const symbol_t &y);
   symbol_t lt(const symbol_t &x, const symbol_t &y);
@@ -376,6 +399,15 @@ namespace mysym
   symbol_t arccsch(const symbol_t &x);
 
   //
+  // 调用符号
+  //
+  symbol_t call_operator(opt_t opt, const symbol_t &x);
+  symbol_t call_operator(opt_t opt, const symbol_t &x, const symbol_t &y);
+  fptr_single_operator_t get_single_operator(opt_t opt);
+  fptr_operator_t get_operator(opt_t opt);
+  void init_operator();
+
+  //
   // 全局变量
   //
   extern int_t gConstZero;
@@ -383,6 +415,8 @@ namespace mysym
   extern int_t gConstNegOne;
   extern flt_t gConstE;
   extern flt_t gConstPI;
+  extern flt_t gConstHalfPI;
+  extern flt_t gConstDoublePI;
   extern flt_t gConstInf;
   extern flt_t gConstNegInf;
   extern symbol_t gConstUDF;
@@ -398,9 +432,9 @@ namespace mysym
 
   std::string print_string(const symbol_t &s);
   std::string print_string(const list_t &l);
-  std::string print_string(const symopt_t& o);
-  std::string print_string(const optset_t& s);
-  std::string print_string(const optcase_t& s);
+  std::string print_string(const symopt_t &o);
+  std::string print_string(const optset_t &s);
+  std::string print_string(const optcase_t &s);
 
 } // namespace mysym
 

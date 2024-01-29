@@ -25,6 +25,9 @@ namespace mysym
 {
   void automatic_simplify(symbol_t &s)
   {
-    apply_rule(s);
+    merge(s);
+    sort(s);
+    if (is_normal(kind(s)))
+      s = iterate(kind(s), s.items);
   }
 } // namespace mysym

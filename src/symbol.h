@@ -23,9 +23,19 @@ namespace mysym
     opt_t opt; // 操作符
     std::string literal;
     std::vector<struct __symbol_t> items;
-    
+
     __symbol_t();
-    __symbol_t& operator[](size_t i);
+    __symbol_t &operator[](size_t i);
+    const __symbol_t &operator[](size_t i) const;
+
+    void operator=(const __symbol_t &x);
+
+//
+// 调试选项
+//
+#ifdef DEBUG
+    std::string dbgstr;
+#endif
   } symbol_t;
 
   typedef std::shared_ptr<symbol_t> symbol_ptr_t;
@@ -34,18 +44,22 @@ namespace mysym
 
   size_t size(const symbol_t &s);
   void append(symbol_t &y, const symbol_t &x);
-  void append(symbol_t& y, const symbol_items_t &x);
+  void append(symbol_t &y, const symbol_items_t &x);
+  void append(symbol_t &y, const symbol_t &x, size_t s, size_t e = -1);
+  symbol_t at(const symbol_t &x, size_t i);
+  symbol_items_t items(const symbol_t &x);
+  symbol_t erase(symbol_t &x, size_t i);
 
-#define kFuncOdevityNone    0
-#define kFuncOdevityOdd     1
-#define kFuncOdevityEven    2
+#define kFuncOdevityNone 0
+#define kFuncOdevityOdd 1
+#define kFuncOdevityEven 2
   typedef struct __symopt_function_attribute_t
   {
-    bool continuous;        // 是否是连续的
-    int odevity;            // 奇偶性
-    std::string period;     // 周期
-    std::string dod;        // 定义域
-    std::string dov;        // 值域
+    bool continuous; // 是否是连续的
+    int odevity;     // 奇偶性
+    symbol_t period; // 周期
+    symbol_t dod;    // 定义域
+    symbol_t dov;    // 值域
   } symopt_func_attr_t;
   typedef std::shared_ptr<symopt_func_attr_t> symbol_func_attr_ptr_t;
 
@@ -93,13 +107,13 @@ namespace mysym
 
   typedef struct __optset_t
   {
-    std::string name;                         // 名称
-    symopt_set_t items;                       // 符号集合
-    std::unordered_set<int> priority_array;   // 优先级队列
-    int max_priority;                         // 最大优先级
-    int min_priority;                         // 最小优先级
-    double average_priority;                  // 平均优先级
-    optid_t id;                               // id
+    std::string name;                       // 名称
+    symopt_set_t items;                     // 符号集合
+    std::unordered_set<int> priority_array; // 优先级队列
+    int max_priority;                       // 最大优先级
+    int min_priority;                       // 最小优先级
+    double average_priority;                // 平均优先级
+    optid_t id;                             // id
   } optset_t;
 
   size_t size(optset_t os);
@@ -115,7 +129,7 @@ namespace mysym
   int optset_priority(std::string name);
   double auto_priority(std::string name);
   opts_t in_optset(std::string setname, opts_t optnames);
-  opts_t expand_optset(const optset_t& s);
+  opts_t expand_optset(const optset_t &s);
   opts_t expand_optset(std::string setname);
   opts_t intersection_optset(std::string s1, std::string s2);
   opts_t union_optset(std::string s1, std::string s2);
@@ -131,6 +145,10 @@ namespace mysym
 #define kOptMul "*"
 #define kOptDiv "/"
 
+#define kOptNot "!"
+#define kOptAnd "&&"
+#define kOptOr "||"
+
 #define kOptEqu "="
 #define kOptNotEqu "!="
 #define kOptLT "<"
@@ -141,7 +159,7 @@ namespace mysym
 #define kOptCmp "cmp"
 #define kOptPow "^"
 #define kOptLog "log"
-#define kOptFact "!"
+#define kOptFact "fact"
 #define kOptAbs "abs"
 #define kOptMod "mod"
 
@@ -193,6 +211,9 @@ namespace mysym
 #define is_fact(o) (o == kOptFact)
 #define is_abs(o) (o == kOptAbs)
 #define is_mod(o) (o == kOptMod)
+#define is_not(o) (o == kOptNot)
+#define is_and(o) (o == kOptAnd)
+#define is_or(o) (o == kOptOr)
 #define is_var(o) (o == kOptVariate)
 #define is_num(o) (o == kOptNumber)
 #define is_int(o) is_num(o)
@@ -207,6 +228,8 @@ namespace mysym
 #define is_opt(o) (in_optset("opt", o))
 #define is_order(o) (in_optset("order", o))
 #define is_basic(o) (in_optset("basic", o))
+#define is_normal(o) (in_optset("normal", o))
+#define is_logic(o) (in_optset("logic", o))
 #define is_atom(o) (in_optset("atom", o))
 #define is_sym(o) (in_optset("sym", o))
 #define is_const(o) (in_optset("const", o))

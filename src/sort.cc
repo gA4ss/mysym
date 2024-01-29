@@ -2,13 +2,41 @@
 
 namespace mysym
 {
-  void sort(symbol_t &s, bool reverse)
+  static bool __symbol_cmp(const symbol_t &s1, const symbol_t &s2)
   {
-    apply_commutative_law(s);
+    int c = compare(s1, s2);
+    return (c == -1) ? true : false;
+  }
 
-    if (symbol_size(s) == 0)
+  static void __sort(symbol_t &x)
+  {
+    if ((symbol_size(x) == 0) || (!is_basic(kind(x))))
       return;
 
+    //
+    // 排序
+    //
+    std::sort(x.items.begin(), x.items.end(), __symbol_cmp);
+
+    // 应用子序列
+    for (auto it = x.items.begin(); it != x.items.end(); it++)
+    {
+      __sort(*it);
+    }
+
+    return;
+  }
+
+  void sort(symbol_t &s, bool reverse)
+  {
+    if ((symbol_size(s) == 0) || (!is_basic(kind(s))))
+      return;
+
+    __sort(s);
+
+    //
+    // 逆向顺序
+    //
     if (reverse)
     {
       std::reverse(s.items.begin(), s.items.end());

@@ -14,12 +14,57 @@ namespace mysym
   }
 
   ///////////////////////////////////////////////////////////////////////
-  void append_entry(opt_t opt, fptr_entry_t fentry,
-                    fptr_preproccess_t fpreproccess, fptr_postproccess_t fpostproccess)
+
+  bool find_single_case(opt_t opt, opt_t param, fptr_single_execute_t *fptr)
   {
-    __rule_library.entries[opt] = fentry;
-    __rule_library.preproccesses[opt] = fpreproccess;
-    __rule_library.postproccesses[opt] = fpostproccess;
+    if (fptr)
+      *fptr = nullptr;
+
+    if (__rule_library.single_cases.find(opt) != __rule_library.single_cases.end())
+    {
+      if (__rule_library.single_cases[opt].find(param) != __rule_library.single_cases[opt].end())
+      {
+        if (fptr)
+          *fptr = __rule_library.single_cases[opt][param];
+        return true;
+      }
+    }
+    return false;
+  }
+
+  bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr)
+  {
+    if (fptr)
+      *fptr = nullptr;
+
+    if (__rule_library.casetbl.find(opt) == __rule_library.casetbl.end())
+      return false;
+    if (__rule_library.casetbl[opt].find(ops) == __rule_library.casetbl[opt].end())
+      return false;
+
+    if (fptr)
+    {
+      size_t k = __rule_library.casetbl[opt][ops];
+      *fptr = __rule_library.cases[opt][k].second;
+    }
+    return true;
+  }
+
+  void append_single_case(opt_t opt, std::string param, fptr_single_execute_t fptr)
+  {
+    if (is_symopt(param))
+    {
+      __rule_library.single_cases[opt][param] = fptr;
+    }
+    else if (is_optset(param))
+    {
+      opts_t opts = expand_optset(param);
+      for (auto so : opts)
+      {
+        __rule_library.single_cases[opt][so] = fptr;
+      }
+    }
+    return;
   }
 
   void append_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
@@ -40,14 +85,33 @@ namespace mysym
     __rule_library.casetbl[opt][sign] = __rule_library.cases[opt].size() - 1;
   }
 
+  void register_preprocess(opt_t opt, fptr_preproccess_t fpreproccess)
+  {
+    __rule_library.preproccesses[opt] = fpreproccess;
+  }
+
+  void register_postprocess(opt_t opt, fptr_postproccess_t fpostproccess)
+  {
+    __rule_library.postproccesses[opt] = fpostproccess;
+  }
+
+  void register_case(opt_t opt, opt_t param, fptr_single_execute_t fexecute)
+  {
+    append_single_case(opt, param, fexecute);
+  }
+
   void register_case(opt_t opt, optsign_t sign, fptr_execute_t fexecute)
   {
-    // __rule_library.cases[opt][sign] = fexecute;
+    //
+    // 添加正序的case
+    //
     append_case(opt, sign, fexecute);
-    // 替换两个位置
+
+    //
+    // 添加逆序的case
+    //
     optpair_t opp = split_optsign(sign);
     optsign_t rsign = make_optsign(opp.second, opp.first);
-    // __rule_library.cases[opt][rsign] = fexecute;
     append_case(opt, rsign, fexecute);
   }
 
@@ -58,8 +122,15 @@ namespace mysym
 
   void sort_case(opt_t opt)
   {
-    if (find_entry(opt) == false)
+    //
+    // 判断是否存在
+    //
+    if (__rule_library.cases.find(opt) == __rule_library.cases.end())
       return;
+
+    //
+    // 排序
+    //
     std::sort(__rule_library.cases[opt].begin(),
               __rule_library.cases[opt].end(),
               __cmp_case);
@@ -75,28 +146,6 @@ namespace mysym
       __rule_library.casetbl[opt][it->first] = i;
       ++i;
     }
-  }
-
-  bool find_entry(opt_t opt)
-  {
-    return __rule_library.entries.find(opt) != __rule_library.entries.end();
-  }
-
-  bool find_case(opt_t opt, optsign_t ops, fptr_execute_t *fptr)
-  {
-    if (fptr)
-      *fptr = nullptr;
-    if (__rule_library.casetbl.find(opt) == __rule_library.casetbl.end())
-      return false;
-    if (__rule_library.casetbl[opt].find(ops) == __rule_library.casetbl[opt].end())
-      return false;
-
-    if (fptr)
-    {
-      size_t k = __rule_library.casetbl[opt][ops];
-      *fptr = __rule_library.cases[opt][k].second;
-    }
-    return true;
   }
 
   // t一定是单个运算符号
@@ -153,13 +202,6 @@ namespace mysym
     return false;
   }
 
-  symbol_t execute_entry(const symbol_t &x)
-  {
-    if (find_entry(kind(x)) == false)
-      return x;
-    return __rule_library.entries[kind(x)](x);
-  }
-
   static inline bool __preprocess(opt_t opt, const symbol_t &x, const symbol_t &y,
                                   symbol_t &z)
   {
@@ -184,6 +226,23 @@ namespace mysym
     return z;
   }
 
+  symbol_t execute_cases(opt_t opt, const symbol_t &x)
+  {
+    symbol_t y;
+    if (__preprocess(opt, x, gConstUDF, y))
+      return y;
+
+    fptr_single_execute_t fptr = nullptr;
+    if (find_single_case(opt, kind(x), &fptr))
+    {
+      y = fptr(x);
+      return __postprocess(opt, y);
+    }
+
+    y = just_make1(opt, x);
+    return __postprocess(opt, y);
+  }
+
   //
   // 所有具体执行都会执行到这里
   //
@@ -206,47 +265,70 @@ namespace mysym
       if (find_case(opt, sign, &fptr))
       {
         z = fptr(x, y);
-        return __postprocess(kind(z), z);
+        return __postprocess(opt, z);
       }
     }
 
     z = just_make2(opt, x, y);
-    return __postprocess(kind(z), z);
-  }
-
-  void apply_rule(symbol_t &x)
-  {
-    x = execute_entry(x);
+    return __postprocess(opt, z);
   }
 
   void init_rule()
   {
     register_atom_rule();
     register_cmp_rule();
+
     register_add_rule();
     register_sub_rule();
     register_mul_rule();
     register_div_rule();
-    register_func_rule();
-  }
+    register_mod_rule();
 
-  symbol_t default_entry(const symbol_t &x)
-  {
-    return x;
-  }
+    register_abs_rule();
+    register_fact_rule();
+    register_frac_rule();
 
-  symbol_t default_execute(const symbol_t &x, const symbol_t &y)
-  {
-    return just_make2(kOptNone, x, y);
-  }
+    register_pow_rule();
+    register_log_rule();
 
-  void default_cases(opt_t opt, std::string ops)
-  {
-    optcase_t cases = generate_optcase(ops);
-    for (auto it = cases.begin(); it != cases.end(); it++)
-    {
-      append_case(opt, *it, default_execute);
-    }
+    register_sin_rule();
+    register_cos_rule();
+    register_tan_rule();
+    register_cot_rule();
+    register_sec_rule();
+    register_csc_rule();
+
+    register_arcsin_rule();
+    register_arccos_rule();
+    register_arctan_rule();
+    register_arccot_rule();
+    register_arcsec_rule();
+    register_arccsc_rule();
+
+    register_sinh_rule();
+    register_cosh_rule();
+    register_tanh_rule();
+    register_coth_rule();
+    register_sech_rule();
+    register_csch_rule();
+
+    register_arcsinh_rule();
+    register_arccosh_rule();
+    register_arctanh_rule();
+    register_arccoth_rule();
+    register_arcsech_rule();
+    register_arccsch_rule();
+
+    register_lnot_rule();
+    register_land_rule();
+    register_lor_rule();
+
+    register_equ_rule();
+    register_neq_rule();
+    register_ge_rule();
+    register_gt_rule();
+    register_le_rule();
+    register_lt_rule();
   }
 
   void append_optcase_string(std::string &ops, const std::string op)

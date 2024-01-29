@@ -1,5 +1,6 @@
 #include <mysym/mysym.h>
 #include "__misc.h"
+#include <mysym/construct.h>
 
 namespace mysym
 {
@@ -8,6 +9,8 @@ namespace mysym
   int_t gConstNegOne;
   flt_t gConstE;
   flt_t gConstPI;
+  flt_t gConstHalfPI;
+  flt_t gConstDoublePI;
   flt_t gConstInf;
   flt_t gConstNegInf;
   symbol_t gConstUDF;
@@ -21,6 +24,8 @@ namespace mysym
     gConstNegOne = create_int("-1");
     gConstE = create_opt(kOptConstE);
     gConstPI = create_opt(kOptConstPI);
+    gConstHalfPI = just_make2(kOptMul, c_frac(gConstOne, create_int("2")), gConstPI);
+    gConstDoublePI = just_make2(kOptMul, create_int("2"), gConstPI);
     gConstInf = create_opt(kOptConstInf);
     gConstNegInf = create_opt(kOptConstNegInf);
     gConstUDF = create_opt(kOptNone);

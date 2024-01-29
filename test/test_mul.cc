@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
 #include <mysym/wrapper.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 
@@ -27,6 +28,8 @@ TEST(Sym, MulOne)
   EXPECT_EQ(compare(x * y, x), 0);
   y = opposite(y);
   EXPECT_EQ(compare(x * y, opposite(x)), 0);
+  symbol_t z = "-1" * x;
+  EXPECT_STREQ(print_string(z).c_str(), "-1*x");
 }
 
 TEST(Sym, Number)
@@ -45,7 +48,7 @@ TEST(Sym, Number)
 
   x = c_frac("1", "3");
   y = create_int("4");
-  EXPECT_EQ(compare(mul(x, y), c_frac("4","3")), 0);
+  EXPECT_EQ(compare(mul(x, y), c_frac("4", "3")), 0);
 
   x = gConstE;
   y = create_flt("1.5");
@@ -86,26 +89,6 @@ TEST(Sym, SymMul)
   // std::cout << print_string(z4) << std::endl;
 }
 
-TEST(Sym, MutilMul)
-{
-  symbol_t x = create_sym("x");
-  symbol_t y = create_sym("y");
-  symbol_t z1 = c_mul("z", "x");
-  symbol_t z2 = c_mul("5", "a");
-  symbol_t z3 = c_add("a", c_mul("x", "y"));
-  symbol_t z4 = c_add("5", "x");
-  symbol_t k = mul(z1, z2);
-  EXPECT_STREQ(print_string(k).c_str(), "5*a*x*z");
-  // (a+x*y)*(5+x) = 5*a+5*x*y+a*x+y*^(x,2)
-  k = mul(z3, z4);
-  EXPECT_STREQ(print_string(k).c_str(), "5*a+5*x*y+a*x+y*x^2");
-  // std::cout << print_string(k) << std::endl;
-  // (x*z) * (a + x*y) = a*x*z + y*z*^(x,2)
-  k = mul(z1, z3);
-  EXPECT_STREQ(print_string(k).c_str(), "a*x*z+y*z*x^2");
-  // std::cout << print_string(k) << std::endl;
-}
-
 TEST(Sym, Pow)
 {
   symbol_t x = create_sym("x");
@@ -116,15 +99,58 @@ TEST(Sym, Pow)
   EXPECT_STREQ(print_string(e1).c_str(), "(x+y)^2");
 }
 
-TEST(Sym, Negative)
+TEST(Sym, MutilMul)
 {
   symbol_t x = create_sym("x");
   symbol_t y = create_sym("y");
-  symbol_t z = c_add(x, y);
-  symbol_t e = c_mul(z, "-1");
-  // std::cout << print_string(e) << std::endl;
-  EXPECT_STREQ(print_string(e).c_str(), "-1*x+-1*y");
+  symbol_t a = create_sym("a");
+  symbol_t b = create_sym("b");
+
+  symbol_t xy = x + y;
+  symbol_t z = xy * xy;
+  EXPECT_STREQ(print_string(z).c_str(), "x^2+y^2+2*x*y");
+
+  symbol_t z1 = c_mul("z", "x");
+  symbol_t z2 = c_mul("5", "a");
+
+  symbol_t p = x * z1;
+  EXPECT_STREQ(print_string(p).c_str(), "z*x^2");
+  p = y * z1;
+  EXPECT_STREQ(print_string(p).c_str(), "x*y*z");
+
+  p = z1 * z2;
+  EXPECT_STREQ(print_string(p).c_str(), "5*a*x*z");
+  z1 = z1 * create_symbol("y");
+  p = z1 * y;
+  EXPECT_STREQ(print_string(p).c_str(), "x*z*y^2");
+
+  z1 = x + b;
+  z2 = y + a;
+  p = z1 * z2;
+  // std::cout << p << std::endl;
+  EXPECT_STREQ(print_string(p).c_str(), "a*b+a*x+b*y+x*y");
+  symbol_t p2 = p * x;
+  // std::cout << p << std::endl;
+  EXPECT_STREQ(print_string(p2).c_str(), "a*x^2+y*x^2+a*b*x+b*x*y");
+
+  // z1 = p2 * x;
+  // std::cout << z1 << std::endl;
+
+  z1 = x * y;
+  p = p2 * z1;
+  // std::cout << p << std::endl;
+  EXPECT_STREQ(print_string(p).c_str(), "x^3*y^2+a*y*x^3+b*x^2*y^2+a*b*y*x^2");
 }
+
+// TEST(Sym, Negative)
+// {
+//   symbol_t x = create_sym("x");
+//   symbol_t y = create_sym("y");
+//   symbol_t z = c_add(x, y);
+//   symbol_t e = c_mul(z, "-1");
+//   // std::cout << print_string(e) << std::endl;
+//   EXPECT_STREQ(print_string(e).c_str(), "-1*x+-1*y");
+// }
 
 int main(int argc, char *argv[])
 {

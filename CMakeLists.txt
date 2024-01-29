@@ -46,6 +46,7 @@ set(MYSYM_HEADERS
   ${SRC_DIRECTORY}/exception.h
   ${SRC_DIRECTORY}/debug.h
   ${SRC_DIRECTORY}/set.hpp
+  ${SRC_DIRECTORY}/construct.h
 )
 
 #
@@ -63,10 +64,40 @@ set(MYSYM_OPERATOR_SRC
   ${SRC_DIRECTORY}/operator/pow.cc
   ${SRC_DIRECTORY}/operator/log.cc
   ${SRC_DIRECTORY}/operator/fact.cc
-  ${SRC_DIRECTORY}/operator/trigo.cc
-  ${SRC_DIRECTORY}/operator/hyper.cc
   ${SRC_DIRECTORY}/operator/frac.cc
-  ${SRC_DIRECTORY}/operator/func.cc
+  ${SRC_DIRECTORY}/operator/logic/lnot.cc
+  ${SRC_DIRECTORY}/operator/logic/land.cc
+  ${SRC_DIRECTORY}/operator/logic/lor.cc
+  ${SRC_DIRECTORY}/operator/equ/equ.cc
+  ${SRC_DIRECTORY}/operator/equ/neq.cc
+  ${SRC_DIRECTORY}/operator/equ/lt.cc
+  ${SRC_DIRECTORY}/operator/equ/gt.cc
+  ${SRC_DIRECTORY}/operator/equ/le.cc
+  ${SRC_DIRECTORY}/operator/equ/ge.cc
+  ${SRC_DIRECTORY}/operator/trigo/sin.cc
+  ${SRC_DIRECTORY}/operator/trigo/cos.cc
+  ${SRC_DIRECTORY}/operator/trigo/tan.cc
+  ${SRC_DIRECTORY}/operator/trigo/cot.cc
+  ${SRC_DIRECTORY}/operator/trigo/sec.cc
+  ${SRC_DIRECTORY}/operator/trigo/csc.cc
+  ${SRC_DIRECTORY}/operator/trigo/arcsin.cc
+  ${SRC_DIRECTORY}/operator/trigo/arccos.cc
+  ${SRC_DIRECTORY}/operator/trigo/arctan.cc
+  ${SRC_DIRECTORY}/operator/trigo/arccot.cc
+  ${SRC_DIRECTORY}/operator/trigo/arcsec.cc
+  ${SRC_DIRECTORY}/operator/trigo/arccsc.cc
+  ${SRC_DIRECTORY}/operator/hyper/sinh.cc
+  ${SRC_DIRECTORY}/operator/hyper/cosh.cc
+  ${SRC_DIRECTORY}/operator/hyper/tanh.cc
+  ${SRC_DIRECTORY}/operator/hyper/coth.cc
+  ${SRC_DIRECTORY}/operator/hyper/sech.cc
+  ${SRC_DIRECTORY}/operator/hyper/csch.cc
+  ${SRC_DIRECTORY}/operator/hyper/arcsinh.cc
+  ${SRC_DIRECTORY}/operator/hyper/arccosh.cc
+  ${SRC_DIRECTORY}/operator/hyper/arctanh.cc
+  ${SRC_DIRECTORY}/operator/hyper/arccoth.cc
+  ${SRC_DIRECTORY}/operator/hyper/arcsech.cc
+  ${SRC_DIRECTORY}/operator/hyper/arccsch.cc
 )
 
 #
@@ -92,14 +123,17 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/create.cc
   ${SRC_DIRECTORY}/copy.cc
   ${SRC_DIRECTORY}/coefficient.cc
+  ${SRC_DIRECTORY}/prime.cc
   ${SRC_DIRECTORY}/make.cc
   ${SRC_DIRECTORY}/tree.cc
   ${SRC_DIRECTORY}/operand.cc
   ${SRC_DIRECTORY}/base.cc
   ${SRC_DIRECTORY}/exponent.cc
   ${SRC_DIRECTORY}/term.cc
+  ${SRC_DIRECTORY}/merge.cc
   ${SRC_DIRECTORY}/simplify.cc
   ${SRC_DIRECTORY}/map.cc
+  ${SRC_DIRECTORY}/iteration.cc
   ${SRC_DIRECTORY}/sort.cc
   ${SRC_DIRECTORY}/find.cc
   ${SRC_DIRECTORY}/match.cc
@@ -112,12 +146,16 @@ add_library(${PROJECT_NAME} STATIC
   ${SRC_DIRECTORY}/optinv.cc
   ${SRC_DIRECTORY}/optset.cc
   ${SRC_DIRECTORY}/optcase.cc
+  ${SRC_DIRECTORY}/gcd.cc
+  ${SRC_DIRECTORY}/lcm.cc
+  ${SRC_DIRECTORY}/extend_euclid.cc
   ${SRC_DIRECTORY}/factor.cc
   ${SRC_DIRECTORY}/fraction.cc
   ${SRC_DIRECTORY}/limit.cc
   ${SRC_DIRECTORY}/integral.cc
   ${SRC_DIRECTORY}/constant.cc
   ${SRC_DIRECTORY}/library.cc
+  ${SRC_DIRECTORY}/operator.cc
   ${SRC_DIRECTORY}/list.cc
   ${SRC_DIRECTORY}/solve.cc
   ${SRC_DIRECTORY}/units.cc
@@ -201,6 +239,8 @@ add_test(NAME test_units COMMAND test_units)
 set_tests_properties(test_units PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 add_test(NAME test_symbol COMMAND test_symbol)
 set_tests_properties(test_symbol PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
+add_test(NAME test_factor COMMAND test_factor)
+set_tests_properties(test_factor PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 # add_test(NAME test_io COMMAND test_io)
 # set_tests_properties(test_io PROPERTIES FAIL_REGULAR_EXPRESSION "FAILED")
 # Test Operator

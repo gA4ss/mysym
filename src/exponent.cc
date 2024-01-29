@@ -10,7 +10,9 @@ namespace mysym
     }
     else if ((kind(s) == kOptPow) || (kind(s) == kOptLog))
     {
-      return operand(s, 1);
+      if (size(s) > 1)
+        return operand(s, 1);
+      return gConstUDF;
     }
     return create_int("1");
   }

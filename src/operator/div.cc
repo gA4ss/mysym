@@ -89,6 +89,16 @@ namespace mysym
     return true;
   }
 
+  static bool __handle_dividend_one(const symbol_t &x, const symbol_t &y, symbol_t &z)
+  {
+    if (compare(x, gConstOne) == 0)
+    {
+      z = pow(y, gConstNegOne);
+      return true;
+    }
+    return false;
+  }
+
   static symbol_t __div_num_num(const symbol_t &x, const symbol_t &y)
   {
     // 如果是整型，需要转换成浮点数才能得到浮点结果，否则是整型。
@@ -99,6 +109,11 @@ namespace mysym
 
   static symbol_t __div_num_frac(const symbol_t &x, const symbol_t &y)
   {
+    if (compare(x, gConstOne) == 0)
+    {
+      symbol_t n = numerator(y), d = denominator(y);
+      return frac(d, n);
+    }
     return compute_frac_num(kOptDiv, x, y);
   }
 
@@ -107,17 +122,24 @@ namespace mysym
     symbol_t z;
     if (__handle_infinity(x, y, z) == true)
       return z;
+    if (__handle_dividend_one(x, y, z) == true)
+      return z;
     return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_num_var(const symbol_t &x, const symbol_t &y)
   {
+    symbol_t z;
+    if (__handle_dividend_one(x, y, z) == true)
+      return z;
     return just_make2(kOptDiv, x, y);
   }
 
   static symbol_t __div_num_func(const symbol_t &x, const symbol_t &y)
   {
     symbol_t z;
+    if (__handle_dividend_one(x, y, z) == true)
+      return z;
     if (__handle_pow(x, y, z) == false)
       z = just_make2(kOptDiv, x, y);
     return z;
@@ -222,50 +244,48 @@ namespace mysym
     return z;
   }
 
+  //////////////////////////////////////////////////
+  // 这里进入单个符号与单项式与多项式的处理
+  //////////////////////////////////////////////////
+
 #include "__polynomial_div.cc"
 
   static symbol_t __div_sym_mul(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t _x, _y;
+    symbol_t n, d, z;
     if (is_sym(kind(x)))
     {
-      _x = x;
-      _y = y;
+      __polynomial_div_sym_mul(x, y, n, d);
     }
     else
     {
-      _x = y;
-      _y = x;
+      __polynomial_div_mul_sym(x, y, n, d);
     }
-    // return map(_y, _x, kOptMul);
-    _y = just_make2(kOptDiv, _x, _y);
-    play(_y);
-    return _y;
-    // symbol_t v = create(kOptMul);
-    // for (auto it1 = _y.items.begin(); it1 != _y.items.end(); it1++)
-    // {
-    //   append(v, make(kOptMul, *it1, _x));
-    // }
-    // return v;
+
+    if (compare(d, gConstOne) == 0)
+      z = n;
+    else
+      z = just_make2(kOptDiv, n, d);
+    return z;
   }
 
   static symbol_t __div_sym_add(const symbol_t &x, const symbol_t &y)
   {
-    symbol_t _x, _y;
+    symbol_t n, d, z;
     if (is_sym(kind(x)))
     {
-      _x = x;
-      _y = y;
+      __polynomial_div_sym_add(x, y, n, d);
     }
     else
     {
-      _x = y;
-      _y = x;
+      __polynomial_div_add_sym(x, y, n, d);
     }
 
-    _y = just_make2(kOptDiv, _x, _y);
-    play(_y);
-    return _y;
+    if (compare(d, gConstOne) == 0)
+      z = n;
+    else
+      z = just_make2(kOptDiv, n, d);
+    return z;
   }
 
   static symbol_t __div_mul_mul(const symbol_t &x, const symbol_t &y)
@@ -281,13 +301,6 @@ namespace mysym
   static symbol_t __div_mul_add(const symbol_t &x, const symbol_t &y)
   {
     return just_make2(kOptDiv, x, y);
-  }
-
-  static symbol_t __div_entry(const symbol_t &x)
-  {
-    symbol_t _x = x;
-    apply_basic_rule(_x);
-    return _x;
   }
 
   static bool __div_preprocess(const symbol_t &x, const symbol_t &y, symbol_t &z)
@@ -333,7 +346,7 @@ namespace mysym
   static symbol_t __div_postprocess(const symbol_t &z)
   {
     symbol_t _z = z;
-    if (is_basic(kind(_z)))
+    if (is_normal(kind(_z)))
     {
       // 基础单元运算都是二元运算
       if (size(_z) == 1)
@@ -390,7 +403,8 @@ namespace mysym
     register_case(kOptDiv, make_optsign(kOptAdd, kOptAdd), __div_add_add);
     register_case(kOptDiv, make_optsign(kOptMul, kOptAdd), __div_mul_add);
 
-    // 入口
-    append_entry(kOptDiv, __div_entry, __div_preprocess, __div_postprocess);
+    // 预处理与后置处理
+    register_preprocess(kOptDiv, __div_preprocess);
+    register_postprocess(kOptDiv, __div_postprocess);
   }
 } // namespace mysym

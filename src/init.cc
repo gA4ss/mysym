@@ -9,5 +9,6 @@ namespace mysym
     init_global();
     init_rule();
     plibrary() = init_library();
+    init_operator();
   }
 } // namespace mysym

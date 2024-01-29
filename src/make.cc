@@ -9,6 +9,9 @@ namespace mysym
     append(u, s);
     if (!nas)
       automatic_simplify(u);
+#ifdef DEBUG
+    u.dbgstr = print_string(u);
+#endif
     return u;
   }
 
@@ -40,8 +43,14 @@ namespace mysym
       append(u, s2);
     }
 
+    //
+    // 自动化简
+    //
     if (!nas)
       automatic_simplify(u);
+#ifdef DEBUG
+    u.dbgstr = print_string(u);
+#endif
     return u;
   }
 

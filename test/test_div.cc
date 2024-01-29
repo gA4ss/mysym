@@ -5,6 +5,7 @@
 #include <gtest/gtest.h>
 #include <mysym/mysym.h>
 #include <mysym/wrapper.h>
+#include <mysym/construct.h>
 
 using namespace mysym;
 
@@ -23,11 +24,8 @@ TEST(Sym, Case1)
   ans = div(x, gConstInf);
   EXPECT_STREQ(print_string(ans).c_str(), "0");
 
-  // ans = div(x, opposite(x));
-  // EXPECT_STREQ(print_string(ans).c_str(), "-1");
-
-  symbol_t poly = (x^create_int("2")) + (y^create_int("-1"));
-  EXPECT_STREQ(print_string(poly).c_str(), "x^2+y^-1");
+  ans = div(x, opposite(x));
+  EXPECT_STREQ(print_string(ans).c_str(), "-1");
 
   ans = div(gConstOne, gConstE);
   EXPECT_STREQ(print_string(ans).c_str(), "e^-1");

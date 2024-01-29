@@ -30,6 +30,7 @@ namespace mysym
 
   /* 常数间的比较
    */
+// #define kNatureApprox           1
   static symbol_t __cmp_const_const(const symbol_t &x, const symbol_t &y)
   {
     number_t f1;
@@ -55,6 +56,7 @@ namespace mysym
 
     //
     // 与自然常数的对比
+    // 这里蕴含了自然常数与数值的对比
     //
     if (is_e(kind(x)) && is_pi(kind(y)))
       return gConstNegOne;
@@ -78,14 +80,16 @@ namespace mysym
     {
       f1 = number_t(x.literal);
     }
-    // else if (is_e(kind(x)))
-    // {
-    //   f1 = mynum::f::approximate_e();
-    // }
-    // else if (is_pi(kind(x)))
-    // {
-    //   f1 = mynum::f::approximate_pi();
-    // }
+#if defined(kNatureApprox)
+    else if (is_e(kind(x)))
+    {
+      f1 = mynum::f::approximate_e();
+    }
+    else if (is_pi(kind(x)))
+    {
+      f1 = mynum::f::approximate_pi();
+    }
+#endif
 
     // precision
 
@@ -99,6 +103,7 @@ namespace mysym
     {
       f2 = number_t(y.literal);
     }
+#if defined(kNatureApprox)
     else if (is_e(kind(y)))
     {
       f2 = mynum::f::approximate_e();
@@ -107,6 +112,7 @@ namespace mysym
     {
       f2 = mynum::f::approximate_pi();
     }
+#endif
 
     int c = mynum::cmp(f1, f2);
     return c == 0 ? gConstZero : c == 1 ? gConstOne
@@ -225,49 +231,6 @@ namespace mysym
     }                                                                        \
   }
 
-  static symbol_t __cmp_entry(const symbol_t &x)
-  {
-    symbol_t _x = x;
-    check_cmp_number_of_params_number(_x);
-    apply_rule(_x.items[0]);
-    apply_rule(_x.items[1]);
-    return _x;
-  }
-
-  // equ neq lt le gt ge的通用处理函数
-#define __order_entry __cmp_entry
-
-  ///////////////////////////////////////////////////
-  static symbol_t __equ_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return equ(x, y);
-  }
-
-  static symbol_t __neq_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return neq(x, y);
-  }
-
-  static symbol_t __lt_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return lt(x, y);
-  }
-
-  static symbol_t __le_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return le(x, y);
-  }
-
-  static symbol_t __gt_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return gt(x, y);
-  }
-
-  static symbol_t __ge_xxx_yyy(const symbol_t &x, const symbol_t &y)
-  {
-    return ge(x, y);
-  }
-
   //
   // 对比函数
   //
@@ -276,37 +239,37 @@ namespace mysym
     return execute_cases(kOptCmp, x, y);
   }
 
-  symbol_t equ(const symbol_t &x, const symbol_t &y)
-  {
-    return cmp(x, y).literal == "0" ? gConstOne : gConstZero;
-  }
+  // symbol_t equ(const symbol_t &x, const symbol_t &y)
+  // {
+  //   return cmp(x, y).literal == "0" ? gConstOne : gConstZero;
+  // }
 
-  symbol_t neq(const symbol_t &x, const symbol_t &y)
-  {
-    return cmp(x, y).literal != "0" ? gConstOne : gConstZero;
-  }
+  // symbol_t neq(const symbol_t &x, const symbol_t &y)
+  // {
+  //   return cmp(x, y).literal != "0" ? gConstOne : gConstZero;
+  // }
 
-  symbol_t lt(const symbol_t &x, const symbol_t &y)
-  {
-    return cmp(x, y).literal == "-1" ? gConstOne : gConstZero;
-  }
+  // symbol_t lt(const symbol_t &x, const symbol_t &y)
+  // {
+  //   return cmp(x, y).literal == "-1" ? gConstOne : gConstZero;
+  // }
 
-  symbol_t le(const symbol_t &x, const symbol_t &y)
-  {
-    symbol_t c = cmp(x, y);
-    return (c.literal == "-1") || (c.literal == "0") ? gConstOne : gConstZero;
-  }
+  // symbol_t le(const symbol_t &x, const symbol_t &y)
+  // {
+  //   symbol_t c = cmp(x, y);
+  //   return (c.literal == "-1") || (c.literal == "0") ? gConstOne : gConstZero;
+  // }
 
-  symbol_t gt(const symbol_t &x, const symbol_t &y)
-  {
-    return cmp(x, y).literal == "1" ? gConstOne : gConstZero;
-  }
+  // symbol_t gt(const symbol_t &x, const symbol_t &y)
+  // {
+  //   return cmp(x, y).literal == "1" ? gConstOne : gConstZero;
+  // }
 
-  symbol_t ge(const symbol_t &x, const symbol_t &y)
-  {
-    symbol_t c = cmp(x, y);
-    return (c.literal == "1") || (c.literal == "0") ? gConstOne : gConstZero;
-  }
+  // symbol_t ge(const symbol_t &x, const symbol_t &y)
+  // {
+  //   symbol_t c = cmp(x, y);
+  //   return (c.literal == "1") || (c.literal == "0") ? gConstOne : gConstZero;
+  // }
 
   void register_cmp_rule()
   {
@@ -322,20 +285,5 @@ namespace mysym
     register_case(kOptCmp, make_optsign_exclude("basic"), __cmp_basic_xxx);
     register_case(kOptCmp, make_optsign("basic", "basic"), __cmp_basic);
     sort_case(kOptCmp);
-    append_entry(kOptCmp, __cmp_entry);
-    // ----------------------------------------
-    append_entry(kOptEqu, __order_entry);
-    append_entry(kOptNotEqu, __order_entry);
-    append_entry(kOptLT, __order_entry);
-    append_entry(kOptLE, __order_entry);
-    append_entry(kOptGT, __order_entry);
-    append_entry(kOptGE, __order_entry);
-    // ----------------------------------------
-    register_case(kOptEqu, make_optsign("all", "all"), __equ_xxx_yyy);
-    register_case(kOptNotEqu, make_optsign("all", "all"), __neq_xxx_yyy);
-    register_case(kOptLT, make_optsign("all", "all"), __lt_xxx_yyy);
-    register_case(kOptLE, make_optsign("all", "all"), __le_xxx_yyy);
-    register_case(kOptGT, make_optsign("all", "all"), __gt_xxx_yyy);
-    register_case(kOptGE, make_optsign("all", "all"), __ge_xxx_yyy);
   }
 } // namespace mysym

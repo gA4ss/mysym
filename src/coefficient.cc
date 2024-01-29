@@ -2,6 +2,30 @@
 
 namespace mysym
 {
+  list_t coefficients(const symbol_t &s)
+  {
+    list_t l;
+    if (is_add(kind(s)))
+    {
+      for (auto a : s.items)
+      {
+        append(l, constant(a));
+      }
+    }
+    else if (is_mul(kind(s)))
+    {
+      append(l, constant(s));
+    }
+    else if (is_const(kind(s)))
+    {
+      append(l, s);
+    }
+    else if (is_var(kind(s)))
+    {
+      append(l, gConstOne);
+    }
+    return l;
+  }
   int_t coefficient(const symbol_t &s, const symbol_t &x, const int_t &d)
   {
     //

@@ -11,6 +11,6 @@ namespace mysym
 
   symbol_t inverse_mul(const symbol_t &x)
   {
-    return c_pow(x, gConstNegInf);
+    return pow(x, gConstNegInf);
   }
 } // namespace mysym

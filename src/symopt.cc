@@ -8,18 +8,19 @@ namespace mysym
 #define define_opt(opt, pri, ass, com, dis, ide, inv, invu, att, id) \
   __symopts[opt] = {opt, pri, ass, com, dis, ide, inv, invu, att, id}
 
-static void __define_func(opt_t o, bool con, int odev, std::string per, std::string dod, std::string dov) {
-  if (__symopts[o].attr == nullptr)
-    __symopts[o].attr = std::make_shared<symopt_func_attr_t>();
-  __symopts[o].attr->continuous = con;
-  __symopts[o].attr->odevity = odev;
-  __symopts[o].attr->period = per;
-  __symopts[o].attr->dod = dod;
-  __symopts[o].attr->dov = dov;
-}
-
-  void init_symopt()
+  static void __define_func(opt_t o, bool con, int odev,
+                            const symbol_t &per, const symbol_t &dod, const symbol_t &dov)
   {
+    if (__symopts[o].attr == nullptr)
+      __symopts[o].attr = std::make_shared<symopt_func_attr_t>();
+    __symopts[o].attr->continuous = con;
+    __symopts[o].attr->odevity = odev;
+    __symopts[o].attr->period = per;
+    __symopts[o].attr->dod = dod;
+    __symopts[o].attr->dov = dov;
+  }
+
+  void init_symopt(){
 #include "symopt.def"
 #include "functions.def"
   }
