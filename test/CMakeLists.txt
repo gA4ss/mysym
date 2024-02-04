@@ -1,11 +1,7 @@
 cmake_minimum_required (VERSION 3.5)
 project(mysym_test VERSION 1.0)
 
-# -g allows for gdb debugging
-# turn on -03 for best performance
-# add_definitions(-std=c++11 -g -O0 -Wunused-variable)
-add_definitions(-std=c++11 -g -O0 -DDEBUG -Wunused-variable)
-# add_definitions(-std=c++11 -O3 -Wunused-variable)
+add_definitions(-std=c++14 -g -O0 -DDEBUG -Wunused-variable)
 
 set(CXX_FLAGS "-Wall")
 set(CMAKE_CXX_FLAGS "${CXX_FLAGS}")
